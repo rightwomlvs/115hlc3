@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L03 The Necklace S+V Challenge</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    .chunk.candy-0 { background-color: #fecaca; } .chunk.candy-1 { background-color: #fed7aa; }
+    .chunk.candy-2 { background-color: #fde68a; } .chunk.candy-3 { background-color: #fef08a; }
+    .chunk.candy-4 { background-color: #d9f99d; } .chunk.candy-5 { background-color: #bbf7d0; }
+    .chunk.candy-6 { background-color: #99f6e4; } .chunk.candy-7 { background-color: #a5f3fc; }
+    .chunk.candy-8 { background-color: #bfdbfe; } .chunk.candy-9 { background-color: #c7d2fe; }
+    .chunk.candy-10 { background-color: #ddd6fe; } .chunk.candy-11 { background-color: #fbcfe8; }
+    .chunk { display: inline-block; padding: 6px 10px; margin: 4px; border-radius: 10px; cursor: pointer; font-size: 1.35rem; line-height: 1.4; border: 2px solid transparent; transition: all 0.15s ease; user-select: none; background-color: #e2e8f0; }
+    .chunk:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .subject-found { background-color: #dbeafe !important; border-color: #2563eb !important; color: #1e40af; font-weight: 700; box-shadow: 0 0 0 2px #2563eb; position: relative; }
+    .subject-found::after { content: 'S'; position: absolute; top: -14px; right: -8px; background: #2563eb; color: #fff; font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 6px; }
+    .verb-found { background-color: #dcfce7 !important; border-color: #16a34a !important; color: #166534; font-weight: 700; box-shadow: 0 0 0 2px #16a34a; position: relative; }
+    .verb-found::after { content: 'V'; position: absolute; top: -14px; right: -8px; background: #16a34a; color: #fff; font-size: 12px; font-weight: 700; padding: 2px 6px; border-radius: 6px; }
+    .shake { animation: shake 0.4s; }
+    .pop { animation: pop 0.35s; }
+    @keyframes shake { 0%,100%{transform:translateX(0);} 20%{transform:translateX(-8px);} 40%{transform:translateX(8px);} 60%{transform:translateX(-6px);} 80%{transform:translateX(6px);} }
+    @keyframes pop { 0%{transform:scale(1);} 50%{transform:scale(1.25);} 100%{transform:scale(1);} }
+    .tabs-btn { padding: 10px 18px; border-radius: 9999px; font-weight: 600; transition: all 0.15s; border: 2px solid transparent; }
+    .tabs-btn.active { background-color: #2563eb; color: #fff; }
+    .tabs-btn:not(.active) { background-color: #f1f5f9; color: #475569; }
+    .tabs-btn:not(.active):hover { background-color: #e2e8f0; }
+    .nav-btn { padding: 10px 22px; border-radius: 12px; font-weight: 600; background-color: #f1f5f9; color: #475569; transition: all 0.15s; border: 2px solid transparent; }
+    .nav-btn:hover { background-color: #e2e8f0; }
+    .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .speak-btn { width: 52px; height: 52px; border-radius: 50%; background-color: #2563eb; color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; font-size: 22px; box-shadow: 0 4px 12px rgba(37,99,235,0.3); transition: all 0.15s; }
+    .speak-btn:hover { transform: scale(1.08); }
+    .trans-part { font-size: 1.5rem; }
+    .trans-s { color: #1d4ed8; font-weight: 700; }
+    .trans-v { color: #15803d; font-weight: 700; }
+    .trans-implicit { color: #94a3b8; font-style: italic; }
+    .hidden-pane { display: none; }
+</style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+<div class="max-w-5xl mx-auto p-6">
+
+    <header class="text-center mb-6">
+        <h1 class="text-4xl font-extrabold text-slate-800">L03 The Necklace</h1>
+        <p class="text-slate-500 mt-1">Subject-Verb Challenge — 找出每句的主詞 (S) 與動詞 (V)</p>
+    </header>
+
+    <!-- 分頁 Tab -->
+    <div class="flex flex-wrap justify-center gap-2 mb-6" id="tabsBar">
+        <button class="tabs-btn" data-tab="youtube">課文動畫</button>
+        <button class="tabs-btn active" data-tab="all">All Sections</button>
+        <button class="tabs-btn" data-tab="1">Paragraph 1</button>
+        <button class="tabs-btn" data-tab="2">Paragraph 2</button>
+        <button class="tabs-btn" data-tab="3">Paragraph 3</button>
+        <button class="tabs-btn" data-tab="4">Paragraph 4</button>
+    </div>
+
+    <!-- 課文動畫 (YouTube) -->
+    <div class="hidden-pane" id="pane-youtube">
+        <div class="bg-white rounded-2xl shadow p-6 text-center">
+            <p class="text-slate-600 mb-4">課文動畫：Choice 課文動畫 L3（中英字幕）。</p>
+            <div class="aspect-video bg-slate-200 rounded-xl" id="videoWrap">
+                <iframe id="youtubeFrame" class="w-full h-full" title="L03 課文動畫" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="hidden py-8" id="videoFallback">
+                <p class="text-slate-600 mb-4">直接開啟本檔時，YouTube 不允許在頁面內嵌播放此影片。</p>
+                <a href="https://youtu.be/gPtQK563sYM" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background-color:#2563eb;color:#fff;font-weight:700;padding:12px 24px;border-radius:12px;text-decoration:none;">▶ 前往 YouTube 觀看課文動畫</a>
+            </div>
+            <p class="text-xs text-slate-400 mt-2">切換其他 Tab 時影片會自動暫停。</p>
+        </div>
+    </div>
+
+    <!-- 遊戲區 -->
+    <div id="pane-all">
+        <div class="bg-white rounded-2xl shadow p-6 mb-4">
+            <div class="flex items-center justify-between mb-4">
+                <div class="text-slate-500 font-medium" id="counter">1 / 1</div>
+                <button class="speak-btn" onclick="speakCurrentSentence()" title="朗讀">🔊</button>
+            </div>
+            <div class="min-h-40 flex flex-wrap items-center justify-center gap-1 p-4 rounded-xl bg-slate-50 border border-slate-200" id="sentenceArea"></div>
+            <div class="flex items-center justify-center gap-4 mt-6">
+                <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← 上一句</button>
+                <button class="nav-btn" id="hintBtn" onclick="showHint()">💡 Show Hint</button>
+                <button class="nav-btn" id="resetBtn" onclick="resetSentence()">↺ 重來</button>
+                <button class="nav-btn" id="nextBtn" onclick="navigate(1)">下一句 →</button>
+            </div>
+            <div id="translationArea" class="mt-6 min-h-16 flex flex-wrap justify-center gap-1"></div>
+        </div>
+        <div class="bg-white rounded-2xl shadow p-6 text-center">
+            <p class="text-slate-500">規則：先點擊 <span class="font-bold text-blue-700">主詞 (S)</span>，再點擊 <span class="font-bold text-green-700">動詞 (V)</span>。全部完成後會顯示中譯。按下「Show Hint」可顯示彩色語意區塊。</p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+const CANDY_CLASSES = ['candy-0','candy-1','candy-2','candy-3','candy-4','candy-5','candy-6','candy-7','candy-8','candy-9','candy-10','candy-11'];
+
+const allSentences = [
+    {
+        "section": 1,
+        "words": [
+            "Matilda",
+            "was",
+            "a pretty woman,",
+            "but her husband",
+            "was",
+            "not wealthy."
+        ],
+        "subject": "Matilda",
+        "verb": "was",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "Matilda",
+                    "type": "s"
+                },
+                {
+                    "text": "是",
+                    "type": "v"
+                },
+                {
+                    "text": "一位漂亮女子，",
+                    "type": "other"
+                },
+                {
+                    "text": "但她的丈夫",
+                    "type": "s"
+                },
+                {
+                    "text": "並不",
+                    "type": "v"
+                },
+                {
+                    "text": "富有。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 1,
+        "words": [
+            "It",
+            "was hard",
+            "for Matilda to accept their low social status."
+        ],
+        "subject": "It",
+        "verb": "was hard",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "對 Matilda 來說",
+                    "type": "other"
+                },
+                {
+                    "text": "接受",
+                    "type": "other"
+                },
+                {
+                    "text": "他們低下的社會地位",
+                    "type": "other"
+                },
+                {
+                    "text": "是",
+                    "type": "v"
+                },
+                {
+                    "text": "困難的。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 1,
+        "words": [
+            "She",
+            "dreamed of",
+            "wearing beautiful dresses and owning a lot of valuable objects."
+        ],
+        "subject": "She",
+        "verb": "dreamed of",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "她",
+                    "type": "s"
+                },
+                {
+                    "text": "夢想",
+                    "type": "v"
+                },
+                {
+                    "text": "穿上漂亮的禮服、擁有許多貴重的物品。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 1,
+        "words": [
+            "One day,",
+            "Matilda's husband",
+            "brought",
+            "her some exciting news."
+        ],
+        "subject": "Matilda's husband",
+        "verb": "brought",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "有一天，",
+                    "type": "other"
+                },
+                {
+                    "text": "Matilda 的丈夫",
+                    "type": "s"
+                },
+                {
+                    "text": "帶給",
+                    "type": "v"
+                },
+                {
+                    "text": "她一些令人興奮的消息。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 1,
+        "words": [
+            "They",
+            "were invited",
+            "to a big party,",
+            "and she would meet many influential people there."
+        ],
+        "subject": "They",
+        "verb": "were invited",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "他們",
+                    "type": "s"
+                },
+                {
+                    "text": "受邀",
+                    "type": "v"
+                },
+                {
+                    "text": "參加一場盛大的派對，而她會在那裡遇見許多有影響力的人。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 2,
+        "words": [
+            "Matilda seemed unhappy when hearing the news,",
+            "and her husband",
+            "wondered",
+            "if she was ill."
+        ],
+        "subject": "her husband",
+        "verb": "wondered",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "Matilda 聽到消息時似乎很不開心，",
+                    "type": "other"
+                },
+                {
+                    "text": "她的丈夫",
+                    "type": "s"
+                },
+                {
+                    "text": "納悶",
+                    "type": "v"
+                },
+                {
+                    "text": "她是不是生病了。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 2,
+        "words": [
+            "So",
+            "he",
+            "spent",
+            "all his money buying her a new dress."
+        ],
+        "subject": "he",
+        "verb": "spent",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "於是",
+                    "type": "other"
+                },
+                {
+                    "text": "他",
+                    "type": "s"
+                },
+                {
+                    "text": "花了",
+                    "type": "v"
+                },
+                {
+                    "text": "所有的錢幫她買了一件新禮服。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 2,
+        "words": [
+            "Still,",
+            "Matilda",
+            "was not satisfied."
+        ],
+        "subject": "Matilda",
+        "verb": "was",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "然而，",
+                    "type": "other"
+                },
+                {
+                    "text": "Matilda",
+                    "type": "s"
+                },
+                {
+                    "text": "仍不滿足。",
+                    "type": "v"
+                }
+            ]
+        }
+    },
+    {
+        "section": 2,
+        "words": [
+            "Her husband",
+            "suggested",
+            "that she ask her friend Madame Forestier to lend her a sparkling diamond necklace."
+        ],
+        "subject": "Her husband",
+        "verb": "suggested",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "她的丈夫",
+                    "type": "s"
+                },
+                {
+                    "text": "建議",
+                    "type": "v"
+                },
+                {
+                    "text": "她向朋友 Forestier 夫人借一條閃閃發光的鑽石項鍊。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 2,
+        "words": [
+            "At the party,",
+            "everyone",
+            "admired",
+            "her and praised her husband for having such a charming wife."
+        ],
+        "subject": "everyone",
+        "verb": "admired",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "在派對上，",
+                    "type": "other"
+                },
+                {
+                    "text": "每個人",
+                    "type": "s"
+                },
+                {
+                    "text": "都仰慕",
+                    "type": "v"
+                },
+                {
+                    "text": "她，並稱讚她的丈夫有這麼一位迷人的妻子。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 3,
+        "words": [
+            "The night, however,",
+            "ended",
+            "in disaster."
+        ],
+        "subject": "The night",
+        "verb": "ended",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "然而，",
+                    "type": "other"
+                },
+                {
+                    "text": "那晚",
+                    "type": "s"
+                },
+                {
+                    "text": "以災難收場。",
+                    "type": "v"
+                }
+            ]
+        }
+    },
+    {
+        "section": 3,
+        "words": [
+            "Somewhere, somehow,",
+            "Matilda",
+            "lost",
+            "the diamond necklace."
+        ],
+        "subject": "Matilda",
+        "verb": "lost",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "不知在哪裡、不知怎麼回事，",
+                    "type": "other"
+                },
+                {
+                    "text": "Matilda",
+                    "type": "s"
+                },
+                {
+                    "text": "弄丟了",
+                    "type": "v"
+                },
+                {
+                    "text": "那條鑽石項鍊。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 3,
+        "words": [
+            "Not daring to tell Madame Forestier,",
+            "the couple",
+            "returned",
+            "a similar one to her."
+        ],
+        "subject": "the couple",
+        "verb": "returned",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "因為不敢告訴 Forestier 夫人，",
+                    "type": "other"
+                },
+                {
+                    "text": "這對夫妻",
+                    "type": "s"
+                },
+                {
+                    "text": "歸還了",
+                    "type": "v"
+                },
+                {
+                    "text": "一條相似的項鍊給她。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 3,
+        "words": [
+            "The new necklace cost them a fortune,",
+            "so they",
+            "had to borrow",
+            "all the money they could."
+        ],
+        "subject": "they",
+        "verb": "had to borrow",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "新項鍊花了他們一大筆錢，",
+                    "type": "other"
+                },
+                {
+                    "text": "所以他們",
+                    "type": "s"
+                },
+                {
+                    "text": "必須借",
+                    "type": "v"
+                },
+                {
+                    "text": "所有能借到的錢。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 3,
+        "words": [
+            "As a result,",
+            "they",
+            "were forced",
+            "to live in poverty."
+        ],
+        "subject": "they",
+        "verb": "were forced",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "結果，",
+                    "type": "other"
+                },
+                {
+                    "text": "他們",
+                    "type": "s"
+                },
+                {
+                    "text": "被迫",
+                    "type": "v"
+                },
+                {
+                    "text": "過著貧窮的生活。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 4,
+        "words": [
+            "One afternoon ten years later,",
+            "Matilda",
+            "was walking",
+            "through the park when she ran into Madame Forestier."
+        ],
+        "subject": "Matilda",
+        "verb": "was walking",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "十年後的一個午後，",
+                    "type": "other"
+                },
+                {
+                    "text": "Matilda",
+                    "type": "s"
+                },
+                {
+                    "text": "正走過",
+                    "type": "v"
+                },
+                {
+                    "text": "公園時，偶遇了 Forestier 夫人。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 4,
+        "words": [
+            "Madame Forestier",
+            "was shocked",
+            "to see Matilda looking so much older and poorer."
+        ],
+        "subject": "Madame Forestier",
+        "verb": "was shocked",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "Forestier 夫人",
+                    "type": "s"
+                },
+                {
+                    "text": "看到",
+                    "type": "other"
+                },
+                {
+                    "text": "Matilda 蒼老許多又更加貧窮",
+                    "type": "other"
+                },
+                {
+                    "text": "感到震驚。",
+                    "type": "v"
+                }
+            ]
+        }
+    },
+    {
+        "section": 4,
+        "words": [
+            "I lost your necklace,",
+            "she",
+            "admitted,",
+            "so I replaced it with a new one."
+        ],
+        "subject": "she",
+        "verb": "admitted",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "「我弄丟了你的項鍊，」",
+                    "type": "other"
+                },
+                {
+                    "text": "她",
+                    "type": "s"
+                },
+                {
+                    "text": "承認，",
+                    "type": "v"
+                },
+                {
+                    "text": "「所以我買了一條新的來取代它。」",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 4,
+        "words": [
+            "It cost us forty thousand francs,",
+            "and it",
+            "took",
+            "us ten years to pay off the debt."
+        ],
+        "subject": "it",
+        "verb": "took",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "它花了我們四萬法郎，",
+                    "type": "other"
+                },
+                {
+                    "text": "我們",
+                    "type": "other"
+                },
+                {
+                    "text": "花了",
+                    "type": "v"
+                },
+                {
+                    "text": "十年才還清債務。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 4,
+        "words": [
+            "My necklace was a fake,",
+            "said Madame Forestier.",
+            "It",
+            "was worth",
+            "five hundred francs at most."
+        ],
+        "subject": "It",
+        "verb": "was worth",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "「我的項鍊是假的，」",
+                    "type": "other"
+                },
+                {
+                    "text": "Forestier 夫人說。",
+                    "type": "other"
+                },
+                {
+                    "text": "它",
+                    "type": "s"
+                },
+                {
+                    "text": "最多",
+                    "type": "v"
+                },
+                {
+                    "text": "只值五百法郎。",
+                    "type": "other"
+                }
+            ]
+        }
+    }
+];
+
+let currentTab = 'all';
+let filtered = [];
+let currentIdx = 0;
+let subjectFound = false;
+let verbFound = false;
+let hintShown = false;
+
+function getFilteredSentences() {
+    if (currentTab === 'all') return allSentences;
+    return allSentences.filter(s => String(s.section) === currentTab);
+}
+
+function navigate(delta) {
+    const next = currentIdx + delta;
+    if (next < 0 || next >= filtered.length) return;
+    currentIdx = next;
+    renderSentence();
+}
+
+function renderSentence() {
+    speechSynthesis.cancel();
+    const sentence = filtered[currentIdx];
+    subjectFound = false;
+    verbFound = false;
+    hintShown = false;
+    document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length;
+    document.getElementById('prevBtn').disabled = currentIdx === 0;
+    document.getElementById('nextBtn').disabled = currentIdx === filtered.length - 1;
+
+    const area = document.getElementById('sentenceArea');
+    area.innerHTML = '';
+    sentence.words.forEach(word => {
+        const btn = document.createElement('button');
+        btn.className = 'chunk';
+        btn.textContent = word;
+        btn.dataset.word = word;
+        btn.onclick = () => handleChunkClick(btn);
+        area.appendChild(btn);
+    });
+
+    document.getElementById('translationArea').innerHTML = '';
+    renderTranslation(true);
+
+    setTimeout(speakCurrentSentence, 500);
+}
+
+function showHint() {
+    if (hintShown) return;
+    hintShown = true;
+    const chunks = document.querySelectorAll('#sentenceArea .chunk');
+    chunks.forEach((chunk, index) => {
+        chunk.classList.remove('chunk-color-neutral');
+        chunk.classList.add(CANDY_CLASSES[index % CANDY_CLASSES.length]);
+    });
+}
+
+function handleChunkClick(el) {
+    const sentence = filtered[currentIdx];
+    const word = el.dataset.word;
+    if (el.classList.contains('subject-found') || el.classList.contains('verb-found')) return;
+
+    const needSubject = !sentence.skipSubject && !subjectFound;
+
+    if (needSubject) {
+        if (word === sentence.subject) {
+            subjectFound = true;
+            el.classList.add('subject-found', 'pop');
+            setTimeout(() => el.classList.remove('pop'), 350);
+        } else {
+            shakeElement(el);
+        }
+        return;
+    }
+
+    if (!verbFound) {
+        if (word === sentence.verb) {
+            verbFound = true;
+            el.classList.add('verb-found', 'pop');
+            setTimeout(() => el.classList.remove('pop'), 350);
+            renderTranslation(false);
+        } else {
+            shakeElement(el);
+        }
+    }
+}
+
+function shakeElement(el) {
+    el.classList.remove('shake');
+    void el.offsetWidth;
+    el.classList.add('shake');
+    setTimeout(() => el.classList.remove('shake'), 400);
+}
+
+function renderTranslation(hidden) {
+    const sentence = filtered[currentIdx];
+    const area = document.getElementById('translationArea');
+    area.innerHTML = '';
+    if (hidden || !(subjectFound && verbFound)) {
+        area.innerHTML = '<span class="text-slate-400 text-sm">完成 S 與 V 之後，這裡會顯示中譯。</span>';
+        return;
+    }
+    sentence.translation.parts.forEach(part => {
+        const span = document.createElement('span');
+        span.className = 'trans-part';
+        if (part.type === 's') span.classList.add('trans-s');
+        else if (part.type === 'v') span.classList.add('trans-v');
+        if (part.implicit) span.classList.add('trans-implicit');
+        span.textContent = part.text + ' ';
+        area.appendChild(span);
+    });
+}
+
+function resetSentence() {
+    renderSentence();
+}
+
+function speakCurrentSentence() {
+    const sentence = filtered[currentIdx];
+    if (!sentence) return;
+    const text = sentence.words.join(' ');
+    speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.85;
+    const voices = speechSynthesis.getVoices();
+    const preferred = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.lang === 'en-US');
+    if (preferred) utterance.voice = preferred;
+    speechSynthesis.speak(utterance);
+}
+
+function pauseYouTube() {
+    const frame = document.getElementById('youtubeFrame');
+    if (frame && frame.contentWindow) {
+        try { frame.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); } catch (e) {}
+    }
+}
+
+const YOUTUBE_VIDEO_URL = 'https://www.youtube.com/embed/gPtQK563sYM';
+
+function setupVideoPane() {
+    const isFile = window.location.protocol === 'file:';
+    document.getElementById('videoWrap').classList.toggle('hidden', isFile);
+    document.getElementById('videoFallback').classList.toggle('hidden', !isFile);
+    const frame = document.getElementById('youtubeFrame');
+    if (!isFile && frame && !frame.getAttribute('src')) {
+        frame.setAttribute('src', YOUTUBE_VIDEO_URL);
+    }
+}
+
+function switchTab(tab) {
+    if (currentTab === 'youtube') pauseYouTube();
+    currentTab = tab;
+    document.querySelectorAll('.tabs-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+    const isVideo = tab === 'youtube';
+    document.getElementById('pane-youtube').classList.toggle('hidden-pane', !isVideo);
+    document.getElementById('pane-all').classList.toggle('hidden-pane', isVideo);
+    if (isVideo) {
+        speechSynthesis.cancel();
+        return;
+    }
+    filtered = getFilteredSentences();
+    currentIdx = 0;
+    renderSentence();
+}
+
+document.querySelectorAll('.tabs-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+window.addEventListener('beforeunload', () => speechSynthesis.cancel());
+speechSynthesis.onvoiceschanged = function() {};
+
+setupVideoPane();
+
+filtered = getFilteredSentences();
+currentIdx = 0;
+renderSentence();
+</script>
+</body>
+</html>

@@ -10,6 +10,9 @@
 - **L02 Colors Speak Louder than Words**
   - `L02/L02-flashcards.html` — 字卡總覽
   - `L02/L02-SV-challenge.html` — S+V 句型挑戰
+- **L03 The Necklace**
+  - `L03/L03-flashcards.html` — 字卡總覽
+  - `L03/L03-SV-challenge.html` — S+V 句型挑戰
 
 ## 發布方式
 
