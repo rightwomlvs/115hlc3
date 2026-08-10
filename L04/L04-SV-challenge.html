@@ -625,7 +625,7 @@ const allSentences = [
         ],
         "subject": "you",
         "verb": "ask",
-        "skipSubject": false,
+        "skipSubject": true,
         "translation": {
             "parts": [
                 {
@@ -679,7 +679,7 @@ const allSentences = [
         ],
         "subject": "you",
         "verb": "ask",
-        "skipSubject": false,
+        "skipSubject": true,
         "translation": {
             "parts": [
                 {
@@ -796,7 +796,8 @@ function renderTranslation(hidden) {
     const sentence = filtered[currentIdx];
     const area = document.getElementById('translationArea');
     area.innerHTML = '';
-    if (hidden || !(subjectFound && verbFound)) {
+    const done = verbFound && (sentence.skipSubject || subjectFound);
+    if (hidden || !done) {
         area.innerHTML = '<span class="text-slate-400 text-sm">完成 S 與 V 之後，這裡會顯示中譯。</span>';
         return;
     }
