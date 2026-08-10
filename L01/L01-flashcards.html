@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L01 What's in My B.O.B.? 字卡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+* { box-sizing: border-box; }
+body { background-color: #f0f2f5; display: flex; flex-direction: column; align-items: center; margin: 0; padding: 32px 0; gap: 32px; font-family: 'Inter', sans-serif; }
+.hidden { display: none !important; }
+.topbar { width: 1280px; max-width: 100%; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.topbar h1 { font-family: 'Crimson Pro', serif; font-size: 36px; color: #1e293b; margin: 0; }
+#backBtn { display: inline-flex; align-items: center; gap: 8px; background-color: #ffffff; border: 2px solid #cbd5e1; color: #334155; font-weight: 600; font-size: 18px; padding: 10px 20px; border-radius: 12px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+#backBtn:hover { background-color: #f1f5f9; border-color: #2563eb; color: #2563eb; }
+.grid-wrap { width: 1280px; max-width: 100%; padding: 0 16px; }
+#cardGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.card { background-color: #ffffff; border: 2px solid transparent; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 20px; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 8px; transition: all 0.15s ease; font-family: inherit; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.14); border-color: #2563eb; }
+.card-word { font-family: 'Crimson Pro', serif; font-size: 30px; font-weight: 700; color: #2c3e50; line-height: 1.1; word-break: break-word; }
+.card-word.phrase { font-size: 23px; }
+.card-pos { align-self: flex-start; background-color: #e0f2fe; color: #0284c7; font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
+.card-def { font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #475569; line-height: 1.3; }
+.slide-container { width: 1280px; height: 720px; background-color: #ffffff; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; padding: 0; }
+.slide-container::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(circle, rgba(237, 242, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); z-index: 0; pointer-events: none; }
+h1, h2, h3 { margin: 0; color: #1a1a1a; }
+.centered-layout { height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 60px 80px; z-index: 1; }
+.main-content-wrapper { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-bottom: 40px; }
+.word-header { display: flex; align-items: center; gap: 32px; margin-bottom: 16px; }
+.headword { font-family: 'Crimson Pro', serif; font-size: 110px; font-weight: 700; color: #2c3e50; letter-spacing: -2px; line-height: 1; }
+.headword.phrase { font-size: 80px; }
+.pos-tag { background-color: #e0f2fe; color: #0284c7; font-size: 32px; font-weight: 600; padding: 10px 20px; border-radius: 16px; text-transform: uppercase; letter-spacing: 1px; }
+.audio-btn { background-color: #ffffff; border: 3px solid #cbd5e1; color: #64748b; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 28px; transition: all 0.2s ease; outline: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.audio-btn:hover { background-color: #f1f5f9; color: #2563eb; border-color: #2563eb; transform: scale(1.05); }
+.audio-btn:active { transform: scale(0.95); background-color: #e2e8f0; }
+.syllable-text, .grammar-note { font-family: 'Inter', sans-serif; font-size: 48px; color: #64748b; font-weight: 500; margin-bottom: 40px; letter-spacing: 2px; }
+.grammar-note { color: #059669; font-weight: 600; background-color: #ecfdf5; padding: 8px 24px; border-radius: 12px; }
+.phonics-container { display: inline-flex; border: 3px solid #cbd5e1; border-radius: 16px; overflow: hidden; background-color: #fff; box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.08); }
+.phonics-pair { display: flex; flex-direction: column; border-right: 2px solid #e2e8f0; min-width: 64px; }
+.phonics-pair:last-child { border-right: none; }
+.char-top { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 48px; color: #334155; padding: 16px 24px; text-align: center; background-color: #f8fafc; border-bottom: 2px solid #e2e8f0; }
+.char-bottom { font-family: 'Inter', sans-serif; font-size: 42px; padding: 16px 24px; text-align: center; font-weight: 500; position: relative; }
+.ph-cons { color: #2563eb; }
+.ph-vowel { color: #dc2626; font-weight: 600; }
+.silent-mark { color: #cbd5e1; }
+.stress-mark, .sec-stress-mark { color: #0f172a; font-weight: 400; margin-right: 2px; font-size: 0.9em; }
+.sec-stress-mark { vertical-align: sub; }
+.definition-container { border-top: 1px solid #e2e8f0; padding-top: 24px; margin-top: auto; width: 100%; text-align: left; }
+.definition { font-family: 'Noto Sans TC', sans-serif; font-size: 56px; font-weight: 500; color: #475569; line-height: 1.3; margin-bottom: 8px; }
+.def-en { font-family: 'Inter', sans-serif; font-size: 36px; color: #94a3b8; font-weight: 400; display: block; }
+.title-layout { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; z-index: 1; }
+.title-layout h1 { font-family: 'Crimson Pro', serif; font-size: 80px; margin-bottom: 24px; color: #1e293b; }
+.title-layout p { font-size: 24px; color: #64748b; max-width: 600px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+    <h1>L01 Vocabulary List</h1>
+    <button id="backBtn" class="hidden" onclick="showGrid()" type="button"><i class="fa-solid fa-arrow-left"></i> 返回字卡總覽</button>
+</header>
+
+<!-- 字卡總覽 Grid -->
+<div class="grid-wrap" id="gridView">
+    <div id="cardGrid"></div>
+</div>
+
+<!-- 單字 1 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">fright</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('fright')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">fright</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
+                <div class="phonics-pair"><div class="char-top">igh</div><div class="char-bottom ph-vowel">aɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">（突然的）驚嚇、恐懼</div>
+            <div class="def-en">(a sudden feeling of fear)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 2 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">warning</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('warning')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">warn · ing</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">w</div><div class="char-bottom ph-cons">w</div></div>
+                <div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɔr</div></div>
+                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
+                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">ng</div><div class="char-bottom ph-cons">ŋ</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">警告</div>
+            <div class="def-en">(a message that tells people to be ready for possible danger)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 3 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">disaster</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('disaster')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">di · sas · ter</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
+                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div>
+                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel">ɚ</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">災難</div>
+            <div class="def-en">(an event causing great harm or death)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 4 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">prepared</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('prepared')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">pre · pared</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
+                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">準備好的，有準備的</div>
+            <div class="def-en">(be ready for something to happen)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 5 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">react</h2>
+                <span class="pos-tag">vi.</span>
+                <button class="audio-btn" onclick="speak('react')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">re · act</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div>
+                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">反應</div>
+            <div class="def-en">(to act as a result of a situation or an event)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 6 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">survival</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('survival')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">sur · vi · val</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">ur</div><div class="char-bottom ph-vowel">ɚ</div></div>
+                <div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div>
+                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>aɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div>
+                <div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">生存，存活</div>
+            <div class="def-en">(the state or act of staying alive)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 7 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">kit</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('kit')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">kit</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">k</div><div class="char-bottom ph-cons">k</div></div>
+                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">成套的工具</div>
+            <div class="def-en">(a set of items or tools)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 8 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">emergency</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('emergency')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">e · mer · gen · cy</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div>
+                <div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div>
+                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">dʒ</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div>
+                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
+                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">緊急情況</div>
+            <div class="def-en">(a sudden situation that requires quick reactions)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 9 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">essential</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('essential')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">es · sen · tial</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div>
+                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">ʃ</div></div>
+                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ǝ</div></div>
+                <div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">必要的</div>
+            <div class="def-en">(very important and necessary)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 10 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">preserve</h2>
+                <span class="pos-tag">vt.</span>
+                <button class="audio-btn" onclick="speak('preserve')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">pre · serve</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div>
+                <div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div>
+                <div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">保存，維護</div>
+            <div class="def-en">(to prevent something from being damaged)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 11 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">document</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('document')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">doc · u · ment</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
+                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div>
+                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
+                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">jǝ</div></div>
+                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div>
+                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">文件</div>
+            <div class="def-en">(a written or printed piece of information that records something)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 12 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">optional</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('optional')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">op · tion · al</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
+                <div class="phonics-pair"><div class="char-top">ti</div><div class="char-bottom ph-cons">ʃ</div></div>
+                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel">ǝ</div></div>
+                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
+                <div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">可選擇的，非必要的</div>
+            <div class="def-en">(available as a choice but not required)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 13 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">spare</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('spare')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">spare</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
+                <div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel">ɛr</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">備用的</div>
+            <div class="def-en">(additional or extra)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 14 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">update</h2>
+                <span class="pos-tag">vt.</span>
+                <button class="audio-btn" onclick="speak('update')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">up · date</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">ʌ</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
+                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">使……更新</div>
+            <div class="def-en">(to add the latest information to something)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 單字 15 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword">grab</h2>
+                <span class="pos-tag">vt.</span>
+                <button class="audio-btn" onclick="speak('grab')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">grab</div>
+            <div class="phonics-container">
+                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
+                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">æ</div></div>
+                <div class="phonics-pair"><div class="char-top">b</div><div class="char-bottom ph-cons">b</div></div>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">抓取</div>
+            <div class="def-en">(to take or catch something suddenly)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 片語 1 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword phrase">as soon as</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('as soon as')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">片語</div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">一……就……</div>
+            <div class="def-en">(at the earliest possible moment after something else happens)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 片語 2 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword phrase">reach for</h2>
+                <span class="pos-tag">phr.</span>
+                <button class="audio-btn" onclick="speak('reach for')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">片語</div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">伸手拿</div>
+            <div class="def-en">(to stretch one's arm out to get or touch something)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 片語 3 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword phrase">stand for</h2>
+                <span class="pos-tag">phr.</span>
+                <button class="audio-btn" onclick="speak('stand for')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">片語</div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">代表</div>
+            <div class="def-en">(to mean a set of words or an idea)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 片語 4 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword phrase">make sure</h2>
+                <span class="pos-tag">phr.</span>
+                <button class="audio-btn" onclick="speak('make sure')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">片語</div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">確定，確保</div>
+            <div class="def-en">(to take action to be certain about something)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 片語 5 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword phrase">as the saying goes</h2>
+                <span class="pos-tag">phr.</span>
+                <button class="audio-btn" onclick="speak('as the saying goes')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">片語</div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">俗話說</div>
+            <div class="def-en">(to introduce an expression)</div>
+        </div>
+    </div>
+</div>
+
+<!-- 片語 6 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class="headword phrase">either … or …</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('either or')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+            <div class="syllable-text">片語</div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">不是……就是……</div>
+            <div class="def-en">(a choice between two options)</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function speak(word) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.8;
+        utterance.pitch = 1;
+        const voices = window.speechSynthesis.getVoices();
+        const preferredVoice = voices.find(voice => voice.name.includes("Google US English")) || voices.find(voice => voice.lang === 'en-US');
+        if (preferredVoice) { utterance.voice = preferredVoice; }
+        window.speechSynthesis.speak(utterance);
+    }
+    window.speechSynthesis.onvoiceschanged = function() {};
+
+    const slides = Array.from(document.querySelectorAll('.slide-container')).filter(s => s.id !== 'slide1');
+    const gridEl = document.getElementById('cardGrid');
+    slides.forEach(s => s.classList.add('hidden'));
+
+    const cards = slides.map(slide => ({
+        slide,
+        word: slide.querySelector('.headword').textContent.trim(),
+        pos: slide.querySelector('.pos-tag').textContent.trim(),
+        def: slide.querySelector('.definition') ? slide.querySelector('.definition').textContent.trim() : '',
+        isPhrase: !!slide.querySelector('.headword.phrase')
+    }));
+
+    cards.forEach((c, i) => {
+        const card = document.createElement('button');
+        card.className = 'card';
+        card.type = 'button';
+        const wordEl = document.createElement('span');
+        wordEl.className = 'card-word' + (c.isPhrase ? ' phrase' : '');
+        wordEl.textContent = c.word;
+        const posEl = document.createElement('span');
+        posEl.className = 'card-pos';
+        posEl.textContent = c.pos;
+        const defEl = document.createElement('span');
+        defEl.className = 'card-def';
+        defEl.textContent = c.def;
+        card.append(wordEl, posEl, defEl);
+        card.addEventListener('click', () => showSlide(i));
+        gridEl.appendChild(card);
+    });
+
+    function showSlide(i) {
+        document.getElementById('gridView').classList.add('hidden');
+        document.getElementById('backBtn').classList.remove('hidden');
+        slides.forEach((s, j) => s.classList.toggle('hidden', j !== i));
+        window.scrollTo(0, 0);
+        speak(cards[i].word.replace(/…+/g, ' ').replace(/\s+/g, ' ').trim());
+    }
+
+    function showGrid() {
+        document.getElementById('gridView').classList.remove('hidden');
+        document.getElementById('backBtn').classList.add('hidden');
+        slides.forEach(s => s.classList.add('hidden'));
+        window.scrollTo(0, 0);
+    }
+</script>
+</body>
+</html>
