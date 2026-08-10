@@ -78,6 +78,7 @@
                 <div class="text-slate-500 font-medium" id="counter">1 / 1</div>
                 <button class="speak-btn" onclick="speakCurrentSentence()" title="朗讀">🔊</button>
             </div>
+            <div id="pairReminder" class="hidden mb-3 text-center text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2 text-sm font-semibold"></div>
             <div class="min-h-40 flex flex-wrap items-center justify-center gap-1 p-4 rounded-xl bg-slate-50 border border-slate-200" id="sentenceArea"></div>
             <div class="flex items-center justify-center gap-4 mt-6">
                 <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← 上一句</button>
@@ -121,8 +122,9 @@ const allSentences = [
     },
     {
         section: 1,
-        words: ["Toby", "liked", "red or black,", "but Helena", "preferred", "blue or yellow."],
+        words: ["Toby", "liked", "red or black,", "but", "Helena", "preferred", "blue or yellow."],
         subject: "Toby", verb: "liked", skipSubject: false,
+        pairs: [ { subject: "Toby", verb: "liked" }, { subject: "Helena", verb: "preferred" } ],
         translation: { parts: [
             { text: "Toby", type: "s" },
             { text: "喜歡", type: "v" },
@@ -188,8 +190,9 @@ const allSentences = [
     },
     {
         section: 2,
-        words: ["For instance,", "red", "can stir up", "strong feelings of love and passion", "and is often linked to excitement."],
+        words: ["For instance,", "red", "can stir up", "strong feelings of love and passion", "and", "is often linked", "to excitement."],
         subject: "red", verb: "can stir up", skipSubject: false,
+        pairs: [ { subject: "red", verb: "can stir up" }, { subject: null, verb: "is often linked" } ],
         translation: { parts: [
             { text: "例如，", type: "other" },
             { text: "紅色", type: "s" },
@@ -210,8 +213,9 @@ const allSentences = [
     },
     {
         section: 2,
-        words: ["Similarly,", "black", "gives", "a sense of elegance and status,", "so it is often chosen by high-end brands such as Chanel and Sony."],
+        words: ["Similarly,", "black", "gives", "a sense of elegance and status,", "so", "it", "is often chosen", "by high-end brands such as Chanel and Sony."],
         subject: "black", verb: "gives", skipSubject: false,
+        pairs: [ { subject: "black", verb: "gives" }, { subject: "it", verb: "is often chosen" } ],
         translation: { parts: [
             { text: "同樣地，", type: "other" },
             { text: "黑色", type: "s" },
@@ -320,9 +324,14 @@ const allSentences = [
 let currentTab = 'all';
 let filtered = [];
 let currentIdx = 0;
-let subjectFound = false;
-let verbFound = false;
+let pairIdx = 0;
+let subDone = false;
 let hintShown = false;
+
+function getPairs(sentence) {
+    if (sentence.pairs) return sentence.pairs;
+    return [{ subject: sentence.subject, verb: sentence.verb, skip: !!sentence.skipSubject }];
+}
 
 function getFilteredSentences() {
     if (currentTab === 'all') return allSentences;
@@ -339,12 +348,15 @@ function navigate(delta) {
 function renderSentence() {
     speechSynthesis.cancel();
     const sentence = filtered[currentIdx];
-    subjectFound = false;
-    verbFound = false;
+    const pairs = getPairs(sentence);
+    pairIdx = 0;
+    subDone = (pairs[0] && !pairs[0].subject) ? true : false;
     hintShown = false;
-    document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length;
+    document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length + (pairs.length > 1 ? (' · 組 ' + (pairIdx + 1) + '/' + pairs.length) : '');
     document.getElementById('prevBtn').disabled = currentIdx === 0;
     document.getElementById('nextBtn').disabled = currentIdx === filtered.length - 1;
+
+    renderPairReminder();
 
     const area = document.getElementById('sentenceArea');
     area.innerHTML = '';
@@ -363,6 +375,18 @@ function renderSentence() {
     setTimeout(speakCurrentSentence, 500);
 }
 
+function renderPairReminder() {
+    const el = document.getElementById('pairReminder');
+    if (!el) return;
+    const n = getPairs(filtered[currentIdx]).length;
+    if (n > 1) {
+        el.classList.remove('hidden');
+        el.textContent = '🔎 本句有 ' + n + ' 組 S+V，請依序找出全部；「一個主詞、兩個動詞」時只需再找出下一個動詞。';
+    } else {
+        el.classList.add('hidden');
+    }
+}
+
 function showHint() {
     if (hintShown) return;
     hintShown = true;
@@ -375,14 +399,17 @@ function showHint() {
 
 function handleChunkClick(el) {
     const sentence = filtered[currentIdx];
+    const pairs = getPairs(sentence);
+    if (pairIdx >= pairs.length) return;
     const word = el.dataset.word;
     if (el.classList.contains('subject-found') || el.classList.contains('verb-found')) return;
 
-    const needSubject = !sentence.skipSubject && !subjectFound;
+    const cur = pairs[pairIdx];
+    const needSubject = !cur.skip && !subDone && !!cur.subject;
 
     if (needSubject) {
-        if (word === sentence.subject) {
-            subjectFound = true;
+        if (word === cur.subject) {
+            subDone = true;
             el.classList.add('subject-found', 'pop');
             setTimeout(() => el.classList.remove('pop'), 350);
         } else {
@@ -391,15 +418,18 @@ function handleChunkClick(el) {
         return;
     }
 
-    if (!verbFound) {
-        if (word === sentence.verb) {
-            verbFound = true;
-            el.classList.add('verb-found', 'pop');
-            setTimeout(() => el.classList.remove('pop'), 350);
+    if (word === cur.verb) {
+        el.classList.add('verb-found', 'pop');
+        setTimeout(() => el.classList.remove('pop'), 350);
+        pairIdx++;
+        if (pairIdx >= pairs.length) {
             renderTranslation(false);
         } else {
-            shakeElement(el);
+            subDone = !pairs[pairIdx].subject;
+            document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length + ' · 組 ' + (pairIdx + 1) + '/' + pairs.length;
         }
+    } else {
+        shakeElement(el);
     }
 }
 
@@ -412,10 +442,12 @@ function shakeElement(el) {
 
 function renderTranslation(hidden) {
     const sentence = filtered[currentIdx];
+    const pairs = getPairs(sentence);
     const area = document.getElementById('translationArea');
     area.innerHTML = '';
-    if (hidden || !(subjectFound && verbFound)) {
-        area.innerHTML = '<span class="text-slate-400 text-sm">完成 S 與 V 之後，這裡會顯示中譯。</span>';
+    const done = pairIdx >= pairs.length;
+    if (hidden || !done) {
+        area.innerHTML = '<span class="text-slate-400 text-sm">完成全部 S 與 V 之後，這裡會顯示中譯。</span>';
         return;
     }
     sentence.translation.parts.forEach(part => {

@@ -78,6 +78,7 @@
                 <div class="text-slate-500 font-medium" id="counter">1 / 1</div>
                 <button class="speak-btn" onclick="speakCurrentSentence()" title="朗讀">🔊</button>
             </div>
+            <div id="pairReminder" class="hidden mb-3 text-center text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-4 py-2 text-sm font-semibold"></div>
             <div class="min-h-40 flex flex-wrap items-center justify-center gap-1 p-4 rounded-xl bg-slate-50 border border-slate-200" id="sentenceArea"></div>
             <div class="flex items-center justify-center gap-4 mt-6">
                 <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← 上一句</button>
@@ -104,7 +105,8 @@ const allSentences = [
             "Matilda",
             "was",
             "a pretty woman,",
-            "but her husband",
+            "but",
+            "her husband",
             "was",
             "not wealthy."
         ],
@@ -138,7 +140,17 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        }
+        },
+        "pairs": [
+            {
+                "subject": "Matilda",
+                "verb": "was"
+            },
+            {
+                "subject": "her husband",
+                "verb": "was"
+            }
+        ]
     },
     {
         "section": 1,
@@ -240,7 +252,10 @@ const allSentences = [
             "They",
             "were invited",
             "to a big party,",
-            "and she would meet many influential people there."
+            "and",
+            "she",
+            "would meet",
+            "many influential people there."
         ],
         "subject": "They",
         "verb": "were invited",
@@ -260,7 +275,17 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        }
+        },
+        "pairs": [
+            {
+                "subject": "They",
+                "verb": "were invited"
+            },
+            {
+                "subject": "she",
+                "verb": "would meet"
+            }
+        ]
     },
     {
         "section": 2,
@@ -417,7 +442,10 @@ const allSentences = [
             "At the party,",
             "everyone",
             "admired",
-            "her and praised her husband for having such a charming wife."
+            "her",
+            "and",
+            "praised",
+            "her husband for having such a charming wife."
         ],
         "subject": "everyone",
         "verb": "admired",
@@ -441,7 +469,17 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        }
+        },
+        "pairs": [
+            {
+                "subject": "everyone",
+                "verb": "admired"
+            },
+            {
+                "subject": null,
+                "verb": "praised"
+            }
+        ]
     },
     {
         "section": 3,
@@ -538,7 +576,9 @@ const allSentences = [
     {
         "section": 3,
         "words": [
-            "The new necklace cost them a fortune,",
+            "The new necklace",
+            "cost",
+            "them a fortune,",
             "so",
             "they",
             "had to borrow",
@@ -566,7 +606,17 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        }
+        },
+        "pairs": [
+            {
+                "subject": "The new necklace",
+                "verb": "cost"
+            },
+            {
+                "subject": "they",
+                "verb": "had to borrow"
+            }
+        ]
     },
     {
         "section": 3,
@@ -666,10 +716,15 @@ const allSentences = [
     {
         "section": 4,
         "words": [
-            "I lost your necklace,",
+            "I",
+            "lost",
+            "your necklace,",
             "she",
             "admitted,",
-            "so I replaced it with a new one."
+            "so",
+            "I",
+            "replaced",
+            "it with a new one."
         ],
         "subject": "she",
         "verb": "admitted,",
@@ -693,12 +748,28 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        }
+        },
+        "pairs": [
+            {
+                "subject": "I",
+                "verb": "lost"
+            },
+            {
+                "subject": "she",
+                "verb": "admitted,"
+            },
+            {
+                "subject": "I",
+                "verb": "replaced"
+            }
+        ]
     },
     {
         "section": 4,
         "words": [
-            "It cost us forty thousand francs,",
+            "It",
+            "cost",
+            "us forty thousand francs,",
             "and",
             "it",
             "took",
@@ -726,7 +797,17 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        }
+        },
+        "pairs": [
+            {
+                "subject": "It",
+                "verb": "cost"
+            },
+            {
+                "subject": "it",
+                "verb": "took"
+            }
+        ]
     },
     {
         "section": 4,
@@ -770,9 +851,14 @@ const allSentences = [
 let currentTab = 'all';
 let filtered = [];
 let currentIdx = 0;
-let subjectFound = false;
-let verbFound = false;
+let pairIdx = 0;
+let subDone = false;
 let hintShown = false;
+
+function getPairs(sentence) {
+    if (sentence.pairs) return sentence.pairs;
+    return [{ subject: sentence.subject, verb: sentence.verb, skip: !!sentence.skipSubject }];
+}
 
 function getFilteredSentences() {
     if (currentTab === 'all') return allSentences;
@@ -789,12 +875,15 @@ function navigate(delta) {
 function renderSentence() {
     speechSynthesis.cancel();
     const sentence = filtered[currentIdx];
-    subjectFound = false;
-    verbFound = false;
+    const pairs = getPairs(sentence);
+    pairIdx = 0;
+    subDone = (pairs[0] && !pairs[0].subject) ? true : false;
     hintShown = false;
-    document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length;
+    document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length + (pairs.length > 1 ? (' · 組 ' + (pairIdx + 1) + '/' + pairs.length) : '');
     document.getElementById('prevBtn').disabled = currentIdx === 0;
     document.getElementById('nextBtn').disabled = currentIdx === filtered.length - 1;
+
+    renderPairReminder();
 
     const area = document.getElementById('sentenceArea');
     area.innerHTML = '';
@@ -813,6 +902,18 @@ function renderSentence() {
     setTimeout(speakCurrentSentence, 500);
 }
 
+function renderPairReminder() {
+    const el = document.getElementById('pairReminder');
+    if (!el) return;
+    const n = getPairs(filtered[currentIdx]).length;
+    if (n > 1) {
+        el.classList.remove('hidden');
+        el.textContent = '🔎 本句有 ' + n + ' 組 S+V，請依序找出全部；「一個主詞、兩個動詞」時只需再找出下一個動詞。';
+    } else {
+        el.classList.add('hidden');
+    }
+}
+
 function showHint() {
     if (hintShown) return;
     hintShown = true;
@@ -825,14 +926,17 @@ function showHint() {
 
 function handleChunkClick(el) {
     const sentence = filtered[currentIdx];
+    const pairs = getPairs(sentence);
+    if (pairIdx >= pairs.length) return;
     const word = el.dataset.word;
     if (el.classList.contains('subject-found') || el.classList.contains('verb-found')) return;
 
-    const needSubject = !sentence.skipSubject && !subjectFound;
+    const cur = pairs[pairIdx];
+    const needSubject = !cur.skip && !subDone && !!cur.subject;
 
     if (needSubject) {
-        if (word === sentence.subject) {
-            subjectFound = true;
+        if (word === cur.subject) {
+            subDone = true;
             el.classList.add('subject-found', 'pop');
             setTimeout(() => el.classList.remove('pop'), 350);
         } else {
@@ -841,15 +945,18 @@ function handleChunkClick(el) {
         return;
     }
 
-    if (!verbFound) {
-        if (word === sentence.verb) {
-            verbFound = true;
-            el.classList.add('verb-found', 'pop');
-            setTimeout(() => el.classList.remove('pop'), 350);
+    if (word === cur.verb) {
+        el.classList.add('verb-found', 'pop');
+        setTimeout(() => el.classList.remove('pop'), 350);
+        pairIdx++;
+        if (pairIdx >= pairs.length) {
             renderTranslation(false);
         } else {
-            shakeElement(el);
+            subDone = !pairs[pairIdx].subject;
+            document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length + ' · 組 ' + (pairIdx + 1) + '/' + pairs.length;
         }
+    } else {
+        shakeElement(el);
     }
 }
 
@@ -862,10 +969,12 @@ function shakeElement(el) {
 
 function renderTranslation(hidden) {
     const sentence = filtered[currentIdx];
+    const pairs = getPairs(sentence);
     const area = document.getElementById('translationArea');
     area.innerHTML = '';
-    if (hidden || !(subjectFound && verbFound)) {
-        area.innerHTML = '<span class="text-slate-400 text-sm">完成 S 與 V 之後，這裡會顯示中譯。</span>';
+    const done = pairIdx >= pairs.length;
+    if (hidden || !done) {
+        area.innerHTML = '<span class="text-slate-400 text-sm">完成全部 S 與 V 之後，這裡會顯示中譯。</span>';
         return;
     }
     sentence.translation.parts.forEach(part => {
