@@ -716,18 +716,25 @@ const allSentences = [
     {
         "section": 4,
         "words": [
+            "“",
             "I",
             "lost",
-            "your necklace,",
+            "your necklace,”",
             "she",
-            "admitted,",
-            "so",
+            "admitted.",
+            "“So",
             "I",
             "replaced",
-            "it with a new one."
+            "it with a new one.",
+            "It",
+            "cost",
+            "forty thousand francs.",
+            "It",
+            "took",
+            "us ten years to pay off the debt.”"
         ],
         "subject": "she",
-        "verb": "admitted,",
+        "verb": "admitted.",
         "skipSubject": false,
         "translation": {
             "parts": [
@@ -740,11 +747,35 @@ const allSentences = [
                     "type": "s"
                 },
                 {
-                    "text": "承認，",
+                    "text": "承認。",
                     "type": "v"
                 },
                 {
-                    "text": "「所以我買了一條新的來取代它。」",
+                    "text": "「所以我買了一條新的來取代它。",
+                    "type": "other"
+                },
+                {
+                    "text": "它",
+                    "type": "s"
+                },
+                {
+                    "text": "花了",
+                    "type": "v"
+                },
+                {
+                    "text": "我們四萬法郎。",
+                    "type": "other"
+                },
+                {
+                    "text": "它",
+                    "type": "s"
+                },
+                {
+                    "text": "耗費了",
+                    "type": "v"
+                },
+                {
+                    "text": "我們十年才還清這筆債務。」",
                     "type": "other"
                 }
             ]
@@ -756,55 +787,18 @@ const allSentences = [
             },
             {
                 "subject": "she",
-                "verb": "admitted,"
+                "verb": "admitted."
             },
             {
                 "subject": "I",
                 "verb": "replaced"
-            }
-        ]
-    },
-    {
-        "section": 4,
-        "words": [
-            "It",
-            "cost",
-            "us forty thousand francs,",
-            "and",
-            "it",
-            "took",
-            "us ten years to pay off the debt."
-        ],
-        "subject": "it",
-        "verb": "took",
-        "skipSubject": false,
-        "translation": {
-            "parts": [
-                {
-                    "text": "它花了我們四萬法郎，",
-                    "type": "other"
-                },
-                {
-                    "text": "我們",
-                    "type": "other"
-                },
-                {
-                    "text": "花了",
-                    "type": "v"
-                },
-                {
-                    "text": "十年才還清債務。",
-                    "type": "other"
-                }
-            ]
-        },
-        "pairs": [
+            },
             {
                 "subject": "It",
                 "verb": "cost"
             },
             {
-                "subject": "it",
+                "subject": "It",
                 "verb": "took"
             }
         ]
@@ -812,11 +806,16 @@ const allSentences = [
     {
         "section": 4,
         "words": [
-            "My necklace was a fake,",
-            "said Madame Forestier.",
+            "“My poor Matilda,”",
+            "said",
+            "Madame Forestier",
+            ", “",
+            "my necklace",
+            "was",
+            "a fake.",
             "It",
             "was worth",
-            "five hundred francs at most."
+            "five hundred francs at most!”"
         ],
         "subject": "It",
         "verb": "was worth",
@@ -824,11 +823,27 @@ const allSentences = [
         "translation": {
             "parts": [
                 {
-                    "text": "「我的項鍊是假的，」",
+                    "text": "「我可憐的 Matilda，」",
                     "type": "other"
                 },
                 {
-                    "text": "Forestier 夫人說。",
+                    "text": "Forestier 夫人",
+                    "type": "s"
+                },
+                {
+                    "text": "說，",
+                    "type": "v"
+                },
+                {
+                    "text": "「我的項鍊",
+                    "type": "other"
+                },
+                {
+                    "text": "是",
+                    "type": "v"
+                },
+                {
+                    "text": "假的。",
                     "type": "other"
                 },
                 {
@@ -837,14 +852,32 @@ const allSentences = [
                 },
                 {
                     "text": "最多",
+                    "type": "other"
+                },
+                {
+                    "text": "值",
                     "type": "v"
                 },
                 {
-                    "text": "只值五百法郎。",
+                    "text": "五百法郎！」",
                     "type": "other"
                 }
             ]
-        }
+        },
+        "pairs": [
+            {
+                "subject": "Madame Forestier",
+                "verb": "said"
+            },
+            {
+                "subject": "my necklace",
+                "verb": "was"
+            },
+            {
+                "subject": "It",
+                "verb": "was worth"
+            }
+        ]
     }
 ];
 
