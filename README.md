@@ -7,6 +7,9 @@
 - **L01 What's in My B.O.B.?**
   - `L01/L01-flashcards.html` — 字卡總覽（點入自動朗讀、KK 音標、Phonics Grid）
   - `L01/L01-SV-challenge.html` — S+V 句型挑戰（分節 Tab、Show Hint、課文動畫）
+- **L02 Colors Speak Louder than Words**
+  - `L02/L02-flashcards.html` — 字卡總覽
+  - `L02/L02-SV-challenge.html` — S+V 句型挑戰
 
 ## 發布方式
 
