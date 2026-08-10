@@ -721,17 +721,7 @@ const allSentences = [
             "lost",
             "your necklace,”",
             "she",
-            "admitted.",
-            "“So",
-            "I",
-            "replaced",
-            "it with a new one.",
-            "It",
-            "cost",
-            "forty thousand francs.",
-            "It",
-            "took",
-            "us ten years to pay off the debt.”"
+            "admitted."
         ],
         "subject": "she",
         "verb": "admitted.",
@@ -749,7 +739,39 @@ const allSentences = [
                 {
                     "text": "承認。",
                     "type": "v"
-                },
+                }
+            ]
+        },
+        "pairs": [
+            {
+                "subject": "I",
+                "verb": "lost"
+            },
+            {
+                "subject": "she",
+                "verb": "admitted."
+            }
+        ]
+    },
+    {
+        "section": 4,
+        "words": [
+            "“So",
+            "I",
+            "replaced",
+            "it with a new one.",
+            "It",
+            "cost",
+            "forty thousand francs.",
+            "It",
+            "took",
+            "us ten years to pay off the debt.”"
+        ],
+        "subject": "It",
+        "verb": "took",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
                 {
                     "text": "「所以我買了一條新的來取代它。",
                     "type": "other"
@@ -781,14 +803,6 @@ const allSentences = [
             ]
         },
         "pairs": [
-            {
-                "subject": "I",
-                "verb": "lost"
-            },
-            {
-                "subject": "she",
-                "verb": "admitted."
-            },
             {
                 "subject": "I",
                 "verb": "replaced"
