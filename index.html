@@ -100,7 +100,7 @@
 </div>
 
 <script>
-/* 隨堂測驗開放/關閉控管：讀取根目錄 config.json，關閉時僅隱藏該課「隨堂測驗」按鈕（字卡與 S+V 挑戰不受影響） */
+/* 隨堂測驗開放/關閉控管：讀取根目錄 config.json，關閉時該課「隨堂測驗」按鈕改為上鎖狀態（仍顯示項目名稱與鎖圖示），字卡與 S+V 挑戰不受影響 */
 (function(){
   fetch('config.json', {cache: 'no-store'}).then(function(r){
     if(!r.ok) return null;
@@ -109,7 +109,14 @@
     if(!cfg || !cfg.quizzes) return;
     document.querySelectorAll('[data-quiz-link]').forEach(function(a){
       var L = a.getAttribute('data-quiz-link');
-      if(cfg.quizzes[L] === false){ a.style.display = 'none'; }
+      if(cfg.quizzes[L] === false){
+        a.removeAttribute('href');
+        a.removeAttribute('data-quiz-link');
+        a.classList.remove('bg-violet-600', 'hover:bg-violet-700');
+        a.classList.add('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
+        a.setAttribute('title', '本課隨堂測驗尚未開放');
+        a.innerHTML = '🔒 隨堂測驗（尚未開放）';
+      }
     });
   }).catch(function(){});
 })();
