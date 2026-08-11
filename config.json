@@ -1,11 +1,11 @@
 {
-  "updated": "2026-08-11T15:31:45.072Z",
+  "updated": "2026-08-11T15:32:02.354Z",
   "quizzes": {
-    "L01": true,
+    "L01": false,
     "L02": false,
     "L03": false,
     "L04": false,
     "L05": false,
-    "L06": false
+    "L06": true
   }
 }
