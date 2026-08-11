@@ -24,6 +24,8 @@ body { background-color: #f0f2f5; display: flex; flex-direction: column; align-i
 .card-word.phrase { font-size: 23px; }
 .card-pos { align-self: flex-start; background-color: #e0f2fe; color: #0284c7; font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
 .card-def { font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #475569; line-height: 1.3; }
+.card-syn { font-family: 'Inter', sans-serif; font-size: 15px; color: #b45309; font-weight: 600; }
+.card-ant { font-family: 'Inter', sans-serif; font-size: 15px; color: #be123c; font-weight: 600; }
 .slide-container { width: 1280px; height: 720px; background-color: #ffffff; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; padding: 0; }
 .slide-container::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(circle, rgba(237, 242, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); z-index: 0; pointer-events: none; }
 h1, h2, h3 { margin: 0; color: #1a1a1a; }
@@ -51,6 +53,12 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .definition-container { border-top: 1px solid #e2e8f0; padding-top: 24px; margin-top: auto; width: 100%; text-align: left; }
 .definition { font-family: 'Noto Sans TC', sans-serif; font-size: 56px; font-weight: 500; color: #475569; line-height: 1.3; margin-bottom: 8px; }
 .def-en { font-family: 'Inter', sans-serif; font-size: 36px; color: #94a3b8; font-weight: 400; display: block; }
+.syn-line { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.syn-label { background-color: #fbbf24; color: #78350f; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.syn-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #b45309; font-weight: 600; }
+.ant-line { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.ant-label { background-color: #fecdd3; color: #881337; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.ant-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #be123c; font-weight: 600; }
 .title-layout { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; z-index: 1; }
 .title-layout h1 { font-family: 'Crimson Pro', serif; font-size: 80px; margin-bottom: 24px; color: #1e293b; }
 .title-layout p { font-size: 24px; color: #64748b; max-width: 600px; }
@@ -67,7 +75,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     <div id="cardGrid"></div>
 </div>
 
-<!-- 單字 1 -->
+
+<!-- 單字 fright -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -78,20 +87,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">fright</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">igh</div><div class="char-bottom ph-vowel">aɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">igh</div><div class="char-bottom ph-vowel">aɪ</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">（突然的）驚嚇、恐懼</div>
             <div class="def-en">(a sudden feeling of fear)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">shock</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 2 -->
+<!-- 單字 warning -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -102,21 +110,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">warn · ing</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">w</div><div class="char-bottom ph-cons">w</div></div>
-                <div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɔr</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">ng</div><div class="char-bottom ph-cons">ŋ</div></div>
+                <div class="phonics-pair"><div class="char-top">w</div><div class="char-bottom ph-cons">w</div></div><div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɔr</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">ng</div><div class="char-bottom ph-cons">ŋ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">警告</div>
             <div class="def-en">(a message that tells people to be ready for possible danger)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">alarm, alert</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 3 -->
+<!-- 單字 disaster -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -127,23 +133,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">di · sas · ter</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
-                <div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel">ɚ</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel">ɚ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">災難</div>
             <div class="def-en">(an event causing great harm or death)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 4 -->
+<!-- 單字 prepared -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -154,24 +156,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">pre · pared</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div><div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">準備好的，有準備的</div>
             <div class="def-en">(be ready for something to happen)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 5 -->
+<!-- 單字 react -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -182,21 +179,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">re · act</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div>
-                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">反應</div>
             <div class="def-en">(to act as a result of a situation or an event)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">respond</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 6 -->
+<!-- 單字 survival -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -207,22 +202,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">sur · vi · val</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">ur</div><div class="char-bottom ph-vowel">ɚ</div></div>
-                <div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>aɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div>
-                <div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">ur</div><div class="char-bottom ph-vowel">ɚ</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>aɪ</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">生存，存活</div>
             <div class="def-en">(the state or act of staying alive)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 7 -->
+<!-- 單字 kit -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -233,19 +225,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">kit</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">k</div><div class="char-bottom ph-cons">k</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">k</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">成套的工具</div>
             <div class="def-en">(a set of items or tools)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">equipment, tool</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 8 -->
+<!-- 單字 emergency -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -256,24 +248,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">e · mer · gen · cy</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div>
-                <div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div>
-                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">dʒ</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div><div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">dʒ</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">緊急情況</div>
             <div class="def-en">(a sudden situation that requires quick reactions)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">crisis</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 9 -->
+<!-- 單字 essential -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -284,23 +271,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">es · sen · tial</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">ʃ</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ǝ</div></div>
-                <div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">ʃ</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">必要的</div>
             <div class="def-en">(very important and necessary)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">necessary, required</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 10 -->
+<!-- 單字 preserve -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -311,23 +294,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">pre · serve</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div>
-                <div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div>
-                <div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">保存，維護</div>
             <div class="def-en">(to prevent something from being damaged)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">maintain, protect</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 11 -->
+<!-- 單字 document -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -338,24 +317,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">doc · u · ment</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
-                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div>
-                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
-                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">jǝ</div></div>
-                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">jǝ</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">文件</div>
             <div class="def-en">(a written or printed piece of information that records something)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">papers</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 12 -->
+<!-- 單字 optional -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -366,22 +340,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">op · tion · al</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div>
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">ti</div><div class="char-bottom ph-cons">ʃ</div></div>
-                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel">ǝ</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
+                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">ti</div><div class="char-bottom ph-cons">ʃ</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">可選擇的，非必要的</div>
             <div class="def-en">(available as a choice but not required)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 13 -->
+<!-- 單字 spare -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -392,20 +363,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">spare</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel">ɛr</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel">ɛr</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">備用的</div>
             <div class="def-en">(additional or extra)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">extra, back-up</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 14 -->
+<!-- 單字 update -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -416,22 +386,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">up · date</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">ʌ</div></div>
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">ʌ</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">使……更新</div>
             <div class="def-en">(to add the latest information to something)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 單字 15 -->
+<!-- 單字 grab -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -442,20 +409,19 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">grab</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">æ</div></div>
-                <div class="phonics-pair"><div class="char-top">b</div><div class="char-bottom ph-cons">b</div></div>
+                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">æ</div></div><div class="phonics-pair"><div class="char-top">b</div><div class="char-bottom ph-cons">b</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">抓取</div>
             <div class="def-en">(to take or catch something suddenly)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">catch, take</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 片語 1 -->
+<!-- 片語 as soon as -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -469,11 +435,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">一……就……</div>
             <div class="def-en">(at the earliest possible moment after something else happens)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 片語 2 -->
+<!-- 片語 reach for -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -487,11 +455,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">伸手拿</div>
             <div class="def-en">(to stretch one's arm out to get or touch something)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 片語 3 -->
+<!-- 片語 stand for -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -505,11 +475,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">代表</div>
             <div class="def-en">(to mean a set of words or an idea)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">represent</span></div>
+            
         </div>
     </div>
 </div>
 
-<!-- 片語 4 -->
+<!-- 片語 make sure -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -523,11 +495,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">確定，確保</div>
             <div class="def-en">(to take action to be certain about something)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 片語 5 -->
+<!-- 片語 as the saying goes -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -541,27 +515,33 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">俗話說</div>
             <div class="def-en">(to introduce an expression)</div>
+            
+            
         </div>
     </div>
 </div>
 
-<!-- 片語 6 -->
+<!-- 片語 either … or … -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
             <div class="word-header">
                 <h2 class="headword phrase">either … or …</h2>
                 <span class="pos-tag">conj.</span>
-                <button class="audio-btn" onclick="speak('either or')"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="audio-btn" onclick="speak('either … or …')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
             <div class="syllable-text">片語</div>
         </div>
         <div class="definition-container">
             <div class="definition">不是……就是……</div>
             <div class="def-en">(a choice between two options)</div>
+            
+            
         </div>
     </div>
 </div>
+
+
 
 <script>
     function speak(word) {
@@ -586,6 +566,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         word: slide.querySelector('.headword').textContent.trim(),
         pos: slide.querySelector('.pos-tag').textContent.trim(),
         def: slide.querySelector('.definition') ? slide.querySelector('.definition').textContent.trim() : '',
+        syn: slide.querySelector('.syn-words') ? slide.querySelector('.syn-words').textContent.trim() : '',
+        ant: slide.querySelector('.ant-words') ? slide.querySelector('.ant-words').textContent.trim() : '',
         isPhrase: !!slide.querySelector('.headword.phrase')
     }));
 
@@ -603,6 +585,18 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         defEl.className = 'card-def';
         defEl.textContent = c.def;
         card.append(wordEl, posEl, defEl);
+        if (c.syn) {
+            const synEl = document.createElement('span');
+            synEl.className = 'card-syn';
+            synEl.textContent = 'SYN ' + c.syn;
+            card.append(synEl);
+        }
+        if (c.ant) {
+            const antEl = document.createElement('span');
+            antEl.className = 'card-ant';
+            antEl.textContent = 'ANT ' + c.ant;
+            card.append(antEl);
+        }
         card.addEventListener('click', () => showSlide(i));
         gridEl.appendChild(card);
     });

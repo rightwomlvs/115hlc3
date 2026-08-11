@@ -24,6 +24,8 @@ body { background-color: #f0f2f5; display: flex; flex-direction: column; align-i
 .card-word.phrase { font-size: 23px; }
 .card-pos { align-self: flex-start; background-color: #e0f2fe; color: #0284c7; font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
 .card-def { font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #475569; line-height: 1.3; }
+.card-syn { font-family: 'Inter', sans-serif; font-size: 15px; color: #b45309; font-weight: 600; }
+.card-ant { font-family: 'Inter', sans-serif; font-size: 15px; color: #be123c; font-weight: 600; }
 .slide-container { width: 1280px; height: 720px; background-color: #ffffff; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; padding: 0; }
 .slide-container::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(circle, rgba(237, 242, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); z-index: 0; pointer-events: none; }
 h1, h2, h3 { margin: 0; color: #1a1a1a; }
@@ -51,6 +53,12 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .definition-container { border-top: 1px solid #e2e8f0; padding-top: 24px; margin-top: auto; width: 100%; text-align: left; }
 .definition { font-family: 'Noto Sans TC', sans-serif; font-size: 56px; font-weight: 500; color: #475569; line-height: 1.3; margin-bottom: 8px; }
 .def-en { font-family: 'Inter', sans-serif; font-size: 36px; color: #94a3b8; font-weight: 400; display: block; }
+.syn-line { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.syn-label { background-color: #fbbf24; color: #78350f; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.syn-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #b45309; font-weight: 600; }
+.ant-line { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.ant-label { background-color: #fecdd3; color: #881337; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.ant-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #be123c; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -81,6 +89,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">（意見）調查</div>
             <div class="def-en">(a method of gathering information or opinions from people, usually by asking questions)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -102,6 +112,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">攝取，吃，喝；消耗，消費</div>
             <div class="def-en">(to eat or drink something; to use something, especially resources or time)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">eat, use</span></div>
+            
         </div>
     </div>
 </div>
@@ -123,6 +135,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">平均</div>
             <div class="def-en">(the usual or typical amount in a group)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -144,6 +158,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">各式各樣的，各種不同的</div>
             <div class="def-en">(many different types)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -165,6 +181,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">風味，味道</div>
             <div class="def-en">(the taste of something)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">taste</span></div>
+            
         </div>
     </div>
 </div>
@@ -186,6 +204,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">（食品）加工過的，處理過的</div>
             <div class="def-en">([esp. food] having been treated in order to preserve or improve the flavor and color)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -207,6 +227,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">包含，容納</div>
             <div class="def-en">(to have something inside or include something as a part)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">hold, include</span></div>
+            
         </div>
     </div>
 </div>
@@ -228,6 +250,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">證明，證實</div>
             <div class="def-en">(to show something is true)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">confirm, show</span></div>
+            
         </div>
     </div>
 </div>
@@ -249,6 +273,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">頭暈目眩的</div>
             <div class="def-en">(feeling unable to stay balanced as if everything is turning around)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">lightheaded</span></div>
+            
         </div>
     </div>
 </div>
@@ -270,6 +296,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">焦慮的；急切渴望的</div>
             <div class="def-en">(feeling worried, nervous, or uneasy; eager)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">worried, nervous</span></div>
+            
         </div>
     </div>
 </div>
@@ -291,6 +319,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">疾病</div>
             <div class="def-en">(an illness that affects the body or mind)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">illness</span></div>
+            
         </div>
     </div>
 </div>
@@ -312,6 +342,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">（事物）令人上癮的，使人入迷的</div>
             <div class="def-en">(making someone unable to stop doing something)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -333,6 +365,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">喜愛的</div>
             <div class="def-en">(liking someone or something very much)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -354,6 +388,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">營養</div>
             <div class="def-en">(substances that you take into your body as food)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -375,6 +411,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">標籤</div>
             <div class="def-en">(a piece of paper or material that gives information)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -393,6 +431,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">減少，削減，縮減</div>
             <div class="def-en">(to reduce the amount of something)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">reduce</span></div>
+            
         </div>
     </div>
 </div>
@@ -411,6 +451,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">另一方面</div>
             <div class="def-en">(in a way that is different from the first thing mentioned)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -429,6 +471,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">（重大問題的）冰山一角</div>
             <div class="def-en">(a small sign of a problem that is much larger)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -447,6 +491,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">此外，除此之外</div>
             <div class="def-en">(used to add another piece of information to what you have just said)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -465,6 +511,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">逐漸，隨著時間</div>
             <div class="def-en">(as time passes, or over a period of time)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">gradually</span></div>
+            
         </div>
     </div>
 </div>
@@ -493,6 +541,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         word: slide.querySelector('.headword').textContent.trim(),
         pos: slide.querySelector('.pos-tag').textContent.trim(),
         def: slide.querySelector('.definition') ? slide.querySelector('.definition').textContent.trim() : '',
+        syn: slide.querySelector('.syn-words') ? slide.querySelector('.syn-words').textContent.trim() : '',
+        ant: slide.querySelector('.ant-words') ? slide.querySelector('.ant-words').textContent.trim() : '',
         isPhrase: !!slide.querySelector('.headword.phrase')
     }));
 
@@ -510,6 +560,18 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         defEl.className = 'card-def';
         defEl.textContent = c.def;
         card.append(wordEl, posEl, defEl);
+        if (c.syn) {
+            const synEl = document.createElement('span');
+            synEl.className = 'card-syn';
+            synEl.textContent = 'SYN ' + c.syn;
+            card.append(synEl);
+        }
+        if (c.ant) {
+            const antEl = document.createElement('span');
+            antEl.className = 'card-ant';
+            antEl.textContent = 'ANT ' + c.ant;
+            card.append(antEl);
+        }
         card.addEventListener('click', () => showSlide(i));
         gridEl.appendChild(card);
     });

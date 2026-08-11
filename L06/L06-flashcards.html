@@ -24,6 +24,8 @@ body { background-color: #f0f2f5; display: flex; flex-direction: column; align-i
 .card-word.phrase { font-size: 23px; }
 .card-pos { align-self: flex-start; background-color: #e0f2fe; color: #0284c7; font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
 .card-def { font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #475569; line-height: 1.3; }
+.card-syn { font-family: 'Inter', sans-serif; font-size: 15px; color: #b45309; font-weight: 600; }
+.card-ant { font-family: 'Inter', sans-serif; font-size: 15px; color: #be123c; font-weight: 600; }
 .slide-container { width: 1280px; height: 720px; background-color: #ffffff; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; padding: 0; }
 .slide-container::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(circle, rgba(237, 242, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); z-index: 0; pointer-events: none; }
 h1, h2, h3 { margin: 0; color: #1a1a1a; }
@@ -51,6 +53,12 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .definition-container { border-top: 1px solid #e2e8f0; padding-top: 24px; margin-top: auto; width: 100%; text-align: left; }
 .definition { font-family: 'Noto Sans TC', sans-serif; font-size: 56px; font-weight: 500; color: #475569; line-height: 1.3; margin-bottom: 8px; }
 .def-en { font-family: 'Inter', sans-serif; font-size: 36px; color: #94a3b8; font-weight: 400; display: block; }
+.syn-line { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.syn-label { background-color: #fbbf24; color: #78350f; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.syn-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #b45309; font-weight: 600; }
+.ant-line { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.ant-label { background-color: #fecdd3; color: #881337; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.ant-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #be123c; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -81,6 +89,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">奢華的；花俏的</div>
             <div class="def-en">(expensive and fashionable; not plain or simple)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">expensive, high-end</span></div>
+            
         </div>
     </div>
 </div>
@@ -102,6 +112,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">職業的；專業的</div>
             <div class="def-en">(doing something as a job; being skilled at a type of work)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -123,6 +135,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">好處，優點</div>
             <div class="def-en">(a good or useful feature that something has)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">benefit</span></div>
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">disadvantage, downside</span></div>
         </div>
     </div>
 </div>
@@ -144,6 +158,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">探索</div>
             <div class="def-en">(to experience something or somewhere in order to learn more about it)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -165,6 +181,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">極好的</div>
             <div class="def-en">(extremely good and enjoyable)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">great, wonderful</span></div>
+            
         </div>
     </div>
 </div>
@@ -186,6 +204,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">缺點，壞處</div>
             <div class="def-en">(the negative part of something)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">disadvantage</span></div>
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">advantage</span></div>
         </div>
     </div>
 </div>
@@ -207,6 +227,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">忍耐，承受</div>
             <div class="def-en">(to experience something difficult or painful without giving up)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">stand, endure</span></div>
+            
         </div>
     </div>
 </div>
@@ -228,6 +250,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">具有挑戰性的</div>
             <div class="def-en">(difficult in a way that tests one's ability)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -249,6 +273,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">意見</div>
             <div class="def-en">(a thought, or feeling about something or somebody)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">thought, viewpoint</span></div>
+            
         </div>
     </div>
 </div>
@@ -270,6 +296,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">考慮；認為</div>
             <div class="def-en">(to think about something carefully; to believe what someone or something is)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">think about, see as</span></div>
+            
         </div>
     </div>
 </div>
@@ -291,6 +319,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">評論</div>
             <div class="def-en">(an opinion that you say or write about somebody or something)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -312,6 +342,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">心力，努力</div>
             <div class="def-en">(the mental or physical energy that is needed to do something)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -333,6 +365,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">必要條件，要求</div>
             <div class="def-en">(something that is needed for a purpose)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">need</span></div>
+            
         </div>
     </div>
 </div>
@@ -354,6 +388,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">健壯的，健康的</div>
             <div class="def-en">(healthy and strong)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">healthy</span></div>
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">unfit</span></div>
         </div>
     </div>
 </div>
@@ -375,6 +411,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">截止日期，最後期限</div>
             <div class="def-en">(a time or a day when something must be finished)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -396,6 +434,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">吸引人的</div>
             <div class="def-en">(pleasing to the senses or mind)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">charming, appealing</span></div>
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">unattractive</span></div>
         </div>
     </div>
 </div>
@@ -414,6 +454,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">試用</div>
             <div class="def-en">(to use something to see if it is good enough)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -432,6 +474,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">詳細說明</div>
             <div class="def-en">(to explain something fully, giving all the specific facts)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -450,6 +494,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">在旅途中</div>
             <div class="def-en">(traveling from one place to another)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -468,6 +514,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">應付，處理</div>
             <div class="def-en">(to deal with something difficult or unpleasant)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">handle, deal with</span></div>
+            
         </div>
     </div>
 </div>
@@ -486,6 +534,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">保持低調</div>
             <div class="def-en">(to avoid attracting attention)</div>
+            
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">keep a high profile</span></div>
         </div>
     </div>
 </div>
@@ -514,6 +564,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         word: slide.querySelector('.headword').textContent.trim(),
         pos: slide.querySelector('.pos-tag').textContent.trim(),
         def: slide.querySelector('.definition') ? slide.querySelector('.definition').textContent.trim() : '',
+        syn: slide.querySelector('.syn-words') ? slide.querySelector('.syn-words').textContent.trim() : '',
+        ant: slide.querySelector('.ant-words') ? slide.querySelector('.ant-words').textContent.trim() : '',
         isPhrase: !!slide.querySelector('.headword.phrase')
     }));
 
@@ -531,6 +583,18 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         defEl.className = 'card-def';
         defEl.textContent = c.def;
         card.append(wordEl, posEl, defEl);
+        if (c.syn) {
+            const synEl = document.createElement('span');
+            synEl.className = 'card-syn';
+            synEl.textContent = 'SYN ' + c.syn;
+            card.append(synEl);
+        }
+        if (c.ant) {
+            const antEl = document.createElement('span');
+            antEl.className = 'card-ant';
+            antEl.textContent = 'ANT ' + c.ant;
+            card.append(antEl);
+        }
         card.addEventListener('click', () => showSlide(i));
         gridEl.appendChild(card);
     });

@@ -24,6 +24,8 @@ body { background-color: #f0f2f5; display: flex; flex-direction: column; align-i
 .card-word.phrase { font-size: 23px; }
 .card-pos { align-self: flex-start; background-color: #e0f2fe; color: #0284c7; font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
 .card-def { font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #475569; line-height: 1.3; }
+.card-syn { font-family: 'Inter', sans-serif; font-size: 15px; color: #b45309; font-weight: 600; }
+.card-ant { font-family: 'Inter', sans-serif; font-size: 15px; color: #be123c; font-weight: 600; }
 .slide-container { width: 1280px; height: 720px; background-color: #ffffff; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; padding: 0; }
 .slide-container::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(circle, rgba(237, 242, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); z-index: 0; pointer-events: none; }
 h1, h2, h3 { margin: 0; color: #1a1a1a; }
@@ -51,6 +53,12 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .definition-container { border-top: 1px solid #e2e8f0; padding-top: 24px; margin-top: auto; width: 100%; text-align: left; }
 .definition { font-family: 'Noto Sans TC', sans-serif; font-size: 56px; font-weight: 500; color: #475569; line-height: 1.3; margin-bottom: 8px; }
 .def-en { font-family: 'Inter', sans-serif; font-size: 36px; color: #94a3b8; font-weight: 400; display: block; }
+.syn-line { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.syn-label { background-color: #fbbf24; color: #78350f; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.syn-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #b45309; font-weight: 600; }
+.ant-line { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.ant-label { background-color: #fecdd3; color: #881337; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.ant-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #be123c; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -81,6 +89,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">法律的；合法的</div>
             <div class="def-en">(relating to the law; allowed by law)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">lawful</span></div>
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">illegal</span></div>
         </div>
     </div>
 </div>
@@ -102,6 +112,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">問題，議題</div>
             <div class="def-en">(a problem or topic that needs to be discussed or handled)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">problem</span></div>
+            
         </div>
     </div>
 </div>
@@ -123,6 +135,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">有罪的；內疚的</div>
             <div class="def-en">(having done something illegal; feeling sad after doing something wrong)</div>
+            
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">innocent</span></div>
         </div>
     </div>
 </div>
@@ -144,6 +158,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">侮辱，辱罵</div>
             <div class="def-en">(rude words or actions)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">offense</span></div>
+            
         </div>
     </div>
 </div>
@@ -165,6 +181,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">移除</div>
             <div class="def-en">(to take something away or off)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">take away</span></div>
+            
         </div>
     </div>
 </div>
@@ -186,6 +204,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">拒絕</div>
             <div class="def-en">(to say no or not allow something)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">reject, turn down</span></div>
+            
         </div>
     </div>
 </div>
@@ -207,6 +227,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">侵犯；侵略</div>
             <div class="def-en">(to get involved in something in an annoying way; to enter a place by force)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -228,6 +250,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">允許，許可</div>
             <div class="def-en">(the act of allowing someone to do something)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -249,6 +273,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">道歉</div>
             <div class="def-en">(to say sorry for doing something wrong)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -270,6 +296,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">性別</div>
             <div class="def-en">(a person's identity or state as male, female, or otherwise)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -291,6 +319,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">輕拍，撫拍</div>
             <div class="def-en">(to gently touch someone or something with your hand)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -312,6 +342,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">行為，舉止</div>
             <div class="def-en">(the way someone acts)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">action</span></div>
+            
         </div>
     </div>
 </div>
@@ -333,6 +365,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">身體的</div>
             <div class="def-en">(relating to the body)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">bodily</span></div>
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">mental</span></div>
         </div>
     </div>
 </div>
@@ -354,6 +388,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">意識到的，知道的</div>
             <div class="def-en">(knowing a fact or situation)</div>
+            
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">unaware</span></div>
         </div>
     </div>
 </div>
@@ -375,6 +411,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">可信賴的</div>
             <div class="def-en">(able to be trusted or depended on)</div>
+            
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">unreliable</span></div>
         </div>
     </div>
 </div>
@@ -393,6 +431,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">因為，由於</div>
             <div class="def-en">(because of)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -411,6 +451,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">極度生氣</div>
             <div class="def-en">(to become very angry)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -429,6 +471,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">翻看，翻找</div>
             <div class="def-en">(to read or examine something quickly)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -447,6 +491,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">最好</div>
             <div class="def-en">(should)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -465,6 +511,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">區分，辨別</div>
             <div class="def-en">(to see the difference between two things or people)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -483,6 +531,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">不小心，無意間</div>
             <div class="def-en">(not on purpose)</div>
+            
+            
         </div>
     </div>
 </div>
@@ -511,6 +561,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         word: slide.querySelector('.headword').textContent.trim(),
         pos: slide.querySelector('.pos-tag').textContent.trim(),
         def: slide.querySelector('.definition') ? slide.querySelector('.definition').textContent.trim() : '',
+        syn: slide.querySelector('.syn-words') ? slide.querySelector('.syn-words').textContent.trim() : '',
+        ant: slide.querySelector('.ant-words') ? slide.querySelector('.ant-words').textContent.trim() : '',
         isPhrase: !!slide.querySelector('.headword.phrase')
     }));
 
@@ -528,6 +580,18 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         defEl.className = 'card-def';
         defEl.textContent = c.def;
         card.append(wordEl, posEl, defEl);
+        if (c.syn) {
+            const synEl = document.createElement('span');
+            synEl.className = 'card-syn';
+            synEl.textContent = 'SYN ' + c.syn;
+            card.append(synEl);
+        }
+        if (c.ant) {
+            const antEl = document.createElement('span');
+            antEl.className = 'card-ant';
+            antEl.textContent = 'ANT ' + c.ant;
+            card.append(antEl);
+        }
         card.addEventListener('click', () => showSlide(i));
         gridEl.appendChild(card);
     });
