@@ -48,6 +48,8 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:v
 .qpts{margin-left:auto;font-size:12px;color:var(--muted);background:#eef1ff;border-radius:6px;padding:0 8px}
 .qstem{font-size:15.5px;margin:4px 0}
 .qstem .hint{color:var(--warn);font-weight:600}
+.uhint,.bblank{color:#94a3b8;font-family:monospace;letter-spacing:.5px;font-weight:600}
+.bblank{color:#64748b}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:8px}
 .opt{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:14.5px;user-select:none;transition:.12s}
 .opt:hover{border-color:#aab4f0;background:#f4f6ff}
@@ -289,7 +291,11 @@ function renderQ(sec, q){
     ctrl.appendChild(chk);
   }
   else if(sec.type === "word"){
-    body.appendChild(el("p", "qstem", q.sent));
+    var sent = String(q.sent).replace(/<span class='hint'>([a-zA-Z]+)\s+([a-zA-Z]+)<\/span>/g, function(m, a, b){
+      var missing = Math.max(1, (q.answer || "").length - a.length - b.length);
+      return "<span class='hint'>" + a + "</span><span class='uhint'>" + new Array(missing + 1).join("_") + "</span><span class='hint'>" + b + "</span>";
+    });
+    body.appendChild(el("p", "qstem", sent));
     var inp = el("input", "");
     inp.type = "text"; inp.placeholder = "依提示字母填入單字";
     body.appendChild(inp);
@@ -313,18 +319,31 @@ function renderQ(sec, q){
     var sen = el("p", "qstem");
     var html = q.en.replace(/\(\((\d+)\)\)/g, function(m, n){
       var b = q.blanks[+n];
-      var inp = el("input", "inline-in");
-      inp.type = "text";
-      inp.style.width = Math.min(220, Math.max(90, (b.ans||"").length * 12)) + "px";
-      inp.setAttribute("data-blank", n);
-      return ' <span class="fbl">' + b.label + '</span> ' + inp.outerHTML + ' ';
+      var letters = [];
+      var lm, lre = /\(([^)]+)\)/g;
+      while((lm = lre.exec(b.label || ""))) letters.push(lm[1]);
+      var fragA = letters[0] || "";
+      var fragB = letters.length > 1 ? letters.slice(1).join("") : "";
+      var missing = Math.max(1, (b.ans || "").length - fragA.length - fragB.length);
+      var shown = fragA + new Array(missing + 1).join("_") + fragB;
+      return ' <span class="bblank">' + shown + '</span> ';
     });
     sen.innerHTML = html;
     body.appendChild(sen);
+    var abox = el("div", "fbox");
+    q.blanks.forEach(function(b, n){
+      var span = el("span", "lbl", "(" + (n + 1) + ")");
+      var inp = el("input", "inline-in");
+      inp.type = "text";
+      inp.style.width = Math.min(220, Math.max(90, (b.ans || "").length * 12)) + "px";
+      inp.setAttribute("data-blank", n);
+      abox.appendChild(span); abox.appendChild(inp);
+    });
+    body.appendChild(abox);
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
       speak(fullSentence(q));
-      var ins = sen.querySelectorAll("input[data-blank]");
+      var ins = abox.querySelectorAll("input[data-blank]");
       var emptyAll = true;
       ins.forEach(function(ip){ if(String(ip.value || "").trim()) emptyAll = false; });
       if(emptyAll){
