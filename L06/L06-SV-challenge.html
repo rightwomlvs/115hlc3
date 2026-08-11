@@ -36,6 +36,8 @@
     .trans-v { color: #15803d; font-weight: 700; }
     .trans-implicit { color: #94a3b8; font-style: italic; }
     .hidden-pane { display: none; }
+    .sentence-full { font-size: 1.6rem; line-height: 1.8; color: #1e293b; padding: 14px 8px; text-align: center; font-weight: 600; }
+    .hint-prompt { font-size: 0.85rem; color: #94a3b8; margin-top: 6px; }
 </style>
 </head>
 <body class="bg-slate-100 min-h-screen">
@@ -90,7 +92,7 @@
             <div id="translationArea" class="mt-6 min-h-16 flex flex-wrap justify-center gap-1"></div>
         </div>
         <div class="bg-white rounded-2xl shadow p-6 text-center">
-            <p class="text-slate-500">規則：先點擊 <span class="font-bold text-blue-700">主詞 (S)</span>，再點擊 <span class="font-bold text-green-700">動詞 (V)</span>。全部完成後會顯示中譯。按下「Show Hint」可顯示彩色語意區塊。</p>
+            <p class="text-slate-500">規則：先閱讀完整句子，再按「Show Hint」觀察語意斷句（chunks），之後點擊每句的 <span class="font-bold text-blue-700">主詞 (S)</span> 與 <span class="font-bold text-green-700">動詞 (V)</span>。全部完成後會顯示中譯。</p>
         </div>
     </div>
 </div>
@@ -105,7 +107,10 @@ const allSentences = [
         "words": [
             "People",
             "keep telling",
-            "me I've got the best job in the world."
+            "me",
+            "I've got",
+            "the best job",
+            "in the world."
         ],
         "subject": "People",
         "verb": "keep telling",
@@ -159,7 +164,12 @@ const allSentences = [
         "words": [
             "They",
             "imagine",
-            "me sleeping in a fancy room and lying beside a pool all day."
+            "me sleeping",
+            "in a fancy room",
+            "and",
+            "lying",
+            "beside a pool",
+            "all day."
         ],
         "subject": "They",
         "verb": "imagine",
@@ -187,7 +197,9 @@ const allSentences = [
             "However,",
             "the work of a professional hotel tester",
             "is not",
-            "like being on vacation all the time."
+            "like being",
+            "on vacation",
+            "all the time."
         ],
         "subject": "the work of a professional hotel tester",
         "verb": "is not",
@@ -370,7 +382,10 @@ const allSentences = [
         "words": [
             "It's",
             "fantastic",
-            "to get paid for telling people how well you slept."
+            "to get paid",
+            "for telling people",
+            "how well",
+            "you slept."
         ],
         "subject": "It's",
         "verb": "fantastic",
@@ -474,7 +489,8 @@ const allSentences = [
         "words": [
             "Writing the reports",
             "can be",
-            "challenging as well."
+            "challenging",
+            "as well."
         ],
         "subject": "Writing the reports",
         "verb": "can be",
@@ -528,7 +544,8 @@ const allSentences = [
         "words": [
             "Telling hotel companies how to improve their services",
             "is",
-            "a much more serious and professional job."
+            "a much more serious",
+            "and professional job."
         ],
         "subject": "Telling hotel companies how to improve their services",
         "verb": "is",
@@ -555,7 +572,9 @@ const allSentences = [
         "words": [
             "I",
             "need",
-            "to go into detail from check-in to check-out."
+            "to go into detail",
+            "from check-in",
+            "to check-out."
         ],
         "subject": "I",
         "verb": "need",
@@ -743,7 +762,8 @@ const allSentences = [
         "words": [
             "Good language skills and cultural knowledge",
             "are",
-            "necessary, too."
+            "necessary,",
+            "too."
         ],
         "subject": "Good language skills and cultural knowledge",
         "verb": "are",
@@ -770,7 +790,9 @@ const allSentences = [
         "words": [
             "We",
             "also need to know",
-            "how to cope with being alone and meeting tight deadlines."
+            "how to cope",
+            "with being alone",
+            "and meeting tight deadlines."
         ],
         "subject": "We",
         "verb": "also need to know",
@@ -798,7 +820,9 @@ const allSentences = [
             "What's more,",
             "we",
             "have to keep",
-            "a low profile on social media and in the hotels",
+            "a low profile",
+            "on social media",
+            "and in the hotels",
             "so that",
             "people",
             "don't find out",
@@ -860,7 +884,8 @@ const allSentences = [
             "As you can see,",
             "the job",
             "is",
-            "not as attractive as many people think."
+            "not as attractive",
+            "as many people think."
         ],
         "subject": "the job",
         "verb": "is",
@@ -896,7 +921,8 @@ const allSentences = [
             "to travel",
             "and",
             "don't mind",
-            "a bit of hard work at the same time,",
+            "a bit of hard work",
+            "at the same time,",
             "hotel testing",
             "might just be",
             "your dream job."
@@ -1000,14 +1026,25 @@ function renderSentence() {
 
     const area = document.getElementById('sentenceArea');
     area.innerHTML = '';
-    sentence.words.forEach(word => {
-        const btn = document.createElement('button');
-        btn.className = 'chunk';
-        btn.textContent = word;
-        btn.dataset.word = word;
-        btn.onclick = () => handleChunkClick(btn);
-        area.appendChild(btn);
-    });
+    if (hintShown) {
+        sentence.words.forEach((word, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'chunk ' + CANDY_CLASSES[index % CANDY_CLASSES.length];
+            btn.textContent = word;
+            btn.dataset.word = word;
+            btn.onclick = () => handleChunkClick(btn);
+            area.appendChild(btn);
+        });
+    } else {
+        const full = document.createElement('div');
+        full.className = 'sentence-full';
+        full.textContent = sentence.words.join(' ');
+        area.appendChild(full);
+        const prompt = document.createElement('div');
+        prompt.className = 'hint-prompt';
+        prompt.textContent = '👀 先讀完整句子，按「💡 Show Hint」切換為語意斷句。';
+        area.appendChild(prompt);
+    }
 
     document.getElementById('translationArea').innerHTML = '';
     renderTranslation(true);
@@ -1030,11 +1067,7 @@ function renderPairReminder() {
 function showHint() {
     if (hintShown) return;
     hintShown = true;
-    const chunks = document.querySelectorAll('#sentenceArea .chunk');
-    chunks.forEach((chunk, index) => {
-        chunk.classList.remove('chunk-color-neutral');
-        chunk.classList.add(CANDY_CLASSES[index % CANDY_CLASSES.length]);
-    });
+    renderSentence();
 }
 
 function handleChunkClick(el) {
