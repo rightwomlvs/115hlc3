@@ -1008,6 +1008,7 @@ function navigate(delta) {
     const next = currentIdx + delta;
     if (next < 0 || next >= filtered.length) return;
     currentIdx = next;
+    hintShown = false;
     renderSentence();
 }
 
@@ -1017,7 +1018,6 @@ function renderSentence() {
     const pairs = getPairs(sentence);
     pairIdx = 0;
     subDone = (pairs[0] && !pairs[0].subject) ? true : false;
-    hintShown = false;
     document.getElementById('counter').textContent = (currentIdx + 1) + ' / ' + filtered.length + (pairs.length > 1 ? (' · 組 ' + (pairIdx + 1) + '/' + pairs.length) : '');
     document.getElementById('prevBtn').disabled = currentIdx === 0;
     document.getElementById('nextBtn').disabled = currentIdx === filtered.length - 1;
@@ -1135,6 +1135,7 @@ function renderTranslation(hidden) {
 }
 
 function resetSentence() {
+    hintShown = false;
     renderSentence();
 }
 
@@ -1184,6 +1185,7 @@ function switchTab(tab) {
     }
     filtered = getFilteredSentences();
     currentIdx = 0;
+    hintShown = false;
     renderSentence();
 }
 
