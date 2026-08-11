@@ -11,7 +11,7 @@
     <header class="mb-8">
         <a href="index.html" class="text-sm text-slate-500 hover:text-slate-700">← 返回課程總覽</a>
         <h1 class="text-3xl font-extrabold text-slate-800 mt-2">🔧 課程管理</h1>
-        <p class="text-slate-500 mt-1">控制各課「隨堂測驗」的開放／關閉。關閉時首頁該課的「📝 隨堂測驗」會改為<b>上鎖狀態（🔒 尚未開放）</b>，項目名稱仍看得到，測驗頁本身也會上鎖；<b>字卡與 S+V 挑戰不受影響，維持開放。</b></p>
+        <p class="text-slate-500 mt-1">分開控制各課「📝 隨堂測驗」與「📘 學習評量」的開放／關閉。關閉時首頁該課的對應按鈕會改為<b>上鎖狀態（🔒 尚未開放）</b>，項目名稱仍看得到，測驗／評量頁本身也會上鎖；<b>字卡與 S+V 挑戰不受影響，維持開放。</b></p>
     </header>
 
     <section class="bg-white rounded-2xl shadow p-6 mb-6">
@@ -90,40 +90,63 @@ function loadConfig(){
     if(obj){
       state.sha = obj.sha;
       state.config = JSON.parse(b64dec(obj.content));
+      state.config.quizzes = state.config.quizzes || {};
+      state.config.assessments = state.config.assessments || {};
     } else {
       state.sha = null;
-      var q = {}; LESSONS.forEach(function(L){ q[L.id] = true; });
-      state.config = {updated: new Date().toISOString(), quizzes: q};
+      var q = {}, a = {};
+      LESSONS.forEach(function(L){ q[L.id] = true; a[L.id] = true; });
+      state.config = {updated: new Date().toISOString(), quizzes: q, assessments: a};
     }
     renderToggles();
   });
 }
 
+function makeSwitch(on, onclk, label){
+  var sw = document.createElement("button");
+  sw.type = "button";
+  sw.setAttribute("aria-label", label + " 開放狀態");
+  sw.className = "w-14 h-8 rounded-full transition relative shrink-0 " + (on ? "bg-green-500" : "bg-slate-300");
+  sw.innerHTML = "<span class='absolute top-1 left-1 w-6 h-6 bg-white rounded-full shadow transition-transform transform " + (on ? "translate-x-6" : "") + "'></span>";
+  sw.onclick = onclk;
+  return sw;
+}
+
 function renderToggles(){
   var box = $("toggles");
   box.innerHTML = "";
-  var open = 0;
+  var openQ = 0, openA = 0;
   LESSONS.forEach(function(L){
-    var on = !!(state.config.quizzes && state.config.quizzes[L.id] !== false);
-    if(on) open++;
+    var onQ = !!(state.config.quizzes[L.id] !== false);
+    var onA = !!(state.config.assessments[L.id] !== false);
+    if(onQ) openQ++;
+    if(onA) openA++;
     var row = document.createElement("div");
-    row.className = "flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-3";
+    row.className = "flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3";
     var name = document.createElement("div");
     name.innerHTML = "<div class='font-bold text-slate-700'>" + L.id + " ｜ " + L.en + "</div>"
-      + "<div class='text-xs " + (on ? "text-green-600" : "text-red-500") + "'>" + (on ? "● 開放中" : "○ 已關閉") + "</div>";
-    var sw = document.createElement("button");
-    sw.type = "button";
-    sw.setAttribute("aria-label", L.id + " 開放狀態");
-    sw.className = "w-14 h-8 rounded-full transition relative shrink-0 " + (on ? "bg-green-500" : "bg-slate-300");
-    sw.innerHTML = "<span class='absolute top-1 left-1 w-6 h-6 bg-white rounded-full shadow transition-transform transform " + (on ? "translate-x-6" : "") + "'></span>";
-    sw.onclick = function(){
+      + "<div class='text-xs text-slate-500'>隨堂測驗 " + (onQ ? "● 開放中" : "○ 已關閉") + " ／ 學習評量 " + (onA ? "● 開放中" : "○ 已關閉") + "</div>";
+    var sws = document.createElement("div");
+    sws.className = "flex items-center gap-5";
+    var qLbl = document.createElement("div");
+    qLbl.className = "flex items-center gap-2 text-sm text-slate-600";
+    qLbl.innerHTML = "<span>📝 隨堂測驗</span>";
+    qLbl.appendChild(makeSwitch(onQ, function(){
       state.config.quizzes[L.id] = !state.config.quizzes[L.id];
       renderToggles();
-    };
-    row.appendChild(name); row.appendChild(sw);
+    }, L.id + " 隨堂測驗"));
+    var aLbl = document.createElement("div");
+    aLbl.className = "flex items-center gap-2 text-sm text-slate-600";
+    aLbl.innerHTML = "<span>📘 學習評量</span>";
+    aLbl.appendChild(makeSwitch(onA, function(){
+      state.config.assessments[L.id] = !state.config.assessments[L.id];
+      renderToggles();
+    }, L.id + " 學習評量"));
+    sws.appendChild(qLbl); sws.appendChild(aLbl);
+    row.appendChild(name); row.appendChild(sws);
     box.appendChild(row);
   });
-  var meta = "共 " + LESSONS.length + " 課 ｜ 目前開放 " + open + " 課";
+  var meta = "共 " + LESSONS.length + " 課 ｜ 隨堂測驗開放 " + openQ + " 課 ｜ 學習評量開放 " + openA + " 課";
   if(state.config.updated){
     var d = new Date(state.config.updated);
     meta += " ｜ 上次更新：" + d.toLocaleString("zh-TW", {hour12: false});
@@ -132,9 +155,12 @@ function renderToggles(){
 }
 
 function saveConfig(){
-  var q = {};
-  LESSONS.forEach(function(L){ q[L.id] = state.config.quizzes[L.id] !== false; });
-  var cfg = {updated: new Date().toISOString(), quizzes: q};
+  var q = {}, a = {};
+  LESSONS.forEach(function(L){
+    q[L.id] = state.config.quizzes[L.id] !== false;
+    a[L.id] = state.config.assessments[L.id] !== false;
+  });
+  var cfg = {updated: new Date().toISOString(), quizzes: q, assessments: a};
   var body = {message: "課程開放狀態更新（管理頁）", content: b64enc(JSON.stringify(cfg, null, 2))};
   if(state.sha) body.sha = state.sha;
   return fetch(API, {method: "PUT", headers: authHeaders({"Content-Type": "application/json"}), body: JSON.stringify(body)}).then(function(r){
