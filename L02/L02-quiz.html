@@ -74,8 +74,9 @@ button.btn{border:none;border-radius:8px;padding:7px 16px;font-size:13.5px;curso
 .qresult.show{display:block}
 .qresult.good{background:#e9f9f0;border:1px solid #b7e6c8;color:#1c6b32}
 .qresult.bad{background:#fdeeee;border:1px solid #f3c1c1;color:#9c2222}
-.toggle-ex{margin-top:8px;border:none;background:transparent;color:#3b5bdb;cursor:pointer;font-size:13px;padding:4px 0}
-.toggle-ex:hover{text-decoration:underline}
+.qresult.info{background:#eef4ff;border:1px solid #c6d8ff;color:#2f4bc0}
+.toggle-ex{margin-top:10px;border:1px solid #aab4f0;background:#eef1ff;color:#3b5bdb;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;padding:5px 14px;transition:.12s}
+.toggle-ex:hover{background:#e2e8ff;border-color:#8f9cf0}
 .ex{display:none;margin-top:10px}
 .ex.show{display:block}
 .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -159,6 +160,11 @@ function showResult(qEl, rbox, ok, msg){
   rbox.innerHTML = msg;
 }
 
+function showInfo(rbox, msg){
+  rbox.className = "qresult show info";
+  rbox.innerHTML = msg;
+}
+
 /* ---------- rendering ---------- */
 function renderApp(){
   var app = document.getElementById("app");
@@ -227,7 +233,11 @@ function renderQ(sec, q){
     body.appendChild(opts);
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
-      if(selected < 0){ rbox.className="qresult show bad"; rbox.innerHTML = "請先選擇一個答案。"; return; }
+      if(selected < 0){
+        showInfo(rbox, "尚未選擇答案。可先參考下方解析，再作答計分。");
+        expandEx(box);
+        return;
+      }
       var ok = (selected === q.ans);
       markResult(box, rbox, q, ok);
       Array.prototype.forEach.call(opts.children, function(c, i){
@@ -239,16 +249,20 @@ function renderQ(sec, q){
     ctrl.appendChild(chk);
   }
   else if(sec.type === "vocab"){
-    body.appendChild(el("p", "qstem", "請寫出「<b>" + q.word + "</b>」的中文意思。"));
+    body.appendChild(el("p", "qstem", "請寫出「<b>" + q.answer + "</b>」的英文。"));
     var inp = el("input", "");
-    inp.type = "text"; inp.placeholder = "輸入中文意思";
+    inp.type = "text"; inp.placeholder = "輸入英文單字";
     body.appendChild(inp);
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
       var v = inp.value.trim();
-      if(!v){ rbox.className="qresult show bad"; rbox.innerHTML="請先輸入答案。"; return; }
-      var ok = hasAny(v, q.accept);
-      markResult(box, rbox, q, ok);
+      if(!v){
+        showInfo(rbox, "尚未輸入答案。可先參考下方解析，作答後即可計分。");
+        expandEx(box);
+        return;
+      }
+      var ok = hasAny(v, [q.word].concat(q.accept_en || []));
+      markResult(box, rbox, q, ok, q.word + "（" + q.answer + "）");
       if(ok){ inp.style.borderColor = "#2b8a3e"; } else { inp.style.borderColor = "#e03131"; }
     };
     ctrl.appendChild(chk);
@@ -261,7 +275,11 @@ function renderQ(sec, q){
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
       var v = inp.value.trim();
-      if(!v){ rbox.className="qresult show bad"; rbox.innerHTML="請先輸入答案。"; return; }
+      if(!v){
+        showInfo(rbox, "尚未輸入答案。可先參考下方解析，作答後即可計分。");
+        expandEx(box);
+        return;
+      }
       var ok = hasAny(v, q.accept);
       markResult(box, rbox, q, ok);
       if(ok){ inp.style.borderColor = "#2b8a3e"; } else { inp.style.borderColor = "#e03131"; }
@@ -284,6 +302,13 @@ function renderQ(sec, q){
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
       var ins = sen.querySelectorAll("input[data-blank]");
+      var emptyAll = true;
+      ins.forEach(function(ip){ if(String(ip.value || "").trim()) emptyAll = false; });
+      if(emptyAll){
+        showInfo(rbox, "尚未輸入答案。可先參考下方解析，再作答計分。");
+        expandEx(box);
+        return;
+      }
       var oks = [];
       var all = true, any = false;
       ins.forEach(function(ip){
@@ -302,6 +327,7 @@ function renderQ(sec, q){
       updateScore();
       var msg = "答對 " + nOk + " / " + q.blanks.length + " 格，得 " + pts + " 分。";
       showResult(box, rbox, all, msg);
+      expandEx(box);
     };
     ctrl.appendChild(chk);
   }
@@ -313,7 +339,11 @@ function renderQ(sec, q){
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
       var v = ta.value.trim();
-      if(!v){ rbox.className="qresult show bad"; rbox.innerHTML="請先寫下你的句子。"; return; }
+      if(!v){
+        showInfo(rbox, "尚未寫下句子。可先參考下方解析，再作答計分。");
+        expandEx(box);
+        return;
+      }
       var ok = hasAny(v, q.accept);
       markResult(box, rbox, q, ok);
       if(!ok){
@@ -338,7 +368,7 @@ function renderQ(sec, q){
   return box;
 }
 
-function markResult(box, rbox, q, ok){
+function markResult(box, rbox, q, ok, ansText){
   box.dataset.graded = "1";
   var prev = results[q.id];
   if(prev){ score -= prev.pts; }
@@ -348,12 +378,20 @@ function markResult(box, rbox, q, ok){
   if(ok){
     showResult(box, rbox, true, "答對了！得 " + q.pts + " 分。");
   } else {
-    showResult(box, rbox, false, "答錯了。正確答案：" + q.answer);
+    showResult(box, rbox, false, "答錯了。正確答案：" + (ansText || q.answer));
   }
   var chip = document.getElementById("chip-" + q.sec);
   if(chip){
     chip.textContent = q.secTitle + " " + sectionScore(q.sec) + "/" + sectionPoints(q.sec);
   }
+  expandEx(box);
+}
+
+function expandEx(box){
+  var ex = box.querySelector(".ex");
+  var tg = box.querySelector(".toggle-ex");
+  if(ex && !ex.classList.contains("show")){ ex.classList.add("show"); }
+  if(tg){ tg.textContent = "收合詳解 ▴"; }
 }
 
 function sectionPoints(secId){
@@ -431,7 +469,9 @@ function revealAll(){
     var ex = box.querySelector(".ex");
     if(ex) ex.classList.add("show");
     var ins = box.querySelectorAll("input[type=text],textarea");
-    if(q.type === "vocab" || q.type === "word"){
+    if(q.type === "vocab"){
+      if(ins[0]) ins[0].value = q.word;
+    } else if(q.type === "word"){
       if(ins[0]) ins[0].value = q.answer;
     } else if(q.type === "fill"){
       box.querySelectorAll("input[data-blank]").forEach(function(ip){
