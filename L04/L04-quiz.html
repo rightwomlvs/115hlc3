@@ -50,6 +50,11 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:v
 .qpts{margin-left:auto;font-size:12px;color:var(--muted);background:#eef1ff;border-radius:6px;padding:0 8px}
 .qstem{font-size:15.5px;margin:4px 0}
 .qstem .hint{color:var(--warn);font-weight:600}
+.qstem.refsent{background:#f8f9ff;border:1px dashed #c7cff5;border-radius:8px;padding:8px 10px;margin:4px 0 8px}
+.qstem.refsent .ctx-prev{display:block;color:#64748b;font-size:13.5px;margin-bottom:2px}
+.qstem.refsent .ctx-prev:before{content:"前一句：";color:#3b5bdb;font-weight:700;font-size:12.5px;margin-right:6px}
+.qstem.refsent .ctx-cur{display:block}
+.qstem.refsent .ctx-cur:before{content:"該格句子：";color:#3b5bdb;font-weight:700;font-size:12.5px;margin-right:6px}
 .uhint,.bblank{color:#94a3b8;font-family:monospace;letter-spacing:.5px;font-weight:600}
 .bblank{color:#64748b}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:8px}
@@ -93,6 +98,7 @@ button.btn{border:none;border-radius:8px;padding:7px 16px;font-size:13.5px;curso
 .ex.trans{border-left:4px solid #be4bdb;background:#fcf5ff}
 @media (max-width:600px){.ex-grid{grid-template-columns:1fr}}
 footer.wrap{padding-bottom:30px;color:var(--muted);font-size:12px}
+.speech-note{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;max-width:88vw;background:#1f2430;color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,.35);text-align:center;line-height:1.5}
 </style>
 </head>
 <body>
@@ -172,14 +178,37 @@ function showInfo(rbox, msg){
 function speak(text){
   try{
     if(!text) return;
-    if(typeof window === "undefined" || !window.speechSynthesis) return;
+    if(typeof window === "undefined") return;
+    if(!window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined"){
+      speechUnsupported();
+      return;
+    }
     var s = window.speechSynthesis;
     var u = new SpeechSynthesisUtterance(String(text));
     u.lang = "en-US";
     u.rate = 0.9;
+    try{
+      var vs = s.getVoices ? s.getVoices() : [];
+      var v = null;
+      for(var i = 0; i < vs.length; i++){ if(/^en[-_]?US/i.test(vs[i].lang || "")){ v = vs[i]; break; } }
+      if(!v){ for(i = 0; i < vs.length; i++){ if(/^en/i.test(vs[i].lang || "")){ v = vs[i]; break; } } }
+      if(v) u.voice = v;
+    }catch(e1){}
+    var np = (typeof navigator !== "undefined" && navigator) ? (navigator.platform || "") : "";
+    var touch = false;
+    try{ touch = ("ontouchstart" in window) || ((navigator.maxTouchPoints || 0) > 0); }catch(e3){}
+    var iOS = /iP(hone|ad|od)/.test(np) || (np === "MacIntel" && (navigator.maxTouchPoints || 0) > 1);
+    if(iOS || touch){
+      // Mobile (iOS Safari / Android Chrome & Edge): cancel() before speak() is the
+      // known Android workaround for silent first utterance, but pause()/resume()
+      // must NOT be used — it can leave the synthesis paused and produce no sound.
+      s.cancel();
+      s.speak(u);
+      return;
+    }
     s.cancel();
     s.speak(u);
-    // Chrome/Edge workaround: wake the engine with pause()/resume()
+    // Chrome/Edge desktop workaround: wake the engine with pause()/resume()
     try{
       if(!s.paused){
         s.pause();
@@ -188,6 +217,26 @@ function speak(text){
     }catch(e2){}
   }catch(e){}
 }
+
+var speechToast = null;
+function speechUnsupported(){
+  try{
+    if(speechToast) return;
+    speechToast = el("div", "speech-note", "此環境無法播放語音朗讀：瀏覽器需支援 Web Speech API，並以 HTTPS（或本機）開啟頁面。");
+    document.body.appendChild(speechToast);
+    setTimeout(function(){ try{ if(speechToast){ speechToast.remove(); speechToast = null; } }catch(e){} }, 5200);
+  }catch(e){}
+}
+
+(function(){
+  if(typeof window === "undefined" || !window.speechSynthesis) return;
+  try{
+    if(window.speechSynthesis.getVoices) window.speechSynthesis.getVoices();
+    var evt = "voiceschanged";
+    if(window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener(evt, function(){ try{ if(window.speechSynthesis.getVoices) window.speechSynthesis.getVoices(); }catch(e){} });
+    else if(window.speechSynthesis.onvoiceschanged === null) window.speechSynthesis.onvoiceschanged = function(){ try{ if(window.speechSynthesis.getVoices) window.speechSynthesis.getVoices(); }catch(e){} };
+  }catch(e){}
+})();
 
 function fullSentence(q){
   if(q.speakText) return q.speakText;
@@ -201,13 +250,23 @@ function fullSentence(q){
   return String(q.stem || "").replace(/_{3,}/g, q.answer || (q.options ? q.options[q.ans] : "") || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
 
+function sentChunk(text, no){
+  var chs = splitSents(text);
+  for(var i = 0; i < chs.length; i++){
+    if(chs[i].indexOf("__" + no + "__") >= 0) return chs[i];
+  }
+  return "";
+}
+
 function sentenceWithBlank(text, no, ans){
-  var t = String(text || "").replace(/<[^>]+>/g, " ");
-  var m = t.match(new RegExp("\\S[^.!?]*?__" + no + "__[^.!?]*(?:[.!?]|$)"));
-  if(!m) return "";
+  var ch = sentChunk(text, no);
+  if(!ch) return "";
+  ch = String(ch).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  // drop the OCR artifact period right after the blank when the sentence continues
+  ch = ch.replace(new RegExp("__" + no + "__\\.(?=\\s*[a-z,])"), "__" + no + "__");
   var parts = String(ans || "").split("\u2026");
   var i = 0;
-  var out = m[0].replace(new RegExp("__" + no + "__", "g"), function(){
+  var out = ch.replace(new RegExp("__" + no + "__", "g"), function(){
     var v = parts.length > 1 ? (parts[i] || "") : (ans || "");
     i++;
     return v.trim();
@@ -215,17 +274,49 @@ function sentenceWithBlank(text, no, ans){
   return out.replace(/\s+/g, " ").replace(/^[\s.,;:!?]+/, "").trim();
 }
 
+function badgeClean(s){
+  return String(s).replace(/<span class='bk'>（\d+）<\/span>\.(?=\s*[a-z,])/g, function(m){ return m.slice(0, -1); });
+}
+
+function refSentHTML(text, no){
+  var chs = splitSents(text);
+  var idx = -1;
+  for(var i = 0; i < chs.length; i++){
+    if(chs[i].indexOf("__" + no + "__") >= 0){ idx = i; break; }
+  }
+  if(idx < 0) return "";
+  var cur = chs[idx].replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; });
+  var out = "";
+  if(idx > 0 && /^\s*__\d+__/.test(chs[idx])){
+    var prev = chs[idx - 1].replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; });
+    out += "<span class='ctx-prev'>" + badgeClean(prev) + "</span>";
+  }
+  out += "<span class='ctx-cur'>" + badgeClean(cur) + "</span>";
+  return out;
+}
+
 function splitSents(text){
   var t = String(text || "");
   var chunks = [];
-  var re = /[^.!?]+(?:[.!?]+|$)/g;
-  var m;
-  while((m = re.exec(t))){
-    var c = m[0].trim();
-    var bare = c.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
-    if(c && bare.trim()) chunks.push(c);
+  var start = 0;
+  for(var i = 0; i < t.length; i++){
+    var c = t.charAt(i);
+    if(c === "." || c === "!" || c === "?"){
+      var prev = t.slice(Math.max(0, i - 12), i);
+      if(/[0-9]+__$/.test(prev)){
+        var nx = t.slice(i + 1).replace(/^\s+/, "");
+        if(nx && /^[a-z,]/.test(nx)) continue;
+      }
+      i++;
+      while(i < t.length && /[.!?]/.test(t.charAt(i))) i++;
+      var ch = t.slice(start, i).trim().replace(/\s+/g, " ");
+      if(ch) chunks.push(ch);
+      start = i;
+      i--;
+    }
   }
-  if(!chunks.length && t.trim()) chunks.push(t.trim());
+  var tail = t.slice(start).trim().replace(/\s+/g, " ");
+  if(tail) chunks.push(tail);
   return chunks;
 }
 
@@ -268,12 +359,14 @@ function renderApp(){
         pass.appendChild(pt);
         var text = splitSents(pg.text).map(function(ch){
           var no = (ch.match(/__(\d+)__/) || [])[1];
-          return "<span class='sent'" + (no ? " data-no='" + no + "'" : "") + ">" + ch.replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; }) + "</span>";
+          var html = ch.replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; });
+          return "<span class='sent'" + (no ? " data-no='" + no + "'" : "") + ">" + badgeClean(html) + "</span>";
         }).join(" ");
         pass.appendChild(el("p", null, text));
         card.appendChild(pass);
         pg.questions.forEach(function(q){
           q.speakText = sentenceWithBlank(pg.text, q.no, q.options[q.ans]);
+          q.refSent = refSentHTML(pg.text, q.no);
           card.appendChild(renderQ(sec, q));
         });
       });
@@ -305,7 +398,8 @@ function renderQ(sec, q){
   var rbox = resultBox();
 
   if(sec.type === "choice" || sec.type === "cloze"){
-    body.appendChild(el("p", "qstem", q.stem));
+    var stemText = q.stem || (q.type === "cloze" ? q.refSent : "");
+    if(stemText) body.appendChild(el("p", "qstem" + (q.type === "cloze" && !q.stem ? " refsent" : ""), stemText));
     var opts = el("div", "opts");
     var selected = -1;
     q.options.forEach(function(opt, i){
