@@ -1,12 +1,12 @@
 {
-  "updated": "2026-08-12T07:30:05.245Z",
+  "updated": "2026-08-12T07:46:03.538Z",
   "quizzes": {
-    "L01": true,
-    "L02": true,
-    "L03": true,
-    "L04": true,
-    "L05": true,
-    "L06": true
+    "L01": false,
+    "L02": false,
+    "L03": false,
+    "L04": false,
+    "L05": false,
+    "L06": false
   },
   "assessments": {
     "L01": false,
