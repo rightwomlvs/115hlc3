@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T05:10:05.202Z",
+  "updated": "2026-08-12T07:30:05.245Z",
   "quizzes": {
     "L01": true,
     "L02": true,
@@ -9,27 +9,27 @@
     "L06": true
   },
   "assessments": {
-    "L01": true,
-    "L02": true,
-    "L03": true,
-    "L04": true,
-    "L05": true,
-    "L06": true,
-    "R12": true,
-    "R34": true,
-    "R56": true,
-    "R16": true
+    "L01": false,
+    "L02": false,
+    "L03": false,
+    "L04": false,
+    "L05": false,
+    "L06": false,
+    "R12": false,
+    "R34": false,
+    "R56": false,
+    "R16": false
   },
   "assessments_adv": {
-    "L01": true,
-    "L02": true,
-    "L03": true,
-    "L04": true,
-    "L05": true,
-    "L06": true,
-    "R12": true,
-    "R34": true,
-    "R56": true,
-    "R16": true
+    "L01": false,
+    "L02": false,
+    "L03": false,
+    "L04": false,
+    "L05": false,
+    "L06": false,
+    "R12": false,
+    "R34": false,
+    "R56": false,
+    "R16": false
   }
 }
