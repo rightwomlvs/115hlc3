@@ -64,6 +64,13 @@ var LESSONS = [
   {id: "L06", en: "Getting Paid to Stay at Hotels"}
 ];
 
+var REVIEWS = [
+  {id: "R12", en: "複習卷｜第 1～2 課"},
+  {id: "R34", en: "複習卷｜第 3～4 課"},
+  {id: "R56", en: "複習卷｜第 5～6 課"},
+  {id: "R16", en: "總複習卷｜第 1～6 課"}
+];
+
 var state = {token: "", sha: null, config: null};
 
 function $(id){ return document.getElementById(id); }
@@ -96,6 +103,7 @@ function loadConfig(){
       state.sha = null;
       var q = {}, a = {};
       LESSONS.forEach(function(L){ q[L.id] = true; a[L.id] = true; });
+      REVIEWS.forEach(function(R){ a[R.id] = true; });
       state.config = {updated: new Date().toISOString(), quizzes: q, assessments: a};
     }
     renderToggles();
@@ -146,7 +154,29 @@ function renderToggles(){
     row.appendChild(name); row.appendChild(sws);
     box.appendChild(row);
   });
-  var meta = "共 " + LESSONS.length + " 課 ｜ 隨堂測驗開放 " + openQ + " 課 ｜ 學習評量開放 " + openA + " 課";
+    var div = document.createElement("div");
+    div.className = "text-sm font-bold text-slate-600 pt-5 pb-1";
+    div.textContent = "複習卷（僅學習評量）";
+    box.appendChild(div);
+    REVIEWS.forEach(function(R){
+      var onA = !!(state.config.assessments[R.id] !== false);
+      if(onA) openA++;
+      var row = document.createElement("div");
+      row.className = "flex flex-wrap items-center justify-between gap-3 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3";
+      var name = document.createElement("div");
+      name.innerHTML = "<div class='font-bold text-slate-700'>" + R.id + " ｜ " + R.en + "</div>"
+        + "<div class='text-xs text-slate-500'>學習評量 " + (onA ? "● 開放中" : "○ 已關閉") + "</div>";
+      var aLbl = document.createElement("div");
+      aLbl.className = "flex items-center gap-2 text-sm text-slate-600";
+      aLbl.innerHTML = "<span>📘 學習評量</span>";
+      aLbl.appendChild(makeSwitch(onA, function(){
+        state.config.assessments[R.id] = !state.config.assessments[R.id];
+        renderToggles();
+      }, R.id + " 學習評量"));
+      row.appendChild(name); row.appendChild(aLbl);
+      box.appendChild(row);
+    });
+    var meta = "共 " + LESSONS.length + " 課＋" + REVIEWS.length + " 複習卷 ｜ 隨堂測驗開放 " + openQ + " 課 ｜ 學習評量開放 " + openA + " 課";
   if(state.config.updated){
     var d = new Date(state.config.updated);
     meta += " ｜ 上次更新：" + d.toLocaleString("zh-TW", {hour12: false});
@@ -160,6 +190,7 @@ function saveConfig(){
     q[L.id] = state.config.quizzes[L.id] !== false;
     a[L.id] = state.config.assessments[L.id] !== false;
   });
+  REVIEWS.forEach(function(R){ a[R.id] = state.config.assessments[R.id] !== false; });
   var cfg = {updated: new Date().toISOString(), quizzes: q, assessments: a};
   var body = {message: "課程開放狀態更新（管理頁）", content: b64enc(JSON.stringify(cfg, null, 2))};
   if(state.sha) body.sha = state.sha;

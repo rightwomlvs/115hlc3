@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colors Speak Louder than Words | 學習評量（115上技高英文 Choice 版三）</title>
+<style>
+:root{
+  --ink:#1f2430; --muted:#6b7280; --line:#e5e7eb; --bg:#f4f6fb;
+  --card:#ffffff; --accent:#3b5bdb; --accent2:#0ca678; --warn:#f59f00;
+  --ok:#2b8a3e; --bad:#e03131; --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+.top{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,#065f46,#0ca678);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.top .wrap{padding-top:14px;padding-bottom:14px}
+.top h1{margin:0;font-size:22px;letter-spacing:.5px}
+.top .zh{margin:2px 0 10px;font-size:13px;opacity:.9}
+.badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:1px 12px;font-size:12px;margin-bottom:6px}
+.scorebar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.score{background:rgba(255,255,255,.14);border-radius:10px;padding:6px 14px;font-size:14px}
+.score b{font-size:20px;color:#ffe066}
+.progress{flex:1 1 120px;height:10px;background:rgba(255,255,255,.25);border-radius:999px;overflow:hidden}
+#pbar{height:100%;width:0%;background:#ffe066;border-radius:999px;transition:width .3s}
+.sb-btn{border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;border-radius:8px;padding:5px 12px;font-size:13px;cursor:pointer}
+.sb-btn:hover{background:rgba(255,255,255,.15)}
+.secchips{flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;background:rgba(255,255,255,.12);border-radius:999px;padding:3px 10px;border:none;color:#fff;cursor:pointer;font-family:inherit;transition:.15s}
+.chip:hover{background:rgba(255,255,255,.26)}
+.chip.on{background:rgba(255,255,255,.4);box-shadow:0 0 0 1px rgba(255,255,255,.65) inset}
+.chip.ok{background:rgba(46,204,113,.35)}
+main.wrap{padding-top:20px;padding-bottom:40px}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:20px;box-shadow:0 1px 4px rgba(16,24,40,.05);overflow:hidden}
+.sec-head{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;background:#fafbff}
+.sec-head h2{margin:0;font-size:17px;color:#253073}
+.sec-head .sub{margin:0;font-size:12.5px;color:var(--muted)}
+.sec-head .sec-score{margin-left:auto;font-size:13px;color:#253073;font-weight:600}
+.passage{margin:14px 18px 0;padding:14px 16px;background:#f8f9ff;border:1px solid #dbe1ff;border-radius:10px;font-size:15px}
+.passage .ptitle{font-weight:700;color:#3b5bdb;margin-bottom:6px}
+.bk{display:inline-block;background:#3b5bdb;color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:0 6px;margin:0 2px;vertical-align:middle}
+.q{padding:16px 18px;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:none}
+.card{scroll-margin-top:170px}
+.qhead{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.qno{font-weight:700;color:#3b5bdb}
+.qpts{margin-left:auto;font-size:12px;color:var(--muted);background:#eef1ff;border-radius:6px;padding:0 8px}
+.qstem{font-size:15.5px;margin:4px 0}
+.qstem .hint{color:var(--warn);font-weight:600}
+.uhint,.bblank{color:#94a3b8;font-family:monospace;letter-spacing:.5px;font-weight:600}
+.bblank{color:#64748b}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:8px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:14.5px;user-select:none;transition:.12s}
+.opt:hover{border-color:#aab4f0;background:#f4f6ff}
+.opt .ol{display:inline-block;width:22px;color:#6b7280;font-weight:700}
+.opt.sel{border-color:var(--accent);background:#e9edff;box-shadow:0 0 0 1px var(--accent) inset}
+.opt.correct{border-color:var(--ok);background:#e6f7ec}
+.opt.wrong{border-color:var(--bad);background:#fdecec}
+.fbox{margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.fbox .lbl{font-weight:700;color:#6b7280;font-size:13px}
+input[type=text],textarea{border:1.5px solid var(--line);border-radius:8px;padding:7px 10px;font-size:14.5px;font-family:inherit;outline:none}
+input[type=text]:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,91,219,.12)}
+textarea{width:100%;min-height:64px;resize:vertical}
+.inline-in{margin:0 4px;vertical-align:middle}
+.fbl{display:inline-block;background:#fff3bf;color:#9a7b00;font-weight:700;font-size:11px;border-radius:5px;padding:0 6px;margin:0 2px;vertical-align:middle}
+.qctrl{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+button.btn{border:none;border-radius:8px;padding:7px 16px;font-size:13.5px;cursor:pointer;font-family:inherit}
+.btn-check{background:var(--accent);color:#fff}
+.btn-check:hover{background:#2f4bc0}
+.btn-ghost{background:#eef1f6;color:#374151}
+.btn-ghost:hover{background:#e2e7f0}
+.btn-ok{background:var(--ok);color:#fff}
+.btn-bad{background:var(--bad);color:#fff}
+.qresult{display:none;margin-top:10px;padding:10px 14px;border-radius:9px;font-size:14px}
+.qresult.show{display:block}
+.qresult.good{background:#e9f9f0;border:1px solid #b7e6c8;color:#1c6b32}
+.qresult.bad{background:#fdeeee;border:1px solid #f3c1c1;color:#9c2222}
+.qresult.info{background:#eef4ff;border:1px solid #c6d8ff;color:#2f4bc0}
+.toggle-ex{margin-top:10px;border:1px solid #aab4f0;background:#eef1ff;color:#3b5bdb;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;padding:5px 14px;transition:.12s}
+.toggle-ex:hover{background:#e2e8ff;border-color:#8f9cf0}
+.ex{display:none;margin-top:10px}
+.ex.show{display:block}
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ex-block{border-radius:9px;padding:10px 12px;font-size:13.5px;border:1px solid var(--line)}
+.ex-block h4{margin:0 0 4px;font-size:13px;color:#253073}
+.ex-block p{margin:0}
+.ex.clue{border-left:4px solid var(--warn);background:#fffbf0}
+.ex.words{border-left:4px solid var(--accent);background:#f4f6ff}
+.ex.grammar{border-left:4px solid var(--accent2);background:#f0fbf6}
+.ex.trans{border-left:4px solid #be4bdb;background:#fcf5ff}
+@media (max-width:600px){.ex-grid{grid-template-columns:1fr}}
+footer.wrap{padding-bottom:30px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Lesson 2｜115上 技高英文 Choice 版（三）學習評量</span>
+    <h1>Colors Speak Louder than Words</h1>
+    <p class="zh">學習評量｜第 2 課｜作答、計分、四類詳解</p>
+    <div class="scorebar">
+      <div class="score">得分 <b id="score">0</b> / <span id="total">0</span></div>
+      <div class="progress"><div id="pbar"></div></div>
+      <button class="sb-btn" id="reset" type="button">重新作答</button>
+      <button class="sb-btn" id="revealAll" type="button">全部顯示答案</button>
+      <div class="secchips" id="secchips"></div>
+    </div>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<footer class="wrap">題目來源：翰林出版 115 上技高英文 Choice 版（三）學習評量卷（教用）。本頁面為互動練習教材，僅供教學使用。</footer>
+<script>
+"use strict";
+var DATA = {"num": 2, "en": "Colors Speak Louder than Words", "zh": "學習評量｜第 2 課", "sections": [{"id": "s1", "type": "word", "title": "一、文意字彙", "subtitle": "1.～4. 題，填入適當的字彙，以完成該句。5.～8. 題，選出適當的字彙，以完成該句。9.～10. 題，選出與句中畫底線的字意思最接近的答案。（每題 2 分，共 20 分）", "points": 20, "questions": [{"no": 1, "pts": 2, "type": "word", "sent": "Trust your own <span class='hint'>j t</span>; you don’t always need to ask for other people’s opinions.", "answer": "judgment", "accept": ["judgment", "judgement"], "ex": {"clue": "Trust your own j…t（相信自己的判斷）", "words": "judgment n. 判斷；judge v. 判斷", "grammar": "judgment 為名詞，Trust your own judgment＝相信你自己的判斷；don’t always need to＋原形動詞「不總是需要……」。", "trans": "相信你自己的判斷；你不必老是徵詢別人的意見。"}, "id": "q1"}, {"no": 2, "pts": 2, "type": "word", "sent": "<span class='hint'>R h</span> shows that most people need seven to eight hours of sleep a night to stay healthy.", "answer": "Research", "accept": ["Research", "research"], "ex": {"clue": "R…h（研究）", "words": "research n. 研究", "grammar": "research 為（不可數）名詞，shows that＋子句「顯示……」；need to＋V「需要……」。", "trans": "研究顯示，大多數人每晚需要七到八小時的睡眠才能保持健康。"}, "id": "q2"}, {"no": 3, "pts": 2, "type": "word", "sent": "Mr. Liao has a high social <span class='hint'>s s</span> because he is a doctor.", "answer": "status", "accept": ["status"], "ex": {"clue": "social s…s（社會地位）", "words": "status n. 地位；身分", "grammar": "social status「社會地位」，status 為不可數名詞；because＋子句「因為……」。", "trans": "廖先生是位醫生，所以他擁有很高的社會地位。"}, "id": "q3"}, {"no": 4, "pts": 2, "type": "word", "sent": "May didn’t <span class='hint'>r e</span> her phone was on silent and missed an important call.", "answer": "realize", "accept": ["realize", "realise"], "ex": {"clue": "didn’t r…e（沒有意識到）", "words": "realize v. 意識到；發覺", "grammar": "didn’t＋原形動詞 realize「沒有意識到」；miss＋受詞「錯過……」。", "trans": "梅沒有意識到手機是靜音模式，因而錯過了一通重要的電話。"}, "id": "q4"}, {"no": 5, "pts": 2, "type": "choice", "stem": "Jim likes J-pop; _______, Jack loves pop music from Japan.", "options": ["originally", "similarly", "likely", "recently"], "ans": 1, "ex": {"clue": "前後兩句語意相同，用 similarly", "words": "similarly adv. 相似地；同樣地", "grammar": "similarly「同樣地、相似地」，用來承接與前句相似的內容；句中有分號，故用副詞連接兩句。", "trans": "吉姆喜歡 J-pop；同樣地，傑克也喜歡來自日本的流行音樂。"}, "id": "q5"}, {"no": 6, "pts": 2, "type": "choice", "stem": "Tom is so smart that he passed the _______ test with the highest possible score.", "options": ["intelligence", "elegance", "discovery", "discussion"], "ans": 0, "ex": {"clue": "以最高分通過的測驗", "words": "intelligence n. 智力；intelligence test 智力測驗", "grammar": "intelligence test「智力測驗」，intelligence 為名詞當形容詞用；so…that＋子句「如此……以致於……」。", "trans": "湯姆非常聰明，他以最高分通過了智力測驗。"}, "id": "q6"}, {"no": 7, "pts": 2, "type": "choice", "stem": "Drunk driving is a(n) _______ cause of car accidents.", "options": ["similar", "energetic", "elegant", "major"], "ans": 3, "ex": {"clue": "酒駕是車禍的「主要原因」", "words": "major adj. 主要的；重要的", "grammar": "a(n) + adj. + cause of＋名詞「……的主要原因」；major「主要的」。", "trans": "酒駕是造成車禍的主要原因之一。"}, "id": "q7"}, {"no": 8, "pts": 2, "type": "choice", "stem": "Is there anything else to _______ before we finish the meeting?", "options": ["major", "impress", "discuss", "tend"], "ans": 2, "ex": {"clue": "會議結束前「討論」事項", "words": "discuss v. 討論", "grammar": "anything else to discuss「其他要討論的事」，to＋原形動詞當形容詞修飾 anything；Is there anything else to…？「還有其他……要……嗎？」", "trans": "在我們結束會議之前，還有其他要討論的事嗎？"}, "id": "q8"}, {"no": 9, "pts": 2, "type": "choice", "stem": "André Chiang always had great passion for cooking and became a very famous chef.", "options": ["element", "enthusiasm", "reaction", "patient"], "ans": 1, "ex": {"clue": "passion 熱情 ≈ enthusiasm 熱忱", "words": "passion n. 熱情；enthusiasm n. 熱忱", "grammar": "passion（熱情）的意思最接近 enthusiasm（熱忱）；had great passion for cooking＝對烹飪有極大的熱情。", "trans": "江振誠對烹飪始終懷有極大的熱情，後來成為非常著名的廚師。"}, "id": "q9"}, {"no": 10, "pts": 2, "type": "choice", "stem": "Ms. Chen is a lady who is known for her elegance.", "options": ["tool", "finding", "interest", "grace"], "ans": 3, "ex": {"clue": "elegance 優雅 ≈ grace 優雅", "words": "elegance n. 優雅；grace n. 優雅", "grammar": "elegance（優雅）的意思最接近 grace（優雅）；be known for＝因……而聞名。", "trans": "陳小姐是一位以優雅而聞名的女士。"}, "id": "q10"}]}, {"id": "s2", "type": "choice", "title": "二、語法測驗", "subtitle": "選出一個最適當的答案。（每題 2 分，共 16 分）", "points": 16, "questions": [{"no": 11, "pts": 2, "stem": "In order _______ win the match, the soccer players practiced hard.", "options": ["by", "that", "for", "to"], "ans": 3, "ex": {"clue": "in order to＋原形動詞「為了……」", "words": "in order to 為了；match n. 比賽", "grammar": "○11 此題使用 in order to + V 為了…… 的句型，故答案為 (D)。", "trans": "為了贏得比賽，足球隊員們努力練習。"}, "id": "q11"}, {"no": 12, "pts": 2, "stem": "Jack has studied hard for the midterm exam, _______ to get good grades in every subject.", "options": ["to hope", "and hoping", "hoping", "hoped"], "ans": 2, "ex": {"clue": "分詞構句表「主動」用 V-ing", "words": "midterm exam 期中考；hope v. 希望", "grammar": "○12 此題為 S + V…, V-ing / Vpp 分詞構句的句型。因為動詞 hope 對主詞 Jack 而言是主動動作，故答案為 hoping。", "trans": "傑克很努力準備期中考，希望在每個科目都拿到好成績。"}, "id": "q12"}, {"no": 13, "pts": 2, "stem": "_______ that Lisa moved to Thailand years ago.", "options": ["It says", "It said", "It is said", "It is to say"], "ans": 2, "ex": {"clue": "It is said that＋子句「據說……」", "words": "It is said that… 據說……；move v. 搬家", "grammar": "此題為 It is said that＋子句「據說……」的句型，It 為虛主詞。", "trans": "據說麗莎多年前搬到泰國。"}, "id": "q13"}, {"no": 14, "pts": 2, "stem": "Mom looked around my <span class='hint'>m s</span> room, _______ by what she saw.", "options": ["shocking", "shocked", "shock", "to shock"], "ans": 1, "ex": {"clue": "shock 對主詞 Mom 是被動動作", "words": "messy adj. 髒亂的；shock v. 使震驚", "grammar": "○14 此題為 S + V…, V-ing / Vpp 分詞構句的句型。因為動詞 shock 對主詞 Mom 而言是被動動作，故答案為 shocked。", "trans": "媽媽環顧我那髒亂的房間，對眼前所見感到震驚。"}, "id": "q14"}, {"no": 15, "pts": 2, "stem": "It is believed that _______ plenty of water helps us stay healthy.", "options": ["drinking", "drink", "drunk", "drinks"], "ans": 0, "ex": {"clue": "動名詞片語當 that 子句主詞", "words": "plenty of 大量的；stay healthy 保持健康", "grammar": "○15 用動名詞片語 drinking plenty of water 來當 that 子句的主詞，故答案為 (A)。", "trans": "大家相信喝大量的水有助於我們保持健康。"}, "id": "q15"}, {"no": 16, "pts": 2, "stem": "Sara happily took a walk in the park, _______ bothered by the heavy rain.", "options": ["didn’t", "no", "wasn’t", "not"], "ans": 3, "ex": {"clue": "分詞構句的否定用 not", "words": "take a walk 散步；bothered by 被……困擾", "grammar": "○16 分詞構句的否定用 not，放在分詞前面。", "trans": "莎拉開心地到公園散步，沒有被大雨困擾。"}, "id": "q16"}, {"no": 17, "pts": 2, "stem": "It is reported that a popular band _______ a concert in Taipei next year.", "options": ["giving", "gave", "gives", "will give"], "ans": 3, "ex": {"clue": "next year 明年 → 未來式", "words": "It is reported that… 據報導……；band n. 樂團", "grammar": "○17 時間副詞為 next year 明年，故動詞前要加上 will 表未來。", "trans": "據報導，一個受歡迎的樂團明年將在臺北舉辦演唱會。"}, "id": "q17"}, {"no": 18, "pts": 2, "stem": "Nowadays, many people prefer watching movies at home _______ going to the theater.", "options": ["to", "for", "from", "with"], "ans": 0, "ex": {"clue": "prefer A to B 比較喜歡 A 勝過 B", "words": "prefer v. 較喜歡；go to the theater 去電影院", "grammar": "○18 prefer A to B 比較喜歡 A 勝過 B。", "trans": "如今，許多人寧可在家看電影，也不願去電影院。"}, "id": "q18"}]}, {"id": "s3", "type": "cloze", "ptitle": "綜合測驗", "title": "三、綜合測驗", "subtitle": "依短文文意，選出一個最適合該空格的答案。（每題 3 分，共 15 分）", "points": 15, "passages": [{"title": "短文", "text": "BLACKPINK is a very popular girl group from South Korea. They are loved by people across the world. However, do you know why the group is called “BLACKPINK”? It is a combination of black and pink, and these two colors have __19__ meanings. Black symbolizes the power of the group, __20__ their talent for music, while pink stands for their cute and cheerful appearance. The contrast（對比） between the two colors __21__ the idea that “pretty isn’t everything.” __22__ that the members of the group write their own songs. They believe that by writing songs they can show the world their real thoughts. Through their powerful performances on stage, BLACKPINK have become very popular, and their albums sell like __23__. Their success is an example for people of all ages.", "questions": [{"no": 19, "pts": 3, "stem": "", "options": ["spare", "specific", "amazed", "frightened"], "ans": 1, "ex": {"clue": "兩色具有「特定的」意義", "words": "specific adj. 特定的；combination n. 結合", "grammar": "specific meanings「特定的意義」，符合文意。", "trans": "「BLACKPINK」是黑與粉紅的組合，而這兩種顏色具有特定的意義。"}, "id": "q19"}, {"no": 20, "pts": 3, "stem": "", "options": ["mean", "meant", "meaning", "it means"], "ans": 2, "ex": {"clue": "現在分詞引導補充說明", "words": "symbolize v. 象徵；talent n. 才華", "grammar": "此處用現在分詞 meaning（意即）補充說明黑色所象徵的力量。", "trans": "黑色象徵團體的力量，代表他們在音樂上的才華；粉紅色則代表他們可愛活潑的外表。"}, "id": "q20"}, {"no": 21, "pts": 3, "stem": "", "options": ["showed", "shows", "to show", "showing"], "ans": 1, "ex": {"clue": "主詞 the contrast 為單數", "words": "contrast n. 對比；appearance n. 外表", "grammar": "主詞 The contrast（單數）搭配現在式動詞，故用 shows。", "trans": "這兩種顏色的對比傳達了「漂亮不是一切」的想法。"}, "id": "q21"}, {"no": 22, "pts": 3, "stem": "", "options": ["It is reported", "In order", "Because of", "As for"], "ans": 0, "ex": {"clue": "It is reported that＋子句「據報導……」", "words": "It is reported that… 據報導……；write songs 寫歌", "grammar": "It is reported that＋子句「據報導……」的句型，It 為虛主詞。", "trans": "據報導，該團體的成員們自己寫歌，他們相信這樣可以讓世界看到他們真實的想法。"}, "id": "q22"}, {"no": 23, "pts": 3, "stem": "", "options": ["a piece of cake", "couch potatoes", "hot potatoes", "hot cakes"], "ans": 3, "ex": {"clue": "sell like hot cakes 熱賣", "words": "hot cakes n. 熱賣品；performance n. 表演", "grammar": "○23 sell like hot cakes 熱賣、暢銷，為固定用法。", "trans": "BLACKPINK 因強大的舞台表演而非常受歡迎，他們的專輯大為熱賣。"}, "id": "q23"}]}]}, {"id": "s4", "type": "choice", "title": "四、對話", "subtitle": "根據對話選一個最適當的答案。（每題 3 分，共 15 分）", "points": 15, "questions": [{"no": 24, "pts": 3, "stem": "Penny: I can’t decide which shirt to wear on my date.<br>Henry: _______________ It really suits you.<br>Penny: Thanks. I think I’m going to wear that.", "options": ["What are you talking about?", "I don’t like that yellow jacket.", "That’s interesting.", "I think you should go with the red one."], "ans": 3, "ex": {"clue": "對方建議，且「真的很適合你」", "words": "suit v. 適合（某人）；go with 選擇；搭配", "grammar": "I think you should go with the red one.「我認為你應該穿紅色的那件。」用於提出建議。", "trans": "佩妮：我不知道約會要穿哪件襯衫。亨利：我認為你應該穿紅色的那件，它真的很適合你。佩妮：謝謝，我想我就穿那件。"}, "id": "q24"}, {"no": 25, "pts": 3, "stem": "Peter: Have you ever tried paragliding（飛行傘）?<br>Betty: No, it looks difficult and dangerous.<br>Peter: In fact, it’s a lot of fun. It makes you feel like a bird flying in the sky.<br>Betty: ______________ Maybe I’ll give it a try.", "options": ["You’ve convinced me.", "I don’t think so.", "That’s not the point.", "I am terrified."], "ans": 0, "ex": {"clue": "「也許我會試試看」表示被說服", "words": "convince v. 說服；give it a try 試一試", "grammar": "You’ve convinced me.「你說服我了。」用於表示同意對方的說法。", "trans": "彼得：你玩過飛行傘嗎？貝蒂：沒有，它看起來又難又危險。彼得：事實上它非常好玩，會讓你覺得自己像在天上飛翔的鳥。貝蒂：你說服我了，也許我會試試看。"}, "id": "q25"}, {"no": 26, "pts": 3, "stem": "Paul: What do you think about using green for our new logo? Green gives people a feeling of freshness.<br>Sam: ____________ It also makes our brand feel safe and natural.<br>Paul: Great. It will help us stand out because most of our competitors use boring gray.", "options": ["I’m not really into green.", "Are you sure about that?", "You have a point.", "I have a better idea."], "ans": 2, "ex": {"clue": "山姆先同意再補充理由", "words": "competitor n. 競爭者；stand out 突出；脫穎而出", "grammar": "You have a point.「你說得有道理。」用來表示同意對方。", "trans": "保羅：你覺得我們的新商標用綠色怎麼樣？綠色給人清新的感覺。山姆：你說得有道理，它也讓我們的品牌感覺安全又自然。保羅：太好了，這能讓我們脫穎而出，因為我們大部分的競爭對手都用無聊的灰色。"}, "id": "q26"}, {"no": 27, "pts": 3, "stem": "Kelly: I haven’t eaten sashimi for years.<br>Jimmy: Why not?<br>Kelly: I don’t really like the smell and taste of raw fish.<br>Jimmy: ___________ I remember you used to like it a lot.", "options": ["That doesn’t make sense.", "I am so happy for you.", "I couldn’t agree with you more.", "Maybe another day."], "ans": 0, "ex": {"clue": "以前喜歡、現在不喜歡 → 不合理", "words": "sashimi n. 生魚片；raw adj. 生的", "grammar": "That doesn’t make sense.「那不合理、說不通。」表示感到困惑或懷疑。", "trans": "凱莉：我好幾年沒吃生魚片了。吉米：為什麼？凱莉：我不太喜歡生魚的氣味和味道。吉米：那不合理耶，我記得你以前很喜歡。"}, "id": "q27"}, {"no": 28, "pts": 3, "stem": "Sara: Oh no! I am running out of paint. I need it to finish this wall.<br>Jill: Don’t worry. I’ll get some for you. ___________<br>Sara: Thanks. You are a lifesaver. I need some black and blue paint.", "options": ["Why haven’t you finished it?", "Where can I buy them?", "What colors do you need?", "What’s all this about?"], "ans": 2, "ex": {"clue": "莎拉最後說出需要的顏色", "words": "run out of 用完；lifesaver n. 救星", "grammar": "What colors do you need?「你需要什麼顏色？」用來詢問需要。", "trans": "莎拉：噢不！我的油漆快用完了，我需要它來完成這面牆。吉兒：別擔心，我去幫你拿一些。你需要什麼顏色？莎拉：謝謝，你是我的救星。我需要一些黑色和藍色的油漆。"}, "id": "q28"}]}, {"id": "s5", "type": "cloze", "title": "五、閱讀測驗", "subtitle": "閱讀下列短文，選出最適當的答案。（每題 3 分，共 18 分）", "points": 18, "passages": [{"title": "A", "text": "The following table shows the hair dyeing（染髮）price list of a hair salon. Read the information below and answer the questions.<br><br><b>Crown Hair Salon – Price List for Hair Dyeing</b><br><br>Hair length | Hair Colors | Highlights（挑染） | Full Color（全染）<br>Short Hair | black / brown | NT$3,500 | NT$4,000<br>Short Hair | blonde（金髮）/ red / gray | NT$4,500 | NT$5,000<br>Long Hair | black / brown | NT$5,000 | NT$6,000<br>Long Hair | blonde / red / gray | NT$6,000 | NT$7,000<br><br>Please note:<br>1. Customers with birthdays in April can enjoy a 20% discount.<br>2. To ensure the best service, we do not accept walk-ins（現場候位）. Please book for all hair coloring services.<br>3. We only take cash; mobile and credit card payments are not available.", "questions": [{"no": 29, "pts": 3, "stem": "Who may be interested in this information?", "options": ["People who want to get a haircut.", "People who want to change their hair color.", "People who want to work in a salon.", "People who have black hair."], "ans": 1, "ex": {"clue": "本文為染髮價目表", "words": "hair dyeing 染髮；be interested in 對……有興趣", "grammar": "本文介紹髮廊的染髮價目表，故想「改變髮色」的人最有興趣。", "trans": "誰可能對這份資訊感興趣？（想改變髮色的人）"}, "id": "q29"}, {"no": 30, "pts": 3, "stem": "Joan wants to dye her long hair red and get highlights. How much should she pay?", "options": ["NT$4,500", "NT$5,000", "NT$7,000", "NT$6,000"], "ans": 3, "ex": {"clue": "長髮＋挑染（紅）→ NT$6,000", "words": "dye v. 染（髮）；highlight n. 挑染", "grammar": "長髮、紅色＋挑染，對照價目表 Long Hair 的 blonde / red / gray 挑染為 NT$6,000。", "trans": "瓊恩想把長髮染紅並挑染，她需要付多少錢？（NT$6,000）"}, "id": "q30"}, {"no": 31, "pts": 3, "stem": "What is true about Crown Hair Salon?", "options": ["People can pay in cash or by credit card.", "People can get served without booking first.", "It charges more for long hair than short hair.", "It offers a birthday discount all year round."], "ans": 2, "ex": {"clue": "比較長髮與短髮的價格", "words": "cash n. 現金；walk-ins 現場候位；booking 預約", "grammar": "由價目表可見長髮的染髮費用皆比短髮高，故 (C) 正確；(A)(B)(D) 皆與注意事項相反。", "trans": "關於 Crown 髮廊，何者正確？（長髮比短髮收費高）"}, "id": "q31"}]}, {"title": "B", "text": "When your eyes feel uncomfortable after using a computer or smartphone for a long time, you might be told to look at something green to feel better. Although green is regarded as the easiest color on the human eye, there is no “magic” about it.<br><br>Actually, the real reason for eye strain is not color, but your eye muscles. When you look at something close for too long, your eye muscles become tensed up（緊繃）. To truly rest these muscles, you need to look at something far away. This common misunderstanding about green probably comes from the distant past. Long ago, houses were usually near green trees and grass. When people looked far away, they usually saw green. Therefore, they thought the color was helping, but it was really just the distance.<br><br>So, the next time you take a break from your screen, you don’t need to find something green. Just look across the room or out of a window to give your eyes the distance they need to relax.", "questions": [{"no": 32, "pts": 3, "stem": "What is this passage mainly about?", "options": ["The top ten most common misunderstandings.", "Colors which are good for our eyes.", "The relationship between color and the environment.", "The real cause of eye strain and how to fix it."], "ans": 3, "ex": {"clue": "本文主旨＝眼睛疲勞的真正原因與改善方法", "words": "eye strain 眼睛疲勞；misunderstanding n. 誤解", "grammar": "全文說明眼睛疲勞的原因其實不是顏色而是眼部肌肉，並說明如何放鬆，故主旨為 (D)。", "trans": "本文主要在講什麼？（眼睛疲勞的真正成因及其改善方法）"}, "id": "q32"}, {"no": 33, "pts": 3, "stem": "According to the passage, why did people in the past believe that looking at green could relax their eyes?", "options": ["There were green trees around people’s houses.", "Most food people ate in the past was green.", "Green symbolized good health in the past.", "Doctors told them to look at green things."], "ans": 0, "ex": {"clue": "從前屋舍旁多綠樹綠草", "words": "in the past 從前；relax v. 放鬆", "grammar": "文中提到 Long ago, houses were usually near green trees and grass.，故 (A) 正確。", "trans": "根據本文，為什麼從前的人認為看綠色可以放鬆眼睛？（因為屋子周圍有綠樹）"}, "id": "q33"}, {"no": 34, "pts": 3, "stem": "According to the passage, which statement is true?", "options": ["Green is not an easy color for our eyes to look at.", "We should always look at the sea to relax our eye muscles.", "Reading a book for a long time will not cause eye strain.", "We can relax our eyes by looking into the distance."], "ans": 3, "ex": {"clue": "「看遠方」才能放鬆眼部肌肉", "words": "eye muscles 眼部肌肉；in the distance 在遠方", "grammar": "文中說要真正休息這些肌肉需看遠方的東西，故 (D) 正確。", "trans": "根據本文，何者正確？（我們可以藉由望向遠方來放鬆眼睛）"}, "id": "q34"}]}]}, {"id": "s6", "type": "fill", "title": "六、填充", "subtitle": "依提示字母填入適當的字彙，以完成句子。（每格 2 分，共 8 分）", "points": 8, "questions": [{"no": 35, "pts": 2, "cn": "John 昨晚因為流感發高燒。難怪他今天沒來學校。", "en": "John had a high fever last night because of the flu. ((0)) ((1)) he didn’t come to school today.", "blanks": [{"label": "(n)(o)", "ans": "No", "accept": ["no", "No"]}, {"label": "(w)(r)", "ans": "wonder", "accept": ["wonder", "wondering"]}], "ex": {"clue": "N…o w…r（難怪）", "words": "no wonder 難怪；flu n. 流感", "grammar": "no wonder「難怪、不足為奇」，為固定用法，後接完整子句。", "trans": "約翰昨晚因為流感發高燒，難怪他今天沒來學校。"}, "id": "q35"}, {"no": 36, "pts": 2, "cn": "這些舊照片勾起了我的童年回憶。", "en": "These old pictures have ((0)) ((1)) my childhood memories.", "blanks": [{"label": "(s)(d)", "ans": "stirred", "accept": ["stirred", "stir"]}, {"label": "(u)(p)", "ans": "up", "accept": ["up"]}], "ex": {"clue": "s…d u…p（激起；勾起）", "words": "stir up 激起；勾起；childhood memories 童年回憶", "grammar": "stir up「勾起（回憶）」，此處用現在完成式 have stirred up。", "trans": "這些舊照片勾起了我的童年回憶。"}, "id": "q36"}]}, {"id": "s7", "type": "sentence", "title": "七、句子重組", "subtitle": "將所給的字詞重組成完整句子。（每題 4 分，共 8 分）", "points": 8, "questions": [{"no": 37, "pts": 4, "task": "that / will / improve your health / It is believed / having a balanced diet", "answer": "It is believed that having a balanced diet will improve your health.", "accept": ["It is believed that having a balanced diet will improve your health", "it is believed that having a balanced diet will improve your health"], "ex": {"clue": "It is believed that＋子句「據信……」", "words": "It is believed that… 據信……；balanced diet 均衡飲食", "grammar": "It is believed that＋子句「據信……」；that 子句中用動名詞片語 having a balanced diet 當主詞。", "trans": "據信，均衡飲食能增進你的健康。"}, "id": "q37"}, {"no": 38, "pts": 4, "task": "the hotel window, / the beautiful view / looked out of / Mandy / amazed by", "answer": "Mandy looked out of the hotel window, amazed by the beautiful view.", "accept": ["Mandy looked out of the hotel window, amazed by the beautiful view", "mandy looked out of the hotel window, amazed by the beautiful view"], "ex": {"clue": "分詞構句 amazed by…", "words": "look out of 從……往外看；amazed by 被……所驚豔", "grammar": "amazed by the beautiful view 為分詞構句，補充說明 Mandy 的狀態。", "trans": "曼蒂從旅館窗戶往外看，被眼前的美景所驚豔。"}, "id": "q38"}]}]};
+
+var NORM_RE = /[\s\.,，。;；:：!！?？"'“”‘’（）()\[\]【】\-、_]/g;
+function norm(s){return (s==null?"":String(s)).toLowerCase().replace(NORM_RE,"");}
+function hasAny(user, arr){
+  var u = norm(user);
+  return arr.some(function(a){ return u === norm(a); });
+}
+
+var score = 0, total = 0;
+var results = {};   // qid -> {ok:true/false, pts:n}   (fill -> {blanks:[bool]})
+
+function el(tag, cls, html){
+  var e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(html != null) e.innerHTML = html;
+  return e;
+}
+
+function exBlock(cls, title, text){
+  var b = el("div", "ex-block " + cls);
+  var h = el("h4", null, title);
+  var p = el("p", null, text || "—");
+  b.appendChild(h); b.appendChild(p);
+  return b;
+}
+
+function exPanel(q, openAll){
+  var ex = el("div", "ex" + (openAll ? " show" : ""));
+  var grid = el("div", "ex-grid");
+  grid.appendChild(exBlock("clue", "解題線索", q.ex.clue));
+  grid.appendChild(exBlock("words", "重要字詞", q.ex.words));
+  grid.appendChild(exBlock("grammar", "文法句型", q.ex.grammar));
+  grid.appendChild(exBlock("trans", "中文翻譯", q.ex.trans));
+  ex.appendChild(grid);
+  var tg = el("button", "toggle-ex", "查看詳解 ▾");
+  tg.onclick = function(){ ex.classList.toggle("show"); tg.textContent = ex.classList.contains("show") ? "收合詳解 ▴" : "查看詳解 ▾"; };
+  ex.appendChild(tg);
+  return ex;
+}
+
+function resultBox(){
+  var r = el("div", "qresult");
+  return r;
+}
+function showResult(qEl, rbox, ok, msg){
+  rbox.className = "qresult show " + (ok ? "good" : "bad");
+  rbox.innerHTML = msg;
+}
+
+function showInfo(rbox, msg){
+  rbox.className = "qresult show info";
+  rbox.innerHTML = msg;
+}
+
+function speak(text){
+  try{
+    if(!text) return;
+    if(typeof window === "undefined" || !window.speechSynthesis) return;
+    var s = window.speechSynthesis;
+    var u = new SpeechSynthesisUtterance(String(text));
+    u.lang = "en-US";
+    u.rate = 0.9;
+    s.cancel();
+    s.speak(u);
+    // Chrome/Edge workaround: wake the engine with pause()/resume()
+    try{
+      if(!s.paused){
+        s.pause();
+        s.resume();
+      }
+    }catch(e2){}
+  }catch(e){}
+}
+
+function fullSentence(q){
+  if(q.en){
+    return q.en.replace(/\(\((\d+)\)\)/g, function(m, n){ return (q.blanks[+n] || {}).ans || ""; });
+  }
+  if(q.sent){
+    var s = String(q.sent).replace(/<span class='hint'>[^<]*<\/span>/g, q.answer || "");
+    return s.replace(/<[^>]+>/g, "");
+  }
+  return String(q.stem || "").replace(/_{3,}/g, q.answer);
+}
+
+/* ---------- rendering ---------- */
+function renderApp(){
+  var app = document.getElementById("app");
+  DATA.sections.forEach(function(sec){
+    var card = el("section", "card");
+    card.id = sec.id;
+    var head = el("div", "sec-head");
+    head.appendChild(el("h2", null, sec.title));
+    head.appendChild(el("p", "sub", sec.subtitle));
+    var ssc = el("span", "sec-score", "本節得分 <b id='ss-"+sec.id+"'>0</b> / <span>"+sec.points+"</span>");
+    head.appendChild(ssc);
+    card.appendChild(head);
+
+    if(sec.type === "cloze"){
+      sec.passages.forEach(function(pg){
+        var pass = el("div", "passage");
+        var pt = el("div", "ptitle", (sec.ptitle || "閱讀測驗 ") + pg.title);
+        pass.appendChild(pt);
+        var text = pg.text.replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; });
+        pass.appendChild(el("p", null, text));
+        card.appendChild(pass);
+        pg.questions.forEach(function(q){ card.appendChild(renderQ(sec, q)); });
+      });
+    } else {
+      sec.questions.forEach(function(q){ card.appendChild(renderQ(sec, q)); });
+    }
+    app.appendChild(card);
+  });
+  total = 0;
+  DATA.sections.forEach(function(sec){
+    total += sec.points;
+  });
+  document.getElementById("total").textContent = total;
+  buildChips();
+}
+
+function renderQ(sec, q){
+  q.type = q.type || sec.type; q.sec = sec.id; q.secTitle = sec.title;
+  var box = el("div", "q");
+  box.setAttribute("data-qid", q.id);
+  var head = el("div", "qhead");
+  head.appendChild(el("span", "qno", q.no + "."));
+  var dispPts = q.pts * (q.blanks ? q.blanks.length : 1);
+  head.appendChild(el("span", "qpts", dispPts + " 分"));
+  box.appendChild(head);
+
+  var body = el("div", "qbody");
+  var ctrl = el("div", "qctrl");
+  var rbox = resultBox();
+
+  if(q.type === "choice" || q.type === "cloze"){
+    body.appendChild(el("p", "qstem", q.stem));
+    var opts = el("div", "opts");
+    var selected = -1;
+    q.options.forEach(function(opt, i){
+      var o = el("div", "opt");
+      o.innerHTML = "<span class='ol'>" + String.fromCharCode(65+i) + ".</span>" + opt;
+      o.onclick = function(){
+        if(box.dataset.graded === "1") return;
+        Array.prototype.forEach.call(opts.children, function(c){ c.classList.remove("sel"); });
+        o.classList.add("sel");
+        selected = i;
+      };
+      opts.appendChild(o);
+    });
+    body.appendChild(opts);
+    var chk = el("button", "btn btn-check", "檢查答案");
+    chk.onclick = function(){
+      speak(fullSentence(q));
+      if(selected < 0){
+        showInfo(rbox, "尚未選擇答案。可先參考下方解析，再作答計分。");
+        expandEx(box);
+        return;
+      }
+      var ok = (selected === q.ans);
+      markResult(box, rbox, q, ok);
+      Array.prototype.forEach.call(opts.children, function(c, i){
+        c.classList.remove("sel");
+        if(i === q.ans) c.classList.add("correct");
+        else if(i === selected && !ok) c.classList.add("wrong");
+      });
+    };
+    ctrl.appendChild(chk);
+  }
+  else if(q.type === "vocab"){
+    body.appendChild(el("p", "qstem", "請寫出「<b>" + q.answer + "</b>」的英文。"));
+    var inp = el("input", "");
+    inp.type = "text"; inp.placeholder = "輸入英文單字";
+    body.appendChild(inp);
+    var chk = el("button", "btn btn-check", "檢查答案");
+    chk.onclick = function(){
+      speak(q.word);
+      var v = inp.value.trim();
+      if(!v){
+        showInfo(rbox, "尚未輸入答案。可先參考下方解析，作答後即可計分。");
+        expandEx(box);
+        return;
+      }
+      var ok = hasAny(v, [q.word].concat(q.accept_en || []));
+      markResult(box, rbox, q, ok, q.word + "（" + q.answer + "）");
+      if(ok){ inp.style.borderColor = "#2b8a3e"; } else { inp.style.borderColor = "#e03131"; }
+    };
+    ctrl.appendChild(chk);
+  }
+  else if(q.type === "word"){
+    var sent = String(q.sent).replace(/<span class='hint'>([a-zA-Z]+)\s+([a-zA-Z]+)<\/span>/g, function(m, a, b){
+      var missing = Math.max(1, (q.answer || "").length - a.length - b.length);
+      return "<span class='hint'>" + a + "</span><span class='uhint'>" + new Array(missing + 1).join("_") + "</span><span class='hint'>" + b + "</span>";
+    });
+    body.appendChild(el("p", "qstem", sent));
+    var inp = el("input", "");
+    inp.type = "text"; inp.placeholder = "依提示字母填入單字";
+    body.appendChild(inp);
+    var chk = el("button", "btn btn-check", "檢查答案");
+    chk.onclick = function(){
+      speak(fullSentence(q));
+      var v = inp.value.trim();
+      if(!v){
+        showInfo(rbox, "尚未輸入答案。可先參考下方解析，作答後即可計分。");
+        expandEx(box);
+        return;
+      }
+      var ok = hasAny(v, q.accept);
+      markResult(box, rbox, q, ok);
+      if(ok){ inp.style.borderColor = "#2b8a3e"; } else { inp.style.borderColor = "#e03131"; }
+    };
+    ctrl.appendChild(chk);
+  }
+  else if(q.type === "fill"){
+    body.appendChild(el("p", "qstem", "【中文】" + q.cn));
+    var sen = el("p", "qstem");
+    var html = q.en.replace(/\(\((\d+)\)\)/g, function(m, n){
+      var b = q.blanks[+n];
+      var letters = [];
+      var lm, lre = /\(([^)]+)\)/g;
+      while((lm = lre.exec(b.label || ""))) letters.push(lm[1]);
+      var fragA = letters[0] || "";
+      var fragB = letters.length > 1 ? letters.slice(1).join("") : "";
+      var missing = Math.max(1, (b.ans || "").length - fragA.length - fragB.length);
+      var shown = fragA + new Array(missing + 1).join("_") + fragB;
+      return ' <span class="bblank">' + shown + '</span> ';
+    });
+    sen.innerHTML = html;
+    body.appendChild(sen);
+    var abox = el("div", "fbox");
+    q.blanks.forEach(function(b, n){
+      var span = el("span", "lbl", "(" + (n + 1) + ")");
+      var inp = el("input", "inline-in");
+      inp.type = "text";
+      inp.style.width = Math.min(220, Math.max(90, (b.ans || "").length * 12)) + "px";
+      inp.setAttribute("data-blank", n);
+      abox.appendChild(span); abox.appendChild(inp);
+    });
+    body.appendChild(abox);
+    var chk = el("button", "btn btn-check", "檢查答案");
+    chk.onclick = function(){
+      speak(fullSentence(q));
+      var ins = abox.querySelectorAll("input[data-blank]");
+      var emptyAll = true;
+      ins.forEach(function(ip){ if(String(ip.value || "").trim()) emptyAll = false; });
+      if(emptyAll){
+        showInfo(rbox, "尚未輸入答案。可先參考下方解析，再作答計分。");
+        expandEx(box);
+        return;
+      }
+      var oks = [];
+      var all = true, any = false;
+      ins.forEach(function(ip){
+        var b = q.blanks[+ip.dataset.blank];
+        var ok = hasAny(ip.value, b.accept);
+        oks.push(ok); any = any || ok; if(!ok) all = false;
+        ip.style.borderColor = ok ? "#2b8a3e" : "#e03131";
+      });
+      var nOk = oks.filter(Boolean).length;
+      box.dataset.graded = "1";
+      var pts = nOk * q.pts;
+      var prev = results[q.id];
+      if(prev){ score -= prev.pts; }
+      results[q.id] = {ok: nOk === q.blanks.length, pts: pts};
+      score += pts;
+      updateScore();
+      var msg = "答對 " + nOk + " / " + q.blanks.length + " 格，得 " + pts + " 分。";
+      showResult(box, rbox, all, msg);
+      expandEx(box);
+    };
+    ctrl.appendChild(chk);
+  }
+  else if(q.type === "sentence"){
+    body.appendChild(el("p", "qstem", q.task));
+    var ta = el("textarea", "");
+    ta.placeholder = "請寫下你的句子";
+    body.appendChild(ta);
+    var chk = el("button", "btn btn-check", "檢查答案");
+    chk.onclick = function(){
+      speak(q.answer);
+      var v = ta.value.trim();
+      if(!v){
+        showInfo(rbox, "尚未寫下句子。可先參考下方解析，再作答計分。");
+        expandEx(box);
+        return;
+      }
+      var ok = hasAny(v, q.accept);
+      markResult(box, rbox, q, ok);
+      if(!ok){
+        rbox.innerHTML = "尚未完全符合參考答案。請先參考下方「解題線索／文法句型」，再自行判斷是否答對。";
+        var self = el("div", "qctrl");
+        var y = el("button", "btn btn-ok", "我寫對了");
+        var n = el("button", "btn btn-bad", "我寫錯了");
+        y.onclick = function(){ markResult(box, rbox, q, true); self.remove(); };
+        n.onclick = function(){ markResult(box, rbox, q, false); self.remove(); };
+        self.appendChild(y); self.appendChild(n);
+        rbox.appendChild(self);
+      }
+    };
+    ctrl.appendChild(chk);
+  }
+
+  box.appendChild(body);
+  box.appendChild(ctrl);
+  box.appendChild(rbox);
+  var ex = exPanel(q, false);
+  box.appendChild(ex);
+  return box;
+}
+
+function markResult(box, rbox, q, ok, ansText){
+  box.dataset.graded = "1";
+  var prev = results[q.id];
+  if(prev){ score -= prev.pts; }
+  results[q.id] = {ok: ok, pts: ok ? q.pts : 0};
+  score += ok ? q.pts : 0;
+  updateScore();
+  if(ok){
+    showResult(box, rbox, true, "答對了！得 " + q.pts + " 分。");
+  } else {
+    showResult(box, rbox, false, "答錯了。正確答案：" + (ansText || q.answer));
+  }
+  var chip = document.getElementById("chip-" + q.sec);
+  if(chip){
+    chip.textContent = q.secTitle + " " + sectionScore(q.sec) + "/" + sectionPoints(q.sec);
+  }
+  expandEx(box);
+}
+
+function expandEx(box){
+  var ex = box.querySelector(".ex");
+  var tg = box.querySelector(".toggle-ex");
+  if(ex && !ex.classList.contains("show")){ ex.classList.add("show"); }
+  if(tg){ tg.textContent = "收合詳解 ▴"; }
+}
+
+function sectionPoints(secId){
+  var s = DATA.sections.filter(function(x){return x.id===secId;})[0];
+  return s ? s.points : 0;
+}
+function sectionScore(secId){
+  var tot = 0;
+  Object.keys(results).forEach(function(k){
+    var r = results[k];
+    var q = questionById(k);
+    if(q && q.sec === secId) tot += r.pts;
+  });
+  return tot;
+}
+function questionById(qid){
+  var found = null;
+  DATA.sections.forEach(function(sec){
+    var list = [];
+    if(sec.type === "cloze"){ sec.passages.forEach(function(p){ list = list.concat(p.questions); }); }
+    else { list = sec.questions; }
+    list.forEach(function(q){ if(q.id === qid){ found = q; } });
+  });
+  return found;
+}
+
+function updateScore(){
+  document.getElementById("score").textContent = score;
+  var p = total ? Math.round(score / total * 100) : 0;
+  document.getElementById("pbar").style.width = p + "%";
+  DATA.sections.forEach(function(sec){
+    var s = document.getElementById("ss-" + sec.id);
+    if(s) s.textContent = sectionScore(sec.id);
+  });
+}
+
+function buildChips(){
+  var c = document.getElementById("secchips");
+  c.innerHTML = "";
+  DATA.sections.forEach(function(sec){
+    var ch = el("button", "chip", sec.title + " 0/" + sec.points);
+    ch.type = "button";
+    ch.id = "chip-" + sec.id;
+    ch.onclick = function(){
+      var el = document.getElementById(sec.id);
+      if(el) el.scrollIntoView({behavior: "smooth", block: "start"});
+    };
+    c.appendChild(ch);
+  });
+  updateChipActive();
+}
+
+function updateChipActive(){
+  var mark = null;
+  DATA.sections.forEach(function(sec){
+    var el = document.getElementById(sec.id);
+    var ch = document.getElementById("chip-" + sec.id);
+    if(!el || !ch) return;
+    var r = el.getBoundingClientRect();
+    if(r.top <= 170) mark = ch;
+  });
+  document.querySelectorAll("#secchips .chip").forEach(function(ch){
+    if(ch === mark) ch.classList.add("on");
+    else ch.classList.remove("on");
+  });
+}
+if(typeof window !== "undefined"){
+  window.addEventListener("scroll", updateChipActive, {passive: true});
+}
+
+function revealAll(){
+  document.querySelectorAll("#app .q").forEach(function(box){
+    var q = questionById(box.dataset.qid);
+    if(!q) return;
+    var ex = box.querySelector(".ex");
+    if(ex) ex.classList.add("show");
+    var ins = box.querySelectorAll("input[type=text],textarea");
+    if(q.type === "vocab"){
+      if(ins[0]) ins[0].value = q.word;
+    } else if(q.type === "word"){
+      if(ins[0]) ins[0].value = q.answer;
+    } else if(q.type === "fill"){
+      box.querySelectorAll("input[data-blank]").forEach(function(ip){
+        ip.value = q.blanks[+ip.dataset.blank].ans;
+      });
+    } else if(q.type === "sentence"){
+      if(ins[0]) ins[0].value = q.answer;
+    } else if(q.type === "choice" || q.type === "cloze"){
+      box.querySelectorAll(".opt").forEach(function(o, i){
+        if(i === q.ans) o.classList.add("correct");
+      });
+    }
+  });
+  var tgs = document.querySelectorAll(".toggle-ex");
+  tgs.forEach(function(t){ t.textContent = "收合詳解 ▴"; });
+}
+
+function resetAll(){
+  score = 0; results = {};
+  document.querySelectorAll("#app .q").forEach(function(box){
+    box.dataset.graded = "";
+    box.querySelectorAll("input[type=text],textarea").forEach(function(i){ i.value=""; i.style.borderColor=""; });
+    box.querySelectorAll(".opt").forEach(function(o){ o.className="opt"; });
+    var r = box.querySelector(".qresult");
+    if(r){ r.className="qresult"; r.innerHTML=""; }
+    var ex = box.querySelector(".ex");
+    if(ex) ex.classList.remove("show");
+  });
+  document.querySelectorAll(".toggle-ex").forEach(function(t){ t.textContent = "查看詳解 ▾"; });
+  updateScore();
+  buildChips();
+}
+
+document.getElementById("reset").onclick = resetAll;
+document.getElementById("revealAll").onclick = revealAll;
+renderApp();
+updateScore();
+</script>
+<script>
+/* lesson open/close gate (GitHub Pages 集中控管：讀取根目錄 config.json) */
+(function(){
+  var L = "L02";
+  var ov = document.createElement("div");
+  ov.id = "gate-lock";
+  ov.style.cssText = "position:fixed;inset:0;z-index:99999;background:#f4f6fb;display:none;align-items:center;justify-content:center;";
+  ov.innerHTML = "<div style='text-align:center;font-family:sans-serif;color:#334155;padding:24px'>"
+    + "<div style='font-size:52px'>🔒</div>"
+    + "<h1 style='font-size:22px;margin:10px 0 4px'>本單元尚未開放</h1>"
+    + "<p style='color:#64748b;margin:0 0 18px'>請等待老師開放後，再重新進入。</p>"
+    + "<a href='../index.html' style='display:inline-block;background:#3b5bdb;color:#fff;text-decoration:none;padding:10px 22px;border-radius:10px;font-weight:700'>返回課程總覽</a></div>";
+  document.body.appendChild(ov);
+  fetch("../config.json", {cache:"no-store"}).then(function(r){
+    if(!r.ok) return null;
+    return r.json();
+  }).then(function(cfg){
+    if(cfg && cfg.assessments && cfg.assessments[L] === false) ov.style.display = "flex";
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>

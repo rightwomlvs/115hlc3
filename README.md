@@ -8,33 +8,51 @@
   - `L01/L01-flashcards.html` — 字卡總覽（點入自動朗讀、KK 音標、Phonics Grid）
   - `L01/L01-SV-challenge.html` — S+V 句型挑戰（分節 Tab、Show Hint、課文動畫）
   - `L01/L01-quiz.html` — 隨堂測驗互動評量（作答、即時計分、四類詳解）
+  - `L01/L01-assessment.html` — 學習評量（字彙、綜合測驗、閱讀、填充、造句）
 - **L02 Colors Speak Louder than Words**
   - `L02/L02-flashcards.html` — 字卡總覽
   - `L02/L02-SV-challenge.html` — S+V 句型挑戰
   - `L02/L02-quiz.html` — 隨堂測驗互動評量
+  - `L02/L02-assessment.html` — 學習評量
 - **L03 The Necklace**
   - `L03/L03-flashcards.html` — 字卡總覽
   - `L03/L03-SV-challenge.html` — S+V 句型挑戰
   - `L03/L03-quiz.html` — 隨堂測驗互動評量
+  - `L03/L03-assessment.html` — 學習評量
 - **L04 Ask a Lawyer**
   - `L04/L04-flashcards.html` — 字卡總覽
   - `L04/L04-SV-challenge.html` — S+V 句型挑戰
   - `L04/L04-quiz.html` — 隨堂測驗互動評量
+  - `L04/L04-assessment.html` — 學習評量
 - **L05 The Sugar Trap**
   - `L05/L05-flashcards.html` — 字卡總覽
   - `L05/L05-SV-challenge.html` — S+V 句型挑戰
   - `L05/L05-quiz.html` — 隨堂測驗互動評量
+  - `L05/L05-assessment.html` — 學習評量
 - **L06 Getting Paid to Stay at Hotels**
   - `L06/L06-flashcards.html` — 字卡總覽
   - `L06/L06-SV-challenge.html` — S+V 句型挑戰
   - `L06/L06-quiz.html` — 隨堂測驗互動評量
+  - `L06/L06-assessment.html` — 學習評量
+
+## 複習卷
+
+- **R12 Lessons 1–2 Review**
+  - `R12/R12-assessment.html` — 複習評量（第 1～2 課）
+- **R34 Lessons 3–4 Review**
+  - `R34/R34-assessment.html` — 複習評量（第 3～4 課）
+- **R56 Lessons 5–6 Review**
+  - `R56/R56-assessment.html` — 複習評量（第 5～6 課）
+- **R16 Lessons 1–6 Review**
+  - `R16/R16-assessment.html` — 總複習評量（第 1～6 課）
 
 ## 課程開放／關閉管理（管理頁）
 
-網站提供 `admin.html` 管理頁（首頁頁尾「🔧 課程管理」進入），可控制各課「隨堂測驗」開放或關閉：
+網站提供 `admin.html` 管理頁（首頁頁尾「🔧 課程管理」進入），可分別控制各課「隨堂測驗」與「學習評量」的開放或關閉：
 
-- **關閉時**：首頁該課的「📝 隨堂測驗」按鈕隱藏，直接輸入測驗網址也會顯示「本單元尚未開放」；字卡與 S+V 挑戰維持開放。
-- **開放／關閉設定**：存於根目錄 `config.json`（`quizzes` 欄位，`true`＝開放）。首頁與測驗頁都會讀取此檔。
+- **關閉時**：首頁該課的「📝 隨堂測驗／📘 學習評量」按鈕隱藏，直接輸入網址也會顯示「本單元尚未開放」；字卡與 S+V 挑戰維持開放。
+- **開放／關閉設定**：存於根目錄 `config.json`（`quizzes` 與 `assessments` 兩欄位，`true`＝開放）。首頁與測驗／評量頁都會讀取此檔。
+- **複習卷**（R12/R34/R56/R16）僅有學習評量，於管理頁下方「複習卷」區塊個別開關。
 
 ### 第一次使用管理頁
 
