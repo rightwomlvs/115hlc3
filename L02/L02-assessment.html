@@ -40,6 +40,10 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:v
 .passage{margin:14px 18px 0;padding:14px 16px;background:#f8f9ff;border:1px solid #dbe1ff;border-radius:10px;font-size:15px}
 .passage .ptitle{font-weight:700;color:#3b5bdb;margin-bottom:6px}
 .bk{display:inline-block;background:#3b5bdb;color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:0 6px;margin:0 2px;vertical-align:middle}
+.bk-link{cursor:pointer;transition:.15s}
+.bk-link:hover{background:#0ca678;box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.q.jump-hl{animation:jumpflash 1.5s ease}
+@keyframes jumpflash{0%{background:#fff9db}55%{background:#fff9db}100%{background:transparent}}
 .sent{transition:background .3s,box-shadow .3s}
 .sent.hl{background:#fff3bf;border-radius:6px;box-shadow:0 0 0 3px #ffe066;scroll-margin-top:170px}
 .q{padding:16px 18px;border-bottom:1px dashed var(--line)}
@@ -320,6 +324,28 @@ function splitSents(text){
   return chunks;
 }
 
+function goToQuestion(card, no){
+  try{
+    var box = null;
+    [].forEach.call(card.querySelectorAll(".q"), function(b){
+      var qno = b.querySelector(".qno");
+      if(!qno) return;
+      var t = String(qno.textContent || qno._innerSet || "").replace(/\s+/g, "");
+      if(t === no + ".") box = b;
+    });
+    if(!box) return;
+    if(typeof box.scrollIntoView === "function") box.scrollIntoView({behavior:"smooth", block:"start"});
+    var ex = box.querySelector(".ex");
+    if(ex){
+      ex.classList.add("show");
+      var tg = box.querySelector(".toggle-ex");
+      if(tg) tg.textContent = "收合詳解 ▴";
+    }
+    box.classList.add("jump-hl");
+    if(typeof setTimeout !== "undefined") setTimeout(function(){ try{ box.classList.remove("jump-hl"); }catch(e){} }, 1600);
+  }catch(e){}
+}
+
 function highlightSentence(box, no){
   try{
     var card = box.parentElement || box.parent;
@@ -362,8 +388,16 @@ function renderApp(){
           var html = ch.replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; });
           return "<span class='sent'" + (no ? " data-no='" + no + "'" : "") + ">" + badgeClean(html) + "</span>";
         }).join(" ");
-        pass.appendChild(el("p", null, text));
+        var pEl = el("p", null, text);
+        pass.appendChild(pEl);
         card.appendChild(pass);
+        [].forEach.call(pEl.querySelectorAll(".bk"), function(bk){
+          var n = parseInt(String(bk.textContent || bk._innerSet || "").replace(/[^0-9]+/g, ""), 10);
+          if(!n) return;
+          bk.classList.add("bk-link");
+          bk.title = "跳到第 " + n + " 題解析";
+          bk.onclick = function(){ goToQuestion(card, n); };
+        });
         pg.questions.forEach(function(q){
           q.speakText = sentenceWithBlank(pg.text, q.no, q.options[q.ans]);
           q.refSent = refSentHTML(pg.text, q.no);
