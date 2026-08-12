@@ -40,6 +40,8 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:v
 .passage{margin:14px 18px 0;padding:14px 16px;background:#f8f9ff;border:1px solid #dbe1ff;border-radius:10px;font-size:15px}
 .passage .ptitle{font-weight:700;color:#3b5bdb;margin-bottom:6px}
 .bk{display:inline-block;background:#3b5bdb;color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:0 6px;margin:0 2px;vertical-align:middle}
+.sent{transition:background .3s,box-shadow .3s}
+.sent.hl{background:#fff3bf;border-radius:6px;box-shadow:0 0 0 3px #ffe066;scroll-margin-top:170px}
 .q{padding:16px 18px;border-bottom:1px dashed var(--line)}
 .q:last-child{border-bottom:none}
 .card{scroll-margin-top:170px}
@@ -213,6 +215,39 @@ function sentenceWithBlank(text, no, ans){
   return out.replace(/\s+/g, " ").replace(/^[\s.,;:!?]+/, "").trim();
 }
 
+function splitSents(text){
+  var t = String(text || "");
+  var chunks = [];
+  var re = /[^.!?]+(?:[.!?]+|$)/g;
+  var m;
+  while((m = re.exec(t))){
+    var c = m[0].trim();
+    var bare = c.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+    if(c && bare.trim()) chunks.push(c);
+  }
+  if(!chunks.length && t.trim()) chunks.push(t.trim());
+  return chunks;
+}
+
+function highlightSentence(box, no){
+  try{
+    var card = box.parentElement || box.parent;
+    if(!card) return;
+    var target = null;
+    [].forEach.call(card.querySelectorAll(".passage"), function(pa){
+      if(!target) target = pa.querySelector("span[data-no=" + no + "]");
+    });
+    if(!target) return;
+    [].forEach.call(card.querySelectorAll(".passage .sent"), function(s){ if(s.classList) s.classList.remove("hl"); });
+    target.classList.add("hl");
+    if(typeof target.scrollIntoView === "function") target.scrollIntoView({behavior:"smooth", block:"center"});
+    if(typeof requestAnimationFrame === "function"){
+      clearTimeout(target._hlTimer);
+      target._hlTimer = setTimeout(function(){ target.classList.remove("hl"); }, 3600);
+    }
+  }catch(e){}
+}
+
 /* ---------- rendering ---------- */
 function renderApp(){
   var app = document.getElementById("app");
@@ -231,7 +266,10 @@ function renderApp(){
         var pass = el("div", "passage");
         var pt = el("div", "ptitle", "閱讀測驗 " + pg.title);
         pass.appendChild(pt);
-        var text = pg.text.replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; });
+        var text = splitSents(pg.text).map(function(ch){
+          var no = (ch.match(/__(\d+)__/) || [])[1];
+          return "<span class='sent'" + (no ? " data-no='" + no + "'" : "") + ">" + ch.replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; }) + "</span>";
+        }).join(" ");
         pass.appendChild(el("p", null, text));
         card.appendChild(pass);
         pg.questions.forEach(function(q){
@@ -285,6 +323,7 @@ function renderQ(sec, q){
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
       speak(fullSentence(q));
+      if(q.type === "cloze") highlightSentence(box, q.no);
       if(selected < 0){
         showInfo(rbox, "尚未選擇答案。可先參考下方解析，再作答計分。");
         expandEx(box);
