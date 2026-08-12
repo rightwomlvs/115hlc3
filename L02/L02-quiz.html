@@ -188,10 +188,29 @@ function speak(text){
 }
 
 function fullSentence(q){
+  if(q.speakText) return q.speakText;
   if(q.en){
     return q.en.replace(/\(\((\d+)\)\)/g, function(m, n){ return (q.blanks[+n] || {}).ans || ""; });
   }
-  return String(q.stem || "").replace(/_{3,}/g, q.answer);
+  if(q.sent){
+    var s = String(q.sent).replace(/<span class='hint'>[^<]*<\/span>/g, q.answer || "");
+    return s.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  }
+  return String(q.stem || "").replace(/_{3,}/g, q.answer || (q.options ? q.options[q.ans] : "") || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function sentenceWithBlank(text, no, ans){
+  var t = String(text || "").replace(/<[^>]+>/g, " ");
+  var m = t.match(new RegExp("\\S[^.!?]*?__" + no + "__[^.!?]*(?:[.!?]|$)"));
+  if(!m) return "";
+  var parts = String(ans || "").split("\u2026");
+  var i = 0;
+  var out = m[0].replace(new RegExp("__" + no + "__", "g"), function(){
+    var v = parts.length > 1 ? (parts[i] || "") : (ans || "");
+    i++;
+    return v.trim();
+  });
+  return out.replace(/\s+/g, " ").replace(/^[\s.,;:!?]+/, "").trim();
 }
 
 /* ---------- rendering ---------- */
@@ -215,7 +234,10 @@ function renderApp(){
         var text = pg.text.replace(/__(\d+)__/g, function(m, n){ return "<span class='bk'>（" + n + "）</span>"; });
         pass.appendChild(el("p", null, text));
         card.appendChild(pass);
-        pg.questions.forEach(function(q){ card.appendChild(renderQ(sec, q)); });
+        pg.questions.forEach(function(q){
+          q.speakText = sentenceWithBlank(pg.text, q.no, q.options[q.ans]);
+          card.appendChild(renderQ(sec, q));
+        });
       });
     } else {
       sec.questions.forEach(function(q){ card.appendChild(renderQ(sec, q)); });
@@ -309,7 +331,7 @@ function renderQ(sec, q){
     body.appendChild(inp);
     var chk = el("button", "btn btn-check", "檢查答案");
     chk.onclick = function(){
-      speak(q.answer);
+      speak(fullSentence(q));
       var v = inp.value.trim();
       if(!v){
         showInfo(rbox, "尚未輸入答案。可先參考下方解析，作答後即可計分。");

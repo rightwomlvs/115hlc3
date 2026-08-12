@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-12T02:30:00.000Z",
+  "updated": "2026-08-12T03:30:00.000Z",
   "quizzes": {
     "L01": false,
     "L02": false,
@@ -14,6 +14,18 @@
     "L03": false,
     "L04": false,
     "L05": false,
+    "L06": true,
+    "R12": true,
+    "R34": true,
+    "R56": true,
+    "R16": true
+  },
+  "assessments_adv": {
+    "L01": true,
+    "L02": true,
+    "L03": true,
+    "L04": true,
+    "L05": true,
     "L06": true,
     "R12": true,
     "R34": true,
