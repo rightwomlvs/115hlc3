@@ -31,5 +31,8 @@
     "R34": false,
     "R56": false,
     "R16": false
+  },
+  "escapeRooms": {
+    "L01": false
   }
 }

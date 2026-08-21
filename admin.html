@@ -100,6 +100,7 @@ function loadConfig(){
       state.config.quizzes = state.config.quizzes || {};
       state.config.assessments = state.config.assessments || {};
       state.config.assessments_adv = state.config.assessments_adv || {};
+      state.config.escapeRooms = state.config.escapeRooms || {};
     } else {
       state.sha = null;
       var q = {}, a = {}, aa = {};
@@ -164,6 +165,28 @@ function renderToggles(){
     row.appendChild(name); row.appendChild(sws);
     box.appendChild(row);
   });
+    /* ── Escape Room 開放控管 ── */
+    var escDiv = document.createElement("div");
+    escDiv.className = "text-sm font-bold text-slate-600 pt-5 pb-1";
+    escDiv.textContent = "Escape Room（密室逃脫）";
+    box.appendChild(escDiv);
+    LESSONS.forEach(function(L){
+      var onEsc = !!(state.config.escapeRooms[L.id] !== false);
+      var row = document.createElement("div");
+      row.className = "flex flex-wrap items-center justify-between gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3";
+      var name = document.createElement("div");
+      name.innerHTML = "<div class='font-bold text-slate-700'>" + L.id + " ｜ " + L.en + "</div>"
+        + "<div class='text-xs text-slate-500'>Escape Room " + (onEsc ? "● 開放中" : "○ 已關閉") + "</div>";
+      var escLbl = document.createElement("div");
+      escLbl.className = "flex items-center gap-2 text-sm text-slate-600";
+      escLbl.innerHTML = "<span>🚨 Escape Room</span>";
+      escLbl.appendChild(makeSwitch(onEsc, function(){
+        state.config.escapeRooms[L.id] = !state.config.escapeRooms[L.id];
+        renderToggles();
+      }, L.id + " Escape Room"));
+      row.appendChild(name); row.appendChild(escLbl);
+      box.appendChild(row);
+    });
     var div = document.createElement("div");
     div.className = "text-sm font-bold text-slate-600 pt-5 pb-1";
     div.textContent = "複習卷（學習評量＋進階評量）";
@@ -204,17 +227,18 @@ function renderToggles(){
 }
 
 function saveConfig(){
-  var q = {}, a = {}, aa = {};
+  var q = {}, a = {}, aa = {}, esc = {};
   LESSONS.forEach(function(L){
     q[L.id] = state.config.quizzes[L.id] !== false;
     a[L.id] = state.config.assessments[L.id] !== false;
     aa[L.id] = state.config.assessments_adv[L.id] !== false;
+    esc[L.id] = state.config.escapeRooms[L.id] !== false;
   });
   REVIEWS.forEach(function(R){
     a[R.id] = state.config.assessments[R.id] !== false;
     aa[R.id] = state.config.assessments_adv[R.id] !== false;
   });
-  var cfg = {updated: new Date().toISOString(), quizzes: q, assessments: a, assessments_adv: aa};
+  var cfg = {updated: new Date().toISOString(), quizzes: q, assessments: a, assessments_adv: aa, escapeRooms: esc};
   var body = {message: "課程開放狀態更新（管理頁）", content: b64enc(JSON.stringify(cfg, null, 2))};
   if(state.sha) body.sha = state.sha;
   return fetch(API, {method: "PUT", headers: authHeaders({"Content-Type": "application/json"}), body: JSON.stringify(body)}).then(function(r){
