@@ -41,7 +41,7 @@
                 <a href="L01/L01-quiz.html" data-quiz-link="L01" class="inline-flex items-center gap-2 bg-violet-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-violet-700 transition">📝 隨堂測驗</a>
                 <a href="L01/L01-assessment.html" data-assess-link="L01" class="inline-flex items-center gap-2 bg-teal-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-teal-700 transition">📘 學習評量</a>
                 <a href="L01/L01-adv-assessment.html" data-adv-link="L01" class="inline-flex items-center gap-2 bg-fuchsia-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-fuchsia-700 transition">📗 進階評量</a>
-                <a href="https://rightwomlvs.github.io/whats-in-my-bob-escape/" data-escape-link="L01" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-red-700 transition">🚨 Escape Room</a>
+                <a href="https://rightwomlvs.github.io/whats-in-my-bob-escape/" data-escape-link="L01" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-red-700 transition">🚨 B.O.B Escape</a>
             </div>
         </section>
 
@@ -61,7 +61,7 @@
                 <a href="L02/L02-assessment.html" data-assess-link="L02" class="inline-flex items-center gap-2 bg-teal-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-teal-700 transition">📘 學習評量</a>
                 <a href="L02/L02-adv-assessment.html" data-adv-link="L02" class="inline-flex items-center gap-2 bg-fuchsia-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-fuchsia-700 transition">📗 進階評量</a>
             
-                <a href="https://rightwomlvs.github.io/l02-colors-escape/" data-escape-link="L02" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-red-700 transition">🎨 Escape Room</a>
+                <a href="https://rightwomlvs.github.io/l02-colors-escape/" data-escape-link="L02" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-red-700 transition">🎨 Colors Escape</a>
             </div>
         </section>
 
@@ -203,18 +203,19 @@
     lock(cfg.quizzes, '[data-quiz-link]', 'data-quiz-link', '隨堂測驗', 'bg-violet-600 hover:bg-violet-700');
     lock(cfg.assessments, '[data-assess-link]', 'data-assess-link', '學習評量', 'bg-teal-600 hover:bg-teal-700');
     lock(cfg.assessments_adv, '[data-adv-link]', 'data-adv-link', '進階評量', 'bg-fuchsia-600 hover:bg-fuchsia-700');
-    lock(cfg.escapeRooms, '[data-escape-link]', 'data-escape-link', 'Escape Room', 'bg-red-600 hover:bg-red-700');
+    lock(cfg.escapeRooms, '[data-escape-link]', 'data-escape-link', {L01:'B.O.B Escape', L02:'Colors Escape'}, 'bg-red-600 hover:bg-red-700');
     function lock(map, sel, attr, label, openCls){
       if(!map) return;
       document.querySelectorAll(sel).forEach(function(a){
         var L = a.getAttribute(attr);
         if(map[L] === false){
+          var lbl = (typeof label === 'object' && label) ? (label[L] || 'Escape Room') : label;
           a.removeAttribute('href');
           a.removeAttribute(attr);
           openCls.split(' ').forEach(function(c){ a.classList.remove(c); });
           a.classList.add('bg-slate-300', 'text-slate-500', 'cursor-not-allowed');
-          a.setAttribute('title', '本課' + label + '尚未開放');
-          a.innerHTML = '🔒 ' + label;
+          a.setAttribute('title', '本課' + (typeof label === 'string' ? label : 'Escape Room') + '尚未開放');
+          a.innerHTML = '🔒 ' + lbl;
         }
       });
     }
