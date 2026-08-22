@@ -92,6 +92,7 @@
                 <a href="L03/L03-quiz.html" data-quiz-link="L03" class="inline-flex items-center gap-2 bg-violet-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-violet-700 transition">📝 隨堂測驗</a>
                 <a href="L03/L03-assessment.html" data-assess-link="L03" class="inline-flex items-center gap-2 bg-teal-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-teal-700 transition">📘 學習評量</a>
                 <a href="L03/L03-adv-assessment.html" data-adv-link="L03" class="inline-flex items-center gap-2 bg-fuchsia-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-fuchsia-700 transition">📗 進階評量</a>
+                <a href="https://rightwomlvs.github.io/l03-necklace-escape/" data-escape-link="L03" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-5 py-3 rounded-xl hover:bg-red-700 transition">💎 Necklace Escape</a>
             </div>
         </section>
 
@@ -203,7 +204,7 @@
     lock(cfg.quizzes, '[data-quiz-link]', 'data-quiz-link', '隨堂測驗', 'bg-violet-600 hover:bg-violet-700');
     lock(cfg.assessments, '[data-assess-link]', 'data-assess-link', '學習評量', 'bg-teal-600 hover:bg-teal-700');
     lock(cfg.assessments_adv, '[data-adv-link]', 'data-adv-link', '進階評量', 'bg-fuchsia-600 hover:bg-fuchsia-700');
-    lock(cfg.escapeRooms, '[data-escape-link]', 'data-escape-link', {L01:'B.O.B. Escape', L02:'Colors Escape'}, 'bg-red-600 hover:bg-red-700');
+    lock(cfg.escapeRooms, '[data-escape-link]', 'data-escape-link', {L01:'B.O.B. Escape', L02:'Colors Escape', L03:'Necklace Escape'}, 'bg-red-600 hover:bg-red-700');
     function lock(map, sel, attr, label, openCls){
       if(!map) return;
       document.querySelectorAll(sel).forEach(function(a){
