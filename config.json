@@ -33,6 +33,7 @@
     "R16": false
   },
   "escapeRooms": {
-    "L01": false
+    "L01": false,
+    "L02": false
   }
 }
