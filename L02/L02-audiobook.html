@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>有聲書</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;color:#fff;overflow:hidden;gap:.75rem;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#startup{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:100;overflow:hidden}
+#startup-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(12px) brightness(.35);transform:scale(1.08);z-index:0}
+.modal{position:relative;z-index:1;background:rgba(20,15,40,.82);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:2.5rem 3rem;text-align:center;max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.7)}
+.modal h2{font-size:1.7rem;margin-bottom:.4rem;letter-spacing:.02em}
+.modal-sub{color:#c4b5fd;font-size:.88rem;margin-bottom:.3rem;font-weight:600}
+.modal p{color:#a0a0c0;font-size:.88rem;margin-bottom:1.8rem}
+.modal-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.modal-btn{padding:.75rem 1.8rem;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.modal-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.btn-auto{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff}
+.btn-manual{background:#374151;color:#e5e7eb}
+#scene{position:relative;width:var(--scene-w,min(96vw,700px));height:var(--scene-h,min(72vh,525px));max-width:100%;max-height:100%;perspective:1200px;display:none;border-radius:10px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.6);transition:width .3s,height .3s,border-radius .3s;touch-action:manipulation}
+.page{position:absolute;inset:0;background:#000;backface-visibility:hidden}
+.page img{width:100%;height:100%;object-fit:contain}
+.page-cur{z-index:2}
+.page-next{z-index:1}
+.flip-fwd .page-cur{animation:flipOut .5s ease-in-out forwards}
+.flip-fwd .page-next{animation:flipIn .5s ease-in-out forwards}
+.flip-back .page-cur{animation:flipOutR .5s ease-in-out forwards}
+.flip-back .page-next{animation:flipInR .5s ease-in-out forwards}
+@keyframes flipOut{0%{transform:rotateY(0)}100%{transform:rotateY(-90deg);opacity:0}}
+@keyframes flipIn{0%{transform:rotateY(90deg);opacity:0}100%{transform:rotateY(0)}}
+@keyframes flipOutR{0%{transform:rotateY(0)}100%{transform:rotateY(90deg);opacity:0}}
+@keyframes flipInR{0%{transform:rotateY(-90deg);opacity:0}100%{transform:rotateY(0)}}
+#bar{display:none;width:var(--scene-w,min(96vw,700px));flex-direction:column;gap:.5rem;transition:width .3s;padding:.5rem .25rem 0}
+.prog-track{width:100%;height:6px;background:#333;border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#a855f7);border-radius:3px;width:0%;transition:width .4s}
+.ctrl-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.ctrl-btn{background:none;border:1px solid #444;color:#ccc;font-size:1rem;cursor:pointer;padding:.3rem .7rem;border-radius:6px;transition:color .2s,background .2s,border-color .2s}
+.ctrl-btn:hover{color:#fff;background:#333;border-color:#666}
+.page-info{flex:1;text-align:center;font-size:.85rem;color:#aaa}
+.ctrl-btn[disabled]{opacity:.45;cursor:not-allowed}
+input[type=range]{accent-color:#a855f7;width:72px}
+#credit{position:fixed;bottom:10px;right:12px;font-size:.7rem;color:rgba(255,255,255,.4);background:rgba(0,0,0,.3);padding:.2rem .55rem;border-radius:4px;z-index:300;line-height:1.6}
+#credit a{color:rgba(255,255,255,.55);text-decoration:none}
+#credit a:hover{color:#fff}
+html.is-fullscreen,body.is-fullscreen{background:#000}
+html.is-fullscreen body,:fullscreen body,:-webkit-full-screen body{background:#000;justify-content:center}
+html.is-fullscreen #scene,:fullscreen #scene,:-webkit-full-screen #scene{border-radius:0}
+html.is-fullscreen #bar,:fullscreen #bar,:-webkit-full-screen #bar{padding:0 .5rem}
+</style>
+</head>
+<body>
+<div id="startup">
+  <img id="startup-bg" src="" alt="">
+  <div class="modal">
+    <h2>📖 <span id="book-title-h"></span></h2>
+    <div class="modal-sub" id="book-page-count"></div>
+    <p>請選擇播放方式</p>
+    <div class="modal-btns">
+      <button class="modal-btn btn-auto" onclick="selMode('auto')">▶ 自動播放</button>
+      <button class="modal-btn btn-manual" onclick="selMode('manual')">手動翻頁</button>
+    </div>
+  </div>
+</div>
+<div id="scene">
+  <div class="page page-next"><img id="img-next" src="" alt=""></div>
+  <div class="page page-cur"><img id="img-cur" src="" alt=""></div>
+</div>
+<div id="bar">
+  <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+  <div class="ctrl-row">
+    <button class="ctrl-btn" onclick="nav(-1)" title="上一頁">上一頁</button>
+    <button class="ctrl-btn" onclick="nav(1)"  title="下一頁">下一頁</button>
+    <button class="ctrl-btn" id="btn-play" onclick="toggleAuto()" title="開始或停止自動播放">開始自動</button>
+    <button class="ctrl-btn" id="btn-audio" onclick="toggleCurrentAudio()" title="播放或暫停聲音">播放聲音</button>
+    <button class="ctrl-btn" onclick="backToStartup()" title="回到播放方式選擇">回到選擇</button>
+    <span class="page-info" id="page-info">1 / 1</span>
+    <input type="range" id="vol" min="0" max="1" step="0.05" value="1" oninput="setVol(this.value)" title="音量">
+    <button class="ctrl-btn" onclick="toggleFS()" title="全螢幕">全螢幕</button>
+  </div>
+</div>
+<div id="credit">Made by <a href="https://kentxchang.blogspot.tw" target="_blank" rel="noopener">阿剛老師</a></div>
+<script>
+const bd = {"mode":"pair","audioDelay":0.5,"title":"260823 HLC B3L2 audiobook","pages":[{"img":"audiobook-assets/img01.jpg","audio":"audiobook-assets/aud01.wav","duration":8.050958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img02.jpg","audio":"audiobook-assets/aud02.wav","duration":7.450958333333333,"width":2752,"height":1536},{"img":"audiobook-assets/img03.jpg","audio":"audiobook-assets/aud03.wav","duration":7.250958333333333,"width":2752,"height":1536},{"img":"audiobook-assets/img04.jpg","audio":"audiobook-assets/aud04.wav","duration":5.770958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img05.jpg","audio":"audiobook-assets/aud05.wav","duration":7.890958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img06.jpg","audio":"audiobook-assets/aud06.wav","duration":7.810958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img07.jpg","audio":"audiobook-assets/aud07.wav","duration":6.930958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img08.jpg","audio":"audiobook-assets/aud08.wav","duration":8.370958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img09.jpg","audio":"audiobook-assets/aud09.wav","duration":8.050958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img10.jpg","audio":"audiobook-assets/aud10.wav","duration":6.970958333333333,"width":2752,"height":1536},{"img":"audiobook-assets/img11.jpg","audio":"audiobook-assets/aud11.wav","duration":8.730958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img12.jpg","audio":"audiobook-assets/aud12.wav","duration":6.330958333333333,"width":2752,"height":1536},{"img":"audiobook-assets/img13.jpg","audio":"audiobook-assets/aud13.wav","duration":9.370958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img14.jpg","audio":"audiobook-assets/aud14.wav","duration":5.890958333333334,"width":2752,"height":1536},{"img":"audiobook-assets/img15.jpg","audio":"audiobook-assets/aud15.wav","duration":6.290958333333333,"width":2752,"height":1536}],"bgmTracks":[]};
+let cur = 0, autoPlay = false, timer = null, flipping = false;
+const scene    = document.getElementById('scene');
+const bar      = document.getElementById('bar');
+const imgCur   = document.getElementById('img-cur');
+const imgNext  = document.getElementById('img-next');
+const progFill = document.getElementById('prog-fill');
+const pageInfo = document.getElementById('page-info');
+const btnPlay  = document.getElementById('btn-play');
+const rootEl   = document.documentElement;
+const btnAudio = document.getElementById('btn-audio');
+let playMode = null;
+
+// Init startup screen
+const title = bd.title || '有聲書';
+document.title = title;
+document.getElementById('book-title-h').textContent = title;
+document.getElementById('book-page-count').textContent = bd.pages.length + ' 頁';
+if (bd.pages.length) document.getElementById('startup-bg').src = bd.pages[0].img;
+
+let pairAudio = null;
+if (bd.mode === 'pair') { pairAudio = new Audio(); pairAudio.volume = 1; }
+
+let bgmAudios = [];
+if (bd.mode === 'bgm' && bd.bgmTracks && bd.bgmTracks.length) {
+  bgmAudios = bd.bgmTracks.map(t => { const a = new Audio(t.audio); a.volume = 1; return a; });
+}
+let bgmIdx = 0, bgmRep = 0;
+function playBgmFrom(idx, rep) {
+  bgmIdx = idx; bgmRep = rep;
+  if (idx >= bgmAudios.length) return;
+  const a = bgmAudios[idx];
+  a.currentTime = 0;
+  a.play().catch(()=>{});
+  a.onended = () => {
+    const reps = bd.bgmTracks[idx].repeat || 1;
+    if (rep + 1 < reps) playBgmFrom(idx, rep + 1);
+    else playBgmFrom(idx + 1, 0);
+  };
+}
+
+function selMode(mode) {
+  playMode = mode;
+  autoPlay = mode === 'auto';
+  document.getElementById('startup').style.display = 'none';
+  scene.style.display = 'block';
+  bar.style.display   = 'flex';
+  showPage(0);
+  updatePlayButtons();
+  if (mode === 'auto') {
+    schedNext();
+    startAudioForCurrentPage();
+  }
+}
+
+function backToStartup() {
+  clearTimer();
+  autoPlay = false;
+  playMode = null;
+  stopAllAudio();
+  document.getElementById('startup').style.display = 'flex';
+  scene.style.display = 'none';
+  bar.style.display   = 'none';
+  updatePlayButtons();
+}
+
+function showPage(idx) {
+  cur = Math.max(0, Math.min(bd.pages.length - 1, idx));
+  imgCur.src  = bd.pages[cur].img;
+  const nxt   = Math.min(cur + 1, bd.pages.length - 1);
+  imgNext.src = bd.pages[nxt].img;
+  pageInfo.textContent = (cur + 1) + ' / ' + bd.pages.length;
+  progFill.style.width = ((cur + 1) / bd.pages.length * 100) + '%';
+  fitScene();
+}
+
+function nav(dir) {
+  if (flipping) return;
+  const nxt = cur + dir;
+  if (nxt < 0 || nxt >= bd.pages.length) return;
+  clearTimer();
+  doFlip(nxt, dir > 0);
+}
+
+function doFlip(nxt, forward) {
+  flipping = true;
+  imgNext.src = bd.pages[nxt].img;
+  scene.classList.add(forward ? 'flip-fwd' : 'flip-back');
+  setTimeout(() => {
+    scene.classList.remove('flip-fwd', 'flip-back');
+    cur = nxt;
+    imgCur.src = bd.pages[cur].img;
+    imgNext.src = bd.pages[Math.min(cur + 1, bd.pages.length - 1)].img;
+    pageInfo.textContent = (cur + 1) + ' / ' + bd.pages.length;
+    progFill.style.width = ((cur + 1) / bd.pages.length * 100) + '%';
+    flipping = false;
+    if (playMode === 'auto') startAudioForCurrentPage();
+    else if (bd.mode === 'pair' && pairAudio) {
+      pairAudio.pause();
+      pairAudio.currentTime = 0;
+    }
+    if (autoPlay) {
+      if (cur < bd.pages.length - 1) schedNext();
+      else { autoPlay = false; updatePlayButtons(); }
+    }
+    updatePlayButtons();
+  }, 520);
+}
+
+function playPageAudio(idx) {
+  if (!pairAudio || !bd.pages[idx].audio) return;
+  pairAudio.pause();
+  pairAudio.currentTime = 0;
+  pairAudio.src = bd.pages[idx].audio;
+  setTimeout(() => pairAudio.play().catch(()=>{}), (bd.audioDelay || 0) * 1000);
+}
+
+function stopAllAudio() {
+  if (pairAudio) {
+    pairAudio.pause();
+    pairAudio.currentTime = 0;
+  }
+  bgmAudios.forEach(a => {
+    a.pause();
+    a.currentTime = 0;
+  });
+}
+
+function startAudioForCurrentPage() {
+  if (bd.mode === 'pair') {
+    playPageAudio(cur);
+    return;
+  }
+  if (bd.mode === 'bgm' && bgmAudios.length) {
+    const bgm = bgmAudios[bgmIdx];
+    if (!bgm) return;
+    if (bgm.paused) {
+      if (bgm.currentTime === 0) playBgmFrom(bgmIdx, bgmRep);
+      else bgm.play().catch(()=>{});
+    }
+  }
+}
+
+function pageRatio() {
+  const page = bd.pages[cur] || bd.pages[0] || {};
+  const w = Number(page.width) || 4;
+  const h = Number(page.height) || 3;
+  return w / h;
+}
+
+function fitScene() {
+  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || rootEl.classList.contains('is-fullscreen'));
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const ratio = pageRatio();
+  const sidePad = isFs ? 0 : 24;
+  const topPad = isFs ? 8 : 48;
+  const bottomPad = isFs ? 72 : 138;
+  const maxW = Math.max(160, vw - sidePad);
+  const maxH = Math.max(120, vh - topPad - bottomPad);
+  let w = maxW;
+  let h = w / ratio;
+  if (h > maxH) {
+    h = maxH;
+    w = h * ratio;
+  }
+  rootEl.style.setProperty('--scene-w', Math.floor(w) + 'px');
+  rootEl.style.setProperty('--scene-h', Math.floor(h) + 'px');
+}
+
+function schedNext() {
+  if (!autoPlay) return;
+  const dur = bd.mode === 'pair'
+    ? ((bd.pages[cur].duration || 3) + (bd.audioDelay || 0))
+    : (bd.perPageDuration || 5);
+  clearTimer();
+  timer = setTimeout(() => { if (autoPlay && cur + 1 < bd.pages.length) doFlip(cur + 1, true); }, dur * 1000);
+}
+
+function clearTimer() { if (timer) { clearTimeout(timer); timer = null; } }
+
+function toggleAuto() {
+  autoPlay = !autoPlay;
+  playMode = autoPlay ? 'auto' : 'manual';
+  if (autoPlay) { schedNext(); startAudioForCurrentPage(); }
+  else {
+    clearTimer();
+    stopAllAudio();
+  }
+  updatePlayButtons();
+}
+
+function isCurrentAudioPlaying() {
+  if (bd.mode === 'pair') return !!(pairAudio && !pairAudio.paused);
+  const bgm = bgmAudios[bgmIdx];
+  return !!(bgm && !bgm.paused);
+}
+
+function updatePlayButtons() {
+  btnPlay.textContent = autoPlay ? '停止自動' : '開始自動';
+  const hasPairAudio = !!(bd.mode === 'pair' && bd.pages[cur] && bd.pages[cur].audio);
+  const hasBgmAudio = !!(bd.mode === 'bgm' && bgmAudios.length);
+  const hasAudio = hasPairAudio || hasBgmAudio;
+  btnAudio.disabled = !hasAudio;
+  btnAudio.textContent = hasAudio && isCurrentAudioPlaying() ? '暫停聲音' : '播放聲音';
+}
+
+function setVol(v) {
+  const vol = parseFloat(v);
+  if (pairAudio) pairAudio.volume = vol;
+  bgmAudios.forEach(a => a.volume = vol);
+}
+
+function toggleFS() {
+  const doc = document;
+  const entering = !(doc.fullscreenElement || doc.webkitFullscreenElement || rootEl.classList.contains('is-fullscreen'));
+  if (entering) {
+    if (rootEl.requestFullscreen) {
+      const req = rootEl.requestFullscreen();
+      if (req && req.catch) req.catch(() => rootEl.classList.add('is-fullscreen'));
+    }
+    else if (rootEl.webkitRequestFullscreen) rootEl.webkitRequestFullscreen();
+    else rootEl.classList.add('is-fullscreen');
+  } else if (doc.fullscreenElement || doc.webkitFullscreenElement) {
+    if (doc.exitFullscreen) doc.exitFullscreen();
+    else if (doc.webkitExitFullscreen) doc.webkitExitFullscreen();
+  } else {
+    rootEl.classList.remove('is-fullscreen');
+  }
+  setTimeout(fitScene, 60);
+}
+
+function toggleCurrentAudio() {
+  if (pairAudio && bd.mode === 'pair' && bd.pages[cur] && bd.pages[cur].audio) {
+    if (pairAudio.src !== bd.pages[cur].audio) pairAudio.src = bd.pages[cur].audio;
+    if (pairAudio.paused) pairAudio.play().catch(()=>{});
+    else pairAudio.pause();
+    updatePlayButtons();
+    return;
+  }
+  const bgm = bgmAudios[bgmIdx];
+  if (!bgm) return;
+  if (bgm.paused) {
+    if (bgm.currentTime === 0) playBgmFrom(bgmIdx, bgmRep);
+    else bgm.play().catch(()=>{});
+  } else bgm.pause();
+  updatePlayButtons();
+}
+
+let tx0 = 0, ty0 = 0, tStart = 0;
+scene.addEventListener('touchstart', e => {
+  tx0 = e.touches[0].clientX;
+  ty0 = e.touches[0].clientY;
+  tStart = Date.now();
+}, { passive: true });
+scene.addEventListener('touchend',   e => {
+  const touch = e.changedTouches[0];
+  const dx = touch.clientX - tx0;
+  const dy = touch.clientY - ty0;
+  const dt = Date.now() - tStart;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) nav(dx < 0 ? 1 : -1);
+  else if (Math.abs(dx) < 12 && Math.abs(dy) < 12 && dt < 350) toggleCurrentAudio();
+}, { passive: true });
+
+window.addEventListener('resize', fitScene);
+window.addEventListener('orientationchange', () => setTimeout(fitScene, 120));
+document.addEventListener('fullscreenchange', fitScene);
+document.addEventListener('webkitfullscreenchange', fitScene);
+
+if (pairAudio) {
+  pairAudio.addEventListener('play', updatePlayButtons);
+  pairAudio.addEventListener('pause', updatePlayButtons);
+  pairAudio.addEventListener('ended', updatePlayButtons);
+}
+bgmAudios.forEach(a => {
+  a.addEventListener('play', updatePlayButtons);
+  a.addEventListener('pause', updatePlayButtons);
+  a.addEventListener('ended', updatePlayButtons);
+});
+
+if (bd.pages.length) {
+  showPage(0);
+  fitScene();
+  updatePlayButtons();
+}
+</script>
+</body>
+</html>
