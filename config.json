@@ -34,6 +34,8 @@
   },
   "escapeRooms": {
     "L01": false,
-    "L02": false
+    "L02": false,
+    "L03": false,
+    "L04": false
   }
 }
