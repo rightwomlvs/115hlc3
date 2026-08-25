@@ -104,6 +104,141 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .ep-supp-btn:hover{background:rgba(99,102,241,0.25);color:#c7d2fe}
 .ep-supp-btn.active{background:rgba(99,102,241,0.3);color:#e0e7ff}
 .supp-icon{font-size:16px}
+
+/* ── Example panels ── */
+.example-tab-btn { position: absolute; bottom: 24px; right: 24px; z-index: 10; background: linear-gradient(145deg, #3b82f6, #2563eb); color: #fff; border: none; border-radius: 50px; padding: 12px 24px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(37,99,235,0.35); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: inherit; }
+.example-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.45); }
+.example-tab-btn:active { transform: translateY(0); }
+.example-tab-btn.active { background: linear-gradient(145deg, #64748b, #475569); }
+.example-panel { position: fixed; inset: 0; z-index: 100; background: rgba(15,23,42,0.88); backdrop-filter: blur(12px); display: none; flex-direction: column; }
+.example-panel.visible { display: flex; }
+.ep-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px 12px; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-title { color: #f1f5f9; font-size: 22px; font-weight: 600; }
+.ep-close { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: inherit; }
+.ep-close:hover { background: rgba(239,68,68,0.3); color: #fca5a5; }
+.ep-body { flex: 1; overflow-y: auto; padding: 20px 40px 40px; }
+.ep-subtitle { color: #94a3b8; font-size: 15px; padding: 10px 32px 0; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-ex { background: rgba(30,41,59,0.7); border: 1px solid rgba(71,85,105,0.5); border-radius: 16px; padding: 20px 24px 16px; margin-bottom: 12px; position: relative; }
+.ep-ex-en { font-size: 30px; line-height: 1.6; color: #f1f5f9; font-weight: 500; }
+.ep-ex-zh { font-size: 22px; color: #94a3b8; margin-top: 8px; line-height: 1.6; }
+.ep-ex-en .col { border-bottom: 2px solid #facc15; padding-bottom: 1px; }
+.ep-ex-en .tgt { color: #ef4444; font-weight: 700; }
+.ep-ex-en .hl { background: rgba(250,204,21,0.3); border-radius: 4px; padding: 0 4px; }
+.ep-ex-zh .hl { color: #fde68a; }
+.ep-speak { position: absolute; top: 14px; right: 14px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s ease; opacity: 0.7; }
+.ep-speak:hover { background: rgba(59,130,246,0.3); color: #bfdbfe; opacity: 1; transform: scale(1.1); }
+.ep-speak:active { transform: scale(0.9); }
+/* ── Supplement ── */
+.supp-view{flex:1;overflow-y:auto;padding:12px 32px 32px}
+.supp-title{font-size:20px;font-weight:700;color:#e0e7ff;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #334155}
+.supp-deriv-header{font-size:18px;font-weight:700;color:#a5b4fc;margin-top:16px;margin-bottom:8px;padding:8px 12px;background:rgba(99,102,241,0.1);border-radius:8px;border-left:3px solid #6366f1}
+.supp-ex{background:rgba(30,41,59,0.5);border:1px solid rgba(71,85,105,0.4);border-radius:12px;padding:14px 18px 12px;margin-bottom:8px;position:relative}
+.supp-ex-en{font-size:18px;line-height:1.6;color:#e2e8f0}
+.supp-ex-zh{font-size:15px;color:#94a3b8;margin-top:4px;line-height:1.5}
+.supp-ex-en .col{border-bottom:2px solid #facc15;padding-bottom:1px}
+.supp-ex-en .tgt{color:#ef4444;font-weight:700}
+.supp-ex-en .hl{background:rgba(250,204,21,0.3);border-radius:4px;padding:0 4px}
+.supp-ex-zh .hl{color:#fde68a}
+.supp-speak{background:rgba(139,92,246,0.15)!important;border-color:rgba(139,92,246,0.3)!important;color:#c4b5fd!important}
+.supp-speak:hover{background:rgba(139,92,246,0.3)!important;color:#ddd6fe!important}
+.supp-notes{margin-top:16px;padding-top:12px;border-top:1px solid #334155}
+.supp-notes-header{font-size:16px;font-weight:700;color:#94a3b8;margin-bottom:8px}
+.supp-note{font-size:15px;color:#cbd5e1;line-height:1.6;padding:4px 0}
+.supp-note-label{display:inline-block;font-size:12px;font-weight:700;color:#6366f1;background:rgba(99,102,241,0.15);padding:2px 8px;border-radius:4px;margin-right:6px}
+.ep-supp-btn{background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;gap:6px;font-family:inherit}
+.ep-supp-btn:hover{background:rgba(99,102,241,0.25);color:#c7d2fe}
+.ep-supp-btn.active{background:rgba(99,102,241,0.3);color:#e0e7ff}
+.supp-icon{font-size:16px}
+
+/* ── Example panels ── */
+.example-tab-btn { position: absolute; bottom: 24px; right: 24px; z-index: 10; background: linear-gradient(145deg, #3b82f6, #2563eb); color: #fff; border: none; border-radius: 50px; padding: 12px 24px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(37,99,235,0.35); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: inherit; }
+.example-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.45); }
+.example-tab-btn:active { transform: translateY(0); }
+.example-tab-btn.active { background: linear-gradient(145deg, #64748b, #475569); }
+.example-panel { position: fixed; inset: 0; z-index: 100; background: rgba(15,23,42,0.88); backdrop-filter: blur(12px); display: none; flex-direction: column; }
+.example-panel.visible { display: flex; }
+.ep-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px 12px; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-title { color: #f1f5f9; font-size: 22px; font-weight: 600; }
+.ep-close { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: inherit; }
+.ep-close:hover { background: rgba(239,68,68,0.3); color: #fca5a5; }
+.ep-body { flex: 1; overflow-y: auto; padding: 20px 40px 40px; }
+.ep-subtitle { color: #94a3b8; font-size: 15px; padding: 10px 32px 0; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-ex { background: rgba(30,41,59,0.7); border: 1px solid rgba(71,85,105,0.5); border-radius: 16px; padding: 20px 24px 16px; margin-bottom: 12px; position: relative; }
+.ep-ex-en { font-size: 30px; line-height: 1.6; color: #f1f5f9; font-weight: 500; }
+.ep-ex-zh { font-size: 22px; color: #94a3b8; margin-top: 8px; line-height: 1.6; }
+.ep-ex-en .col { border-bottom: 2px solid #facc15; padding-bottom: 1px; }
+.ep-ex-en .tgt { color: #ef4444; font-weight: 700; }
+.ep-ex-en .hl { background: rgba(250,204,21,0.3); border-radius: 4px; padding: 0 4px; }
+.ep-ex-zh .hl { color: #fde68a; }
+.ep-speak { position: absolute; top: 14px; right: 14px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s ease; opacity: 0.7; }
+.ep-speak:hover { background: rgba(59,130,246,0.3); color: #bfdbfe; opacity: 1; transform: scale(1.1); }
+.ep-speak:active { transform: scale(0.9); }
+/* ── Supplement ── */
+.supp-view{flex:1;overflow-y:auto;padding:12px 32px 32px}
+.supp-title{font-size:20px;font-weight:700;color:#e0e7ff;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #334155}
+.supp-deriv-header{font-size:18px;font-weight:700;color:#a5b4fc;margin-top:16px;margin-bottom:8px;padding:8px 12px;background:rgba(99,102,241,0.1);border-radius:8px;border-left:3px solid #6366f1}
+.supp-ex{background:rgba(30,41,59,0.5);border:1px solid rgba(71,85,105,0.4);border-radius:12px;padding:14px 18px 12px;margin-bottom:8px;position:relative}
+.supp-ex-en{font-size:18px;line-height:1.6;color:#e2e8f0}
+.supp-ex-zh{font-size:15px;color:#94a3b8;margin-top:4px;line-height:1.5}
+.supp-ex-en .col{border-bottom:2px solid #facc15;padding-bottom:1px}
+.supp-ex-en .tgt{color:#ef4444;font-weight:700}
+.supp-ex-en .hl{background:rgba(250,204,21,0.3);border-radius:4px;padding:0 4px}
+.supp-ex-zh .hl{color:#fde68a}
+.supp-speak{background:rgba(139,92,246,0.15)!important;border-color:rgba(139,92,246,0.3)!important;color:#c4b5fd!important}
+.supp-speak:hover{background:rgba(139,92,246,0.3)!important;color:#ddd6fe!important}
+.supp-notes{margin-top:16px;padding-top:12px;border-top:1px solid #334155}
+.supp-notes-header{font-size:16px;font-weight:700;color:#94a3b8;margin-bottom:8px}
+.supp-note{font-size:15px;color:#cbd5e1;line-height:1.6;padding:4px 0}
+.supp-note-label{display:inline-block;font-size:12px;font-weight:700;color:#6366f1;background:rgba(99,102,241,0.15);padding:2px 8px;border-radius:4px;margin-right:6px}
+.ep-supp-btn{background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;gap:6px;font-family:inherit}
+.ep-supp-btn:hover{background:rgba(99,102,241,0.25);color:#c7d2fe}
+.ep-supp-btn.active{background:rgba(99,102,241,0.3);color:#e0e7ff}
+.supp-icon{font-size:16px}
+
+/* ── Example panels ── */
+.example-tab-btn { position: absolute; bottom: 24px; right: 24px; z-index: 10; background: linear-gradient(145deg, #3b82f6, #2563eb); color: #fff; border: none; border-radius: 50px; padding: 12px 24px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(37,99,235,0.35); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: inherit; }
+.example-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.45); }
+.example-tab-btn:active { transform: translateY(0); }
+.example-tab-btn.active { background: linear-gradient(145deg, #64748b, #475569); }
+.example-panel { position: fixed; inset: 0; z-index: 100; background: rgba(15,23,42,0.88); backdrop-filter: blur(12px); display: none; flex-direction: column; }
+.example-panel.visible { display: flex; }
+.ep-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px 12px; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-title { color: #f1f5f9; font-size: 22px; font-weight: 600; }
+.ep-close { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: inherit; }
+.ep-close:hover { background: rgba(239,68,68,0.3); color: #fca5a5; }
+.ep-body { flex: 1; overflow-y: auto; padding: 20px 40px 40px; }
+.ep-subtitle { color: #94a3b8; font-size: 15px; padding: 10px 32px 0; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-ex { background: rgba(30,41,59,0.7); border: 1px solid rgba(71,85,105,0.5); border-radius: 16px; padding: 20px 24px 16px; margin-bottom: 12px; position: relative; }
+.ep-ex-en { font-size: 30px; line-height: 1.6; color: #f1f5f9; font-weight: 500; }
+.ep-ex-zh { font-size: 22px; color: #94a3b8; margin-top: 8px; line-height: 1.6; }
+.ep-ex-en .col { border-bottom: 2px solid #facc15; padding-bottom: 1px; }
+.ep-ex-en .tgt { color: #ef4444; font-weight: 700; }
+.ep-ex-en .hl { background: rgba(250,204,21,0.3); border-radius: 4px; padding: 0 4px; }
+.ep-ex-zh .hl { color: #fde68a; }
+.ep-speak { position: absolute; top: 14px; right: 14px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s ease; opacity: 0.7; }
+.ep-speak:hover { background: rgba(59,130,246,0.3); color: #bfdbfe; opacity: 1; transform: scale(1.1); }
+.ep-speak:active { transform: scale(0.9); }
+/* ── Supplement ── */
+.supp-view{flex:1;overflow-y:auto;padding:12px 32px 32px}
+.supp-title{font-size:20px;font-weight:700;color:#e0e7ff;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #334155}
+.supp-deriv-header{font-size:18px;font-weight:700;color:#a5b4fc;margin-top:16px;margin-bottom:8px;padding:8px 12px;background:rgba(99,102,241,0.1);border-radius:8px;border-left:3px solid #6366f1}
+.supp-ex{background:rgba(30,41,59,0.5);border:1px solid rgba(71,85,105,0.4);border-radius:12px;padding:14px 18px 12px;margin-bottom:8px;position:relative}
+.supp-ex-en{font-size:18px;line-height:1.6;color:#e2e8f0}
+.supp-ex-zh{font-size:15px;color:#94a3b8;margin-top:4px;line-height:1.5}
+.supp-ex-en .col{border-bottom:2px solid #facc15;padding-bottom:1px}
+.supp-ex-en .tgt{color:#ef4444;font-weight:700}
+.supp-ex-en .hl{background:rgba(250,204,21,0.3);border-radius:4px;padding:0 4px}
+.supp-ex-zh .hl{color:#fde68a}
+.supp-speak{background:rgba(139,92,246,0.15)!important;border-color:rgba(139,92,246,0.3)!important;color:#c4b5fd!important}
+.supp-speak:hover{background:rgba(139,92,246,0.3)!important;color:#ddd6fe!important}
+.supp-notes{margin-top:16px;padding-top:12px;border-top:1px solid #334155}
+.supp-notes-header{font-size:16px;font-weight:700;color:#94a3b8;margin-bottom:8px}
+.supp-note{font-size:15px;color:#cbd5e1;line-height:1.6;padding:4px 0}
+.supp-note-label{display:inline-block;font-size:12px;font-weight:700;color:#6366f1;background:rgba(99,102,241,0.15);padding:2px 8px;border-radius:4px;margin-right:6px}
+.ep-supp-btn{background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;gap:6px;font-family:inherit}
+.ep-supp-btn:hover{background:rgba(99,102,241,0.25);color:#c7d2fe}
+.ep-supp-btn.active{background:rgba(99,102,241,0.3);color:#e0e7ff}
+.supp-icon{font-size:16px}
 </style>
 </head>
 <body>
@@ -139,7 +274,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -164,7 +299,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -189,7 +324,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -214,7 +349,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -239,7 +374,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -264,7 +399,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -289,7 +424,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -314,7 +449,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -339,7 +474,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -364,7 +499,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -389,7 +524,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -414,7 +549,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -439,7 +574,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">minor</span></div>
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -464,7 +599,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -489,7 +624,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -514,7 +649,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -536,7 +671,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -558,7 +693,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -580,7 +715,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -602,7 +737,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
@@ -624,13 +759,313 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             
         </div>
     </div>
-
+    
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function speakSentence(text) {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+    var v = window.speechSynthesis.getVoices();
+    var pv = v.find(function(x){ return x.name.includes("Google US English"); }) || v.find(function(x){ return x.lang === 'en-US'; });
+    if (pv) u.voice = pv;
+    window.speechSynthesis.speak(u);
+}
+</script>
+<script>
+function toggleSupp(btn){
+    var panel=btn.closest('.example-panel');
+    var body=panel.querySelector('.ep-body');
+    var sub=panel.querySelector('.ep-subtitle');
+    var sv=panel.querySelector('.supp-view');
+    if(!sv)return;
+    if(sv.style.display==='none'){
+        sv.style.display='';body.style.display='none';
+        sub.textContent='補充內容';btn.classList.add('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 例句';
+    }else{
+        sv.style.display='none';body.style.display='';
+        sub.textContent='課文例句';btn.classList.remove('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 補充';
+    }
+}
+</script>
+<script>
+(function(){
+    var panels = document.querySelectorAll('.example-panel');
+    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (panels[i]) panels[i].classList.add('visible');
+        });
+    });
+    panels.forEach(function(panel){
+        panel.querySelector('.ep-close').addEventListener('click', function(){
+            panel.classList.remove('visible');
+        });
+        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
+            b.addEventListener('click', function(){
+                speakSentence(this.getAttribute('data-text'));
+            });
+        });
+    });
+    document.querySelectorAll('.supp-speak').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            speakSentence(this.getAttribute('data-text'));
+        });
+    });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function speakSentence(text) {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+    var v = window.speechSynthesis.getVoices();
+    var pv = v.find(function(x){ return x.name.includes("Google US English"); }) || v.find(function(x){ return x.lang === 'en-US'; });
+    if (pv) u.voice = pv;
+    window.speechSynthesis.speak(u);
+}
+</script>
+<script>
+function toggleSupp(btn){
+    var panel=btn.closest('.example-panel');
+    var body=panel.querySelector('.ep-body');
+    var sub=panel.querySelector('.ep-subtitle');
+    var sv=panel.querySelector('.supp-view');
+    if(!sv)return;
+    if(sv.style.display==='none'){
+        sv.style.display='';body.style.display='none';
+        sub.textContent='補充內容';btn.classList.add('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 例句';
+    }else{
+        sv.style.display='none';body.style.display='';
+        sub.textContent='課文例句';btn.classList.remove('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 補充';
+    }
+}
+</script>
+<script>
+(function(){
+    var panels = document.querySelectorAll('.example-panel');
+    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (panels[i]) panels[i].classList.add('visible');
+        });
+    });
+    panels.forEach(function(panel){
+        panel.querySelector('.ep-close').addEventListener('click', function(){
+            panel.classList.remove('visible');
+        });
+        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
+            b.addEventListener('click', function(){
+                speakSentence(this.getAttribute('data-text'));
+            });
+        });
+    });
+    document.querySelectorAll('.supp-speak').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            speakSentence(this.getAttribute('data-text'));
+        });
+    });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function speakSentence(text) {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+    var v = window.speechSynthesis.getVoices();
+    var pv = v.find(function(x){ return x.name.includes("Google US English"); }) || v.find(function(x){ return x.lang === 'en-US'; });
+    if (pv) u.voice = pv;
+    window.speechSynthesis.speak(u);
+}
+</script>
+<script>
+function toggleSupp(btn){
+    var panel=btn.closest('.example-panel');
+    var body=panel.querySelector('.ep-body');
+    var sub=panel.querySelector('.ep-subtitle');
+    var sv=panel.querySelector('.supp-view');
+    if(!sv)return;
+    if(sv.style.display==='none'){
+        sv.style.display='';body.style.display='none';
+        sub.textContent='補充內容';btn.classList.add('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 例句';
+    }else{
+        sv.style.display='none';body.style.display='';
+        sub.textContent='課文例句';btn.classList.remove('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 補充';
+    }
+}
+</script>
+<script>
+(function(){
+    var panels = document.querySelectorAll('.example-panel');
+    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (panels[i]) panels[i].classList.add('visible');
+        });
+    });
+    panels.forEach(function(panel){
+        panel.querySelector('.ep-close').addEventListener('click', function(){
+            panel.classList.remove('visible');
+        });
+        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
+            b.addEventListener('click', function(){
+                speakSentence(this.getAttribute('data-text'));
+            });
+        });
+    });
+    document.querySelectorAll('.supp-speak').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            speakSentence(this.getAttribute('data-text'));
+        });
+    });
+})();
+</script>
 <div class="example-panel" id="ep-0">
   <div class="ep-header">
     <div class="ep-header-left"><span class="ep-badge">EXAMPLES</span> <span class="ep-title">logo</span></div>
@@ -674,7 +1109,6 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> prefer + (not) to V / V-ing = 寧願∕更喜歡（不）做……</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> prefer A to B = 喜歡A勝過B</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> prefer to V1 rather than V2 = 寧願做V1而不願做V2</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> preference n. 偏好，偏愛</div>
     </div>
 </div>
 </div>
@@ -700,14 +1134,14 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">researcher [rɪˈsɝtʃər] n. 研究人員，調查員</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 The team is <span class="col"><span class="tgt">researching</span></span> possible solutions to the problem.</div><div class="supp-ex-zh">(團隊正在<span class="hl">研究</span>可行的解決方案。)</div><button class="ep-speak supp-speak" type="button" data-text="The team is researching possible solutions to the problem." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
-    <div class="supp-ex"><div class="supp-ex-en">例 Before the interview, make sure you <span class="col">do some <span class="tgt">research</span> on</span> the company's history.</div><div class="supp-ex-zh">(面試前，務必<span class="hl">做一些研究</span>了解該公司的歷史。)</div><button class="ep-speak supp-speak" type="button" data-text="Before the interview, make sure you do some research on the company&#x27;s history." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Janet <span class="col">is doing some <span class="tgt">research</span> on</span> shopping habits for her marketing report.</div><div class="supp-ex-zh">(Janet 為了她的行銷報告，正<span class="hl">針對購物習慣做一些研究</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Janet is doing some research on shopping habits for her marketing report." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The team is <span class="col"><span class="tgt">researching</span> possible solutions</span> to the problem.</div><div class="supp-ex-zh">(團隊正<span class="hl">研究可行的解決方案</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The team is researching possible solutions to the problem." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> scientific / medical research = 科學∕醫學研究</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> market research = 市場調查</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> research center = 研究中心</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> research project = 研究計畫</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> research and development (R&D) = 研發</div>
+      <div class="supp-note"><span class="supp-note-label">搭配用法</span> research and development (R&amp;D) = 研發</div>
     </div>
 </div>
 </div>
@@ -733,8 +1167,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">judge [dʒʌdʒ] vt. vi. 判斷；批評</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 It's important to gather all the facts before you <span class="col">make a <span class="tgt">judgment</span></span>.</div><div class="supp-ex-zh">(在<span class="hl">做出判斷</span>前，蒐集所有事實是很重要的。)</div><button class="ep-speak supp-speak" type="button" data-text="It&#x27;s important to gather all the facts before you make a judgment." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The court's <span class="col"><span class="tgt">final judgment</span></span> surprised everyone.</div><div class="supp-ex-zh">(法院的<span class="hl">最終判決</span>讓所有人大吃一驚。)</div><button class="ep-speak supp-speak" type="button" data-text="The court&#x27;s final judgment surprised everyone." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 You can't <span class="col"><span class="tgt">judge</span> a book by its cover</span>.</div><div class="supp-ex-zh">(【諺】<span class="hl">以貌取人</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="You can&#x27;t judge a book by its cover." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
-    <div class="supp-ex"><div class="supp-ex-en">例 If we <span class="col"><span class="tgt">judge</span> it from</span> the long line outside, that restaurant must be amazing.</div><div class="supp-ex-zh">(如果我們從外面的長排隊伍來<span class="hl">判斷</span>，那家餐廳一定很棒。)</div><button class="ep-speak supp-speak" type="button" data-text="If we judge it from the long line outside, that restaurant must be amazing." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> make a judgment (about / on ...) = （對……）做出判斷</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> in one's judgment = 依某人的判斷</div>
@@ -760,12 +1195,11 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">tendency [ˈtɛndənsi] n. 傾向，趨勢</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Watching cooking shows <span class="col"><span class="tgt">tends</span> to make me feel hungry</span>.</div><div class="supp-ex-zh">(看烹飪節目<span class="hl">往往會讓我覺得肚子餓</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Watching cooking shows tends to make me feel hungry." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 Some phones have a <span class="col"><span class="tgt">tendency</span> to overheat</span> if they are used for too long.</div><div class="supp-ex-zh">(有些手機使用太久會有<span class="hl">過熱的傾向</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Some phones have a tendency to overheat if they are used for too long." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> tend + to V = 傾向（於）做……</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> tendency n. 傾向，趨勢</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Prices tend to go up during the holiday season.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Family members tend to have similar eating habits.</div>
     </div>
 </div>
 </div>
@@ -822,14 +1256,14 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">passionate [ˈpæʃənət] adj. 熱情的；熱愛的</div>
     <div class="supp-ex"><div class="supp-ex-en">例 The fans are very <span class="col"><span class="tgt">passionate</span></span>, and they always support their team.</div><div class="supp-ex-zh">(這些球迷非常<span class="hl">熱情</span>，總是支持他們的球隊。)</div><button class="ep-speak supp-speak" type="button" data-text="The fans are very passionate, and they always support their team." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 I've always been <span class="col"><span class="tgt">passionate</span> about</span> cooking, even though it's just a hobby.</div><div class="supp-ex-zh">(我一直對烹飪很<span class="hl">熱情</span>，即使這只是個嗜好。)</div><button class="ep-speak supp-speak" type="button" data-text="I&#x27;ve always been passionate about cooking, even though it&#x27;s just a hobby." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-deriv-header">passion n.</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 Maria <span class="col">has a <span class="tgt">passion</span> for</span> photography and often shares her photos online.</div><div class="supp-ex-zh">(Maria <span class="hl">熱衷</span>攝影，經常在網路上分享她的照片。)</div><button class="ep-speak supp-speak" type="button" data-text="Maria has a passion for photography and often shares her photos online." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 The speech was <span class="col">filled with <span class="tgt">passion</span></span>, and some people even started crying.</div><div class="supp-ex-zh">(這場演講<span class="hl">充滿熱情</span>，有些人甚至開始哭了。)</div><button class="ep-speak supp-speak" type="button" data-text="The speech was filled with passion, and some people even started crying." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Maria <span class="col">has a <span class="tgt">passion</span> for</span> photography and often shares her photos online.</div><div class="supp-ex-zh">(Maria <span class="hl">熱衷</span>攝影，經常在網路上分享她的照片。)</div><button class="ep-speak supp-speak" type="button" data-text="Maria has a passion for photography and often shares her photos online." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> with passion = 充滿熱情地</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> have a passion for + N / V-ing = 熱衷於……</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> passion fruit = 百香果</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> passionate adj. 熱情的；熱愛的</div>
     </div>
 </div>
 </div>
@@ -850,15 +1284,15 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">similar [ˈsɪməlɚ] adj. 相似的 ANT different</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Una enjoys camping; <span class="col"><span class="tgt">similarly</span></span>, her boyfriend has a passion for outdoor activities.</div><div class="supp-ex-zh">(Una 喜歡露營；<span class="hl">同樣地</span>，她的男朋友也熱衷戶外活動。)</div><button class="ep-speak supp-speak" type="button" data-text="Una enjoys camping; similarly, her boyfriend has a passion for outdoor activities." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 Cora's tastes in music are <span class="col"><span class="tgt">similar</span> to</span> her sister's.</div><div class="supp-ex-zh">(Cora 的音樂品味與她姊姊<span class="hl">接近</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Cora&#x27;s tastes in music are similar to her sister&#x27;s." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 My new job is very <span class="col"><span class="tgt">similar</span> to</span> my old one, but with better pay.</div><div class="supp-ex-zh">(我的新工作跟舊的<span class="hl">很相似</span>，但薪水更好。)</div><button class="ep-speak supp-speak" type="button" data-text="My new job is very similar to my old one, but with better pay." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> similarly 置於句首作為「轉折語」，比較兩件相似的事</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> similar adj. 相似的 ANT different</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> be similar to B = A與B很相似</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> be similar in ... = 在……上很相似</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> similarity n. 相似處</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Tom failed the driving test once. Similarly, his brother did not pass on the first try.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Most people reacted similarly to the news with shock.</div>
     </div>
 </div>
 </div>
@@ -879,12 +1313,12 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">elegant [ˈɛləgənt] adj. 高雅的 SYN graceful</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The ballet dancer performed with <span class="col"><span class="tgt">elegance</span></span>.</div><div class="supp-ex-zh">(這位芭蕾舞者表演得非常<span class="hl">優雅</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The ballet dancer performed with elegance." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 The hotel lobby was decorated in an <span class="col"><span class="tgt">elegant</span> style</span>.</div><div class="supp-ex-zh">(飯店大廳的裝飾風格十分<span class="hl">高雅</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The hotel lobby was decorated in an elegant style." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 The restaurant is decorated with simple <span class="col"><span class="tgt">elegance</span></span> and soft lighting.</div><div class="supp-ex-zh">(這家餐廳以簡約的<span class="hl">優雅</span>和柔和燈光裝飾。)</div><button class="ep-speak supp-speak" type="button" data-text="The restaurant is decorated with simple elegance and soft lighting." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 This sports car has an <span class="col"><span class="tgt">elegant</span> shape</span> and simple lines.</div><div class="supp-ex-zh">(這輛跑車有<span class="hl">優雅的外型</span>和簡潔的線條。)</div><button class="ep-speak supp-speak" type="button" data-text="This sports car has an elegant shape and simple lines." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> elegant adj. 高雅的 SYN graceful</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> with elegance = 優雅地</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> The restaurant is decorated with simple elegance and soft lighting.</div>
     </div>
 </div>
 </div>
@@ -905,15 +1339,14 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">status n.</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 Doctors usually have a <span class="col">high social <span class="tgt">status</span></span> in many cultures.</div><div class="supp-ex-zh">(醫生在許多文化中通常有很高的<span class="hl">社會地位</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Doctors usually have a high social status in many cultures." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
-    <div class="supp-ex"><div class="supp-ex-en">例 You can check the delivery <span class="col"><span class="tgt">status</span></span> online to see where your package is.</div><div class="supp-ex-zh">(你可以上網查詢配送<span class="hl">狀態</span>，看看你的包裹到哪裡了。)</div><button class="ep-speak supp-speak" type="button" data-text="You can check the delivery status online to see where your package is." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 In ancient times, people's clothing showed their <span class="col">social <span class="tgt">status</span></span>.</div><div class="supp-ex-zh">(在古代，人們的衣著顯示了他們的<span class="hl">社會地位</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="In ancient times, people&#x27;s clothing showed their social status." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Doctors usually have a <span class="col">high social <span class="tgt">status</span></span> in many cultures.</div><div class="supp-ex-zh">(在許多文化中，醫生通常擁有<span class="hl">很高的社會地位</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Doctors usually have a high social status in many cultures." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 You can check the <span class="col">delivery <span class="tgt">status</span></span> online to see where your package is.</div><div class="supp-ex-zh">(你可以上網查詢<span class="hl">配送狀態</span>，看看你的包裹到哪裡了。)</div><button class="ep-speak supp-speak" type="button" data-text="You can check the delivery status online to see where your package is." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> high / low status = 身份高∕低</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> status symbol = 身份象徵</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> status quo = 現狀</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> marital status = 婚姻狀態</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Doctors usually have a high social status in many cultures.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> The shipping status page says my package is arriving today.</div>
     </div>
 </div>
 </div>
@@ -935,13 +1368,14 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">intelligent [ɪnˈtɛlədʒənt] adj. 聰明的，有智慧的 SYN clever, smart</div>
     <div class="supp-ex"><div class="supp-ex-en">例 It is believed that an adult dolphin is as <span class="col"><span class="tgt">intelligent</span></span> as a seven-year-old human child.</div><div class="supp-ex-zh">(一般相信成年海豚就像七歲的人類小孩一樣<span class="hl">聰明</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="It is believed that an adult dolphin is as intelligent as a seven-year-old human child." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Elephants are very <span class="col"><span class="tgt">intelligent</span></span>; they can remember faces for many years.</div><div class="supp-ex-zh">(大象非常<span class="hl">聰明</span>；牠們能記住臉孔好多年。)</div><button class="ep-speak supp-speak" type="button" data-text="Elephants are very intelligent; they can remember faces for many years." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-deriv-header">intelligence n.</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 <span class="col"><span class="tgt">Artificial intelligence</span></span> is changing the way we live and work.</div><div class="supp-ex-zh">(<span class="hl">人工智慧</span>正在改變我們的生活和工作方式。)</div><button class="ep-speak supp-speak" type="button" data-text="Artificial intelligence is changing the way we live and work." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 She is of high <span class="col"><span class="tgt">intelligence</span></span> and learns everything fast.</div><div class="supp-ex-zh">(她<span class="hl">智商</span>很高，什麼都學得很快。)</div><button class="ep-speak supp-speak" type="button" data-text="She is of high intelligence and learns everything fast." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> intelligence test = 智力測驗</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> emotional intelligence = 情緒智商</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> artificial intelligence (AI) = 人工智慧</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> intelligent adj. 聰明的 SYN clever, smart</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> intelligent / smart / clever / wise 辨析</div>
     </div>
 </div>
@@ -963,6 +1397,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">expression [ɪkˈsprɛʃən] n. 表情；表達；措辭</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Jim sent his mom a special card to <span class="col"><span class="tgt">express</span> his love and respect</span>.</div><div class="supp-ex-zh">(Jim 寄給他媽媽一張特別的卡片來<span class="hl">表達他的愛與尊敬</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Jim sent his mom a special card to express his love and respect." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 Linda's <span class="col"><span class="tgt">expression</span></span> changed from sadness to joy when she received the good news.</div><div class="supp-ex-zh">(當 Linda 收到好消息時，她的<span class="hl">表情</span>從悲傷轉為喜悅。)</div><button class="ep-speak supp-speak" type="button" data-text="Linda&#x27;s expression changed from sadness to joy when she received the good news." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 In some way, clothing is an <span class="col"><span class="tgt">expression</span></span> of personality.</div><div class="supp-ex-zh">(在某種程度上，穿著是個性的<span class="hl">表達</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="In some way, clothing is an expression of personality." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-deriv-header">express vt.</div>
@@ -970,7 +1405,6 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> express oneself = 表達自己</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> express interest / concern / doubts = 表示興趣∕憂慮∕懷疑</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> expression n. 表情；表達；措辭</div>
     </div>
 </div>
 </div>
@@ -996,6 +1430,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">majority [məˈdʒɔrəti] n. 大多數 ANT minority</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Sugar is a <span class="col"><span class="tgt">major</span> cause</span> of tooth decay.</div><div class="supp-ex-zh">(糖是蛀牙的<span class="hl">主要</span>原因。)</div><button class="ep-speak supp-speak" type="button" data-text="Sugar is a major cause of tooth decay." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 I plan to <span class="col"><span class="tgt">major</span> in</span> graphic design at college.</div><div class="supp-ex-zh">(我計劃在大學<span class="hl">主修</span>平面設計。)</div><button class="ep-speak supp-speak" type="button" data-text="I plan to major in graphic design at college." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 The <span class="col"><span class="tgt">majority</span></span> of students like playing mobile games.</div><div class="supp-ex-zh">(<span class="hl">大多數</span>學生喜歡玩手機遊戲。)</div><button class="ep-speak supp-speak" type="button" data-text="The majority of students like playing mobile games." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> major adj. 主要的 SYN big, main ANT minor</div>
@@ -1022,12 +1458,11 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">realize vt.</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 As soon as the fire alarm rang, we <span class="col"><span class="tgt">realized</span></span> there was an emergency.</div><div class="supp-ex-zh">(火災警報一響，我們就<span class="hl">意識到</span>有緊急情況。)</div><button class="ep-speak supp-speak" type="button" data-text="As soon as the fire alarm rang, we realized there was an emergency." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 He suddenly <span class="col"><span class="tgt">realized</span></span> that he was walking in the wrong direction.</div><div class="supp-ex-zh">(他突然<span class="hl">意識到</span>自己走錯了方向。)</div><button class="ep-speak supp-speak" type="button" data-text="He suddenly realized that he was walking in the wrong direction." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 After many years, he finally <span class="col"><span class="tgt">realized</span> his goal</span> of becoming a pilot.</div><div class="supp-ex-zh">(多年後，他終於<span class="hl">實現了</span>成為飛行員的<span class="hl">目標</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="After many years, he finally realized his goal of becoming a pilot." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> realize vt. (1) 理解，意識到 SYN understand (2) 實現</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> He suddenly realized that he was walking in the wrong direction.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> After many years, he finally realized his goal of becoming a pilot.</div>
     </div>
 </div>
 </div>
@@ -1048,6 +1483,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">discussion [dɪˈskʌʃən] n. 討論，談論 SYN talk</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Let's <span class="col"><span class="tgt">discuss</span> the situation</span> before we take any action.</div><div class="supp-ex-zh">(讓我們在採取任何行動前先<span class="hl">討論一下情況</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Let&#x27;s discuss the situation before we take any action." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 We need to <span class="col"><span class="tgt">discuss</span> your grades</span> after class.</div><div class="supp-ex-zh">(我們需要下課後<span class="hl">討論</span>你的成績。)</div><button class="ep-speak supp-speak" type="button" data-text="We need to discuss your grades after class." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 The students had a lively <span class="col"><span class="tgt">discussion</span></span> about their group project.</div><div class="supp-ex-zh">(學生們針對他們的小組報告進行了<span class="hl">熱烈的討論</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The students had a lively discussion about their group project." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> discuss + N / V-ing (with sb.) = （和某人）討論……</div>
@@ -1073,15 +1510,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">discover [dɪsˈkʌvɚ] vt. 發現 SYN find</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Columbus <span class="col"><span class="tgt">discovered</span></span> America in 1492.</div><div class="supp-ex-zh">(哥倫布在 1492 年<span class="hl">發現</span>了美洲。)</div><button class="ep-speak supp-speak" type="button" data-text="Columbus discovered America in 1492." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 We <span class="col"><span class="tgt">discovered</span></span> an amazing little coffee shop when we were visiting the town.</div><div class="supp-ex-zh">(我們在造訪這座城鎮時，<span class="hl">發現</span>了一間很棒的小咖啡店。)</div><button class="ep-speak supp-speak" type="button" data-text="We discovered an amazing little coffee shop when we were visiting the town." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-deriv-header">discovery n.</div>
     <div class="supp-ex"><div class="supp-ex-en">例 Scientists have <span class="col">made a major <span class="tgt">discovery</span></span> in the fight against cancer.</div><div class="supp-ex-zh">(科學家們在對抗癌症方面<span class="hl">有了重大的發現</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Scientists have made a major discovery in the fight against cancer." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 The <span class="col"><span class="tgt">discovery</span> of electricity</span> changed the world.</div><div class="supp-ex-zh">(<span class="hl">電的發現</span>改變了世界。)</div><button class="ep-speak supp-speak" type="button" data-text="The discovery of electricity changed the world." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> make a discovery = 有了一項發現</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> discover vt. 發現 SYN find</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Scientists have made a major discovery in the fight against cancer.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> The discovery of electricity changed the world.</div>
     </div>
 </div>
 </div>
@@ -1101,8 +1536,11 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     </div>
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
+    <div class="supp-deriv-header">in order to +V 為了……</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 <span class="col"><span class="tgt">In order to</span> draw everyone's attention</span>, the street artist played loud music before his show began.</div><div class="supp-ex-zh">(<span class="hl">為了吸引大家的注意</span>，街頭藝人在表演開始前播放了響亮的音樂。)</div><button class="ep-speak supp-speak" type="button" data-text="In order to draw everyone&#x27;s attention, the street artist played loud music before his show began." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 He works two jobs <span class="col"><span class="tgt">in order to</span></span> support his family.</div><div class="supp-ex-zh">(他做兩份工作<span class="hl">為了</span>養家。)</div><button class="ep-speak supp-speak" type="button" data-text="He works two jobs in order to support his family." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Please lower your voice <span class="col"><span class="tgt">in order not to</span></span> bother others.</div><div class="supp-ex-zh">(請降低音量<span class="hl">以免</span>打擾別人。)</div><button class="ep-speak supp-speak" type="button" data-text="Please lower your voice in order not to bother others." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
-      <div class="supp-note"><span class="supp-note-label">文法提示</span> 用來解釋做某件事的原因或目的，可放句首或句中</div>
       <div class="supp-note"><span class="supp-note-label">文法提示</span> 否定用法 not 要放在 to 前面：in order not to V</div>
       <div class="supp-note"><span class="supp-note-label">延伸學習</span> to V / in order to V / so as to V / in order that + 子句 / so that + 子句</div>
     </div>
@@ -1124,11 +1562,10 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     </div>
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
-    <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> look into SYN investigate = 調查，探究</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> I am sorry for the mistake. I will look into it right away.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> The fire department is looking into the cause of the fire.</div>
-    </div>
+    <div class="supp-deriv-header">look into 調查，探究 SYN investigate</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The police promised to <span class="col"><span class="tgt">look into</span></span> the scam.</div><div class="supp-ex-zh">(警方承諾會<span class="hl">調查</span>這起詐騙案。)</div><button class="ep-speak supp-speak" type="button" data-text="The police promised to look into the scam." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 I am sorry for the mistake. I will <span class="col"><span class="tgt">look into</span></span> it right away.</div><div class="supp-ex-zh">(很抱歉出了錯，我會<span class="hl">立刻調查</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="I am sorry for the mistake. I will look into it right away." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The fire department is <span class="col"><span class="tgt">looking into</span></span> the cause of the fire.</div><div class="supp-ex-zh">(消防隊正在<span class="hl">調查</span>火災原因。)</div><button class="ep-speak supp-speak" type="button" data-text="The fire department is looking into the cause of the fire." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
 </div>
 </div>
 
@@ -1147,12 +1584,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     </div>
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
+    <div class="supp-deriv-header">stir up 激發，引發</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Yesterday, Tom <span class="col"><span class="tgt">stirred up</span> trouble</span> by telling lies about his classmates.</div><div class="supp-ex-zh">(昨天，Tom 因為造謠他同學的事而<span class="hl">惹出禍端</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Yesterday, Tom stirred up trouble by telling lies about his classmates." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 I don't want to <span class="col"><span class="tgt">stir up</span> an argument</span>, but I think you're wrong.</div><div class="supp-ex-zh">(我不想<span class="hl">引起爭論</span>，但我認為你錯了。)</div><button class="ep-speak supp-speak" type="button" data-text="I don&#x27;t want to stir up an argument, but I think you&#x27;re wrong." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Good advertisements should <span class="col"><span class="tgt">stir up</span> people's interest</span> in the product.</div><div class="supp-ex-zh">(好的廣告應該能<span class="hl">激發</span>人們對產品的興趣。)</div><button class="ep-speak supp-speak" type="button" data-text="Good advertisements should stir up people&#x27;s interest in the product." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> stir up 後接感覺、回憶、麻煩、爭議等</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> stir up 是及物動詞片語，可分開；代名詞只能放中間</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> ※ stir的動詞三態為 stir-stirred-stirred</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> I don't want to stir up an argument, but I think you're wrong.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Good advertisements should stir up people's interest in the product.</div>
+      <div class="supp-note"><span class="supp-note-label">搭配用法</span> stir up是及物動詞片語，可分開</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> 名詞放中間或後面皆可：Don't stir up trouble. / Don't stir trouble up.</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> 代名詞只能放中間：Don't stir it up.</div>
     </div>
@@ -1174,12 +1612,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     </div>
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
+    <div class="supp-deriv-header">no wonder 難怪</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 They didn't receive enough training. <span class="col"><span class="tgt">No wonder</span></span> they're making so many mistakes.</div><div class="supp-ex-zh">(他們沒有接受足夠的訓練。<span class="hl">難怪</span>他們會犯這麼多錯誤。)</div><button class="ep-speak supp-speak" type="button" data-text="They didn&#x27;t receive enough training. No wonder they&#x27;re making so many mistakes." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 It's raining outside. <span class="col"><span class="tgt">No wonder</span></span> nobody is at the park.</div><div class="supp-ex-zh">(外面在下雨。<span class="hl">難怪</span>公園都沒人。)</div><button class="ep-speak supp-speak" type="button" data-text="It&#x27;s raining outside. No wonder nobody is at the park." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> No wonder + S + V = 難怪……</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> It is no wonder that ... 的省略</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> 可單獨使用在口語中，表示「原來如此，怪不得」</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> It's raining outside. No wonder nobody is at the park.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> A: The restaurant won a Bib Gourmand this year. B: No wonder (there is a long line outside).</div>
     </div>
 </div>
 </div>
@@ -1199,10 +1638,10 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     </div>
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
+    <div class="supp-deriv-header">sell like hot cakes 熱賣，非常搶手</div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The concert tickets <span class="col"><span class="tgt">sold like hot cakes</span></span> as soon as they went on sale.</div><div class="supp-ex-zh">(演唱會門票一開賣就<span class="hl">非常搶手</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The concert tickets sold like hot cakes as soon as they went on sale." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The new iPhone is <span class="col"><span class="tgt">selling like hot cakes</span></span>.</div><div class="supp-ex-zh">(新款 iPhone <span class="hl">非常搶手</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The new iPhone is selling like hot cakes." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> sell like hot cakes = 熱賣，非常搶手</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> Tickets for the concert sold like hot cakes and were gone in minutes.</div>
-      <div class="supp-note"><span class="supp-note-label">搭配用法</span> The new iPhone is selling like hot cakes.</div>
       <div class="supp-note"><span class="supp-note-label">延伸學習</span> hot cakes 最早出現在 1830 年代美國，指用玉米粉或小麥粉在鐵板上煎熟的薄煎餅</div>
     </div>
 </div>
