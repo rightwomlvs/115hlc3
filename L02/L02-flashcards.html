@@ -239,6 +239,51 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .ep-supp-btn:hover{background:rgba(99,102,241,0.25);color:#c7d2fe}
 .ep-supp-btn.active{background:rgba(99,102,241,0.3);color:#e0e7ff}
 .supp-icon{font-size:16px}
+
+/* ── Example panels ── */
+.example-tab-btn { position: absolute; bottom: 24px; right: 24px; z-index: 10; background: linear-gradient(145deg, #3b82f6, #2563eb); color: #fff; border: none; border-radius: 50px; padding: 12px 24px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(37,99,235,0.35); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: inherit; }
+.example-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.45); }
+.example-tab-btn:active { transform: translateY(0); }
+.example-tab-btn.active { background: linear-gradient(145deg, #64748b, #475569); }
+.example-panel { position: fixed; inset: 0; z-index: 100; background: rgba(15,23,42,0.88); backdrop-filter: blur(12px); display: none; flex-direction: column; }
+.example-panel.visible { display: flex; }
+.ep-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px 12px; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-title { color: #f1f5f9; font-size: 22px; font-weight: 600; }
+.ep-close { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: inherit; }
+.ep-close:hover { background: rgba(239,68,68,0.3); color: #fca5a5; }
+.ep-body { flex: 1; overflow-y: auto; padding: 20px 40px 40px; }
+.ep-subtitle { color: #94a3b8; font-size: 15px; padding: 10px 32px 0; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-ex { background: rgba(30,41,59,0.7); border: 1px solid rgba(71,85,105,0.5); border-radius: 16px; padding: 20px 24px 16px; margin-bottom: 12px; position: relative; }
+.ep-ex-en { font-size: 30px; line-height: 1.6; color: #f1f5f9; font-weight: 500; }
+.ep-ex-zh { font-size: 22px; color: #94a3b8; margin-top: 8px; line-height: 1.6; }
+.ep-ex-en .col { border-bottom: 2px solid #facc15; padding-bottom: 1px; }
+.ep-ex-en .tgt { color: #ef4444; font-weight: 700; }
+.ep-ex-en .hl { background: rgba(250,204,21,0.3); border-radius: 4px; padding: 0 4px; }
+.ep-ex-zh .hl { color: #fde68a; }
+.ep-speak { position: absolute; top: 14px; right: 14px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s ease; opacity: 0.7; }
+.ep-speak:hover { background: rgba(59,130,246,0.3); color: #bfdbfe; opacity: 1; transform: scale(1.1); }
+.ep-speak:active { transform: scale(0.9); }
+/* ── Supplement ── */
+.supp-view{flex:1;overflow-y:auto;padding:12px 32px 32px}
+.supp-title{font-size:20px;font-weight:700;color:#e0e7ff;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #334155}
+.supp-deriv-header{font-size:18px;font-weight:700;color:#a5b4fc;margin-top:16px;margin-bottom:8px;padding:8px 12px;background:rgba(99,102,241,0.1);border-radius:8px;border-left:3px solid #6366f1}
+.supp-ex{background:rgba(30,41,59,0.5);border:1px solid rgba(71,85,105,0.4);border-radius:12px;padding:14px 18px 12px;margin-bottom:8px;position:relative}
+.supp-ex-en{font-size:18px;line-height:1.6;color:#e2e8f0}
+.supp-ex-zh{font-size:15px;color:#94a3b8;margin-top:4px;line-height:1.5}
+.supp-ex-en .col{border-bottom:2px solid #facc15;padding-bottom:1px}
+.supp-ex-en .tgt{color:#ef4444;font-weight:700}
+.supp-ex-en .hl{background:rgba(250,204,21,0.3);border-radius:4px;padding:0 4px}
+.supp-ex-zh .hl{color:#fde68a}
+.supp-speak{background:rgba(139,92,246,0.15)!important;border-color:rgba(139,92,246,0.3)!important;color:#c4b5fd!important}
+.supp-speak:hover{background:rgba(139,92,246,0.3)!important;color:#ddd6fe!important}
+.supp-notes{margin-top:16px;padding-top:12px;border-top:1px solid #334155}
+.supp-notes-header{font-size:16px;font-weight:700;color:#94a3b8;margin-bottom:8px}
+.supp-note{font-size:15px;color:#cbd5e1;line-height:1.6;padding:4px 0}
+.supp-note-label{display:inline-block;font-size:12px;font-weight:700;color:#6366f1;background:rgba(99,102,241,0.15);padding:2px 8px;border-radius:4px;margin-right:6px}
+.ep-supp-btn{background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;gap:6px;font-family:inherit}
+.ep-supp-btn:hover{background:rgba(99,102,241,0.25);color:#c7d2fe}
+.ep-supp-btn.active{background:rgba(99,102,241,0.3);color:#e0e7ff}
+.supp-icon{font-size:16px}
 </style>
 </head>
 <body>
@@ -1066,6 +1111,106 @@ function toggleSupp(btn){
     });
 })();
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function speakSentence(text) {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+    var v = window.speechSynthesis.getVoices();
+    var pv = v.find(function(x){ return x.name.includes("Google US English"); }) || v.find(function(x){ return x.lang === 'en-US'; });
+    if (pv) u.voice = pv;
+    window.speechSynthesis.speak(u);
+}
+</script>
+<script>
+function toggleSupp(btn){
+    var panel=btn.closest('.example-panel');
+    var body=panel.querySelector('.ep-body');
+    var sub=panel.querySelector('.ep-subtitle');
+    var sv=panel.querySelector('.supp-view');
+    if(!sv)return;
+    if(sv.style.display==='none'){
+        sv.style.display='';body.style.display='none';
+        sub.textContent='補充內容';btn.classList.add('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 例句';
+    }else{
+        sv.style.display='none';body.style.display='';
+        sub.textContent='課文例句';btn.classList.remove('active');
+        btn.innerHTML='<span class="supp-icon">📖</span> 補充';
+    }
+}
+</script>
+<script>
+(function(){
+    var panels = document.querySelectorAll('.example-panel');
+    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (panels[i]) panels[i].classList.add('visible');
+        });
+    });
+    panels.forEach(function(panel){
+        panel.querySelector('.ep-close').addEventListener('click', function(){
+            panel.classList.remove('visible');
+        });
+        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
+            b.addEventListener('click', function(){
+                speakSentence(this.getAttribute('data-text'));
+            });
+        });
+    });
+    document.querySelectorAll('.supp-speak').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            speakSentence(this.getAttribute('data-text'));
+        });
+    });
+})();
+</script>
 <div class="example-panel" id="ep-0">
   <div class="ep-header">
     <div class="ep-header-left"><span class="ep-badge">EXAMPLES</span> <span class="ep-title">logo</span></div>
@@ -1306,17 +1451,17 @@ function toggleSupp(btn){
   <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">例 The ballet dancer performed with <span class="col"><span class="tgt">elegance</span></span>.</div>
+      <div class="ep-ex-en">例 The ballet dancer performed <span class="col">with <span class="tgt">elegance</span></span>.</div>
       <div class="ep-ex-zh">這位芭蕾舞者表演得非常<span class="hl">優雅</span>。</div>
       <button class="ep-speak" type="button" data-text="The ballet dancer performed with elegance." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">elegant [ˈɛləgənt] adj. 高雅的 SYN graceful</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 The ballet dancer performed with <span class="col"><span class="tgt">elegance</span></span>.</div><div class="supp-ex-zh">(這位芭蕾舞者表演得非常<span class="hl">優雅</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The ballet dancer performed with elegance." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
-    <div class="supp-ex"><div class="supp-ex-en">例 The hotel lobby was decorated in an <span class="col"><span class="tgt">elegant</span> style</span>.</div><div class="supp-ex-zh">(飯店大廳的裝飾風格十分<span class="hl">高雅</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The hotel lobby was decorated in an elegant style." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
-    <div class="supp-ex"><div class="supp-ex-en">例 The restaurant is decorated with simple <span class="col"><span class="tgt">elegance</span></span> and soft lighting.</div><div class="supp-ex-zh">(這家餐廳以簡約的<span class="hl">優雅</span>和柔和燈光裝飾。)</div><button class="ep-speak supp-speak" type="button" data-text="The restaurant is decorated with simple elegance and soft lighting." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
-    <div class="supp-ex"><div class="supp-ex-en">例 This sports car has an <span class="col"><span class="tgt">elegant</span> shape</span> and simple lines.</div><div class="supp-ex-zh">(這輛跑車有<span class="hl">優雅的外型</span>和簡潔的線條。)</div><button class="ep-speak supp-speak" type="button" data-text="This sports car has an elegant shape and simple lines." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The ballet dancer performed <span class="col">with <span class="tgt">elegance</span></span>.</div><div class="supp-ex-zh">(這位芭蕾舞者表演得非常<span class="hl">優雅</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The ballet dancer performed with elegance." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The hotel lobby was decorated <span class="col">in an <span class="tgt">elegant</span> style</span>.</div><div class="supp-ex-zh">(飯店大廳的裝飾風格十分<span class="hl">高雅</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The hotel lobby was decorated in an elegant style." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The restaurant is decorated <span class="col">with simple <span class="tgt">elegance</span></span> and soft lighting.</div><div class="supp-ex-zh">(這家餐廳以簡約的<span class="hl">優雅</span>和柔和燈光裝飾。)</div><button class="ep-speak supp-speak" type="button" data-text="The restaurant is decorated with simple elegance and soft lighting." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 This sports car has <span class="col">an <span class="tgt">elegant</span> shape</span> and simple lines.</div><div class="supp-ex-zh">(這輛跑車有<span class="hl">優雅的外型</span>和簡潔的線條。)</div><button class="ep-speak supp-speak" type="button" data-text="This sports car has an elegant shape and simple lines." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> elegant adj. 高雅的 SYN graceful</div>
     </div>
@@ -1430,7 +1575,7 @@ function toggleSupp(btn){
   </div>
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">majority [məˈdʒɔrəti] n. 大多數 ANT minority</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 Sugar is a <span class="col"><span class="tgt">major</span> cause</span> of tooth decay.</div><div class="supp-ex-zh">(糖是蛀牙的<span class="hl">主要</span>原因。)</div><button class="ep-speak supp-speak" type="button" data-text="Sugar is a major cause of tooth decay." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Sugar is a <span class="col"><span class="tgt">major</span> cause of tooth decay</span>.</div><div class="supp-ex-zh">(糖是蛀牙的<span class="hl">主要原因</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Sugar is a major cause of tooth decay." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 I plan to <span class="col"><span class="tgt">major</span> in</span> graphic design at college.</div><div class="supp-ex-zh">(我計劃在大學<span class="hl">主修</span>平面設計。)</div><button class="ep-speak supp-speak" type="button" data-text="I plan to major in graphic design at college." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-ex"><div class="supp-ex-en">例 The <span class="col"><span class="tgt">majority</span></span> of students like playing mobile games.</div><div class="supp-ex-zh">(<span class="hl">大多數</span>學生喜歡玩手機遊戲。)</div><button class="ep-speak supp-speak" type="button" data-text="The majority of students like playing mobile games." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
