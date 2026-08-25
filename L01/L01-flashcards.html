@@ -739,31 +739,6 @@ function speakSentence(text) {
     if (pv) u.voice = pv;
     window.speechSynthesis.speak(u);
 }
-(function(){
-    var panels = document.querySelectorAll('.example-panel');
-    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
-        btn.addEventListener('click', function(e){
-            e.stopPropagation();
-            if (panels[i]) panels[i].classList.add('visible');
-        });
-    });
-    panels.forEach(function(panel){
-        panel.querySelector('.ep-close').addEventListener('click', function(){
-            panel.classList.remove('visible');
-        });
-        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
-            b.addEventListener('click', function(){
-                speakSentence(this.getAttribute('data-text'));
-            });
-        });
-    });
-    document.querySelectorAll('.supp-speak').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-            e.stopPropagation();
-            speakSentence(this.getAttribute('data-text'));
-        });
-    });
-})();
 </script>
 <div class="example-panel" id="ep-0">
   <div class="ep-header">
@@ -1316,6 +1291,33 @@ function speakSentence(text) {
 </div>
 </div>
 
+<script>
+(function(){
+    var panels = document.querySelectorAll('.example-panel');
+    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (panels[i]) panels[i].classList.add('visible');
+        });
+    });
+    panels.forEach(function(panel){
+        panel.querySelector('.ep-close').addEventListener('click', function(){
+            panel.classList.remove('visible');
+        });
+        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
+            b.addEventListener('click', function(){
+                speakSentence(this.getAttribute('data-text'));
+            });
+        });
+    });
+    document.querySelectorAll('.supp-speak').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            speakSentence(this.getAttribute('data-text'));
+        });
+    });
+})();
+</script>
 <script>
 function toggleSupp(btn){
     var panel=btn.closest('.example-panel');
