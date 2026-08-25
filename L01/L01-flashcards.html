@@ -729,42 +729,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     }
 </script>
 
-<script>
-function speakSentence(text) {
-    window.speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
-    var v = window.speechSynthesis.getVoices();
-    var pv = v.find(function(x){ return x.name.includes("Google US English"); }) || v.find(function(x){ return x.lang === 'en-US'; });
-    if (pv) u.voice = pv;
-    window.speechSynthesis.speak(u);
-}
-(function(){
-    var panels = document.querySelectorAll('.example-panel');
-    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
-        btn.addEventListener('click', function(e){
-            e.stopPropagation();
-            if (panels[i]) panels[i].classList.add('visible');
-        });
-    });
-    panels.forEach(function(panel){
-        panel.querySelector('.ep-close').addEventListener('click', function(){
-            panel.classList.remove('visible');
-        });
-        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
-            b.addEventListener('click', function(){
-                speakSentence(this.getAttribute('data-text'));
-            });
-        });
-    });
-    document.querySelectorAll('.supp-speak').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-            e.stopPropagation();
-            speakSentence(this.getAttribute('data-text'));
-        });
-    });
-})();
-</script>
+
 <div class="example-panel" id="ep-0">
   <div class="ep-header">
     <div class="ep-header-left"><span class="ep-badge">EXAMPLES</span> <span class="ep-title">fright</span></div>
@@ -1319,6 +1284,17 @@ function speakSentence(text) {
 </div>
 
 <script>
+function speakSentence(text) {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+    var v = window.speechSynthesis.getVoices();
+    var pv = v.find(function(x){ return x.name.includes("Google US English"); }) || v.find(function(x){ return x.lang === 'en-US'; });
+    if (pv) u.voice = pv;
+    window.speechSynthesis.speak(u);
+}
+</script>
+<script>
 function toggleSupp(btn){
     var panel=btn.closest('.example-panel');
     var body=panel.querySelector('.ep-body');
@@ -1335,6 +1311,33 @@ function toggleSupp(btn){
         btn.innerHTML='<span class="supp-icon">📖</span> 補充';
     }
 }
+</script>
+<script>
+(function(){
+    var panels = document.querySelectorAll('.example-panel');
+    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (panels[i]) panels[i].classList.add('visible');
+        });
+    });
+    panels.forEach(function(panel){
+        panel.querySelector('.ep-close').addEventListener('click', function(){
+            panel.classList.remove('visible');
+        });
+        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
+            b.addEventListener('click', function(){
+                speakSentence(this.getAttribute('data-text'));
+            });
+        });
+    });
+    document.querySelectorAll('.supp-speak').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            speakSentence(this.getAttribute('data-text'));
+        });
+    });
+})();
 </script>
 </body>
 </html>
