@@ -1,1110 +1,1102 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L01 字卡 — What's in My B.O.B.</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Inter:wght@400;600;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:'Noto Sans TC','Inter','Microsoft JhengHei',sans-serif;background:linear-gradient(135deg,#dbeafe 0%,#e0f2fe 50%,#f0f9ff 100%);min-height:100vh;padding:24px;display:flex;flex-direction:column;align-items:center}
-.slide-container{width:100%;max-width:900px;position:relative;display:flex;flex-direction:column;align-items:center}
-.centered-layout{display:flex;flex-direction:column;align-items:center;gap:20px;padding:32px 0 24px;width:100%}
-.main-content-wrapper{background:linear-gradient(145deg,#ffffff 0%,#f8fafc 100%);border-radius:24px;padding:40px 48px 36px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,0.08);border:1px solid rgba(226,232,240,0.6)}
-.word-header{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.headword{font-family:'Inter','Noto Sans TC',sans-serif;font-size:64px;font-weight:700;color:#1e293b;letter-spacing:-1px;line-height:1.1}
-.headword.phrase{font-size:48px}
-.pos-tag{font-size:22px;font-weight:600;color:#6366f1;background:linear-gradient(135deg,#eef2ff,#e0e7ff);padding:6px 16px;border-radius:20px;border:1px solid #c7d2fe;line-height:1.2}
-.audio-btn{background-color:#ffffff;border:3px solid #cbd5e1;color:#64748b;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:28px;transition:all 0.2s ease;outline:none;box-shadow:0 4px 6px rgba(0,0,0,0.05)}
-.audio-btn:hover{background-color:#f1f5f9;color:#2563eb;border-color:#2563eb;transform:scale(1.05)}
-.audio-btn:active{transform:scale(0.95);background-color:#e2e8f0}
-.syllable-text{font-size:22px;color:#94a3b8;letter-spacing:6px;margin-top:4px}
-.phonics-container{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.phonics-pair{display:flex;flex-direction:column;align-items:center;border:1px solid #e2e8f0;border-radius:10px;padding:4px 8px;background:#fff;min-width:36px}
-.char-top{font-size:24px;color:#334155}
-.char-bottom{font-size:22px;color:#334155;font-family:'Inter','Noto Sans TC',sans-serif}
-.ph-cons{background:#eff6ff;color:#1d4ed8;border-radius:4px;padding:0 2px}
-.ph-vowel{background:#fef3c7;color:#92400e;border-radius:4px;padding:0 2px}
-.silent-mark{color:#cbd5e1;text-decoration:line-through;font-size:18px}
-.stress-mark{color:#dc2626;font-weight:bold}
-.definition-container{background:linear-gradient(145deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:20px;padding:28px 36px;width:100%;border:1px solid #bae6fd;box-shadow:0 4px 12px rgba(0,0,0,0.04)}
-.definition{font-size:36px;font-weight:700;color:#0c4a6e;line-height:1.5}
-.def-en{font-size:20px;color:#64748b;font-weight:400;margin-top:8px;font-family:'Inter','Noto Sans TC',sans-serif}
-.example-tab-btn{position:fixed;bottom:32px;right:32px;z-index:50;background:linear-gradient(145deg,#3b82f6,#2563eb);color:#fff;border:none;border-radius:50px;padding:14px 28px;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(37,99,235,0.4);transition:all 0.3s ease;display:flex;align-items:center;gap:8px}
-.example-tab-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,99,235,0.5)}
-.example-tab-btn:active{transform:translateY(0)}
-.example-tab-btn.active{background:linear-gradient(145deg,#64748b,#475569);box-shadow:0 8px 24px rgba(71,85,105,0.4)}
-.tab-icon{font-size:20px}
-.example-panel{position:fixed;inset:0;z-index:40;background:rgba(15,23,42,0.85);backdrop-filter:blur(12px);display:none;flex-direction:column;overflow:hidden}
-.example-panel.visible{display:flex}
-.panel-header{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;background:rgba(30,41,59,0.95);border-bottom:1px solid #334155;flex-shrink:0}
-.panel-header-left{display:flex;align-items:center;gap:12px}
-.ex-badge{background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;font-size:13px;font-weight:700;padding:6px 14px;border-radius:20px;letter-spacing:1px}
-.panel-title-text{color:#f1f5f9;font-size:22px;font-weight:600}
-.panel-subtitle{color:#94a3b8;font-size:15px;padding:10px 32px 0;flex-shrink:0;background:rgba(30,41,59,0.95)}
-.supplement-btn{background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.3);border-radius:20px;padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;gap:6px}
-.supplement-btn:hover{background:rgba(99,102,241,0.25);color:#c7d2fe;border-color:rgba(99,102,241,0.5)}
-.supplement-btn.active{background:rgba(99,102,241,0.3);color:#e0e7ff;border-color:rgba(99,102,241,0.6)}
-.supp-icon{font-size:16px}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L01 What's in My B.O.B. 字卡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+* { box-sizing: border-box; }
+body { background-color: #f0f2f5; display: flex; flex-direction: column; align-items: center; margin: 0; padding: 32px 0; gap: 32px; font-family: 'Inter', sans-serif; }
+.hidden { display: none !important; }
+.topbar { width: 1280px; max-width: 100%; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.topbar h1 { font-family: 'Crimson Pro', serif; font-size: 36px; color: #1e293b; margin: 0; }
+#backBtn { display: inline-flex; align-items: center; gap: 8px; background-color: #ffffff; border: 2px solid #cbd5e1; color: #334155; font-weight: 600; font-size: 18px; padding: 10px 20px; border-radius: 12px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+#backBtn:hover { background-color: #f1f5f9; border-color: #2563eb; color: #2563eb; }
+.grid-wrap { width: 1280px; max-width: 100%; padding: 0 16px; }
+#cardGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.card { background-color: #ffffff; border: 2px solid transparent; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 20px; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 8px; transition: all 0.15s ease; font-family: inherit; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.14); border-color: #2563eb; }
+.card-word { font-family: 'Crimson Pro', serif; font-size: 30px; font-weight: 700; color: #2c3e50; line-height: 1.1; word-break: break-word; }
+.card-word.phrase { font-size: 23px; }
+.card-pos { align-self: flex-start; background-color: #e0f2fe; color: #0284c7; font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
+.card-def { font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #475569; line-height: 1.3; }
+.slide-container { width: 1280px; height: 720px; background-color: #ffffff; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; padding: 0; }
+.slide-container::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(circle, rgba(237, 242, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); z-index: 0; pointer-events: none; }
+h1, h2, h3 { margin: 0; color: #1a1a1a; }
+.centered-layout { height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: space-between; padding: 60px 80px; z-index: 1; }
+.main-content-wrapper { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-bottom: 40px; }
+.word-header { display: flex; align-items: center; gap: 32px; margin-bottom: 16px; }
+.headword { font-family: 'Crimson Pro', serif; font-size: 110px; font-weight: 700; color: #2c3e50; letter-spacing: -2px; line-height: 1; }
+.headword.phrase { font-size: 80px; }
+.pos-tag { background-color: #e0f2fe; color: #0284c7; font-size: 32px; font-weight: 600; padding: 10px 20px; border-radius: 16px; text-transform: uppercase; letter-spacing: 1px; }
+.audio-btn { background-color: #ffffff; border: 3px solid #cbd5e1; color: #64748b; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 28px; transition: all 0.2s ease; outline: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.audio-btn:hover { background-color: #f1f5f9; color: #2563eb; border-color: #2563eb; transform: scale(1.05); }
+.audio-btn:active { transform: scale(0.95); background-color: #e2e8f0; }
+.definition-container { border-top: 1px solid #e2e8f0; padding-top: 24px; margin-top: auto; width: 100%; text-align: left; }
+.definition { font-family: 'Noto Sans TC', sans-serif; font-size: 56px; font-weight: 500; color: #475569; line-height: 1.3; margin-bottom: 8px; }
+.def-en { font-family: 'Inter', sans-serif; font-size: 36px; color: #94a3b8; font-weight: 400; display: block; }
 
-/* ── Example view (projector-friendly large fonts) ── */
-.examples-view{flex:1;overflow-y:auto;padding:12px 28px 32px}
-.example-item{background:rgba(30,41,59,0.7);border:1px solid rgba(71,85,105,0.5);border-radius:16px;padding:20px 24px 16px;margin-bottom:12px;position:relative}
-.example-en{font-size:30px;line-height:1.6;color:#f1f5f9;font-weight:500}
-.example-zh{font-size:22px;color:#94a3b8;margin-top:8px;line-height:1.6}
-.example-en .col{border-bottom:2px solid #60a5fa;padding-bottom:1px}
-.example-en .tgt{color:#facc15;font-weight:700;text-decoration:underline;text-decoration-color:#facc15;text-underline-offset:4px}
-.example-en .hl{background:rgba(250,204,21,0.15);border-radius:4px;padding:0 4px}
-.example-zh .hl{background:rgba(250,204,21,0.15);border-radius:4px;padding:0 4px}
+/* ── Example panel (fixed overlay) ── */
+.example-panel { position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(12px); display: none; flex-direction: column; }
+.example-panel.visible { display: flex; }
+.panel-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; background: rgba(30, 41, 59, 0.95); border-bottom: 1px solid #334155; flex-shrink: 0; }
+.panel-header-left { display: flex; align-items: center; gap: 12px; }
+.ex-badge { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 20px; letter-spacing: 1px; }
+.panel-title-text { color: #f1f5f9; font-size: 22px; font-weight: 600; }
+.panel-subtitle { color: #94a3b8; font-size: 15px; padding: 10px 32px 0; flex-shrink: 0; background: rgba(30, 41, 59, 0.95); }
+.panel-close-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.panel-close-btn:hover { background: rgba(239,68,68,0.3); color: #fca5a5; border-color: rgba(239,68,68,0.5); }
+.supplement-btn { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); border-radius: 20px; padding: 8px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 6px; }
+.supplement-btn:hover { background: rgba(99,102,241,0.25); color: #c7d2fe; }
+.supplement-btn.active { background: rgba(99,102,241,0.3); color: #e0e7ff; }
+.supp-icon { font-size: 16px; }
 
-/* ── Speaker button for example sentences ── */
-.example-speak-btn{position:absolute;top:14px;right:14px;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93c5fd;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all 0.2s ease;opacity:0.7}
-.example-speak-btn:hover{background:rgba(59,130,246,0.3);color:#bfdbfe;opacity:1;transform:scale(1.1)}
-.example-speak-btn:active{transform:scale(0.9)}
-.example-speak-btn.supp-speak{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.3);color:#c4b5fd}
-.example-speak-btn.supp-speak:hover{background:rgba(139,92,246,0.3);color:#ddd6fe}
+/* ── Examples view ── */
+.examples-view { flex: 1; overflow-y: auto; padding: 12px 32px 32px; }
+.example-item { background: rgba(30,41,59,0.7); border: 1px solid rgba(71,85,105,0.5); border-radius: 16px; padding: 20px 24px 16px; margin-bottom: 12px; position: relative; }
+.example-en { font-size: 30px; line-height: 1.6; color: #f1f5f9; font-weight: 500; }
+.example-zh { font-size: 22px; color: #94a3b8; margin-top: 8px; line-height: 1.6; }
+.example-en .col { border-bottom: 2px solid #60a5fa; padding-bottom: 1px; }
+.example-en .tgt { color: #facc15; font-weight: 700; text-decoration: underline; text-decoration-color: #facc15; text-underline-offset: 4px; }
+.example-en .hl, .example-zh .hl { background: rgba(250,204,21,0.15); border-radius: 4px; padding: 0 4px; }
+.no-example { color: #64748b; font-size: 16px; text-align: center; padding: 32px 0; }
 
-.no-example{color:#64748b;font-size:16px;text-align:center;padding:32px 0}
+/* ── Speaker button ── */
+.example-speak-btn { position: absolute; top: 14px; right: 14px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s ease; opacity: 0.7; }
+.example-speak-btn:hover { background: rgba(59,130,246,0.3); color: #bfdbfe; opacity: 1; transform: scale(1.1); }
+.example-speak-btn:active { transform: scale(0.9); }
+.example-speak-btn.supp-speak { background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.3); color: #c4b5fd; }
+.example-speak-btn.supp-speak:hover { background: rgba(139,92,246,0.3); color: #ddd6fe; }
 
 /* ── Supplement view ── */
-.supplement-view{flex:1;overflow-y:auto;padding:12px 28px 32px;display:none}
-.supplement-title{font-size:20px;font-weight:700;color:#e0e7ff;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #334155}
-.supp-deriv-header{font-size:18px;font-weight:700;color:#a5b4fc;margin-top:16px;margin-bottom:8px;padding:8px 12px;background:rgba(99,102,241,0.1);border-radius:8px;border-left:3px solid #6366f1}
-.supp-example-item{background:rgba(30,41,59,0.5);border:1px solid rgba(71,85,105,0.4);border-radius:12px;padding:14px 18px 12px;margin-bottom:8px;position:relative}
-.supp-ex-en{font-size:18px;line-height:1.6;color:#e2e8f0}
-.supp-ex-zh{font-size:15px;color:#94a3b8;margin-top:4px;line-height:1.5}
-.supp-ex-en .col{border-bottom:2px solid #60a5fa;padding-bottom:1px}
-.supp-ex-en .tgt{color:#facc15;font-weight:700;text-decoration:underline;text-decoration-color:#facc15;text-underline-offset:4px}
-.supp-ex-en .hl,.supp-ex-zh .hl{background:rgba(250,204,21,0.15);border-radius:4px;padding:0 4px}
-.supp-notes-section{margin-top:16px;padding-top:12px;border-top:1px solid #334155}
-.supp-notes-header{font-size:16px;font-weight:700;color:#94a3b8;margin-bottom:8px}
-.supp-note-item{font-size:15px;color:#cbd5e1;line-height:1.6;padding:4px 0}
-.supp-note-label{display:inline-block;font-size:12px;font-weight:700;color:#6366f1;background:rgba(99,102,241,0.15);padding:2px 8px;border-radius:4px;margin-right:6px}
-.supp-phrase-header{font-size:18px;font-weight:700;color:#a5b4fc;margin-top:16px;margin-bottom:8px;padding:8px 12px;background:rgba(99,102,241,0.1);border-radius:8px;border-left:3px solid #6366f1}
-
-#backBtn{position:fixed;top:24px;left:24px;z-index:60;background:rgba(255,255,255,0.95);border:2px solid #e2e8f0;border-radius:50px;padding:10px 20px;font-size:15px;font-weight:600;color:#475569;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.08);transition:all 0.2s ease;display:flex;align-items:center;gap:6px}
-#backBtn:hover{background:#f1f5f9;border-color:#cbd5e1;transform:translateY(-1px)}
-#cardGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:16px;width:100%;max-width:900px}
-.card{background:#fff;border:2px solid #e2e8f0;border-radius:16px;padding:20px 22px;text-align:left;cursor:pointer;transition:all 0.25s ease;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.card:hover{border-color:#60a5fa;box-shadow:0 6px 20px rgba(96,165,250,0.18);transform:translateY(-2px)}
-.card:active{transform:translateY(0);box-shadow:0 2px 6px rgba(0,0,0,0.06)}
-.card-word{display:block;font-size:24px;font-weight:700;color:#1e293b;line-height:1.3}
-.card-word.phrase{font-size:18px}
-.card-pos{display:inline-block;font-size:13px;font-weight:600;color:#6366f1;margin-top:4px}
-.card-def{display:block;font-size:15px;color:#64748b;margin-top:4px;line-height:1.4}
-.hidden{display:none!important}
+.supplement-view { flex: 1; overflow-y: auto; padding: 12px 32px 32px; display: none; }
+.supplement-title { font-size: 20px; font-weight: 700; color: #e0e7ff; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #334155; }
+.supp-deriv-header { font-size: 18px; font-weight: 700; color: #a5b4fc; margin-top: 16px; margin-bottom: 8px; padding: 8px 12px; background: rgba(99,102,241,0.1); border-radius: 8px; border-left: 3px solid #6366f1; }
+.supp-example-item { background: rgba(30,41,59,0.5); border: 1px solid rgba(71,85,105,0.4); border-radius: 12px; padding: 14px 18px 12px; margin-bottom: 8px; position: relative; }
+.supp-ex-en { font-size: 18px; line-height: 1.6; color: #e2e8f0; }
+.supp-ex-zh { font-size: 15px; color: #94a3b8; margin-top: 4px; line-height: 1.5; }
+.supp-ex-en .col { border-bottom: 2px solid #60a5fa; padding-bottom: 1px; }
+.supp-ex-en .tgt { color: #facc15; font-weight: 700; text-decoration: underline; text-decoration-color: #facc15; text-underline-offset: 4px; }
+.supp-ex-en .hl, .supp-ex-zh .hl { background: rgba(250,204,21,0.15); border-radius: 4px; padding: 0 4px; }
+.supp-notes-section { margin-top: 16px; padding-top: 12px; border-top: 1px solid #334155; }
+.supp-notes-header { font-size: 16px; font-weight: 700; color: #94a3b8; margin-bottom: 8px; }
+.supp-note-item { font-size: 15px; color: #cbd5e1; line-height: 1.6; padding: 4px 0; }
+.supp-note-label { display: inline-block; font-size: 12px; font-weight: 700; color: #6366f1; background: rgba(99,102,241,0.15); padding: 2px 8px; border-radius: 4px; margin-right: 6px; }
 </style>
 </head>
 <body>
-<div id="gridView"><div id="cardGrid"></div></div>
+<header class="topbar">
+    <h1>L01 What's in My B.O.B. 字卡</h1>
+    <button id="backBtn" class="hidden" onclick="showGrid()" type="button"><i class="fa-solid fa-arrow-left"></i> 返回字卡總覽</button>
+</header>
 
-<button id="backBtn" class="hidden" onclick="showGrid()">← 返回</button>
+<div class="grid-wrap" id="gridView">
+    <div id="cardGrid"></div>
+</div>
 
-
+<!-- 單字 0 -->
+<div class="slide-container">
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">fright</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('fright')"><i class="fa-solid fa-volume-high"></i></button>
+            </div>
+        </div>
+        <div class="definition-container">
+            <div class="definition">(突然的)驚嚇、恐懼</div>
+        </div>
+    </div>
+</div>
 <!-- 單字 1 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">fright</h2>
-                    <span class="pos-tag">n.</span>
-                    <button class="audio-btn" onclick="speak('fright')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">(突然的)驚嚇、恐懼</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">fright</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 A sudden knock at the door <span class="col">gave Linda a <span class="tgt">fright</span></span>.</div>
-                <div class="example-zh">(突然的敲門聲<span class="hl">讓 Linda 嚇了一跳</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('A sudden knock at the door gave Linda a fright.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 Don't move, or you'll <span class="col"><span class="tgt">frighten</span> the birds away</span>.</div>
-                <div class="example-zh">(別動，否則你會<span class="hl">把鳥嚇跑</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Don&#x27;t move, or you&#x27;ll frighten the birds away.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">warning</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('warning')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-deriv-header">frighten [ˈfraɪtń] vt. 使……害怕，驚嚇到</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 Don't move, or you'll <span class="col"><span class="tgt">frighten</span> the birds away</span>.</div>
-                <div class="supp-ex-zh">(別動，否則你會<span class="hl">把鳥嚇跑</span>。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Don&#x27;t move, or you&#x27;ll frighten the birds away.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-deriv-header">frightening [ˈfraɪtńɪŋ] adj. 令人害怕的</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 It was <span class="col"><span class="tgt">frightening</span> to walk along the dark lane by myself.</span></div>
-                <div class="supp-ex-zh">(獨自走在黑暗的巷道上<span class="hl">令人害怕</span>。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('It was frightening to walk along the dark lane by myself.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-deriv-header">frightened [ˈfraɪtńd] adj. 感到害怕的</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 Everyone was <span class="col"><span class="tgt">frightened</span> by the sudden loud noise.</span></div>
-                <div class="supp-ex-zh">(每個人都<span class="hl">被巨大的聲響嚇到</span>。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Everyone was frightened by the sudden loud noise.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> in / with fright = 嚇得……</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> give sb. a fright = 嚇某人一跳</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I found myself shaking with fright. (我發覺自己嚇得渾身發抖。)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">警告</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 2 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">warning</h2>
-                    <span class="pos-tag">n.</span>
-                    <button class="audio-btn" onclick="speak('warning')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">警告</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">warning</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 The power went off <span class="col">without <span class="tgt">warning</span></span> and left the town in darkness.</div>
-                <div class="example-zh">(電源<span class="hl">毫無警告地</span>中斷，讓小鎮陷入黑暗。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('The power went off without warning and left the town in darkness.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 The sign <span class="col"><span class="tgt">warns</span> drivers of</span> falling rocks ahead.</div>
-                <div class="example-zh">(這個標誌<span class="hl">警告駕駛人注意</span>前方有落石。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('The sign warns drivers of falling rocks ahead.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">disaster</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('disaster')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-deriv-header">warn [wɔrn] vi. vt. 警告</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 The sign <span class="col"><span class="tgt">warns</span> drivers of falling rocks ahead.</span></div>
-                <div class="supp-ex-zh">(這個標示牌<span class="hl">警告</span>駕駛前方有落石。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('The sign warns drivers of falling rocks ahead.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> issue a warning = 發出警告</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> give (sb.) a warning = （對某人）提出警告</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I think it is a warning to always be prepared. (我想這是提醒我們要隨時做好準備。)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">災難</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 3 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">disaster</h2>
-                    <span class="pos-tag">n.</span>
-                    <button class="audio-btn" onclick="speak('disaster')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">災難</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">disaster</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Many lives can be lost in a <span class="col">natural <span class="tgt">disaster</span></span> like a typhoon.</div>
-                <div class="example-zh">(許多生命可能在像颱風這樣的<span class="hl">自然災難</span>中喪失。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Many lives can be lost in a natural disaster like a typhoon.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">prepared</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('prepared')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> natural / man-made disaster = 自然／人為災害</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> great / major / terrible disaster = 重大災害</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> bring / cause / lead to a disaster = 帶來／導致災害</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> When a natural disaster happens... (當天災發生時……)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">準備好的，有準備的</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 4 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">prepared</h2>
-                    <span class="pos-tag">adj.</span>
-                    <button class="audio-btn" onclick="speak('prepared')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">準備好的，有準備的</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">prepared</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 When there is a typhoon warning, people need to <span class="col">be <span class="tgt">prepared</span> for</span> the danger.</div>
-                <div class="example-zh">(當有颱風警報時，人們需要<span class="hl">為這危險做好準備</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('When there is a typhoon warning, people need to be prepared for the danger.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div>
-                <div class="example-zh">(Connie 花了幾個星期<span class="hl">為她的前大學面試做準備</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Connie spent weeks preparing for her college interview.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 Alice is <span class="col">making <span class="tgt">preparations</span> for</span> the party.</div>
-                <div class="example-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Alice is making preparations for the party.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">react</h2>
+                <span class="pos-tag">vi.</span>
+                <button class="audio-btn" onclick="speak('react')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-deriv-header">prepare [prɪ`pɛr] vi. vt. 準備</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div>
-                <div class="supp-ex-zh">(Connie 花了幾個星期<span class="hl">為她的大學面試做準備</span>。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Connie spent weeks preparing for her college interview.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-deriv-header">preparation [ˌprɛpə`reʃən] n. 準備，預備</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 Alice is making <span class="col"><span class="tgt">preparations</span> for</span> the party.</div>
-                <div class="supp-ex-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Alice is making preparations for the party.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> be prepared for = 為……做好準備</div>
-                <div class="supp-note-item"><span class="supp-note-label">文法提示</span> S + find/leave/keep + O + OC：I was prepared (OC) → 被動用法</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I was prepared and able to react quickly. (幸好我早有準備，能夠迅速反應。)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">反應</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 5 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">react</h2>
-                    <span class="pos-tag">vi.</span>
-                    <button class="audio-btn" onclick="speak('react')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">反應</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">react</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Most local people <span class="col"><span class="tgt">reacted</span> with anger</span> to the news.</div>
-                <div class="example-zh">(大多數當地人對這則新聞<span class="hl">做出憤怒的反應</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Most local people reacted with anger to the news.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div>
-                <div class="example-zh">(我等不及要看 Harvey <span class="hl">對</span>他生日禮物的<span class="hl">反應</span>了。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 There is a strong <span class="col"><span class="tgt">reaction</span></span> when these two chemicals are mixed together.</div>
-                <div class="example-zh">(當這兩種化學物質混合在一起時，會有強烈的<span class="hl">化學反應</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('There is a strong reaction when these two chemicals are mixed together.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">survival</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('survival')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-deriv-header">reaction [rɪ`ækʃən] n. 反應；（化學）反應</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div>
-                <div class="supp-ex-zh">(我迫不及待想看 Harvey 對生日禮物的<span class="hl">反應</span>。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> react quickly / calmly = 迅速／冷靜地反應</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> react against = 反對</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I was prepared and able to react quickly. (我早有準備，能夠迅速反應。)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">生存，存活</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 6 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">survival</h2>
-                    <span class="pos-tag">n.</span>
-                    <button class="audio-btn" onclick="speak('survival')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">生存，存活</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">survival</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Nowadays, the <span class="col"><span class="tgt">survival</span> rate</span> for cancer patients is much higher than before.</div>
-                <div class="example-zh">(現今，癌症病患的<span class="hl">存活率</span>比以前高很多。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Nowadays, the survival rate for cancer patients is much higher than before.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 The lucky man <span class="col"><span class="tgt">survived</span></span> the car crash with no injuries.</div>
-                <div class="example-zh">(這個幸運的男人在車禍中<span class="hl">倖存下來</span>，毫髮無傷。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('The lucky man survived the car crash with no injuries.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 More than 90 percent of <span class="col"><span class="tgt">survivors</span></span> are saved within the first 72 hours after an earthquake.</div>
-                <div class="example-zh">(超過 90% 的<span class="hl">生還者</span>是在地震後的前 72 小時內獲救的。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('More than 90 percent of survivors are saved within the first 72 hours after an earthquake.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">kit</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('kit')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-deriv-header">survive [sɚ`vaɪv] vi. vt. 生存，存活</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 The lucky man <span class="col"><span class="tgt">survived</span> the car crash</span> with no injuries.</div>
-                <div class="supp-ex-zh">(那名幸運的男子在車禍中<span class="hl">倖存</span>，毫髮無傷。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('The lucky man survived the car crash with no injuries.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-deriv-header">survivor [sɚ`vaɪvɚ] n. 倖存者，生還者</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 More than 90 percent of <span class="col"><span class="tgt">survivors</span> are saved</span> within the first 72 hours.</div>
-                <div class="supp-ex-zh">(超過百分之九十的<span class="hl">生還者</span>是在地震後72小時內獲救。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('More than 90 percent of survivors are saved within the first 72 hours.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> survival kit = 生存工具組</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> survival of the fittest = 適者生存</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> It is basically a survival kit. (它基本上是一個生存套組。)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">成套的工具</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 7 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">kit</h2>
-                    <span class="pos-tag">n.</span>
-                    <button class="audio-btn" onclick="speak('kit')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">成套的工具</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">kit</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 The hiker carried a <span class="col">survival <span class="tgt">kit</span></span> with a lighter, dried food, and a knife.</div>
-                <div class="example-zh">(這名登山客攜帶了一個含有打火機、乾燥食物和刀子的<span class="hl">生存工具包</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('The hiker carried a survival kit with a lighter, dried food, and a knife.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">emergency</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('emergency')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> first-aid kit = 急救藥箱</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> survival kit = 生存工具組</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> a survival kit (一個生存套組)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">緊急情況</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 8 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">emergency</h2>
-                    <span class="pos-tag">n.</span>
-                    <button class="audio-btn" onclick="speak('emergency')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">緊急情況</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">emergency</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 <span class="col">In an <span class="tgt">emergency</span></span>, follow the signs to the exit.</div>
-                <div class="example-zh">(<span class="hl">在緊急情況下</span>，請遵循標誌前往出口。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('In an emergency, follow the signs to the exit.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">essential</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('essential')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> emergency exit = 緊急出口</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> emergency room (ER) = 急診室</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> emergency supplies = 緊急物資</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> for other emergencies, such as house fires (其他緊急狀況，如家中失火)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">必要的</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 9 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">essential</h2>
-                    <span class="pos-tag">adj.</span>
-                    <button class="audio-btn" onclick="speak('essential')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">必要的</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">essential</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Water and food are <span class="col"><span class="tgt">essential</span> for</span> life.</div>
-                <div class="example-zh">(水和食物<span class="hl">對</span>生命是<span class="hl">必要的</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Water and food are essential for life.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">preserve</h2>
+                <span class="pos-tag">vt.</span>
+                <button class="audio-btn" onclick="speak('preserve')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> essential items = 必需品</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> pack your bag with essential items (把必需品放進背包裡)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">保存，維護</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 10 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">preserve</h2>
-                    <span class="pos-tag">vt.</span>
-                    <button class="audio-btn" onclick="speak('preserve')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">保存，維護</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">preserve</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 We must <span class="col"><span class="tgt">preserve</span> this ancient temple</span> because it is an essential part of our culture.</div>
-                <div class="example-zh">(我們必須<span class="hl">維護這座古老的寺廟</span>，因為它是我們文化中必要的一部分。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('We must preserve this ancient temple because it is an essential part of our culture.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">document</h2>
+                <span class="pos-tag">n.</span>
+                <button class="audio-btn" onclick="speak('document')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> easy-to-preserve = 容易保存的</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> well-preserved = 保存完好的</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> water and easy-to-preserve food (水和易於保存的食物)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">文件</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 11 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">document</h2>
-                    <span class="pos-tag">n.</span>
-                    <button class="audio-btn" onclick="speak('document')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">文件</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">document</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 I always <span class="col">check <span class="tgt">documents</span> for errors</span> before I give them to my boss.</div>
-                <div class="example-zh">(在將文件交給老闆之前，我總是會<span class="hl">檢查文件是否有錯誤</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('I always check documents for errors before I give them to my boss.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">optional</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('optional')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-deriv-header">documentary [ˌdɑkjə`mɛntəri] n. 紀錄片</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 <em>Beyond Beauty: Taiwan from Above</em> is a famous <span class="col"><span class="tgt">documentary</span></span>.</div>
-                <div class="supp-ex-zh">(《看見臺灣》是一部著名的<span class="hl">紀錄片</span>。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Beyond Beauty: Taiwan from Above is a famous documentary.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> legal / official document = 法律／官方文件</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> identity / personal document = 身分／個人文件</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> important documents (重要證件)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">可選擇的，非必要的</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 12 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">optional</h2>
-                    <span class="pos-tag">adj.</span>
-                    <button class="audio-btn" onclick="speak('optional')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">可選擇的，非必要的</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">optional</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 There's an <span class="col"><span class="tgt">optional</span> club event</span> next week. You can choose to attend or not.</div>
-                <div class="example-zh">(下週有一個<span class="hl">非必要的社團活動</span>。你可以選擇參加或不參加。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('There&#x27;s an optional club event next week. You can choose to attend or not.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 When the last bus left, we had <span class="col">no <span class="tgt">option</span> but to</span> take a taxi home.</div>
-                <div class="example-zh">(當最後一班公車離開時，我們<span class="hl">別無選擇，只好</span>搭計程車回家。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('When the last bus left, we had no option but to take a taxi home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">spare</h2>
+                <span class="pos-tag">adj.</span>
+                <button class="audio-btn" onclick="speak('spare')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-deriv-header">option [ˈɑpʃən] n. 選擇</div>
-            <div class="supp-example-item">
-                <div class="supp-ex-en">例 When the last bus left, we had no <span class="col"><span class="tgt">option</span> but to</span> take a taxi home.</div>
-                <div class="supp-ex-zh">(當末班車離去，我們<span class="hl">別無選擇</span>只能搭計程車回家。)</div>
-                <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('When the last bus left, we had no option but to take a taxi home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> optional subjects / courses = 選修科目／課程</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> optional equipment = 選配裝備</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> some other optional items (其他選配用品)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">備用的</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 13 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">spare</h2>
-                    <span class="pos-tag">adj.</span>
-                    <button class="audio-btn" onclick="speak('spare')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">備用的</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">spare</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 For safety, cars should always carry a <span class="col"><span class="tgt">spare</span> tire</span>.</div>
-                <div class="example-zh">(為了安全起見，汽車應該隨時攜帶<span class="hl">備用輪胎</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('For safety, cars should always carry a spare tire.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">update</h2>
+                <span class="pos-tag">vt.</span>
+                <button class="audio-btn" onclick="speak('update')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> spare time = 空檔時間</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> spare key = 備用鑰匙</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> spare room = 空房間，客房</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> spare tire = 備胎</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> cash, spare keys, a raincoat (現金、備用鑰匙、雨衣)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">使……更新</div>
         </div>
     </div>
 </div>
-
 <!-- 單字 14 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">update</h2>
-                    <span class="pos-tag">vt.</span>
-                    <button class="audio-btn" onclick="speak('update')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">使……更新</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">update</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 The school has just <span class="col"><span class="tgt">updated</span> all its computer equipment</span>.</div>
-                <div class="example-zh">(學校剛<span class="hl">更新了其所有的電腦設備</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('The school has just updated all its computer equipment.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword">grab</h2>
+                <span class="pos-tag">vt.</span>
+                <button class="audio-btn" onclick="speak('grab')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> update information = 更新資訊</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> keep the items updated (持續更新內容物)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition">vi. 抓取</div>
         </div>
     </div>
 </div>
-
-<!-- 單字 15 -->
+<!-- 片語 15 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword">grab</h2>
-                    <span class="pos-tag">vt.</span>
-                    <button class="audio-btn" onclick="speak('grab')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">vi. 抓取</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">grab</span>
-            </div>
-            <button class="supplement-btn" type="button"><span class="supp-icon">📖</span> 補充</button>
-        </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Ben <span class="col"><span class="tgt">grabbed</span> a handful of candy</span> from the bowl.</div>
-                <div class="example-zh">(Ben 從碗裡<span class="hl">抓了一把糖果</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Ben grabbed a handful of candy from the bowl.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 Noah called his parents <span class="col"><span class="tgt">as soon as</span> his plane landed</span> in Chicago.</div>
-                <div class="example-zh">(Noah 的飛機<span class="hl">一降落</span>在芝加哥，他<span class="hl">就</span>打電話給父母。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Noah called his parents as soon as his plane landed in Chicago.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 Billy stood on a chair to <span class="col"><span class="tgt">reach for</span> the cookies</span> on the top shelf.</div>
-                <div class="example-zh">(Billy 站在椅子上<span class="hl">伸手拿拿餅乾</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Billy stood on a chair to reach for the cookies on the top shelf.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 The letter "P" on the sign <span class="col"><span class="tgt">stands for</span> parking</span>.</div>
-                <div class="example-zh">(標誌上的字母 "P" <span class="hl">代表停車</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('The letter &quot;P&quot; on the sign stands for parking.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 Before the movie starts, we should <span class="col"><span class="tgt">make sure</span> we turn off our phones</span>.</div>
-                <div class="example-zh">(在電影開始前，我們應該<span class="hl">確保關掉手機</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Before the movie starts, we should make sure we turn off our phones.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 <span class="col"><span class="tgt">Make sure</span> to keep</span> your emergency kit in an easy-to-reach place.</div>
-                <div class="example-zh">(<span class="hl">務必確保把</span>你的緊急備用包<span class="hl">放</span>在容易拿到的地方。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Make sure to keep your emergency kit in an easy-to-reach place.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 <span class="col"><span class="tgt">As the saying goes</span></span>, "Better late than never."</div>
-                <div class="example-zh">(<span class="hl">俗話說</span>：「遲做總比不做好」。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('As the saying goes, &quot;Better late than never.&quot;')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook</span> something at home.</div>
-                <div class="example-zh">(我們<span class="hl">不是叫披薩，就是在家煮</span>點東西。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('We can either order pizza or cook something at home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword phrase">as soon as 一……就……</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('as soon as 一 就')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="supplement-view">
-            <div class="supplement-title">核心知識與字詞運用</div>
-            <div class="supp-notes-section">
-                <div class="supp-notes-header">📖 字詞運用</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> grab one's attention = 吸引某人的注意</div>
-                <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> grab a bite / drink = 隨便吃／喝點東西</div>
-                <div class="supp-note-item"><span class="supp-note-label">課文語境</span> make sure that you can grab your bag quickly (確保能迅速取得這個包)</div>
-            </div>
+        <div class="definition-container">
+            <div class="definition"></div>
         </div>
     </div>
 </div>
-
-<!-- 片語 1 -->
+<!-- 片語 16 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword phrase">as soon as 一……就……</h2>
-                    <span class="pos-tag">conj.</span>
-                    <button class="audio-btn" onclick="speak('as soon as 一 就')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition">一……就……</div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">as soon as 一……就……</span>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword phrase">reach for 伸手拿</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('reach for 伸手拿')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Noah called his parents <span class="col"><span class="tgt">as soon as</span> his plane landed</span> in Chicago.</div>
-                <div class="example-zh">(Noah 的飛機<span class="hl">一降落</span>在芝加哥，他<span class="hl">就</span>打電話給父母。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Noah called his parents as soon as his plane landed in Chicago.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
+        <div class="definition-container">
+            <div class="definition"></div>
         </div>
     </div>
 </div>
-
-<!-- 片語 2 -->
+<!-- 片語 17 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword phrase">reach for 伸手拿</h2>
-                    <span class="pos-tag">prep.</span>
-                    <button class="audio-btn" onclick="speak('reach for 伸手拿')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition"></div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">reach for 伸手拿</span>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword phrase">stand for 代表</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('stand for 代表')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Billy stood on a chair to <span class="col"><span class="tgt">reach for</span> the cookies</span> on the top shelf.</div>
-                <div class="example-zh">(Billy 站在椅子上<span class="hl">伸手拿拿餅乾</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Billy stood on a chair to reach for the cookies on the top shelf.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
+        <div class="definition-container">
+            <div class="definition"></div>
         </div>
     </div>
 </div>
-
-<!-- 片語 3 -->
+<!-- 片語 18 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword phrase">stand for 代表</h2>
-                    <span class="pos-tag">prep.</span>
-                    <button class="audio-btn" onclick="speak('stand for 代表')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition"></div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">stand for 代表</span>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword phrase">make sure 確定，確保</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('make sure 確定，確保')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 The letter "P" on the sign <span class="col"><span class="tgt">stands for</span> parking</span>.</div>
-                <div class="example-zh">(標誌上的字母 "P" <span class="hl">代表停車</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('The letter &quot;P&quot; on the sign stands for parking.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
+        <div class="definition-container">
+            <div class="definition"></div>
         </div>
     </div>
 </div>
-
-<!-- 片語 4 -->
+<!-- 片語 19 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword phrase">make sure 確定，確保</h2>
-                    <span class="pos-tag">phrase</span>
-                    <button class="audio-btn" onclick="speak('make sure 確定，確保')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition"></div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">make sure 確定，確保</span>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword phrase">as the saying goes 俗話說</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('as the saying goes 俗話說')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 Before the movie starts, we should <span class="col"><span class="tgt">make sure</span> we turn off our phones</span>.</div>
-                <div class="example-zh">(在電影開始前，我們應該<span class="hl">確保關掉手機</span>。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Before the movie starts, we should make sure we turn off our phones.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
-            <div class="example-item">
-                <div class="example-en">例 <span class="col"><span class="tgt">Make sure</span> to keep</span> your emergency kit in an easy-to-reach place.</div>
-                <div class="example-zh">(<span class="hl">務必確保把</span>你的緊急備用包<span class="hl">放</span>在容易拿到的地方。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('Make sure to keep your emergency kit in an easy-to-reach place.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
+        <div class="definition-container">
+            <div class="definition"></div>
         </div>
     </div>
 </div>
-
-<!-- 片語 5 -->
+<!-- 片語 20 -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword phrase">as the saying goes 俗話說</h2>
-                    <span class="pos-tag">phrase</span>
-                    <button class="audio-btn" onclick="speak('as the saying goes 俗話說')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition"></div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">as the saying goes 俗話說</span>
+    <div class="centered-layout">
+        <div class="main-content-wrapper">
+            <div class="word-header">
+                <h2 class=" headword phrase">either ... or ... 不是……就是……</h2>
+                <span class="pos-tag">conj.</span>
+                <button class="audio-btn" onclick="speak('either   or   不是 就是')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 <span class="col"><span class="tgt">As the saying goes</span></span>, "Better late than never."</div>
-                <div class="example-zh">(<span class="hl">俗話說</span>：「遲做總比不做好」。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('As the saying goes, &quot;Better late than never.&quot;')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
+        <div class="definition-container">
+            <div class="definition"></div>
         </div>
     </div>
 </div>
 
-<!-- 片語 6 -->
-<div class="slide-container">
-    <button class="example-tab-btn" type="button"><span class="tab-icon">📖</span> 例句</button>
-        <div class="centered-layout">
-            <div class="main-content-wrapper">
-                <div class="word-header">
-                    <h2 class="headword phrase">either ... or ... 不是……就是……</h2>
-                    <span class="pos-tag">conj.</span>
-                    <button class="audio-btn" onclick="speak('either   or   不是 就是')"><i class="fa-solid fa-volume-high"></i></button>
-                </div>
-            </div>
-            <div class="definition-container">
-                <div class="definition"></div>
-            </div>
-    <div class="example-panel">
-        <div class="panel-header">
-            <div class="panel-header-left">
-                <span class="ex-badge">EXAMPLES</span>
-                <span class="panel-title-text">either ... or ... 不是……就是……</span>
-            </div>
+<div class="example-panel" id="panel-0">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">fright</span>
         </div>
-        <div class="panel-subtitle">課文例句</div>
-        <div class="examples-view">
-            <div class="example-item">
-                <div class="example-en">例 We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook</span> something at home.</div>
-                <div class="example-zh">(我們<span class="hl">不是叫披薩，就是在家煮</span>點東西。)</div>
-                <button class="example-speak-btn" type="button" onclick="speakSentence('We can either order pizza or cook something at home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
-            </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-0')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-0')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 A sudden knock at the door <span class="col">gave Linda a <span class="tgt">fright</span></span>.</div>
+            <div class="example-zh">(突然的敲門聲<span class="hl">讓 Linda 嚇了一跳</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('A sudden knock at the door gave Linda a fright.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 Don't move, or you'll <span class="col"><span class="tgt">frighten</span> the birds away</span>.</div>
+            <div class="example-zh">(別動，否則你會<span class="hl">把鳥嚇跑</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Don&#x27;t move, or you&#x27;ll frighten the birds away.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-deriv-header">frighten [ˈfraɪtń] vt. 使……害怕，驚嚇到</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 Don't move, or you'll <span class="col"><span class="tgt">frighten</span> the birds away</span>.</div>
+            <div class="supp-ex-zh">(別動，否則你會<span class="hl">把鳥嚇跑</span>。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Don&#x27;t move, or you&#x27;ll frighten the birds away.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-deriv-header">frightening [ˈfraɪtńɪŋ] adj. 令人害怕的</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 It was <span class="col"><span class="tgt">frightening</span> to walk along the dark lane by myself.</span></div>
+            <div class="supp-ex-zh">(獨自走在黑暗的巷道上<span class="hl">令人害怕</span>。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('It was frightening to walk along the dark lane by myself.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-deriv-header">frightened [ˈfraɪtńd] adj. 感到害怕的</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 Everyone was <span class="col"><span class="tgt">frightened</span> by the sudden loud noise.</span></div>
+            <div class="supp-ex-zh">(每個人都<span class="hl">被巨大的聲響嚇到</span>。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Everyone was frightened by the sudden loud noise.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> in / with fright = 嚇得……</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> give sb. a fright = 嚇某人一跳</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I found myself shaking with fright. (我發覺自己嚇得渾身發抖。)</div>
         </div>
     </div>
 </div>
-
+<div class="example-panel" id="panel-1">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">warning</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-1')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-1')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 The power went off <span class="col">without <span class="tgt">warning</span></span> and left the town in darkness.</div>
+            <div class="example-zh">(電源<span class="hl">毫無警告地</span>中斷，讓小鎮陷入黑暗。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('The power went off without warning and left the town in darkness.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 The sign <span class="col"><span class="tgt">warns</span> drivers of</span> falling rocks ahead.</div>
+            <div class="example-zh">(這個標誌<span class="hl">警告駕駛人注意</span>前方有落石。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('The sign warns drivers of falling rocks ahead.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-deriv-header">warn [wɔrn] vi. vt. 警告</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 The sign <span class="col"><span class="tgt">warns</span> drivers of falling rocks ahead.</span></div>
+            <div class="supp-ex-zh">(這個標示牌<span class="hl">警告</span>駕駛前方有落石。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('The sign warns drivers of falling rocks ahead.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> issue a warning = 發出警告</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> give (sb.) a warning = （對某人）提出警告</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I think it is a warning to always be prepared.</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-2">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">disaster</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-2')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-2')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Many lives can be lost in a <span class="col">natural <span class="tgt">disaster</span></span> like a typhoon.</div>
+            <div class="example-zh">(許多生命可能在像颱風這樣的<span class="hl">自然災難</span>中喪失。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Many lives can be lost in a natural disaster like a typhoon.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> natural / man-made disaster = 自然／人為災害</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> great / major / terrible disaster = 重大災害</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> bring / cause / lead to a disaster = 帶來／導致災害</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> When a natural disaster happens...</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-3">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">prepared</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-3')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-3')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 When there is a typhoon warning, people need to <span class="col">be <span class="tgt">prepared</span> for</span> the danger.</div>
+            <div class="example-zh">(當有颱風警報時，人們需要<span class="hl">為這危險做好準備</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('When there is a typhoon warning, people need to be prepared for the danger.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div>
+            <div class="example-zh">(Connie 花了幾個星期<span class="hl">為她的前大學面試做準備</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Connie spent weeks preparing for her college interview.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 Alice is <span class="col">making <span class="tgt">preparations</span> for</span> the party.</div>
+            <div class="example-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Alice is making preparations for the party.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-deriv-header">prepare [prɪ`pɛr] vi. vt. 準備</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div>
+            <div class="supp-ex-zh">(Connie 花了幾個星期<span class="hl">為她的大學面試做準備</span>。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Connie spent weeks preparing for her college interview.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-deriv-header">preparation [ˌprɛpə`reʃən] n. 準備，預備</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 Alice is making <span class="col"><span class="tgt">preparations</span> for</span> the party.</div>
+            <div class="supp-ex-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Alice is making preparations for the party.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> be prepared for = 為……做好準備</div>
+            <div class="supp-note-item"><span class="supp-note-label">文法提示</span> S + find/leave/keep + O + OC：I was prepared (OC) → 被動用法</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I was prepared and able to react quickly.</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-4">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">react</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-4')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-4')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Most local people <span class="col"><span class="tgt">reacted</span> with anger</span> to the news.</div>
+            <div class="example-zh">(大多數當地人對這則新聞<span class="hl">做出憤怒的反應</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Most local people reacted with anger to the news.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div>
+            <div class="example-zh">(我等不及要看 Harvey <span class="hl">對</span>他生日禮物的<span class="hl">反應</span>了。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 There is a strong <span class="col"><span class="tgt">reaction</span></span> when these two chemicals are mixed together.</div>
+            <div class="example-zh">(當這兩種化學物質混合在一起時，會有強烈的<span class="hl">化學反應</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('There is a strong reaction when these two chemicals are mixed together.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-deriv-header">reaction [rɪ`ækʃən] n. 反應；（化學）反應</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div>
+            <div class="supp-ex-zh">(我迫不及待想看 Harvey 對生日禮物的<span class="hl">反應</span>。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> react quickly / calmly = 迅速／冷靜地反應</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> react against = 反對</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> I was prepared and able to react quickly.</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-5">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">survival</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-5')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-5')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Nowadays, the <span class="col"><span class="tgt">survival</span> rate</span> for cancer patients is much higher than before.</div>
+            <div class="example-zh">(現今，癌症病患的<span class="hl">存活率</span>比以前高很多。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Nowadays, the survival rate for cancer patients is much higher than before.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 The lucky man <span class="col"><span class="tgt">survived</span></span> the car crash with no injuries.</div>
+            <div class="example-zh">(這個幸運的男人在車禍中<span class="hl">倖存下來</span>，毫髮無傷。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('The lucky man survived the car crash with no injuries.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 More than 90 percent of <span class="col"><span class="tgt">survivors</span></span> are saved within the first 72 hours after an earthquake.</div>
+            <div class="example-zh">(超過 90% 的<span class="hl">生還者</span>是在地震後的前 72 小時內獲救的。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('More than 90 percent of survivors are saved within the first 72 hours after an earthquake.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-deriv-header">survive [sɚ`vaɪv] vi. vt. 生存，存活</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 The lucky man <span class="col"><span class="tgt">survived</span> the car crash</span> with no injuries.</div>
+            <div class="supp-ex-zh">(那名幸運的男子在車禍中<span class="hl">倖存</span>，毫髮無傷。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('The lucky man survived the car crash with no injuries.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-deriv-header">survivor [sɚ`vaɪvɚ] n. 倖存者，生還者</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 More than 90 percent of <span class="col"><span class="tgt">survivors</span> are saved</span> within the first 72 hours.</div>
+            <div class="supp-ex-zh">(超過百分之九十的<span class="hl">生還者</span>是在地震後72小時內獲救。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('More than 90 percent of survivors are saved within the first 72 hours.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> survival kit = 生存工具組</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> survival of the fittest = 適者生存</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> It is basically a survival kit.</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-6">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">kit</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-6')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-6')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 The hiker carried a <span class="col">survival <span class="tgt">kit</span></span> with a lighter, dried food, and a knife.</div>
+            <div class="example-zh">(這名登山客攜帶了一個含有打火機、乾燥食物和刀子的<span class="hl">生存工具包</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('The hiker carried a survival kit with a lighter, dried food, and a knife.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> first-aid kit = 急救藥箱</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> survival kit = 生存工具組</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> a survival kit</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-7">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">emergency</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-7')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-7')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 <span class="col">In an <span class="tgt">emergency</span></span>, follow the signs to the exit.</div>
+            <div class="example-zh">(<span class="hl">在緊急情況下</span>，請遵循標誌前往出口。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('In an emergency, follow the signs to the exit.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> emergency exit = 緊急出口</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> emergency room (ER) = 急診室</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> emergency supplies = 緊急物資</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> for other emergencies, such as house fires</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-8">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">essential</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-8')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-8')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Water and food are <span class="col"><span class="tgt">essential</span> for</span> life.</div>
+            <div class="example-zh">(水和食物<span class="hl">對</span>生命是<span class="hl">必要的</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Water and food are essential for life.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> essential items = 必需品</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> pack your bag with essential items</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-9">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">preserve</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-9')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-9')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 We must <span class="col"><span class="tgt">preserve</span> this ancient temple</span> because it is an essential part of our culture.</div>
+            <div class="example-zh">(我們必須<span class="hl">維護這座古老的寺廟</span>，因為它是我們文化中必要的一部分。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('We must preserve this ancient temple because it is an essential part of our culture.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> easy-to-preserve = 容易保存的</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> well-preserved = 保存完好的</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> water and easy-to-preserve food</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-10">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">document</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-10')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-10')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 I always <span class="col">check <span class="tgt">documents</span> for errors</span> before I give them to my boss.</div>
+            <div class="example-zh">(在將文件交給老闆之前，我總是會<span class="hl">檢查文件是否有錯誤</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('I always check documents for errors before I give them to my boss.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-deriv-header">documentary [ˌdɑkjə`mɛntəri] n. 紀錄片</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 <em>Beyond Beauty: Taiwan from Above</em> is a famous <span class="col"><span class="tgt">documentary</span></span>.</div>
+            <div class="supp-ex-zh">(《看見臺灣》是一部著名的<span class="hl">紀錄片</span>。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('Beyond Beauty: Taiwan from Above is a famous documentary.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> legal / official document = 法律／官方文件</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> identity / personal document = 身分／個人文件</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> important documents</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-11">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">optional</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-11')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-11')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 There's an <span class="col"><span class="tgt">optional</span> club event</span> next week. You can choose to attend or not.</div>
+            <div class="example-zh">(下週有一個<span class="hl">非必要的社團活動</span>。你可以選擇參加或不參加。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('There&#x27;s an optional club event next week. You can choose to attend or not.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 When the last bus left, we had <span class="col">no <span class="tgt">option</span> but to</span> take a taxi home.</div>
+            <div class="example-zh">(當最後一班公車離開時，我們<span class="hl">別無選擇，只好</span>搭計程車回家。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('When the last bus left, we had no option but to take a taxi home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-deriv-header">option [ˈɑpʃən] n. 選擇</div>
+        <div class="supp-example-item">
+            <div class="supp-ex-en">例 When the last bus left, we had no <span class="col"><span class="tgt">option</span> but to</span> take a taxi home.</div>
+            <div class="supp-ex-zh">(當末班車離去，我們<span class="hl">別無選擇</span>只能搭計程車回家。)</div>
+            <button class="example-speak-btn supp-speak" type="button" onclick="speakSentence('When the last bus left, we had no option but to take a taxi home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> optional subjects / courses = 選修科目／課程</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> optional equipment = 選配裝備</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> some other optional items</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-12">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">spare</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-12')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-12')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 For safety, cars should always carry a <span class="col"><span class="tgt">spare</span> tire</span>.</div>
+            <div class="example-zh">(為了安全起見，汽車應該隨時攜帶<span class="hl">備用輪胎</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('For safety, cars should always carry a spare tire.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> spare time = 空檔時間</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> spare key = 備用鑰匙</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> spare tire = 備胎</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> cash, spare keys, a raincoat</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-13">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">update</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-13')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-13')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 The school has just <span class="col"><span class="tgt">updated</span> all its computer equipment</span>.</div>
+            <div class="example-zh">(學校剛<span class="hl">更新了其所有的電腦設備</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('The school has just updated all its computer equipment.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> update information = 更新資訊</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> keep the items updated</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-14">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">grab</span>
+        </div>
+        <button class="supplement-btn" type="button" onclick="toggleSupp('panel-14')"><span class="supp-icon">📖</span> 補充</button>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-14')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Ben <span class="col"><span class="tgt">grabbed</span> a handful of candy</span> from the bowl.</div>
+            <div class="example-zh">(Ben 從碗裡<span class="hl">抓了一把糖果</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Ben grabbed a handful of candy from the bowl.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 Noah called his parents <span class="col"><span class="tgt">as soon as</span> his plane landed</span> in Chicago.</div>
+            <div class="example-zh">(Noah 的飛機<span class="hl">一降落</span>在芝加哥，他<span class="hl">就</span>打電話給父母。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Noah called his parents as soon as his plane landed in Chicago.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 Billy stood on a chair to <span class="col"><span class="tgt">reach for</span> the cookies</span> on the top shelf.</div>
+            <div class="example-zh">(Billy 站在椅子上<span class="hl">伸手拿拿餅乾</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Billy stood on a chair to reach for the cookies on the top shelf.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 The letter "P" on the sign <span class="col"><span class="tgt">stands for</span> parking</span>.</div>
+            <div class="example-zh">(標誌上的字母 "P" <span class="hl">代表停車</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('The letter &quot;P&quot; on the sign stands for parking.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 Before the movie starts, we should <span class="col"><span class="tgt">make sure</span> we turn off our phones</span>.</div>
+            <div class="example-zh">(在電影開始前，我們應該<span class="hl">確保關掉手機</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Before the movie starts, we should make sure we turn off our phones.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 <span class="col"><span class="tgt">Make sure</span> to keep</span> your emergency kit in an easy-to-reach place.</div>
+            <div class="example-zh">(<span class="hl">務必確保把</span>你的緊急備用包<span class="hl">放</span>在容易拿到的地方。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Make sure to keep your emergency kit in an easy-to-reach place.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 <span class="col"><span class="tgt">As the saying goes</span></span>, "Better late than never."</div>
+            <div class="example-zh">(<span class="hl">俗話說</span>：「遲做總比不做好」。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('As the saying goes, &quot;Better late than never.&quot;')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook</span> something at home.</div>
+            <div class="example-zh">(我們<span class="hl">不是叫披薩，就是在家煮</span>點東西。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('We can either order pizza or cook something at home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+    <div class="supplement-view">
+        <div class="supplement-title">核心知識與字詞運用</div>
+        <div class="supp-notes-section">
+            <div class="supp-notes-header">📖 字詞運用</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> grab one's attention = 吸引某人的注意</div>
+            <div class="supp-note-item"><span class="supp-note-label">搭配用法</span> grab a bite / drink = 隨便吃／喝點東西</div>
+            <div class="supp-note-item"><span class="supp-note-label">課文語境</span> make sure that you can grab your bag quickly</div>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-15">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">as soon as 一……就……</span>
+        </div>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-15')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Noah called his parents <span class="col"><span class="tgt">as soon as</span> his plane landed</span> in Chicago.</div>
+            <div class="example-zh">(Noah 的飛機<span class="hl">一降落</span>在芝加哥，他<span class="hl">就</span>打電話給父母。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Noah called his parents as soon as his plane landed in Chicago.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-16">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">reach for 伸手拿</span>
+        </div>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-16')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Billy stood on a chair to <span class="col"><span class="tgt">reach for</span> the cookies</span> on the top shelf.</div>
+            <div class="example-zh">(Billy 站在椅子上<span class="hl">伸手拿拿餅乾</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Billy stood on a chair to reach for the cookies on the top shelf.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-17">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">stand for 代表</span>
+        </div>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-17')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 The letter "P" on the sign <span class="col"><span class="tgt">stands for</span> parking</span>.</div>
+            <div class="example-zh">(標誌上的字母 "P" <span class="hl">代表停車</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('The letter &quot;P&quot; on the sign stands for parking.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-18">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">make sure 確定，確保</span>
+        </div>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-18')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 Before the movie starts, we should <span class="col"><span class="tgt">make sure</span> we turn off our phones</span>.</div>
+            <div class="example-zh">(在電影開始前，我們應該<span class="hl">確保關掉手機</span>。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Before the movie starts, we should make sure we turn off our phones.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+        <div class="example-item">
+            <div class="example-en">例 <span class="col"><span class="tgt">Make sure</span> to keep</span> your emergency kit in an easy-to-reach place.</div>
+            <div class="example-zh">(<span class="hl">務必確保把</span>你的緊急備用包<span class="hl">放</span>在容易拿到的地方。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('Make sure to keep your emergency kit in an easy-to-reach place.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-19">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">as the saying goes 俗話說</span>
+        </div>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-19')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 <span class="col"><span class="tgt">As the saying goes</span></span>, "Better late than never."</div>
+            <div class="example-zh">(<span class="hl">俗話說</span>：「遲做總比不做好」。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('As the saying goes, &quot;Better late than never.&quot;')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+</div>
+<div class="example-panel" id="panel-20">
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <span class="ex-badge">EXAMPLES</span>
+            <span class="panel-title-text">either ... or ... 不是……就是……</span>
+        </div>
+        <button class="panel-close-btn" type="button" onclick="closePanel('panel-20')">✕</button>
+    </div>
+    <div class="panel-subtitle">課文例句</div>
+    <div class="examples-view">
+        <div class="example-item">
+            <div class="example-en">例 We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook</span> something at home.</div>
+            <div class="example-zh">(我們<span class="hl">不是叫披薩，就是在家煮</span>點東西。)</div>
+            <button class="example-speak-btn" type="button" onclick="speakSentence('We can either order pizza or cook something at home.')" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+    </div>
+</div>
 
 <script>
     function speak(word) {
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(word);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.8;
-        utterance.pitch = 1;
-        const voices = window.speechSynthesis.getVoices();
-        const preferredVoice = voices.find(voice => voice.name.includes("Google US English")) || voices.find(voice.lang === 'en-US');
-        if (preferredVoice) { utterance.voice = preferredVoice; }
-        window.speechSynthesis.speak(utterance);
+        const u = new SpeechSynthesisUtterance(word);
+        u.lang = 'en-US'; u.rate = 0.8; u.pitch = 1;
+        const v = window.speechSynthesis.getVoices();
+        const pv = v.find(x => x.name.includes("Google US English")) || v.find(x => x.lang === 'en-US');
+        if (pv) u.voice = pv;
+        window.speechSynthesis.speak(u);
     }
     function speakSentence(text) {
         window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.85;
-        utterance.pitch = 1;
-        const voices = window.speechSynthesis.getVoices();
-        const preferredVoice = voices.find(voice => voice.name.includes("Google US English")) || voices.find(voice.lang === 'en-US');
-        if (preferredVoice) { utterance.voice = preferredVoice; }
-        window.speechSynthesis.speak(utterance);
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+        const v = window.speechSynthesis.getVoices();
+        const pv = v.find(x => x.name.includes("Google US English")) || v.find(x => x.lang === 'en-US');
+        if (pv) u.voice = pv;
+        window.speechSynthesis.speak(u);
     }
     window.speechSynthesis.onvoiceschanged = function() {};
 
-    const slides = Array.from(document.querySelectorAll('.slide-container')).filter(s => s.id !== 'slide1');
+    /* ── Slide navigation ── */
+    const slides = Array.from(document.querySelectorAll('.slide-container'));
     const gridEl = document.getElementById('cardGrid');
     slides.forEach(s => s.classList.add('hidden'));
 
@@ -1120,16 +1112,16 @@ body{font-family:'Noto Sans TC','Inter','Microsoft JhengHei',sans-serif;backgrou
         const card = document.createElement('button');
         card.className = 'card';
         card.type = 'button';
-        const wordEl = document.createElement('span');
-        wordEl.className = 'card-word' + (c.isPhrase ? ' phrase' : '');
-        wordEl.textContent = c.word;
-        const posEl = document.createElement('span');
-        posEl.className = 'card-pos';
-        posEl.textContent = c.pos;
-        const defEl = document.createElement('span');
-        defEl.className = 'card-def';
-        defEl.textContent = c.def;
-        card.append(wordEl, posEl, defEl);
+        const w = document.createElement('span');
+        w.className = 'card-word' + (c.isPhrase ? ' phrase' : '');
+        w.textContent = c.word;
+        const p = document.createElement('span');
+        p.className = 'card-pos';
+        p.textContent = c.pos;
+        const d = document.createElement('span');
+        d.className = 'card-def';
+        d.textContent = c.def;
+        card.append(w, p, d);
         card.addEventListener('click', () => showSlide(i));
         gridEl.appendChild(card);
     });
@@ -1141,65 +1133,68 @@ body{font-family:'Noto Sans TC','Inter','Microsoft JhengHei',sans-serif;backgrou
         window.scrollTo(0, 0);
         speak(cards[i].word.replace(/…+/g, ' ').replace(/\s+/g, ' ').trim());
     }
-
     function showGrid() {
         document.getElementById('gridView').classList.remove('hidden');
         document.getElementById('backBtn').classList.add('hidden');
         slides.forEach(s => s.classList.add('hidden'));
         window.scrollTo(0, 0);
     }
+
+    /* ── Example panel toggle ── */
+    const panelStates = {};
+    function openPanel(id) {
+        const panel = document.getElementById(id);
+        if (!panel) return;
+        panel.classList.add('visible');
+        panelStates[id] = { showing: true, supp: false };
+        const ev = panel.querySelector('.examples-view');
+        const sv = panel.querySelector('.supplement-view');
+        if (ev) ev.style.display = '';
+        if (sv) sv.style.display = 'none';
+    }
+    function closePanel(id) {
+        const panel = document.getElementById(id);
+        if (!panel) return;
+        panel.classList.remove('visible');
+        panelStates[id] = { showing: false, supp: false };
+        const ev = panel.querySelector('.examples-view');
+        const sv = panel.querySelector('.supplement-view');
+        const btn = panel.querySelector('.supplement-btn');
+        if (ev) ev.style.display = '';
+        if (sv) sv.style.display = 'none';
+        if (btn) { btn.classList.remove('active'); btn.innerHTML = '<span class="supp-icon">📖</span> 補充'; }
+    }
+    function toggleSupp(id) {
+        const panel = document.getElementById(id);
+        if (!panel) return;
+        const st = panelStates[id] || { supp: false };
+        st.supp = !st.supp;
+        panelStates[id] = st;
+        const ev = panel.querySelector('.examples-view');
+        const sv = panel.querySelector('.supplement-view');
+        const btn = panel.querySelector('.supplement-btn');
+        if (st.supp) {
+            if (ev) ev.style.display = 'none';
+            if (sv) sv.style.display = '';
+            if (btn) { btn.classList.add('active'); btn.innerHTML = '<span class="supp-icon">📖</span> 例句'; }
+        } else {
+            if (ev) ev.style.display = '';
+            if (sv) sv.style.display = 'none';
+            if (btn) { btn.classList.remove('active'); btn.innerHTML = '<span class="supp-icon">📖</span> 補充'; }
+        }
+    }
 </script>
 
 <script>
 (function(){
-    document.querySelectorAll('.slide-container').forEach(function(slide){
+    /* Bind example-tab-btn on each slide to open its panel */
+    document.querySelectorAll('.slide-container').forEach(function(slide, idx){
         var btn = slide.querySelector('.example-tab-btn');
-        var panel = slide.querySelector('.example-panel');
-        var main = slide.querySelector('.centered-layout');
-        var suppBtn = slide.querySelector('.supplement-btn');
-        var examplesView = slide.querySelector('.examples-view');
-        var supplementView = slide.querySelector('.supplement-view');
-        if(!btn||!panel) return;
-        var showing = false;
-        var showingSupp = false;
-
+        if (!btn) return;
         btn.addEventListener('click', function(e){
             e.stopPropagation();
-            showing = !showing;
-            if(showing){
-                panel.classList.add('visible');
-                if(main) main.style.display='none';
-                btn.classList.add('active');
-                btn.innerHTML='<span class="tab-icon">📖</span> 字卡';
-                showingSupp = false;
-                if(examplesView) examplesView.style.display='';
-                if(supplementView) supplementView.style.display='none';
-                if(suppBtn){ suppBtn.classList.remove('active'); suppBtn.innerHTML='<span class="supp-icon">📖</span> 補充'; }
-            } else {
-                panel.classList.remove('visible');
-                if(main) main.style.display='';
-                btn.classList.remove('active');
-                btn.innerHTML='<span class="tab-icon">📖</span> 例句';
-            }
+            openPanel('panel-' + idx);
         });
-
-        if(suppBtn){
-            suppBtn.addEventListener('click', function(e){
-                e.stopPropagation();
-                showingSupp = !showingSupp;
-                if(showingSupp){
-                    if(examplesView) examplesView.style.display='none';
-                    if(supplementView) supplementView.style.display='';
-                    suppBtn.classList.add('active');
-                    suppBtn.innerHTML='<span class="supp-icon">📖</span> 例句';
-                } else {
-                    if(examplesView) examplesView.style.display='';
-                    if(supplementView) supplementView.style.display='none';
-                    suppBtn.classList.remove('active');
-                    suppBtn.innerHTML='<span class="supp-icon">📖</span> 補充';
-                }
-            });
-        }
     });
 })();
 </script>
