@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L01 What's in My B.O.B.? 摮</title>
+<title>L01 What's in My B.O.B.? 字卡</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .title-layout h1 { font-family: 'Crimson Pro', serif; font-size: 80px; margin-bottom: 24px; color: #1e293b; }
 .title-layout p { font-size: 24px; color: #64748b; max-width: 600px; }
 
-/* ?? Example tab + panel ?? */
+/* ── Example tab + panel ── */
 .example-tab-btn { position: absolute; bottom: 24px; right: 24px; z-index: 10; background: linear-gradient(145deg, #3b82f6, #2563eb); color: #fff; border: none; border-radius: 50px; padding: 12px 24px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(37,99,235,0.35); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: inherit; }
 .example-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.45); }
 .example-tab-btn:active { transform: translateY(0); }
@@ -116,18 +116,18 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 <body>
 <header class="topbar">
     <h1>L01 Vocabulary List</h1>
-    <button id="backBtn" class="hidden" onclick="showGrid()" type="button"><i class="fa-solid fa-arrow-left"></i> 餈?摮蝮質汗</button>
+    <button id="backBtn" class="hidden" onclick="showGrid()" type="button"><i class="fa-solid fa-arrow-left"></i> 返回字卡總覽</button>
 </header>
 
-<!-- 摮蝮質汗 Grid -->
+<!-- 字卡總覽 Grid -->
 <div class="grid-wrap" id="gridView">
     <div id="cardGrid"></div>
 </div>
 
 
-<!-- ?桀? fright -->
+<!-- 單字 fright -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -138,11 +138,11 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">fright</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">igh</div><div class="char-bottom ph-vowel">a阞</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">igh</div><div class="char-bottom ph-vowel">aɪ</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">嚗??嗥?嚗?????/div>
+            <div class="definition">（突然的）驚嚇、恐懼</div>
             <div class="def-en">(a sudden feeling of fear)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">shock</span></div>
             
@@ -151,9 +151,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? warning -->
+<!-- 單字 warning -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -162,13 +162,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">n.</span>
                 <button class="audio-btn" onclick="speak('warning')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">warn 繚 ing</div>
+            <div class="syllable-text">warn · ing</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">w</div><div class="char-bottom ph-cons">w</div></div><div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>?r</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">ng</div><div class="char-bottom ph-cons">?</div></div>
+                <div class="phonics-pair"><div class="char-top">w</div><div class="char-bottom ph-cons">w</div></div><div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɔr</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">ng</div><div class="char-bottom ph-cons">ŋ</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">霅血?</div>
+            <div class="definition">警告</div>
             <div class="def-en">(a message that tells people to be ready for possible danger)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">alarm, alert</span></div>
             
@@ -177,9 +177,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? disaster -->
+<!-- 單字 disaster -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -188,13 +188,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">n.</span>
                 <button class="audio-btn" onclick="speak('disaster')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">di 繚 sas 繚 ter</div>
+            <div class="syllable-text">di · sas · ter</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>疆</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel">?</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel">ɚ</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">?賡</div>
+            <div class="definition">災難</div>
             <div class="def-en">(an event causing great harm or death)</div>
             
             
@@ -203,9 +203,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? prepared -->
+<!-- 單字 prepared -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -214,13 +214,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">adj.</span>
                 <button class="audio-btn" onclick="speak('prepared')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">pre 繚 pared</div>
+            <div class="syllable-text">pre · pared</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>?</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">??/div></div><div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div><div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">皞?憟賜?嚗?皞???/div>
+            <div class="definition">準備好的，有準備的</div>
             <div class="def-en">(be ready for something to happen)</div>
             
             
@@ -229,9 +229,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? react -->
+<!-- 單字 react -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -240,13 +240,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">vi.</span>
                 <button class="audio-btn" onclick="speak('react')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">re 繚 act</div>
+            <div class="syllable-text">re · act</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>疆</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">??</div>
+            <div class="definition">反應</div>
             <div class="def-en">(to act as a result of a situation or an event)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">respond</span></div>
             
@@ -255,9 +255,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? survival -->
+<!-- 單字 survival -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -266,13 +266,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">n.</span>
                 <button class="audio-btn" onclick="speak('survival')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">sur 繚 vi 繚 val</div>
+            <div class="syllable-text">sur · vi · val</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">ur</div><div class="char-bottom ph-vowel">?</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>a阞</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">廎?/div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">ur</div><div class="char-bottom ph-vowel">ɚ</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>aɪ</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">??嚗?瘣?/div>
+            <div class="definition">生存，存活</div>
             <div class="def-en">(the state or act of staying alive)</div>
             
             
@@ -281,9 +281,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? kit -->
+<!-- 單字 kit -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -294,11 +294,11 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">kit</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">k</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">k</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">???極??/div>
+            <div class="definition">成套的工具</div>
             <div class="def-en">(a set of items or tools)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">equipment, tool</span></div>
             
@@ -307,9 +307,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? emergency -->
+<!-- 單字 emergency -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -318,13 +318,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">n.</span>
                 <button class="audio-btn" onclick="speak('emergency')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">e 繚 mer 繚 gen 繚 cy</div>
+            <div class="syllable-text">e · mer · gen · cy</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>?</div></div><div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">d?</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">?</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">阞</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div><div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">dʒ</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">蝺交?瘜?/div>
+            <div class="definition">緊急情況</div>
             <div class="def-en">(a sudden situation that requires quick reactions)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">crisis</span></div>
             
@@ -333,9 +333,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? essential -->
+<!-- 單字 essential -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -344,13 +344,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">adj.</span>
                 <button class="audio-btn" onclick="speak('essential')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">es 繚 sen 繚 tial</div>
+            <div class="syllable-text">es · sen · tial</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>?</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">?</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">?</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">廎?/div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">ʃ</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">敹???/div>
+            <div class="definition">必要的</div>
             <div class="def-en">(very important and necessary)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">necessary, required</span></div>
             
@@ -359,9 +359,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? preserve -->
+<!-- 單字 preserve -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -370,13 +370,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">vt.</span>
                 <button class="audio-btn" onclick="speak('preserve')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">pre 繚 serve</div>
+            <div class="syllable-text">pre · serve</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">阞</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>?</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">??/div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">z</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">靽?嚗雁霅?/div>
+            <div class="definition">保存，維護</div>
             <div class="def-en">(to prevent something from being damaged)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">maintain, protect</span></div>
             
@@ -385,9 +385,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? document -->
+<!-- 單字 document -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -396,13 +396,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">n.</span>
                 <button class="audio-btn" onclick="speak('document')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">doc 繚 u 繚 ment</div>
+            <div class="syllable-text">doc · u · ment</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>?</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">j?</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">?</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">jǝ</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">?辣</div>
+            <div class="definition">文件</div>
             <div class="def-en">(a written or printed piece of information that records something)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">papers</span></div>
             
@@ -411,9 +411,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? optional -->
+<!-- 單字 optional -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -422,13 +422,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">adj.</span>
                 <button class="audio-btn" onclick="speak('optional')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">op 繚 tion 繚 al</div>
+            <div class="syllable-text">op · tion · al</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>?</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">ti</div><div class="char-bottom ph-cons">?</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel">?</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">廎?/div></div>
+                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɑ</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">ti</div><div class="char-bottom ph-cons">ʃ</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel">ǝ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">al</div><div class="char-bottom ph-vowel">ḷ</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">?舫??嚗?敹???/div>
+            <div class="definition">可選擇的，非必要的</div>
             <div class="def-en">(available as a choice but not required)</div>
             
             
@@ -437,9 +437,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? spare -->
+<!-- 單字 spare -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -450,11 +450,11 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">spare</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel">?r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">??/div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel">ɛr</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">???/div>
+            <div class="definition">備用的</div>
             <div class="def-en">(additional or extra)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">extra, back-up</span></div>
             
@@ -463,9 +463,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? update -->
+<!-- 單字 update -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -474,13 +474,13 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">vt.</span>
                 <button class="audio-btn" onclick="speak('update')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">up 繚 date</div>
+            <div class="syllable-text">up · date</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">?</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">?</span>e</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">??/div></div>
+                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">ʌ</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">雿踱色行??/div>
+            <div class="definition">使……更新</div>
             <div class="def-en">(to add the latest information to something)</div>
             
             
@@ -489,9 +489,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?桀? grab -->
+<!-- 單字 grab -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -502,11 +502,11 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">grab</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">氶</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">疆</div></div><div class="phonics-pair"><div class="char-top">b</div><div class="char-bottom ph-cons">b</div></div>
+                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">æ</div></div><div class="phonics-pair"><div class="char-top">b</div><div class="char-bottom ph-cons">b</div></div>
             </div>
         </div>
         <div class="definition-container">
-            <div class="definition">??</div>
+            <div class="definition">抓取</div>
             <div class="def-en">(to take or catch something suddenly)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">catch, take</span></div>
             
@@ -515,9 +515,9 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 
 </div>
 
-<!-- ?? as soon as -->
+<!-- 片語 as soon as -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -526,19 +526,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">conj.</span>
                 <button class="audio-btn" onclick="speak('as soon as')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">??</div>
+            <div class="syllable-text">片語</div>
         </div>
         <div class="definition-container">
-            <div class="definition">銝?色血停?色?/div>
+            <div class="definition">一……就……</div>
             <div class="def-en">(at the earliest possible moment after something else happens)</div>
             
             
         </div>
     </div>
 
-<!-- ?? reach for -->
+</div>
+
+<!-- 片語 reach for -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -547,19 +549,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">phr.</span>
                 <button class="audio-btn" onclick="speak('reach for')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">??</div>
+            <div class="syllable-text">片語</div>
         </div>
         <div class="definition-container">
-            <div class="definition">隡豢???/div>
+            <div class="definition">伸手拿</div>
             <div class="def-en">(to stretch one's arm out to get or touch something)</div>
             
             
         </div>
     </div>
 
-<!-- ?? stand for -->
+</div>
+
+<!-- 片語 stand for -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -568,19 +572,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">phr.</span>
                 <button class="audio-btn" onclick="speak('stand for')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">??</div>
+            <div class="syllable-text">片語</div>
         </div>
         <div class="definition-container">
-            <div class="definition">隞?”</div>
+            <div class="definition">代表</div>
             <div class="def-en">(to mean a set of words or an idea)</div>
             <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">represent</span></div>
             
         </div>
     </div>
 
-<!-- ?? make sure -->
+</div>
+
+<!-- 片語 make sure -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -589,19 +595,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">phr.</span>
                 <button class="audio-btn" onclick="speak('make sure')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">??</div>
+            <div class="syllable-text">片語</div>
         </div>
         <div class="definition-container">
-            <div class="definition">蝣箏?嚗Ⅱ靽?/div>
+            <div class="definition">確定，確保</div>
             <div class="def-en">(to take action to be certain about something)</div>
             
             
         </div>
     </div>
 
-<!-- ?? as the saying goes -->
+</div>
+
+<!-- 片語 as the saying goes -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -610,36 +618,40 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
                 <span class="pos-tag">phr.</span>
                 <button class="audio-btn" onclick="speak('as the saying goes')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">??</div>
+            <div class="syllable-text">片語</div>
         </div>
         <div class="definition-container">
-            <div class="definition">靽店隤?/div>
+            <div class="definition">俗話說</div>
             <div class="def-en">(to introduce an expression)</div>
             
             
         </div>
     </div>
 
-<!-- ?? either ??or ??-->
+</div>
+
+<!-- 片語 either … or … -->
 <div class="slide-container">
-    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 靘</button>
+    <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
 
     <div class="centered-layout">
         <div class="main-content-wrapper">
             <div class="word-header">
-                <h2 class="headword phrase">either ??or ??/h2>
+                <h2 class="headword phrase">either … or …</h2>
                 <span class="pos-tag">conj.</span>
-                <button class="audio-btn" onclick="speak('either ??or ??)"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="audio-btn" onclick="speak('either … or …')"><i class="fa-solid fa-volume-high"></i></button>
             </div>
-            <div class="syllable-text">??</div>
+            <div class="syllable-text">片語</div>
         </div>
         <div class="definition-container">
-            <div class="definition">銝?色血停?胼色?/div>
+            <div class="definition">不是……就是……</div>
             <div class="def-en">(a choice between two options)</div>
             
             
         </div>
     </div>
+
+</div>
 
 
 
@@ -706,7 +718,7 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         document.getElementById('backBtn').classList.remove('hidden');
         slides.forEach((s, j) => s.classList.toggle('hidden', j !== i));
         window.scrollTo(0, 0);
-        speak(cards[i].word.replace(/??/g, ' ').replace(/\s+/g, ' ').trim());
+        speak(cards[i].word.replace(/…+/g, ' ').replace(/\s+/g, ' ').trim());
     }
 
     function showGrid() {
@@ -759,17 +771,17 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?A sudden knock at the door <span class="col">gave Linda a <span class="tgt">fright</span></span>.</div>
-      <div class="ep-ex-zh">(蝒????span class="hl">霈?Linda ??銝頝?/span>??</div>
-      <button class="ep-speak" type="button" data-text="A sudden knock at the door gave Linda a fright." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 A sudden knock at the door <span class="col">gave Linda a <span class="tgt">fright</span></span>.</div>
+      <div class="ep-ex-zh">(突然的敲門聲<span class="hl">讓 Linda 嚇了一跳</span>。)</div>
+      <button class="ep-speak" type="button" data-text="A sudden knock at the door gave Linda a fright." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Don't move, or you'll <span class="col"><span class="tgt">frighten</span> the birds away</span>.</div>
-      <div class="ep-ex-zh">(?亙?嚗????span class="hl">?野??</span>??</div>
-      <button class="ep-speak" type="button" data-text="Don&#x27;t move, or you&#x27;ll frighten the birds away." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Don't move, or you'll <span class="col"><span class="tgt">frighten</span> the birds away</span>.</div>
+      <div class="ep-ex-zh">(別動，否則你會<span class="hl">把鳥嚇跑</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Don&#x27;t move, or you&#x27;ll frighten the birds away." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -793,17 +805,17 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?The power went off <span class="col">without <span class="tgt">warning</span></span> and left the town in darkness.</div>
-      <div class="ep-ex-zh">(?餅?<span class="hl">瘥怎霅血???/span>銝剜嚗?撠?瑕暺???</div>
-      <button class="ep-speak" type="button" data-text="The power went off without warning and left the town in darkness." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 The power went off <span class="col">without <span class="tgt">warning</span></span> and left the town in darkness.</div>
+      <div class="ep-ex-zh">(電源<span class="hl">毫無警告地</span>中斷，讓小鎮陷入黑暗。)</div>
+      <button class="ep-speak" type="button" data-text="The power went off without warning and left the town in darkness." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?The sign <span class="col"><span class="tgt">warns</span> drivers of</span> falling rocks ahead.</div>
-      <div class="ep-ex-zh">(??隤?span class="hl">霅血?擏?鈭箸釣??/span>???喋?</div>
-      <button class="ep-speak" type="button" data-text="The sign warns drivers of falling rocks ahead." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 The sign <span class="col"><span class="tgt">warns</span> drivers of</span> falling rocks ahead.</div>
+      <div class="ep-ex-zh">(這個標誌<span class="hl">警告駕駛人注意</span>前方有落石。)</div>
+      <button class="ep-speak" type="button" data-text="The sign warns drivers of falling rocks ahead." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -823,12 +835,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Many lives can be lost in a <span class="col">natural <span class="tgt">disaster</span></span> like a typhoon.</div>
-      <div class="ep-ex-zh">(閮勗???航?典?憸梢◢?見??span class="hl">?芰?賡</span>銝剖憭晞?</div>
-      <button class="ep-speak" type="button" data-text="Many lives can be lost in a natural disaster like a typhoon." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Many lives can be lost in a <span class="col">natural <span class="tgt">disaster</span></span> like a typhoon.</div>
+      <div class="ep-ex-zh">(許多生命可能在像颱風這樣的<span class="hl">自然災難</span>中喪失。)</div>
+      <button class="ep-speak" type="button" data-text="Many lives can be lost in a natural disaster like a typhoon." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -846,22 +858,22 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?When there is a typhoon warning, people need to <span class="col">be <span class="tgt">prepared</span> for</span> the danger.</div>
-      <div class="ep-ex-zh">(?嗆?憸梢◢霅血??鈭箏?閬?span class="hl">?粹?芸?憟賣???/span>??</div>
-      <button class="ep-speak" type="button" data-text="When there is a typhoon warning, people need to be prepared for the danger." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 When there is a typhoon warning, people need to <span class="col">be <span class="tgt">prepared</span> for</span> the danger.</div>
+      <div class="ep-ex-zh">(當有颱風警報時，人們需要<span class="hl">為這危險做好準備</span>。)</div>
+      <button class="ep-speak" type="button" data-text="When there is a typhoon warning, people need to be prepared for the danger." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div>
-      <div class="ep-ex-zh">(Connie ?曹?撟曉???span class="hl">?箏旦??憭批飛?Ｚ岫????/span>??</div>
-      <button class="ep-speak" type="button" data-text="Connie spent weeks preparing for her college interview." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div>
+      <div class="ep-ex-zh">(Connie 花了幾個星期<span class="hl">為她的前大學面試做準備</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Connie spent weeks preparing for her college interview." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Alice is <span class="col">making <span class="tgt">preparations</span> for</span> the party.</div>
-      <div class="ep-ex-zh">(Alice 甇?<span class="hl">?箸晷撠?皞?</span>??</div>
-      <button class="ep-speak" type="button" data-text="Alice is making preparations for the party." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Alice is <span class="col">making <span class="tgt">preparations</span> for</span> the party.</div>
+      <div class="ep-ex-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Alice is making preparations for the party." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -883,22 +895,22 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Most local people <span class="col"><span class="tgt">reacted</span> with anger</span> to the news.</div>
-      <div class="ep-ex-zh">(憭批??貊?唬犖撠??啗?<span class="hl">??斗???</span>??</div>
-      <button class="ep-speak" type="button" data-text="Most local people reacted with anger to the news." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Most local people <span class="col"><span class="tgt">reacted</span> with anger</span> to the news.</div>
+      <div class="ep-ex-zh">(大多數當地人對這則新聞<span class="hl">做出憤怒的反應</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Most local people reacted with anger to the news." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div>
-      <div class="ep-ex-zh">(??銝?閬? Harvey <span class="hl">撠?/span>隞??亦旨?拍?<span class="hl">??</span>鈭?</div>
-      <button class="ep-speak" type="button" data-text="I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div>
+      <div class="ep-ex-zh">(我等不及要看 Harvey <span class="hl">對</span>他生日禮物的<span class="hl">反應</span>了。)</div>
+      <button class="ep-speak" type="button" data-text="I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?There is a strong <span class="col"><span class="tgt">reaction</span></span> when these two chemicals are mixed together.</div>
-      <div class="ep-ex-zh">(?園蝔桀?摮貊鞈芣毽?銝韏瑟?嚗??撥??<span class="hl">?飛??</span>??</div>
-      <button class="ep-speak" type="button" data-text="There is a strong reaction when these two chemicals are mixed together." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 There is a strong <span class="col"><span class="tgt">reaction</span></span> when these two chemicals are mixed together.</div>
+      <div class="ep-ex-zh">(當這兩種化學物質混合在一起時，會有強烈的<span class="hl">化學反應</span>。)</div>
+      <button class="ep-speak" type="button" data-text="There is a strong reaction when these two chemicals are mixed together." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -918,22 +930,22 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Nowadays, the <span class="col"><span class="tgt">survival</span> rate</span> for cancer patients is much higher than before.</div>
-      <div class="ep-ex-zh">(?曆?嚗??????<span class="hl">摮暑??/span>瘥誑??敺???</div>
-      <button class="ep-speak" type="button" data-text="Nowadays, the survival rate for cancer patients is much higher than before." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Nowadays, the <span class="col"><span class="tgt">survival</span> rate</span> for cancer patients is much higher than before.</div>
+      <div class="ep-ex-zh">(現今，癌症病患的<span class="hl">存活率</span>比以前高很多。)</div>
+      <button class="ep-speak" type="button" data-text="Nowadays, the survival rate for cancer patients is much higher than before." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?The lucky man <span class="col"><span class="tgt">survived</span></span> the car crash with no injuries.</div>
-      <div class="ep-ex-zh">(?兢???瑚犖?刻?蝳葉<span class="hl">??銝?</span>嚗神擃桃?瑯?</div>
-      <button class="ep-speak" type="button" data-text="The lucky man survived the car crash with no injuries." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 The lucky man <span class="col"><span class="tgt">survived</span></span> the car crash with no injuries.</div>
+      <div class="ep-ex-zh">(這個幸運的男人在車禍中<span class="hl">倖存下來</span>，毫髮無傷。)</div>
+      <button class="ep-speak" type="button" data-text="The lucky man survived the car crash with no injuries." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?More than 90 percent of <span class="col"><span class="tgt">survivors</span></span> are saved within the first 72 hours after an earthquake.</div>
-      <div class="ep-ex-zh">(頞? 90% ??span class="hl">????/span>?臬?圈?敺???72 撠??抒????</div>
-      <button class="ep-speak" type="button" data-text="More than 90 percent of survivors are saved within the first 72 hours after an earthquake." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 More than 90 percent of <span class="col"><span class="tgt">survivors</span></span> are saved within the first 72 hours after an earthquake.</div>
+      <div class="ep-ex-zh">(超過 90% 的<span class="hl">生還者</span>是在地震後的前 72 小時內獲救的。)</div>
+      <button class="ep-speak" type="button" data-text="More than 90 percent of survivors are saved within the first 72 hours after an earthquake." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -955,12 +967,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?The hiker carried a <span class="col">survival <span class="tgt">kit</span></span> with a lighter, dried food, and a knife.</div>
-      <div class="ep-ex-zh">(???餃控摰Ｘ?撣嗡?銝????急??嗾?仿??拙??摮?<span class="hl">??撌亙??/span>??</div>
-      <button class="ep-speak" type="button" data-text="The hiker carried a survival kit with a lighter, dried food, and a knife." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 The hiker carried a <span class="col">survival <span class="tgt">kit</span></span> with a lighter, dried food, and a knife.</div>
+      <div class="ep-ex-zh">(這名登山客攜帶了一個含有打火機、乾燥食物和刀子的<span class="hl">生存工具包</span>。)</div>
+      <button class="ep-speak" type="button" data-text="The hiker carried a survival kit with a lighter, dried food, and a knife." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -978,12 +990,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?<span class="col">In an <span class="tgt">emergency</span></span>, follow the signs to the exit.</div>
-      <div class="ep-ex-zh">(<span class="hl">?函??交?瘜?</span>嚗??萄儐璅????箏??</div>
-      <button class="ep-speak" type="button" data-text="In an emergency, follow the signs to the exit." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 <span class="col">In an <span class="tgt">emergency</span></span>, follow the signs to the exit.</div>
+      <div class="ep-ex-zh">(<span class="hl">在緊急情況下</span>，請遵循標誌前往出口。)</div>
+      <button class="ep-speak" type="button" data-text="In an emergency, follow the signs to the exit." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1001,12 +1013,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Water and food are <span class="col"><span class="tgt">essential</span> for</span> life.</div>
-      <div class="ep-ex-zh">(瘞游?憌<span class="hl">撠?/span>???span class="hl">敹???/span>??</div>
-      <button class="ep-speak" type="button" data-text="Water and food are essential for life." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Water and food are <span class="col"><span class="tgt">essential</span> for</span> life.</div>
+      <div class="ep-ex-zh">(水和食物<span class="hl">對</span>生命是<span class="hl">必要的</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Water and food are essential for life." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1023,12 +1035,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?We must <span class="col"><span class="tgt">preserve</span> this ancient temple</span> because it is an essential part of our culture.</div>
-      <div class="ep-ex-zh">(????span class="hl">蝬剛風?漣?方?撖箏?</span>嚗??箏??舀????葉敹????典???</div>
-      <button class="ep-speak" type="button" data-text="We must preserve this ancient temple because it is an essential part of our culture." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 We must <span class="col"><span class="tgt">preserve</span> this ancient temple</span> because it is an essential part of our culture.</div>
+      <div class="ep-ex-zh">(我們必須<span class="hl">維護這座古老的寺廟</span>，因為它是我們文化中必要的一部分。)</div>
+      <button class="ep-speak" type="button" data-text="We must preserve this ancient temple because it is an essential part of our culture." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1046,12 +1058,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?I always <span class="col">check <span class="tgt">documents</span> for errors</span> before I give them to my boss.</div>
-      <div class="ep-ex-zh">(?典??辣鈭斤策??銋?嚗?蝮賣??span class="hl">瑼Ｘ?辣?臬?隤?/span>??</div>
-      <button class="ep-speak" type="button" data-text="I always check documents for errors before I give them to my boss." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 I always <span class="col">check <span class="tgt">documents</span> for errors</span> before I give them to my boss.</div>
+      <div class="ep-ex-zh">(在將文件交給老闆之前，我總是會<span class="hl">檢查文件是否有錯誤</span>。)</div>
+      <button class="ep-speak" type="button" data-text="I always check documents for errors before I give them to my boss." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1070,17 +1082,17 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?There's an <span class="col"><span class="tgt">optional</span> club event</span> next week. You can choose to attend or not.</div>
-      <div class="ep-ex-zh">(銝望?銝??span class="hl">??閬?蝷曉?瘣餃?</span>???臭誑?豢?????????</div>
-      <button class="ep-speak" type="button" data-text="There&#x27;s an optional club event next week. You can choose to attend or not." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 There's an <span class="col"><span class="tgt">optional</span> club event</span> next week. You can choose to attend or not.</div>
+      <div class="ep-ex-zh">(下週有一個<span class="hl">非必要的社團活動</span>。你可以選擇參加或不參加。)</div>
+      <button class="ep-speak" type="button" data-text="There&#x27;s an optional club event next week. You can choose to attend or not." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?When the last bus left, we had <span class="col">no <span class="tgt">option</span> but to</span> take a taxi home.</div>
-      <div class="ep-ex-zh">(?嗆?敺??剖頠??嚗???span class="hl">?亦?豢?嚗憟?/span>?剛?蝔??振??</div>
-      <button class="ep-speak" type="button" data-text="When the last bus left, we had no option but to take a taxi home." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 When the last bus left, we had <span class="col">no <span class="tgt">option</span> but to</span> take a taxi home.</div>
+      <div class="ep-ex-zh">(當最後一班公車離開時，我們<span class="hl">別無選擇，只好</span>搭計程車回家。)</div>
+      <button class="ep-speak" type="button" data-text="When the last bus left, we had no option but to take a taxi home." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1100,12 +1112,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?For safety, cars should always carry a <span class="col"><span class="tgt">spare</span> tire</span>.</div>
-      <div class="ep-ex-zh">(?箔?摰韏瑁?嚗掃頠?閰脤??撣?span class="hl">?頛芾?</span>??</div>
-      <button class="ep-speak" type="button" data-text="For safety, cars should always carry a spare tire." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 For safety, cars should always carry a <span class="col"><span class="tgt">spare</span> tire</span>.</div>
+      <div class="ep-ex-zh">(為了安全起見，汽車應該隨時攜帶<span class="hl">備用輪胎</span>。)</div>
+      <button class="ep-speak" type="button" data-text="For safety, cars should always carry a spare tire." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1122,12 +1134,12 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?The school has just <span class="col"><span class="tgt">updated</span> all its computer equipment</span>.</div>
-      <div class="ep-ex-zh">(摮豢??span class="hl">?湔鈭????餉閮剖?</span>??</div>
-      <button class="ep-speak" type="button" data-text="The school has just updated all its computer equipment." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 The school has just <span class="col"><span class="tgt">updated</span> all its computer equipment</span>.</div>
+      <div class="ep-ex-zh">(學校剛<span class="hl">更新了其所有的電腦設備</span>。)</div>
+      <button class="ep-speak" type="button" data-text="The school has just updated all its computer equipment." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1144,47 +1156,47 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Ben <span class="col"><span class="tgt">grabbed</span> a handful of candy</span> from the bowl.</div>
-      <div class="ep-ex-zh">(Ben 敺?鋆?span class="hl">??銝????/span>??</div>
-      <button class="ep-speak" type="button" data-text="Ben grabbed a handful of candy from the bowl." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Ben <span class="col"><span class="tgt">grabbed</span> a handful of candy</span> from the bowl.</div>
+      <div class="ep-ex-zh">(Ben 從碗裡<span class="hl">抓了一把糖果</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Ben grabbed a handful of candy from the bowl." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Noah called his parents <span class="col"><span class="tgt">as soon as</span> his plane landed</span> in Chicago.</div>
-      <div class="ep-ex-zh">(Noah ??璈?span class="hl">銝?</span>?刻??嚗?<span class="hl">撠?/span>?閰梁策?嗆???</div>
-      <button class="ep-speak" type="button" data-text="Noah called his parents as soon as his plane landed in Chicago." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Noah called his parents <span class="col"><span class="tgt">as soon as</span> his plane landed</span> in Chicago.</div>
+      <div class="ep-ex-zh">(Noah 的飛機<span class="hl">一降落</span>在芝加哥，他<span class="hl">就</span>打電話給父母。)</div>
+      <button class="ep-speak" type="button" data-text="Noah called his parents as soon as his plane landed in Chicago." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Billy stood on a chair to <span class="col"><span class="tgt">reach for</span> the cookies</span> on the top shelf.</div>
-      <div class="ep-ex-zh">(Billy 蝡璊?銝?span class="hl">隡豢??踵擗嗾</span>??</div>
-      <button class="ep-speak" type="button" data-text="Billy stood on a chair to reach for the cookies on the top shelf." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Billy stood on a chair to <span class="col"><span class="tgt">reach for</span> the cookies</span> on the top shelf.</div>
+      <div class="ep-ex-zh">(Billy 站在椅子上<span class="hl">伸手拿拿餅乾</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Billy stood on a chair to reach for the cookies on the top shelf." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?The letter "P" on the sign <span class="col"><span class="tgt">stands for</span> parking</span>.</div>
-      <div class="ep-ex-zh">(璅?銝?摮? "P" <span class="hl">隞?”??</span>??</div>
-      <button class="ep-speak" type="button" data-text="The letter &quot;P&quot; on the sign stands for parking." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 The letter "P" on the sign <span class="col"><span class="tgt">stands for</span> parking</span>.</div>
+      <div class="ep-ex-zh">(標誌上的字母 "P" <span class="hl">代表停車</span>。)</div>
+      <button class="ep-speak" type="button" data-text="The letter &quot;P&quot; on the sign stands for parking." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?Before the movie starts, we should <span class="col"><span class="tgt">make sure</span> we turn off our phones</span>.</div>
-      <div class="ep-ex-zh">(?券敶梢?憪?嚗???閰?span class="hl">蝣箔?????</span>??</div>
-      <button class="ep-speak" type="button" data-text="Before the movie starts, we should make sure we turn off our phones." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 Before the movie starts, we should <span class="col"><span class="tgt">make sure</span> we turn off our phones</span>.</div>
+      <div class="ep-ex-zh">(在電影開始前，我們應該<span class="hl">確保關掉手機</span>。)</div>
+      <button class="ep-speak" type="button" data-text="Before the movie starts, we should make sure we turn off our phones." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?<span class="col"><span class="tgt">Make sure</span> to keep</span> your emergency kit in an easy-to-reach place.</div>
-      <div class="ep-ex-zh">(<span class="hl">??蝣箔???/span>雿?蝺亙??典?<span class="hl">??/span>?典捆??啁??唳??</div>
-      <button class="ep-speak" type="button" data-text="Make sure to keep your emergency kit in an easy-to-reach place." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 <span class="col"><span class="tgt">Make sure</span> to keep</span> your emergency kit in an easy-to-reach place.</div>
+      <div class="ep-ex-zh">(<span class="hl">務必確保把</span>你的緊急備用包<span class="hl">放</span>在容易拿到的地方。)</div>
+      <button class="ep-speak" type="button" data-text="Make sure to keep your emergency kit in an easy-to-reach place." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?<span class="col"><span class="tgt">As the saying goes</span></span>, "Better late than never."</div>
-      <div class="ep-ex-zh">(<span class="hl">靽店隤?/span>嚗?蜇瘥??末??</div>
-      <button class="ep-speak" type="button" data-text="As the saying goes, &quot;Better late than never.&quot;" title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 <span class="col"><span class="tgt">As the saying goes</span></span>, "Better late than never."</div>
+      <div class="ep-ex-zh">(<span class="hl">俗話說</span>：「遲做總比不做好」。)</div>
+      <button class="ep-speak" type="button" data-text="As the saying goes, &quot;Better late than never.&quot;" title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">靘?We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook</span> something at home.</div>
-      <div class="ep-ex-zh">(??span class="hl">銝?急?抬?撠望?典振??/span>暺镼踴?</div>
-      <button class="ep-speak" type="button" data-text="We can either order pizza or cook something at home." title="??靘"><i class="fa-solid fa-volume-high"></i></button>
+      <div class="ep-ex-en">例 We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook</span> something at home.</div>
+      <div class="ep-ex-zh">(我們<span class="hl">不是叫披薩，就是在家煮</span>點東西。)</div>
+      <button class="ep-speak" type="button" data-text="We can either order pizza or cook something at home." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
   </div>
 
@@ -1202,12 +1214,10 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
-    <div class="ep-no-ex">甇文閰?∟玨????/div>
+    <div class="ep-no-ex">此單詞暫無課文例句</div>
   </div>
-</div>
-
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
@@ -1223,12 +1233,10 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
-    <div class="ep-no-ex">甇文閰?∟玨????/div>
+    <div class="ep-no-ex">此單詞暫無課文例句</div>
   </div>
-</div>
-
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
@@ -1244,12 +1252,10 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
-    <div class="ep-no-ex">甇文閰?∟玨????/div>
+    <div class="ep-no-ex">此單詞暫無課文例句</div>
   </div>
-</div>
-
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
@@ -1264,12 +1270,10 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
-    <div class="ep-no-ex">甇文閰?∟玨????/div>
+    <div class="ep-no-ex">此單詞暫無課文例句</div>
   </div>
-</div>
-
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
@@ -1284,12 +1288,10 @@ function speakSentence(text) {
     <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
-    <div class="ep-no-ex">甇文閰?∟玨????/div>
+    <div class="ep-no-ex">此單詞暫無課文例句</div>
   </div>
-</div>
-
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
@@ -1301,15 +1303,23 @@ function speakSentence(text) {
 </div>
 <div class="example-panel" id="ep-20">
   <div class="ep-header">
-    <div class="ep-header-left"><span class="ep-badge">EXAMPLES</span> <span class="ep-title">either ??or ??/span></div>
+    <div class="ep-header-left"><span class="ep-badge">EXAMPLES</span> <span class="ep-title">either … or …</span></div>
+    <button class="ep-supp-btn" type="button" onclick="toggleSupp(this)"><span class="supp-icon">📖</span> 補充</button>
     <button class="ep-close" type="button">&#x2715;</button>
   </div>
-  <div class="ep-subtitle">隤脫?靘</div>
+  <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
-    <div class="ep-no-ex">甇文閰?∟玨????/div>
+    <div class="ep-no-ex">此單詞暫無課文例句</div>
   </div>
-</div>
 
+  <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
+    <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
+      <div class="supp-note"><span class="supp-note-label">文法提示</span> 二擇一對等連接詞</div>
+      <div class="supp-note"><span class="supp-note-label">文法提示</span> 連接兩主詞時動詞與最近者一致</div>
+      <div class="supp-note"><span class="supp-note-label">延伸學習</span> neither ... nor ...</div>
+      <div class="supp-note"><span class="supp-note-label">課文語境</span> We can either be safe or be sorry.</div>
+    </div>
+</div>
 </div>
 
 <script>
