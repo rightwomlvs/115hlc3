@@ -739,6 +739,31 @@ function speakSentence(text) {
     if (pv) u.voice = pv;
     window.speechSynthesis.speak(u);
 }
+(function(){
+    var panels = document.querySelectorAll('.example-panel');
+    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            if (panels[i]) panels[i].classList.add('visible');
+        });
+    });
+    panels.forEach(function(panel){
+        panel.querySelector('.ep-close').addEventListener('click', function(){
+            panel.classList.remove('visible');
+        });
+        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
+            b.addEventListener('click', function(){
+                speakSentence(this.getAttribute('data-text'));
+            });
+        });
+    });
+    document.querySelectorAll('.supp-speak').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            speakSentence(this.getAttribute('data-text'));
+        });
+    });
+})();
 </script>
 <div class="example-panel" id="ep-0">
   <div class="ep-header">
@@ -796,7 +821,7 @@ function speakSentence(text) {
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">warn [wɔrn] vi. vt. 警告</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 The sign <span class="col"><span class="tgt">warns</span> drivers of falling rocks ahead.</span></div><div class="supp-ex-zh">(這個標示牌<span class="hl">警告</span>駕駛前方有落石。)</div><button class="ep-speak supp-speak" type="button" data-text="The sign warns drivers of falling rocks ahead." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The sign <span class="col"><span class="tgt">warns</span> drivers of</span> falling rocks ahead.</div><div class="supp-ex-zh">(這個標誌<span class="hl">警告駕駛人注意</span>前方有落石。)</div><button class="ep-speak supp-speak" type="button" data-text="The sign warns drivers of falling rocks ahead." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> issue a warning = 發出警告</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> give (sb.) a warning = 提出警告</div>
@@ -836,17 +861,17 @@ function speakSentence(text) {
   <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">例 When there is a typhoon warning, people need to <span class="col">be <span class="tgt">prepared</span> for the danger</span>.</div>
-      <div class="ep-ex-zh">(當有颱風警報時，人們需要<span class="hl">為危險做好準備</span>。)</div>
+      <div class="ep-ex-en">例 When there is a typhoon warning, people need to <span class="col">be <span class="tgt">prepared</span> for</span> the danger.</div>
+      <div class="ep-ex-zh">(當有颱風警報時，人們需要<span class="hl">為這危險做好準備</span>。)</div>
       <button class="ep-speak" type="button" data-text="When there is a typhoon warning, people need to be prepared for the danger." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for her college interview</span>.</div>
-      <div class="ep-ex-zh">(Connie 花了幾個星期<span class="hl">為大學面試做準備</span>。)</div>
+      <div class="ep-ex-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div>
+      <div class="ep-ex-zh">(Connie 花了幾個星期<span class="hl">為她的前大學面試做準備</span>。)</div>
       <button class="ep-speak" type="button" data-text="Connie spent weeks preparing for her college interview." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
     <div class="ep-ex">
-      <div class="ep-ex-en">例 Alice is <span class="col">making <span class="tgt">preparations</span> for the party</span>.</div>
+      <div class="ep-ex-en">例 Alice is <span class="col">making <span class="tgt">preparations</span> for</span> the party.</div>
       <div class="ep-ex-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div>
       <button class="ep-speak" type="button" data-text="Alice is making preparations for the party." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
@@ -854,9 +879,9 @@ function speakSentence(text) {
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">prepare [prɪˈpɛr] vi. vt. 準備</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for</span> her college interview.</div><div class="supp-ex-zh">(Connie 花了幾個星期<span class="hl">為大學面試做準備</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Connie spent weeks preparing for her college interview." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Connie spent weeks <span class="col"><span class="tgt">preparing</span> for her college interview</span>.</div><div class="supp-ex-zh">(Connie 花了幾個星期<span class="hl">為大學面試做準備</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Connie spent weeks preparing for her college interview." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-deriv-header">preparation [ˌprɛpəˈreʃən] n. 準備</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 Alice is making <span class="col"><span class="tgt">preparations</span> for</span> the party.</div><div class="supp-ex-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Alice is making preparations for the party." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 Alice is <span class="col">making <span class="tgt">preparations</span> for the party</span>.</div><div class="supp-ex-zh">(Alice 正在<span class="hl">為派對做準備</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="Alice is making preparations for the party." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> be prepared for = 為……做好準備</div>
       <div class="supp-note"><span class="supp-note-label">文法提示</span> S + find/leave/keep + O + OC</div>
@@ -891,7 +916,7 @@ function speakSentence(text) {
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">reaction [rɪˈækʃən] n. 反應</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div><div class="supp-ex-zh">(我迫不及待想看 Harvey 的<span class="hl">反應</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 I can't wait to see Harvey's <span class="col"><span class="tgt">reaction</span> to</span> his birthday gift.</div><div class="supp-ex-zh">(我等不及要看 Harvey <span class="hl">對</span>他生日禮物的<span class="hl">反應</span>了。)</div><button class="ep-speak supp-speak" type="button" data-text="I can&#x27;t wait to see Harvey&#x27;s reaction to his birthday gift." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> react quickly / calmly</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> react against = 反對</div>
@@ -926,9 +951,9 @@ function speakSentence(text) {
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">survive [sɚˈvaɪv] vi. vt. 生存</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 The lucky man <span class="col"><span class="tgt">survived</span> the car crash</span>.</div><div class="supp-ex-zh">(那名幸運的男子在車禍中<span class="hl">倖存</span>。)</div><button class="ep-speak supp-speak" type="button" data-text="The lucky man survived the car crash." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 The lucky man <span class="col"><span class="tgt">survived</span></span> the car crash with no injuries.</div><div class="supp-ex-zh">(這個幸運的男人在車禍中<span class="hl">倖存下來</span>，毫髮無傷。)</div><button class="ep-speak supp-speak" type="button" data-text="The lucky man survived the car crash with no injuries." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-deriv-header">survivor [sɚˈvaɪvɚ] n. 倖存者</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 More than 90% of <span class="col"><span class="tgt">survivors</span> are saved</span> within 72 hours.</div><div class="supp-ex-zh">(超過90%的<span class="hl">生還者</span>在72小時內獲救。)</div><button class="ep-speak supp-speak" type="button" data-text="More than 90% of survivors are saved within 72 hours." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 More than 90 percent of <span class="col"><span class="tgt">survivors</span></span> are saved within the first 72 hours after an earthquake.</div><div class="supp-ex-zh">(超過 90% 的<span class="hl">生還者</span>是在地震後的前 72 小時內獲救的。)</div><button class="ep-speak supp-speak" type="button" data-text="More than 90 percent of survivors are saved within the first 72 hours after an earthquake." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> survival kit = 生存工具組</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> survival of the fittest = 適者生存</div>
@@ -1073,7 +1098,7 @@ function speakSentence(text) {
 
   <div class="supp-view" style="display:none">    <div class="supp-title">核心知識與字詞運用</div>
     <div class="supp-deriv-header">option [ˈɑpʃən] n. 選擇</div>
-    <div class="supp-ex"><div class="supp-ex-en">例 We had no <span class="col"><span class="tgt">option</span> but to</span> take a taxi.</div><div class="supp-ex-zh">(我們<span class="hl">別無選擇</span>只能搭計程車。)</div><button class="ep-speak supp-speak" type="button" data-text="We had no option but to take a taxi." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
+    <div class="supp-ex"><div class="supp-ex-en">例 When the last bus left, we had <span class="col">no <span class="tgt">option</span> but to</span> take a taxi home.</div><div class="supp-ex-zh">(當最後一班公車離開時，我們<span class="hl">別無選擇，只好</span>搭計程車回家。)</div><button class="ep-speak supp-speak" type="button" data-text="When the last bus left, we had no option but to take a taxi home." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button></div>
     <div class="supp-notes"><div class="supp-notes-header">📖 字詞運用</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> optional subjects / courses</div>
       <div class="supp-note"><span class="supp-note-label">搭配用法</span> optional equipment</div>
@@ -1275,7 +1300,7 @@ function speakSentence(text) {
   <div class="ep-subtitle">課文例句</div>
   <div class="ep-body">
     <div class="ep-ex">
-      <div class="ep-ex-en">例 We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook something at home</span>.</div>
+      <div class="ep-ex-en">例 We can <span class="col"><span class="tgt">either</span> order pizza <span class="tgt">or</span> cook something</span> at home.</div>
       <div class="ep-ex-zh">(我們<span class="hl">不是叫披薩，就是在家煮點東西</span>。)</div>
       <button class="ep-speak" type="button" data-text="We can either order pizza or cook something at home." title="朗讀例句"><i class="fa-solid fa-volume-high"></i></button>
     </div>
@@ -1291,33 +1316,6 @@ function speakSentence(text) {
 </div>
 </div>
 
-<script>
-(function(){
-    var panels = document.querySelectorAll('.example-panel');
-    document.querySelectorAll('.example-tab-btn').forEach(function(btn, i){
-        btn.addEventListener('click', function(e){
-            e.stopPropagation();
-            if (panels[i]) panels[i].classList.add('visible');
-        });
-    });
-    panels.forEach(function(panel){
-        panel.querySelector('.ep-close').addEventListener('click', function(){
-            panel.classList.remove('visible');
-        });
-        panel.querySelectorAll('.ep-speak:not(.supp-speak)').forEach(function(b){
-            b.addEventListener('click', function(){
-                speakSentence(this.getAttribute('data-text'));
-            });
-        });
-    });
-    document.querySelectorAll('.supp-speak').forEach(function(btn){
-        btn.addEventListener('click', function(e){
-            e.stopPropagation();
-            speakSentence(this.getAttribute('data-text'));
-        });
-    });
-})();
-</script>
 <script>
 function toggleSupp(btn){
     var panel=btn.closest('.example-panel');
