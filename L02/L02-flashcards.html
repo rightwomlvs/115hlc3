@@ -24,6 +24,8 @@ body { background-color: #f0f2f5; display: flex; flex-direction: column; align-i
 .card-word.phrase { font-size: 23px; }
 .card-pos { align-self: flex-start; background-color: #e0f2fe; color: #0284c7; font-size: 14px; font-weight: 600; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
 .card-def { font-family: 'Noto Sans TC', sans-serif; font-size: 20px; color: #475569; line-height: 1.3; }
+.card-syn { font-family: 'Inter', sans-serif; font-size: 15px; color: #b45309; font-weight: 600; }
+.card-ant { font-family: 'Inter', sans-serif; font-size: 15px; color: #be123c; font-weight: 600; }
 .slide-container { width: 1280px; height: 720px; background-color: #ffffff; border-radius: 24px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; padding: 0; }
 .slide-container::before { content: ''; position: absolute; top: -50%; left: -20%; width: 80%; height: 200%; background: radial-gradient(circle, rgba(237, 242, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%); z-index: 0; pointer-events: none; }
 h1, h2, h3 { margin: 0; color: #1a1a1a; }
@@ -51,7 +53,36 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
 .definition-container { border-top: 1px solid #e2e8f0; padding-top: 24px; margin-top: auto; width: 100%; text-align: left; }
 .definition { font-family: 'Noto Sans TC', sans-serif; font-size: 56px; font-weight: 500; color: #475569; line-height: 1.3; margin-bottom: 8px; }
 .def-en { font-family: 'Inter', sans-serif; font-size: 36px; color: #94a3b8; font-weight: 400; display: block; }
+.syn-line { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+.syn-label { background-color: #fbbf24; color: #78350f; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.syn-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #b45309; font-weight: 600; }
+.ant-line { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.ant-label { background-color: #fecdd3; color: #881337; font-size: 20px; font-weight: 700; padding: 3px 12px; border-radius: 8px; letter-spacing: 1px; }
+.ant-words { font-family: 'Inter', sans-serif; font-size: 34px; color: #be123c; font-weight: 600; }
 
+/* ── Example panels ── */
+.example-tab-btn { position: absolute; bottom: 24px; right: 24px; z-index: 10; background: linear-gradient(145deg, #3b82f6, #2563eb); color: #fff; border: none; border-radius: 50px; padding: 12px 24px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(37,99,235,0.35); transition: all 0.25s ease; display: flex; align-items: center; gap: 8px; font-family: inherit; }
+.example-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,99,235,0.45); }
+.example-tab-btn:active { transform: translateY(0); }
+.example-tab-btn.active { background: linear-gradient(145deg, #64748b, #475569); }
+.example-panel { position: fixed; inset: 0; z-index: 100; background: rgba(15,23,42,0.88); backdrop-filter: blur(12px); display: none; flex-direction: column; }
+.example-panel.visible { display: flex; }
+.ep-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px 12px; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-title { color: #f1f5f9; font-size: 22px; font-weight: 600; }
+.ep-close { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: inherit; }
+.ep-close:hover { background: rgba(239,68,68,0.3); color: #fca5a5; }
+.ep-body { flex: 1; overflow-y: auto; padding: 20px 40px 40px; }
+.ep-subtitle { color: #94a3b8; font-size: 15px; padding: 10px 32px 0; flex-shrink: 0; background: rgba(30,41,59,0.95); }
+.ep-ex { background: rgba(30,41,59,0.7); border: 1px solid rgba(71,85,105,0.5); border-radius: 16px; padding: 20px 24px 16px; margin-bottom: 12px; position: relative; }
+.ep-ex-en { font-size: 30px; line-height: 1.6; color: #f1f5f9; font-weight: 500; }
+.ep-ex-zh { font-size: 22px; color: #94a3b8; margin-top: 8px; line-height: 1.6; }
+.ep-ex-en .col { border-bottom: 2px solid #facc15; padding-bottom: 1px; }
+.ep-ex-en .tgt { color: #ef4444; font-weight: 700; }
+.ep-ex-en .hl { background: rgba(250,204,21,0.3); border-radius: 4px; padding: 0 4px; }
+.ep-ex-zh .hl { color: #fde68a; }
+.ep-speak { position: absolute; top: 14px; right: 14px; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; transition: all 0.2s ease; opacity: 0.7; }
+.ep-speak:hover { background: rgba(59,130,246,0.3); color: #bfdbfe; opacity: 1; transform: scale(1.1); }
+.ep-speak:active { transform: scale(0.9); }
 /* ── Supplement ── */
 .supp-view{flex:1;overflow-y:auto;padding:12px 32px 32px}
 .supp-title{font-size:20px;font-weight:700;color:#e0e7ff;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid #334155}
@@ -86,7 +117,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
     <div id="cardGrid"></div>
 </div>
 
-<!-- 單字 1 -->
+
+<!-- 單字 logo -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -97,22 +129,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">lo · go</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div>
-                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>o</div></div>
-                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div>
-                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel">o</div></div>
+                <div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>o</div></div><div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel">o</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">標誌，商標</div>
             <div class="def-en">(a designed symbol for a person or a group)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 2 -->
+<!-- 單字 prefer -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -123,23 +154,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">pre · fer</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div>
-                <div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div><div class="phonics-pair"><div class="char-top">er</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɝ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">較喜歡，寧可</div>
             <div class="def-en">(to like someone or something better than another)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 3 -->
+<!-- 單字 research -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -150,24 +179,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">re · search</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">ea</div><div class="char-bottom ph-vowel">ɝ</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">ch</div><div class="char-bottom ph-cons">tʃ</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">ea</div><div class="char-bottom ph-vowel">ɝ</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">ch</div><div class="char-bottom ph-cons">tʃ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">研究，調查</div>
             <div class="def-en">(the study of something to discover facts or new information)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">study</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 4 -->
+<!-- 單字 judgment -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -178,25 +204,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">judge · ment</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">j</div><div class="char-bottom ph-cons">dʒ</div></div>
-                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ʌ</div></div>
-                <div class="phonics-pair"><div class="char-top">dg</div><div class="char-bottom ph-cons">dʒ</div></div>
-                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
+                <div class="phonics-pair"><div class="char-top">j</div><div class="char-bottom ph-cons">dʒ</div></div><div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ʌ</div></div><div class="phonics-pair"><div class="char-top">dg</div><div class="char-bottom ph-cons">dʒ</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">判斷</div>
             <div class="def-en">(an opinion about a person, place or thing; a decision by a court)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 5 -->
+<!-- 單字 tend -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -207,22 +229,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">tend</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɛ</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
+                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɛ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">傾向（於），往往會</div>
             <div class="def-en">(to be likely to have a particular effect)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">be likely to</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 6 -->
+<!-- 單字 specific -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -233,26 +254,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">spe · ci · fic</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div><div class="phonics-pair"><div class="char-top">f</div><div class="char-bottom ph-cons">f</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">特定的；明確的</div>
             <div class="def-en">(particular; clearly defined)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">certain, exact</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 7 -->
+<!-- 單字 passion -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -263,23 +279,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">pas · sion</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div>
-                <div class="phonics-pair"><div class="char-top">ss</div><div class="char-bottom ph-cons">ʃ</div></div>
-                <div class="phonics-pair"><div class="char-top">io</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
+                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>æ</div></div><div class="phonics-pair"><div class="char-top">ss</div><div class="char-bottom ph-cons">ʃ</div></div><div class="phonics-pair"><div class="char-top">io</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">熱情；熱衷</div>
             <div class="def-en">(any strong or powerful feeling for something; a strong liking)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">enthusiasm, interest</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 8 -->
+<!-- 單字 similarly -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -290,26 +304,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">sim · i · lar · ly</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div>
-                <div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel"><span class="sec-stress-mark">ˏ</span>ɚ</div></div>
-                <div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div>
-                <div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div><div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div><div class="phonics-pair"><div class="char-top">ar</div><div class="char-bottom ph-vowel"><span class="sec-stress-mark">ˏ</span>ɚ</div></div><div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div><div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">同樣地，相似地</div>
             <div class="def-en">(in almost the same way)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">likewise</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 9 -->
+<!-- 單字 elegance -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -320,25 +329,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">el · e · gance</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div>
-                <div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">ce</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div><div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">ɡ</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">ce</div><div class="char-bottom ph-cons">s</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">優雅，高尚</div>
             <div class="def-en">(the quality of being graceful, stylish, and tasteful)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">grace</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 10 -->
+<!-- 單字 status -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -349,24 +354,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">sta · tus</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
-                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">（社會中的）地位，身份</div>
             <div class="def-en">(a position in a social group; the current state of something)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 11 -->
+<!-- 單字 intelligence -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -377,28 +379,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">in · tel · li · gence</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div>
-                <div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">dʒ</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div>
-                <div class="phonics-pair"><div class="char-top">ce</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">t</div><div class="char-bottom ph-cons">t</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div><div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">g</div><div class="char-bottom ph-cons">dʒ</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">n</div><div class="char-bottom ph-cons">n</div></div><div class="phonics-pair"><div class="char-top">ce</div><div class="char-bottom ph-cons">s</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">智慧</div>
             <div class="def-en">(the ability to learn or understand knowledge and skills)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 12 -->
+<!-- 單字 express -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -409,24 +404,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">ex · press</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">x</div><div class="char-bottom ph-cons">ks</div></div>
-                <div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div>
-                <div class="phonics-pair"><div class="char-top">ss</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">x</div><div class="char-bottom ph-cons">ks</div></div><div class="phonics-pair"><div class="char-top">p</div><div class="char-bottom ph-cons">p</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɛ</div></div><div class="phonics-pair"><div class="char-top">ss</div><div class="char-bottom ph-cons">s</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">表達</div>
             <div class="def-en">(to clearly show one's feeling or opinions)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">show, describe</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 13 -->
+<!-- 單字 major -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -437,22 +429,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">ma · jor</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div>
-                <div class="phonics-pair"><div class="char-top">j</div><div class="char-bottom ph-cons">dʒ</div></div>
-                <div class="phonics-pair"><div class="char-top">or</div><div class="char-bottom ph-vowel">ɚ</div></div>
+                <div class="phonics-pair"><div class="char-top">m</div><div class="char-bottom ph-cons">m</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>e</div></div><div class="phonics-pair"><div class="char-top">j</div><div class="char-bottom ph-cons">dʒ</div></div><div class="phonics-pair"><div class="char-top">or</div><div class="char-bottom ph-vowel">ɚ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">主要的，重大的</div>
             <div class="def-en">(being greater than average in number or importance)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">big, main</span></div>
+            <div class="ant-line"><span class="ant-label">ANT</span> <span class="ant-words">minor</span></div>
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 14 -->
+<!-- 單字 realize -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -463,25 +454,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">re · a · lize</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">aɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">z</div><div class="char-bottom ph-cons">z</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
+                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ɪ</div></div><div class="phonics-pair"><div class="char-top">a</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">l</div><div class="char-bottom ph-cons">l</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">aɪ</div></div><div class="phonics-pair"><div class="char-top">z</div><div class="char-bottom ph-cons">z</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom silent-mark">–</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">理解，意識到</div>
             <div class="def-en">(to understand something suddenly)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">understand</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 15 -->
+<!-- 單字 discuss -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -492,24 +479,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">dis · cuss</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
-                <div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ʌ</div></div>
-                <div class="phonics-pair"><div class="char-top">ss</div><div class="char-bottom ph-cons">s</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">u</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ʌ</div></div><div class="phonics-pair"><div class="char-top">ss</div><div class="char-bottom ph-cons">s</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">討論</div>
             <div class="def-en">(to talk about and give opinions on something)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">talk about</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 單字 16 -->
+<!-- 單字 discovery -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -520,27 +504,21 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
             </div>
             <div class="syllable-text">dis · cov · er · y</div>
             <div class="phonics-container">
-                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div>
-                <div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div>
-                <div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div>
-                <div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div>
-                <div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ʌ</div></div>
-                <div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div>
-                <div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div>
-                <div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div>
-                <div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
+                <div class="phonics-pair"><div class="char-top">d</div><div class="char-bottom ph-cons">d</div></div><div class="phonics-pair"><div class="char-top">i</div><div class="char-bottom ph-vowel">ɪ</div></div><div class="phonics-pair"><div class="char-top">s</div><div class="char-bottom ph-cons">s</div></div><div class="phonics-pair"><div class="char-top">c</div><div class="char-bottom ph-cons">k</div></div><div class="phonics-pair"><div class="char-top">o</div><div class="char-bottom ph-vowel"><span class="stress-mark">ˋ</span>ʌ</div></div><div class="phonics-pair"><div class="char-top">v</div><div class="char-bottom ph-cons">v</div></div><div class="phonics-pair"><div class="char-top">e</div><div class="char-bottom ph-vowel">ə</div></div><div class="phonics-pair"><div class="char-top">r</div><div class="char-bottom ph-cons">r</div></div><div class="phonics-pair"><div class="char-top">y</div><div class="char-bottom ph-vowel">ɪ</div></div>
             </div>
         </div>
         <div class="definition-container">
             <div class="definition">發現（的事物）</div>
             <div class="def-en">(finding or learning something, especially for the first time)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">finding</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 片語 1 -->
+<!-- 片語 in order to -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -554,13 +532,15 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">為了……</div>
             <div class="def-en">(as a means of reaching a goal or purpose)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 片語 2 -->
+<!-- 片語 look into -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -574,13 +554,15 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">調查，探究</div>
             <div class="def-en">(to check out a problem or examine something)</div>
+            <div class="syn-line"><span class="syn-label">SYN</span> <span class="syn-words">investigate</span></div>
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 片語 3 -->
+<!-- 片語 stir up -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -594,13 +576,15 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">激起，引發</div>
             <div class="def-en">(to cause emotions, actions, or reactions)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 片語 4 -->
+<!-- 片語 no wonder -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -614,13 +598,15 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">難怪</div>
             <div class="def-en">(used to express that something is not surprising or easy to understand)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
 
-<!-- 片語 5 -->
+<!-- 片語 sell like hot cakes -->
 <div class="slide-container">
     <div class="centered-layout">
         <div class="main-content-wrapper">
@@ -634,11 +620,15 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         <div class="definition-container">
             <div class="definition">熱賣</div>
             <div class="def-en">(to sell very quickly or in large amounts)</div>
+            
+            
         </div>
     </div>
 
         <button class="example-tab-btn" type="button"><i class="fa-solid fa-book-open"></i> 例句</button>
     </div>
+
+
 
 
 <div class="example-panel" id="ep-0">
@@ -1217,6 +1207,8 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         word: slide.querySelector('.headword').textContent.trim(),
         pos: slide.querySelector('.pos-tag').textContent.trim(),
         def: slide.querySelector('.definition') ? slide.querySelector('.definition').textContent.trim() : '',
+        syn: slide.querySelector('.syn-words') ? slide.querySelector('.syn-words').textContent.trim() : '',
+        ant: slide.querySelector('.ant-words') ? slide.querySelector('.ant-words').textContent.trim() : '',
         isPhrase: !!slide.querySelector('.headword.phrase')
     }));
 
@@ -1234,6 +1226,18 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         defEl.className = 'card-def';
         defEl.textContent = c.def;
         card.append(wordEl, posEl, defEl);
+        if (c.syn) {
+            const synEl = document.createElement('span');
+            synEl.className = 'card-syn';
+            synEl.textContent = 'SYN ' + c.syn;
+            card.append(synEl);
+        }
+        if (c.ant) {
+            const antEl = document.createElement('span');
+            antEl.className = 'card-ant';
+            antEl.textContent = 'ANT ' + c.ant;
+            card.append(antEl);
+        }
         card.addEventListener('click', () => showSlide(i));
         gridEl.appendChild(card);
     });
