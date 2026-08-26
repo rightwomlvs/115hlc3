@@ -1119,18 +1119,19 @@ function speakSentence(text) {
 <script>
 function toggleSupp(btn){
     var panel=btn.closest(".example-panel");
+    if(!panel){alert("panel not found");return;}
     var body=panel.querySelector(".ep-body");
     var sub=panel.querySelector(".ep-subtitle");
     var sv=panel.querySelector(".supp-view");
-    if(!sv)return;
+    if(!sv){alert("supp-view not found in "+panel.id);return;}
     if(sv.style.display==="none"||sv.style.display===""){
         sv.style.display="block";body.style.display="none";
         sub.textContent="補充內容";btn.classList.add("active");
-        btn.innerHTML="<span class="supp-icon">📖</span> 例句";
+        btn.innerHTML='<span class="supp-icon">📖</span> 例句';
     }else{
         sv.style.display="none";body.style.display="";
         sub.textContent="課文例句";btn.classList.remove("active");
-        btn.innerHTML="<span class="supp-icon">📖</span> 補充";
+        btn.innerHTML='<span class="supp-icon">📖</span> 補充';
     }
 }
 </script>
