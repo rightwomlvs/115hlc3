@@ -681,9 +681,6 @@ h1, h2, h3 { margin: 0; color: #1a1a1a; }
         window.scrollTo(0, 0);
     }
 </script>
-
-
-
 <div class="example-panel" id="ep-0">
   <div class="ep-header">
     <div class="ep-header-left"><span class="ep-badge">EXAMPLES</span> <span class="ep-title">wealthy</span></div>
@@ -1126,8 +1123,8 @@ function toggleSupp(btn){
     var sub=panel.querySelector(".ep-subtitle");
     var sv=panel.querySelector(".supp-view");
     if(!sv)return;
-    if(sv.style.display==="none"){
-        sv.style.display="";body.style.display="none";
+    if(sv.style.display==="none"||sv.style.display===""){
+        sv.style.display="block";body.style.display="none";
         sub.textContent="補充內容";btn.classList.add("active");
         btn.innerHTML="<span class="supp-icon">📖</span> 例句";
     }else{
