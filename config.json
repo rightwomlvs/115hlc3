@@ -1,8 +1,8 @@
 {
-  "updated": "2026-09-11T07:56:03.138Z",
+  "updated": "2026-09-30T02:50:01.106Z",
   "quizzes": {
     "L01": true,
-    "L02": false,
+    "L02": true,
     "L03": false,
     "L04": false,
     "L05": false,
@@ -33,8 +33,8 @@
     "R16": false
   },
   "escapeRooms": {
-    "L01": false,
-    "L02": false,
+    "L01": true,
+    "L02": true,
     "L03": false,
     "L04": false,
     "L05": false,
