@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T05:51:23.315Z",
+  "updated": "2026-10-05T07:56:50.523Z",
   "quizzes": {
     "L01": true,
     "L02": true,
@@ -27,7 +27,7 @@
     "L04": false,
     "L05": false,
     "L06": false,
-    "R12": false,
+    "R12": true,
     "R34": false,
     "R56": false,
     "R16": false
