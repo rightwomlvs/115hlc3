@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T07:56:50.523Z",
+  "updated": "2026-10-06T02:19:56.217Z",
   "quizzes": {
     "L01": true,
     "L02": true,
@@ -9,7 +9,7 @@
     "L06": false
   },
   "assessments": {
-    "L01": false,
+    "L01": true,
     "L02": false,
     "L03": false,
     "L04": false,
@@ -35,9 +35,9 @@
   "escapeRooms": {
     "L01": true,
     "L02": true,
-    "L03": false,
-    "L04": false,
-    "L05": false,
-    "L06": false
+    "L03": true,
+    "L04": true,
+    "L05": true,
+    "L06": true
   }
 }
