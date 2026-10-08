@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07T03:56:22.958Z",
+  "updated": "2026-10-08T02:18:58.439Z",
   "quizzes": {
     "L01": true,
     "L02": true,
@@ -21,8 +21,8 @@
     "R16": false
   },
   "assessments_adv": {
-    "L01": false,
-    "L02": false,
+    "L01": true,
+    "L02": true,
     "L03": false,
     "L04": false,
     "L05": false,
