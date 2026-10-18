@@ -86,6 +86,7 @@
         <button class="tabs-btn" data-tab="2">Paragraph 2</button>
         <button class="tabs-btn" data-tab="3">Paragraph 3</button>
         <button class="tabs-btn" data-tab="4">Paragraph 4</button>
+        <button class="tabs-btn" data-tab="5">Paragraph 5</button>
     </div>
 
     <!-- 課文動畫 (YouTube) -->
@@ -136,11 +137,7 @@ const allSentences = [
         "words": [
             "Matilda",
             "was",
-            "a pretty woman,",
-            "but",
-            "her husband",
-            "was",
-            "not wealthy."
+            "a pretty woman."
         ],
         "subject": "Matilda",
         "verb": "was",
@@ -156,11 +153,42 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "一位漂亮女子，",
+                    "text": "一位漂亮的女子。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 1,
+        "words": [
+            "Her husband",
+            "worked",
+            "for the French government,",
+            "but",
+            "he",
+            "was",
+            "not wealthy."
+        ],
+        "subject": null,
+        "verb": null,
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "她的丈夫",
+                    "type": "s"
+                },
+                {
+                    "text": "在法國政府任職，",
                     "type": "other"
                 },
                 {
-                    "text": "但她的丈夫",
+                    "text": "但是",
+                    "type": "other"
+                },
+                {
+                    "text": "他",
                     "type": "s"
                 },
                 {
@@ -168,18 +196,18 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "富有。",
+                    "text": "富裕。",
                     "type": "other"
                 }
             ]
         },
         "pairs": [
             {
-                "subject": "Matilda",
-                "verb": "was"
+                "subject": "Her husband",
+                "verb": "worked"
             },
             {
-                "subject": "her husband",
+                "subject": "he",
                 "verb": "was"
             }
         ]
@@ -200,15 +228,11 @@ const allSentences = [
         "translation": {
             "parts": [
                 {
+                    "text": "這件事",
+                    "type": "s"
+                },
+                {
                     "text": "對 Matilda 來說",
-                    "type": "other"
-                },
-                {
-                    "text": "接受",
-                    "type": "other"
-                },
-                {
-                    "text": "他們低下的社會地位",
                     "type": "other"
                 },
                 {
@@ -216,7 +240,7 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "困難的。",
+                    "text": "難以接受的——他們低下的社會地位。",
                     "type": "other"
                 }
             ]
@@ -227,7 +251,9 @@ const allSentences = [
         "words": [
             "She",
             "dreamed of",
-            "wearing beautiful dresses and owning a lot of valuable objects."
+            "wearing beautiful dresses",
+            "and",
+            "owning a lot of valuable objects."
         ],
         "subject": "She",
         "verb": "dreamed of",
@@ -243,22 +269,22 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "穿上漂亮的禮服、擁有許多貴重的物品。",
+                    "text": "穿上漂亮的禮服，並擁有許多貴重的物品。",
                     "type": "other"
                 }
             ]
         }
     },
     {
-        "section": 1,
+        "section": 2,
         "words": [
             "One day,",
-            "Matilda's husband",
+            "Matilda’s husband",
             "brought",
             "her",
             "some exciting news."
         ],
-        "subject": "Matilda's husband",
+        "subject": "Matilda’s husband",
         "verb": "brought",
         "skipSubject": false,
         "translation": {
@@ -283,7 +309,7 @@ const allSentences = [
         }
     },
     {
-        "section": 1,
+        "section": 2,
         "words": [
             "They",
             "were invited",
@@ -293,8 +319,8 @@ const allSentences = [
             "would meet",
             "many influential people there."
         ],
-        "subject": "They",
-        "verb": "were invited",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
@@ -307,7 +333,19 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "參加一場盛大的派對，而她會在那裡遇見許多有影響力的人。",
+                    "text": "參加一場盛大的派對，而",
+                    "type": "other"
+                },
+                {
+                    "text": "她",
+                    "type": "s"
+                },
+                {
+                    "text": "會在那裡遇見",
+                    "type": "v"
+                },
+                {
+                    "text": "許多有影響力的人。",
                     "type": "other"
                 }
             ]
@@ -328,7 +366,8 @@ const allSentences = [
         "words": [
             "Matilda",
             "seemed",
-            "unhappy when hearing the news."
+            "unhappy",
+            "when hearing the news."
         ],
         "subject": "Matilda",
         "verb": "seemed",
@@ -340,7 +379,7 @@ const allSentences = [
                     "type": "s"
                 },
                 {
-                    "text": "聽到消息時",
+                    "text": "聽到這個消息時",
                     "type": "other"
                 },
                 {
@@ -358,11 +397,13 @@ const allSentences = [
         "section": 2,
         "words": [
             "Her husband",
+            "was surprised",
+            "and",
             "wondered",
             "if she was ill."
         ],
-        "subject": "Her husband",
-        "verb": "wondered",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
@@ -371,11 +412,114 @@ const allSentences = [
                     "type": "s"
                 },
                 {
-                    "text": "納悶",
+                    "text": "既驚訝，",
+                    "type": "v"
+                },
+                {
+                    "text": "又納悶",
                     "type": "v"
                 },
                 {
                     "text": "她是不是生病了。",
+                    "type": "other"
+                }
+            ]
+        },
+        "pairs": [
+            {
+                "subject": "Her husband",
+                "verb": "was surprised"
+            },
+            {
+                "subject": null,
+                "verb": "wondered"
+            }
+        ]
+    },
+    {
+        "section": 2,
+        "words": [
+            "“",
+            "How can",
+            "I",
+            "go",
+            "to such a party?”",
+            "she",
+            "asked."
+        ],
+        "subject": null,
+        "verb": null,
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "「",
+                    "type": "other"
+                },
+                {
+                    "text": "我",
+                    "type": "s"
+                },
+                {
+                    "text": "怎麼能",
+                    "type": "other"
+                },
+                {
+                    "text": "去",
+                    "type": "v"
+                },
+                {
+                    "text": "那樣的派對呢？」",
+                    "type": "other"
+                },
+                {
+                    "text": "她",
+                    "type": "s"
+                },
+                {
+                    "text": "問道。",
+                    "type": "v"
+                }
+            ]
+        },
+        "pairs": [
+            {
+                "subject": "I",
+                "verb": "go"
+            },
+            {
+                "subject": "she",
+                "verb": "asked."
+            }
+        ]
+    },
+    {
+        "section": 2,
+        "words": [
+            "“",
+            "I",
+            "have",
+            "nothing nice to wear.”"
+        ],
+        "subject": "I",
+        "verb": "have",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "「",
+                    "type": "other"
+                },
+                {
+                    "text": "我",
+                    "type": "s"
+                },
+                {
+                    "text": "沒有",
+                    "type": "v"
+                },
+                {
+                    "text": "好看的衣服穿。」",
                     "type": "other"
                 }
             ]
@@ -384,7 +528,7 @@ const allSentences = [
     {
         "section": 2,
         "words": [
-            "So",
+            "So,",
             "he",
             "spent",
             "all his money",
@@ -397,7 +541,7 @@ const allSentences = [
         "translation": {
             "parts": [
                 {
-                    "text": "於是",
+                    "text": "於是，",
                     "type": "other"
                 },
                 {
@@ -450,36 +594,188 @@ const allSentences = [
     {
         "section": 2,
         "words": [
-            "Her husband",
-            "suggested",
-            "that she ask",
-            "her friend",
-            "Madame Forestier",
-            "to lend her",
-            "a sparkling diamond necklace."
+            "“",
+            "I",
+            "have",
+            "no jewelry!”",
+            "she",
+            "cried."
         ],
-        "subject": "Her husband",
-        "verb": "suggested",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
+                {
+                    "text": "「",
+                    "type": "other"
+                },
+                {
+                    "text": "我",
+                    "type": "s"
+                },
+                {
+                    "text": "沒有",
+                    "type": "v"
+                },
+                {
+                    "text": "珠寶！」",
+                    "type": "other"
+                },
+                {
+                    "text": "她",
+                    "type": "s"
+                },
+                {
+                    "text": "哭了。",
+                    "type": "v"
+                }
+            ]
+        },
+        "pairs": [
+            {
+                "subject": "I",
+                "verb": "have"
+            },
+            {
+                "subject": "she",
+                "verb": "cried."
+            }
+        ]
+    },
+    {
+        "section": 3,
+        "words": [
+            "“It’s simple,”",
+            "her husband",
+            "said."
+        ],
+        "subject": "her husband",
+        "verb": "said.",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "「很簡單，」",
+                    "type": "other"
+                },
                 {
                     "text": "她的丈夫",
                     "type": "s"
                 },
                 {
-                    "text": "建議",
+                    "text": "說道。",
                     "type": "v"
-                },
-                {
-                    "text": "她向朋友 Forestier 夫人借一條閃閃發光的鑽石項鍊。",
-                    "type": "other"
                 }
             ]
         }
     },
     {
-        "section": 2,
+        "section": 3,
+        "words": [
+            "“",
+            "Ask",
+            "your friend",
+            "Madame Forestier",
+            "whether",
+            "she",
+            "can lend",
+            "you",
+            "anything.”"
+        ],
+        "subject": null,
+        "verb": null,
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "「",
+                    "type": "other"
+                },
+                {
+                    "text": "去問",
+                    "type": "v"
+                },
+                {
+                    "text": "你的朋友 Forestier 夫人，",
+                    "type": "other"
+                },
+                {
+                    "text": "她",
+                    "type": "s"
+                },
+                {
+                    "text": "能否借",
+                    "type": "v"
+                },
+                {
+                    "text": "你任何東西。」",
+                    "type": "other"
+                }
+            ]
+        },
+        "pairs": [
+            {
+                "subject": null,
+                "verb": "Ask"
+            },
+            {
+                "subject": "she",
+                "verb": "can lend"
+            }
+        ]
+    },
+    {
+        "section": 3,
+        "words": [
+            "Matilda",
+            "followed",
+            "his suggestion",
+            "and",
+            "borrowed",
+            "a sparkling diamond necklace",
+            "from Madame Forestier."
+        ],
+        "subject": null,
+        "verb": null,
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "Matilda",
+                    "type": "s"
+                },
+                {
+                    "text": "聽從",
+                    "type": "v"
+                },
+                {
+                    "text": "他的建議，並",
+                    "type": "other"
+                },
+                {
+                    "text": "借了",
+                    "type": "v"
+                },
+                {
+                    "text": "一條閃閃發光的鑽石項鍊。",
+                    "type": "other"
+                }
+            ]
+        },
+        "pairs": [
+            {
+                "subject": "Matilda",
+                "verb": "followed"
+            },
+            {
+                "subject": null,
+                "verb": "borrowed"
+            }
+        ]
+    },
+    {
+        "section": 3,
         "words": [
             "At the party,",
             "everyone",
@@ -487,10 +783,11 @@ const allSentences = [
             "her",
             "and",
             "praised",
-            "her husband for having such a charming wife."
+            "her husband",
+            "for having such a charming wife."
         ],
-        "subject": "everyone",
-        "verb": "admired",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
@@ -507,7 +804,15 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "她，並稱讚她的丈夫有這麼一位迷人的妻子。",
+                    "text": "她，並",
+                    "type": "other"
+                },
+                {
+                    "text": "稱讚",
+                    "type": "v"
+                },
+                {
+                    "text": "她的丈夫有這麼一位迷人的妻子。",
                     "type": "other"
                 }
             ]
@@ -524,14 +829,14 @@ const allSentences = [
         ]
     },
     {
-        "section": 3,
+        "section": 4,
         "words": [
-            "The night",
+            "The night,",
             "however,",
             "ended",
             "in disaster."
         ],
-        "subject": "The night",
+        "subject": "The night,",
         "verb": "ended",
         "skipSubject": false,
         "translation": {
@@ -541,18 +846,22 @@ const allSentences = [
                     "type": "other"
                 },
                 {
-                    "text": "那晚",
+                    "text": "那一晚",
                     "type": "s"
                 },
                 {
-                    "text": "以災難收場。",
+                    "text": "以",
+                    "type": "other"
+                },
+                {
+                    "text": "災難收場。",
                     "type": "v"
                 }
             ]
         }
     },
     {
-        "section": 3,
+        "section": 4,
         "words": [
             "Somewhere, somehow,",
             "Matilda",
@@ -584,12 +893,14 @@ const allSentences = [
         }
     },
     {
-        "section": 3,
+        "section": 4,
         "words": [
-            "Not daring to tell Madame Forestier,",
+            "Not daring",
+            "to tell Madame Forestier,",
             "the couple",
             "returned",
-            "a similar one to her."
+            "a similar one",
+            "to her."
         ],
         "subject": "the couple",
         "verb": "returned",
@@ -597,7 +908,11 @@ const allSentences = [
         "translation": {
             "parts": [
                 {
-                    "text": "因為不敢告訴 Forestier 夫人，",
+                    "text": "因為不敢",
+                    "type": "other"
+                },
+                {
+                    "text": "告訴 Forestier 夫人，",
                     "type": "other"
                 },
                 {
@@ -616,7 +931,7 @@ const allSentences = [
         }
     },
     {
-        "section": 3,
+        "section": 4,
         "words": [
             "The new necklace",
             "cost",
@@ -624,23 +939,32 @@ const allSentences = [
             "so",
             "they",
             "had to borrow",
-            "all the money they could."
+            "all the money",
+            "they could."
         ],
-        "subject": "they",
-        "verb": "had to borrow",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
                 {
-                    "text": "新項鍊花了他們一大筆錢，",
-                    "type": "other"
-                },
-                {
-                    "text": "所以他們",
+                    "text": "新項鍊",
                     "type": "s"
                 },
                 {
-                    "text": "必須借",
+                    "text": "花費",
+                    "type": "v"
+                },
+                {
+                    "text": "他們一大筆錢，所以",
+                    "type": "other"
+                },
+                {
+                    "text": "他們",
+                    "type": "s"
+                },
+                {
+                    "text": "必須借入",
                     "type": "v"
                 },
                 {
@@ -661,7 +985,34 @@ const allSentences = [
         ]
     },
     {
-        "section": 3,
+        "section": 4,
+        "words": [
+            "They",
+            "had to work hard",
+            "to pay off their debt."
+        ],
+        "subject": "They",
+        "verb": "had to work hard",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "他們",
+                    "type": "s"
+                },
+                {
+                    "text": "不得不努力工作",
+                    "type": "v"
+                },
+                {
+                    "text": "來償還他們的負債。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 4,
         "words": [
             "As a result,",
             "they",
@@ -693,7 +1044,7 @@ const allSentences = [
         }
     },
     {
-        "section": 4,
+        "section": 5,
         "words": [
             "One afternoon ten years later,",
             "Matilda",
@@ -704,8 +1055,8 @@ const allSentences = [
             "ran into",
             "Madame Forestier."
         ],
-        "subject": "Matilda",
-        "verb": "was walking",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
@@ -722,7 +1073,19 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "公園時，偶遇了 Forestier 夫人。",
+                    "text": "公園時，",
+                    "type": "other"
+                },
+                {
+                    "text": "她",
+                    "type": "s"
+                },
+                {
+                    "text": "偶遇了",
+                    "type": "v"
+                },
+                {
+                    "text": "Forestier 夫人。",
                     "type": "other"
                 }
             ]
@@ -739,13 +1102,13 @@ const allSentences = [
         ]
     },
     {
-        "section": 4,
+        "section": 5,
         "words": [
             "Madame Forestier",
             "was shocked",
             "to see Matilda",
-            "looking so much",
-            "older and poorer."
+            "looking so much older",
+            "and poorer."
         ],
         "subject": "Madame Forestier",
         "verb": "was shocked",
@@ -757,22 +1120,50 @@ const allSentences = [
                     "type": "s"
                 },
                 {
-                    "text": "看到",
+                    "text": "看到 Matilda 蒼老許多又更為貧窮，",
                     "type": "other"
                 },
                 {
-                    "text": "Matilda 蒼老許多又更加貧窮",
-                    "type": "other"
-                },
-                {
-                    "text": "感到震驚。",
+                    "text": "大為震驚。",
                     "type": "v"
                 }
             ]
         }
     },
     {
-        "section": 4,
+        "section": 5,
+        "words": [
+            "Matilda",
+            "told",
+            "her old friend",
+            "about that night."
+        ],
+        "subject": "Matilda",
+        "verb": "told",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
+                {
+                    "text": "Matilda",
+                    "type": "s"
+                },
+                {
+                    "text": "告訴",
+                    "type": "v"
+                },
+                {
+                    "text": "她的老朋友",
+                    "type": "other"
+                },
+                {
+                    "text": "那天晚上的事。",
+                    "type": "other"
+                }
+            ]
+        }
+    },
+    {
+        "section": 5,
         "words": [
             "“",
             "I",
@@ -781,13 +1172,21 @@ const allSentences = [
             "she",
             "admitted."
         ],
-        "subject": "she",
-        "verb": "admitted.",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
                 {
-                    "text": "「我弄丟了你的項鍊，」",
+                    "text": "「",
+                    "type": "other"
+                },
+                {
+                    "text": "我",
+                    "type": "s"
+                },
+                {
+                    "text": "弄丟了你的項鍊，」",
                     "type": "other"
                 },
                 {
@@ -812,28 +1211,51 @@ const allSentences = [
         ]
     },
     {
-        "section": 4,
+        "section": 5,
         "words": [
             "“So",
             "I",
             "replaced",
-            "it with a new one.",
-            "It",
-            "cost",
-            "forty thousand francs.",
-            "It",
-            "took",
-            "us ten years to pay off the debt.”"
+            "it with a new one."
         ],
-        "subject": "It",
-        "verb": "took",
+        "subject": null,
+        "verb": null,
         "skipSubject": false,
         "translation": {
             "parts": [
                 {
-                    "text": "「所以我買了一條新的來取代它。",
+                    "text": "「所以",
                     "type": "other"
                 },
+                {
+                    "text": "我",
+                    "type": "s"
+                },
+                {
+                    "text": "用一條新的取代了它。",
+                    "type": "v"
+                }
+            ]
+        },
+        "pairs": [
+            {
+                "subject": "I",
+                "verb": "replaced"
+            }
+        ]
+    },
+    {
+        "section": 5,
+        "words": [
+            "It",
+            "cost",
+            "forty thousand francs."
+        ],
+        "subject": "It",
+        "verb": "cost",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
                 {
                     "text": "它",
                     "type": "s"
@@ -843,9 +1265,25 @@ const allSentences = [
                     "type": "v"
                 },
                 {
-                    "text": "我們四萬法郎。",
+                    "text": "四萬法郎。",
                     "type": "other"
-                },
+                }
+            ]
+        }
+    },
+    {
+        "section": 5,
+        "words": [
+            "It",
+            "took",
+            "us ten years",
+            "to pay off the debt.”"
+        ],
+        "subject": "It",
+        "verb": "took",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
                 {
                     "text": "它",
                     "type": "s"
@@ -859,38 +1297,17 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        },
-        "pairs": [
-            {
-                "subject": "I",
-                "verb": "replaced"
-            },
-            {
-                "subject": "It",
-                "verb": "cost"
-            },
-            {
-                "subject": "It",
-                "verb": "took"
-            }
-        ]
+        }
     },
     {
-        "section": 4,
+        "section": 5,
         "words": [
             "“My poor Matilda,”",
             "said",
-            "Madame Forestier",
-            ", “",
-            "my necklace",
-            "was",
-            "a fake.",
-            "It",
-            "was worth",
-            "five hundred francs at most!”"
+            "Madame Forestier,"
         ],
-        "subject": "It",
-        "verb": "was worth",
+        "subject": "Madame Forestier,",
+        "verb": "said",
         "skipSubject": false,
         "translation": {
             "parts": [
@@ -903,12 +1320,28 @@ const allSentences = [
                     "type": "s"
                 },
                 {
-                    "text": "說，",
+                    "text": "說：",
                     "type": "v"
-                },
+                }
+            ]
+        }
+    },
+    {
+        "section": 5,
+        "words": [
+            "“my",
+            "necklace",
+            "was",
+            "a fake."
+        ],
+        "subject": "necklace",
+        "verb": "was",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
                 {
                     "text": "「我的項鍊",
-                    "type": "other"
+                    "type": "s"
                 },
                 {
                     "text": "是",
@@ -917,7 +1350,23 @@ const allSentences = [
                 {
                     "text": "假的。",
                     "type": "other"
-                },
+                }
+            ]
+        }
+    },
+    {
+        "section": 5,
+        "words": [
+            "It",
+            "was worth",
+            "five hundred francs",
+            "at most!”"
+        ],
+        "subject": "It",
+        "verb": "was worth",
+        "skipSubject": false,
+        "translation": {
+            "parts": [
                 {
                     "text": "它",
                     "type": "s"
@@ -935,23 +1384,10 @@ const allSentences = [
                     "type": "other"
                 }
             ]
-        },
-        "pairs": [
-            {
-                "subject": "Madame Forestier",
-                "verb": "said"
-            },
-            {
-                "subject": "my necklace",
-                "verb": "was"
-            },
-            {
-                "subject": "It",
-                "verb": "was worth"
-            }
-        ]
+        }
     }
 ];
+
 
 let currentTab = 'all';
 let filtered = [];
@@ -959,6 +1395,17 @@ let currentIdx = 0;
 let pairIdx = 0;
 let subDone = false;
 let hintShown = false;
+
+function joinWords(words) {
+    let out = '';
+    words.forEach((w, i) => {
+        if (i === 0) { out = w; return; }
+        const prev = words[i - 1];
+        const glue = /[“‘(]$/.test(prev) || /^[”’),;:!?.]/.test(w);
+        out += (glue ? '' : ' ') + w;
+    });
+    return out;
+}
 
 function getPairs(sentence) {
     if (sentence.pairs) return sentence.pairs;
@@ -1004,7 +1451,7 @@ function renderSentence() {
     } else {
         const full = document.createElement('div');
         full.className = 'sentence-full';
-        full.textContent = sentence.words.join(' ');
+        full.textContent = joinWords(sentence.words);
         area.appendChild(full);
         const prompt = document.createElement('div');
         prompt.className = 'hint-prompt';
@@ -1120,7 +1567,7 @@ function resetSentence() {
 function speakCurrentSentence() {
     const sentence = filtered[currentIdx];
     if (!sentence) return;
-    const text = sentence.words.join(' ');
+    const text = joinWords(sentence.words);
     speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
