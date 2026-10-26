@@ -95,7 +95,7 @@
     <header class="w-full bg-slate-900/95 border-b-2 border-amber-500/40 px-4 py-2.5 z-30 shadow-2xl backdrop-blur-md sticky top-0">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
             
-            <!-- Stage Info & Badge -->
+            <!-- Stage Info & Badge & Prev/Next Quick Navigation -->
             <div class="flex items-center space-x-3">
                 <button id="attorneyBadgeBtn" onclick="game.onBadgeClick()" title="校園律師徽章（點擊5次解鎖教師模式）" class="relative group p-1 bg-amber-500/20 hover:bg-amber-500/40 rounded-full border border-amber-400 transition transform hover:scale-105 active:scale-95">
                     <svg class="w-9 h-9 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
@@ -108,8 +108,11 @@
                 </button>
                 <div>
                     <div class="flex items-center space-x-2">
+                        <button onclick="game.prevStation()" id="hudPrevBtn" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-amber-300 rounded border border-slate-700 text-xs font-bold transition flex items-center gap-1" title="返回上一站">
+                            ◀ 上一站
+                        </button>
                         <span class="text-xs uppercase tracking-wider font-bold text-amber-400 bg-amber-950/70 px-2 py-0.5 rounded border border-amber-600/50" id="hudStageTag">Station 0</span>
-                        <h1 class="text-lg md:text-xl font-bold tracking-wide text-slate-100" id="hudStageTitle">案件開端：校園法律諮詢室</h1>
+                        <h1 class="text-base sm:text-lg font-bold tracking-wide text-slate-100" id="hudStageTitle">案件開端：校園法律諮詢室</h1>
                     </div>
                     <p class="text-xs text-slate-400 hidden sm:block">Lesson 4: Ask a Lawyer • Campus Legal Myth RPG</p>
                 </div>
@@ -189,26 +192,26 @@
                     <span id="speakerRole" class="text-xs text-slate-400 bg-slate-800 px-2 py-0.5 rounded">法治指導律師</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button id="ttsPlayBtn" onclick="game.speakCurrentDialog()" class="flex items-center space-x-1.5 px-3 py-1 bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 border border-blue-500/50 rounded-lg text-sm font-medium transition active:scale-95" title="朗讀英文例句與對話">
+                    <button id="ttsPlayBtn" onclick="game.speakCurrentDialog()" class="flex items-center space-x-1.5 px-3 py-1 bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 border border-blue-500/50 rounded-lg text-sm font-medium transition active:scale-95" title="朗讀英文例句與對話（僅讀英文）">
                         <svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
                         <span>🔊 重複聆聽 (Replay TTS)</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Dialogue Text Content (Min Font Size 20px) -->
+            <!-- Dialogue Text Content (Min Font Size 20px, English = White, Chinese = Light Green) -->
             <div id="dialogArea" class="min-h-[100px] mb-3">
-                <div id="dialogEnglish" class="game-text font-bold text-emerald-300 tracking-normal mb-1">
+                <div id="dialogEnglish" class="game-text font-bold text-white tracking-normal mb-1">
                     Welcome to the Campus Legal Aid Room!
                 </div>
-                <div id="dialogChinese" class="game-text text-slate-200 font-medium">
+                <div id="dialogChinese" class="game-text text-emerald-300 font-medium">
                     歡迎來到校園法律諮詢室！我是 Carrie 律師。最近接獲多起同學因為「以為只是開玩笑」而面臨法律訴訟的案件。
                 </div>
             </div>
 
             <!-- Action Buttons / Question Interface Container -->
-            <div id="actionContainer" class="flex flex-wrap items-center justify-end gap-3 pt-2 border-t border-slate-800">
-                <!-- Injected dynamically -->
+            <div id="actionContainer" class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800">
+                <!-- Injected dynamically with [返回上一站] and actions -->
             </div>
 
         </div>
@@ -219,7 +222,7 @@
     <!-- 4. MODALS & OVERLAYS                       -->
     <!-- ========================================== -->
 
-    <!-- Evidence Detail Modal (Replaces browser alert with 20px+ font and auto-TTS) -->
+    <!-- Evidence Detail Modal (20px+ font, English = White, Chinese = Light Green, Auto-TTS English) -->
     <div id="evidenceDetailModal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
         <div class="bg-slate-900 border-2 border-amber-500 rounded-2xl max-w-xl w-full p-6 shadow-2xl text-left">
             <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
@@ -234,16 +237,18 @@
             </div>
             <div class="mb-4 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
                 <div class="flex items-center justify-between mb-1">
-                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-wide">Key English Point:</span>
+                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wide">Key English Point:</span>
                     <button onclick="game.speakText(document.getElementById('evDetailEn').innerText)" class="px-2.5 py-0.5 bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 border border-blue-500/40 rounded text-xs flex items-center gap-1 font-semibold">
                         🔊 重聽英文
                     </button>
                 </div>
-                <p id="evDetailEn" class="text-[20px] font-bold text-emerald-300 leading-relaxed"></p>
+                <!-- English in prominent WHITE -->
+                <p id="evDetailEn" class="text-[20px] font-bold text-white leading-relaxed"></p>
             </div>
             <div class="mb-6 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
                 <span class="text-xs font-bold text-amber-400 uppercase tracking-wide block mb-1">台灣法律實務重點：</span>
-                <p id="evDetailZh" class="text-[20px] font-medium text-slate-100 leading-relaxed"></p>
+                <!-- Chinese in LIGHT GREEN -->
+                <p id="evDetailZh" class="text-[20px] font-medium text-emerald-300 leading-relaxed"></p>
             </div>
             <button onclick="game.closeEvidenceDetail()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold rounded-xl shadow-lg transition text-[20px]">
                 📥 收入證物包 (Add to Evidence Bag)
@@ -270,7 +275,7 @@
         </div>
     </div>
 
-    <!-- Scaffolding Hint Modal (3-Tier Scaffolding) -->
+    <!-- Scaffolding Hint Modal (3-Tier Scaffolding, English = White, Chinese = Light Green) -->
     <div id="hintModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-slate-900 border-2 border-red-500 rounded-2xl max-w-lg w-full p-6 shadow-2xl">
             <div class="flex items-center space-x-3 mb-4">
@@ -282,8 +287,10 @@
                     <p class="text-xs text-slate-400">裁判長的質疑與法律鷹架指引</p>
                 </div>
             </div>
-            <div id="hintContentEn" class="text-emerald-300 font-bold mb-2 text-[20px]"></div>
-            <div id="hintContentZh" class="text-slate-200 text-[20px] mb-6 font-medium"></div>
+            <!-- English in prominent WHITE -->
+            <div id="hintContentEn" class="text-white font-bold mb-2 text-[20px]"></div>
+            <!-- Chinese in LIGHT GREEN -->
+            <div id="hintContentZh" class="text-emerald-300 text-[20px] mb-6 font-medium"></div>
             <button onclick="game.closeHintModal()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg text-[18px]">我明白了，重新審視案件！(Understood)</button>
         </div>
     </div>
@@ -437,7 +444,7 @@
         }
 
         /**
-         * Stations & PIRLS Curriculum Data (All Bilingual CEFR A2-B1, No '(正解)' in text)
+         * Stations & PIRLS Curriculum Data (All Bilingual CEFR A2-B1, Balanced Lengths, No '(正解)')
          */
         const GAME_DATA = {
             stations: [
@@ -500,12 +507,12 @@
                             pirls: "提取訊息 (Focus & Retrieve)",
                             type: "single",
                             promptEn: "According to Taiwan Law, how many members in a private messaging group make it 'public'?",
-                            promptZh: "根據台灣刑法實務見解，通訊軟體私人群組達到多少人以上，在法律上即符合「公然」侮辱之公然要件？",
+                            promptZh: "根據台灣刑法實務見解，通訊軟體私人群組達到多少人以上，即符合公然侮辱之「公然」要件？",
                             options: [
-                                { en: "A) 2 people", zh: "僅 2 人", correct: false },
-                                { en: "B) 3 or more people", zh: "3 人以上", correct: true },
-                                { en: "C) 10 people", zh: "10 人以上", correct: false },
-                                { en: "D) 50 people", zh: "50 人以上", correct: false }
+                                { en: "A) Two people in a private chat", zh: "僅有兩人的私人私訊中", correct: false },
+                                { en: "B) Three or more group members", zh: "三人或以上的群組成員", correct: true },
+                                { en: "C) Ten people in a classroom", zh: "十人或以上的班級群組", correct: false },
+                                { en: "D) Fifty people on social media", zh: "五十人以上的社群論壇", correct: false }
                             ],
                             hintEn: "Think about: does a 3-person conversation include another audience besides you and the target?",
                             hintZh: "提示：只要除了說話者與被害人之外，有第三人在場聽聞，即具「公然」散布性。"
@@ -601,10 +608,10 @@
                             promptEn: "Which of the following English expressions are appropriate for setting firm personal boundaries? (Select all that apply)",
                             promptZh: "多選題：當同儕跨越人際界線時，下列哪些英文句型適合用於「堅定拒絕並劃定界線」？（多選）",
                             options: [
-                                { en: "A) \"I don't give you consent to post my picture.\"", zh: "我沒有同意你發布我的照片", correct: true },
-                                { en: "B) \"It's okay, it's just a funny prank.\"", zh: "沒關係，這只是好玩的惡作劇", correct: false },
-                                { en: "C) \"You are crossing my personal space and privacy.\"", zh: "你侵犯了我的個人空間與隱私", correct: true },
-                                { en: "D) \"I am not comfortable with this touch.\"", zh: "我對這種肢體碰觸感到很不舒服", correct: true }
+                                { en: "A) \"I do not give you consent to share my picture.\"", zh: "我沒有同意你公開散布我的個人照片。", correct: true },
+                                { en: "B) \"Do not worry about it because it is just a joke.\"", zh: "不用擔心這件事因為這只是有趣惡作劇。", correct: false },
+                                { en: "C) \"You are crossing my personal space and boundaries.\"", zh: "你正在跨越我的個人空間與身體隱私界線。", correct: true },
+                                { en: "D) \"I feel uncomfortable with your physical touch.\"", zh: "我對你現在的肢體碰觸感到非常不舒服。", correct: true }
                             ],
                             hintEn: "Select sentences that firmly state non-consent and defend personal boundaries.",
                             hintZh: "提示：請選擇明確表達拒絕、捍衛隱私與身體自主權的堅定語句。"
@@ -612,10 +619,15 @@
                         {
                             qid: "q5",
                             pirls: "提取訊息 (Focus & Retrieve)",
-                            type: "fillblank",
-                            promptEn: "According to the penal code, cracking passwords or peeking into someone's smartphone violates the offense against ______ use (妨害______使用罪).",
-                            promptZh: "填空題：根據刑法第 358 條，無故輸入密碼或破解指紋偷看他人手機隱私，觸犯「妨害______使用罪」。（請輸入兩個中文字）",
-                            correctText: "電腦",
+                            type: "single",
+                            promptEn: "Under Article 358 of the Criminal Code, peeking into someone's smartphone violates which offense?",
+                            promptZh: "單選題：根據刑法第 358 條，無故輸入密碼或破解指紋偷看他人手機隱私，觸犯下列哪一項罪名？",
+                            options: [
+                                { en: "A) Offense Against Computer Use", zh: "妨害電腦使用罪", correct: true },
+                                { en: "B) Offense Against Personal Liberty", zh: "妨害自由罪章", correct: false },
+                                { en: "C) Offense Against Public Safety", zh: "妨害公共安全罪", correct: false },
+                                { en: "D) Offense of Simple Property Theft", zh: "普通侵占竊盜罪", correct: false }
+                            ],
                             hintEn: "In Taiwan penal law, smartphones are legally classified under 'Computer' (電腦).",
                             hintZh: "提示：智慧型手機在刑法規範中被視為廣義的「電腦」。"
                         }
@@ -676,10 +688,10 @@
                             promptEn: "Which statement best defines the true legal difference between a prank and a crime?",
                             promptZh: "單選題：關於「玩笑（Prank）」與「犯罪（Crime）」的界線，下列哪一個法學觀點最為正確？",
                             options: [
-                                { en: "A) It is not a crime as long as the prankster finds it funny.", zh: "只要開玩笑的人覺得好笑，就不算犯罪。", correct: false },
-                                { en: "B) A joke is only funny if everyone is laughing. If it hurts someone, it is a crime.", zh: "大家都笑得出來才算玩笑；若造成傷害，就是犯罪。", correct: true },
-                                { en: "C) Police have no legal power to investigate incidents inside school classrooms.", zh: "只要在學校教室內發生的事，警察就管不到。", correct: false },
-                                { en: "D) If the victim does not cry out immediately, it means they agreed to the prank.", zh: "只要被害人當下沒有哭鬧，就代表他默認同意被整。", correct: false }
+                                { en: "A) A prank is never a crime if the person doing it feels happy.", zh: "只要惡作劇者感到開心好玩，就絕非犯罪行為。", correct: false },
+                                { en: "B) A joke is funny only if all people laugh without injuries.", zh: "大家都笑得出來才是玩笑；若造成傷害即是犯罪。", correct: true },
+                                { en: "C) Police officers cannot legally enter and investigate classrooms.", zh: "司法警察依法不能進入校園教室調查任何意外。", correct: false },
+                                { en: "D) Victims accept all pranks if they do not cry immediately.", zh: "被害人若當場沒有立刻哭泣，就代表默認同意整人。", correct: false }
                             ],
                             hintEn: "Key Golden Quote: Everyone must be laughing for it to be a real joke.",
                             hintZh: "提示：真正的玩笑是大家都感到愉快；一旦造成實質損害或痛苦，就是法律責任。"
@@ -736,13 +748,13 @@
                             qid: "q8",
                             pirls: "詮釋整合 (Interpret & Integrate)",
                             type: "single",
-                            promptEn: "Why can't students usually claim 'self-defense' (正當防衛) when they fight back against bullies in school?",
+                            promptEn: "Why can't students claim self-defense when they hit back during school bullying?",
                             promptZh: "單選題：在學校遭遇霸凌時若直接動手還擊，為何在法律上通常無法成功主張「正當防衛」？",
                             options: [
-                                { en: "A) High school students have no legal right to protect themselves on campus.", zh: "高中生在校園內完全沒有自我保護權益。", correct: false },
-                                { en: "B) Self-defense requires an ongoing attack; once it turns into a mutual fight, both face injury charges.", zh: "正當防衛須針對「現在進行中」侵害；若演變成互毆，雙方皆構成傷害罪。", correct: true },
-                                { en: "C) Police automatically arrest any teenager who physically touches someone.", zh: "只要未成年人有肢體碰觸，警察就一律先移送關押。", correct: false },
-                                { en: "D) School regulations are always higher than national criminal laws.", zh: "校規效力始終凌駕於中華民國刑法之上。", correct: false }
+                                { en: "A) High school students possess no legal rights on school campuses.", zh: "高中生在校園內完全沒有任何法律自我保護權益。", correct: false },
+                                { en: "B) Fighting back turns into a mutual brawl where both face charges.", zh: "動手還擊常演變成雙方互毆，法律上雙方皆構成傷害罪。", correct: true },
+                                { en: "C) Police officers arrest every teenager who touches another person.", zh: "司法警察只要看到未成年人有肢體接觸，就一律逮捕關押。", correct: false },
+                                { en: "D) School handbook rules replace all national laws on campus grounds.", zh: "學校學生獎懲規則之效力始終凌駕於國家刑法法規之上。", correct: false }
                             ],
                             hintEn: "Look at the legal definition: ongoing attack vs mutual intentional brawl.",
                             hintZh: "提示：正當防衛有嚴格時效限制，若是出於報復或演變成互相攻擊（互毆），將被雙方各告傷害罪。"
@@ -751,13 +763,13 @@
                             qid: "q9",
                             pirls: "直接推論 (Make Straightforward Inferences)",
                             type: "single",
-                            promptEn: "If a teenager acts as an ATM money mule (車手) for pocket money, what legal consequence will happen?",
-                            promptZh: "單選題：若高中生因兼職打工幫忙跑腿領錢而成為詐騙集團「車手」，下列法律後果何者正確？",
+                            promptEn: "If a teenager acts as an ATM money mule for quick money, what legal result occurs?",
+                            promptZh: "單選題：若高中生因兼職打工跑腿領錢而成為詐騙集團車手，依法會面臨下列何種後果？",
                             options: [
-                                { en: "A) Teenagers have zero legal liability if they claim they were tricked.", zh: "青少年只要推說被騙不知情，就完全不用負擔法律責任。", correct: false },
-                                { en: "B) The student only gets a school demerit without having to pay any money.", zh: "頂多被學校記大過處分，不需要向被害人賠償金錢。", correct: false },
-                                { en: "C) They face criminal fraud charges, and parents bear joint civil compensation.", zh: "會被依詐欺洗錢罪移送，且父母依法須負擔高額連帶民事賠償責任。", correct: true },
-                                { en: "D) Taiwan law permanently protects minors under 18 from paying civil damages.", zh: "法律規定未滿 18 歲者永久免除所有民事損害賠償責任。", correct: false }
+                                { en: "A) Teenagers hold zero liability if they claim they were innocent.", zh: "青少年只要辯稱自己被騙不知情，就完全不需要承擔責任。", correct: false },
+                                { en: "B) The school assigns a conduct penalty without any financial fine.", zh: "學校僅會給予校規記過處分，完全不需要向被害人賠償金錢。", correct: false },
+                                { en: "C) Teenagers face fraud charges, and parents pay joint damages.", zh: "青少年將被依詐欺洗錢罪移送，且父母依法承擔連帶損害賠償。", correct: true },
+                                { en: "D) Taiwan laws protect all students under eighteen from restitution.", zh: "台灣法律規定所有未滿十八歲之在學學生一律免除賠償責任。", correct: false }
                             ],
                             hintEn: "Recall Station 5: Joint parental liability under the Civil Code.",
                             hintZh: "提示：民法第 187 條規定法定代理人（父母）必須負擔連帶賠償責任。"
@@ -766,13 +778,13 @@
                             qid: "q10",
                             pirls: "評鑑文本 (Examine & Evaluate)",
                             type: "single",
-                            promptEn: "When a classmate plans to post private screenshots to start an online witch-hunt, what is the best legal action?",
-                            promptZh: "情境題：當你發現同儕正準備將同學的私密對話截圖公開上網進行「公審」時，最合適且合法的行動是？",
+                            promptEn: "When a friend plans to post private chat screenshots online, what is the best legal action?",
+                            promptZh: "情境題：當你發現朋友正準備將同學的私人私訊截圖公開上網公審時，最合適且合法的行動是？",
                             options: [
-                                { en: "A) Share the screenshots to other online groups so everyone can discuss it.", zh: "幫忙轉發到各大社團與群組，讓大家一起公審看熱鬧。", correct: false },
-                                { en: "B) Warn them firmly: 'Stop it. That is defamation and cyberbullying, and you could get sued!'", zh: "用英文堅定警告：「住手！這是公然侮辱與網路霸凌，你可能會被告！」並阻止發布。", correct: true },
-                                { en: "C) Help create an anonymous burner account for them to post secretly.", zh: "幫忙註冊匿名分身小帳發文，以為這樣比較安全查不到。", correct: false },
-                                { en: "D) Pretend not to see it and simply press like as a silent bystander.", zh: "裝作完全沒看到，在旁邊默默按讚當個看戲路人。", correct: false }
+                                { en: "A) Share screenshots to public groups to attract more views.", zh: "將對話截圖轉發到各大公開社團，以吸引更多網友點閱關注。", correct: false },
+                                { en: "B) Warn them firmly: 'Stop it. That is defamation and cyberbullying!'", zh: "用英文堅定警告：「住手！這是誹謗與網路霸凌，你會被告！」", correct: true },
+                                { en: "C) Register an anonymous account to release the files secretly.", zh: "幫忙註冊匿名分身假帳號發文，以為這樣警方就查不到來源。", correct: false },
+                                { en: "D) Say nothing at all and click like on the social media post.", zh: "完全不發一語假裝沒看到，並在社群貼文下方默默按讚圍觀。", correct: false }
                             ],
                             hintEn: "Use the Lesson 4 Target English warning against defamation and cyberbullying.",
                             hintZh: "提示：運用第四課核心英文片語，堅定指明違法後果並阻止憾事發生。"
@@ -853,6 +865,15 @@
                 document.getElementById("hudHpText").innerText = `${this.integrity}%`;
                 document.getElementById("hudHpBar").style.width = `${Math.max(0, this.integrity)}%`;
                 
+                const prevBtn = document.getElementById("hudPrevBtn");
+                if (this.currentStationIndex === 0) {
+                    prevBtn.classList.add("opacity-30", "cursor-not-allowed");
+                    prevBtn.disabled = true;
+                } else {
+                    prevBtn.classList.remove("opacity-30", "cursor-not-allowed");
+                    prevBtn.disabled = false;
+                }
+
                 const bar = document.getElementById("hudHpBar");
                 if (this.integrity > 60) {
                     bar.className = "bg-gradient-to-r from-emerald-500 via-green-400 to-emerald-300 h-full rounded-full transition-all duration-500";
@@ -888,6 +909,12 @@
                 } else if (station.type === "court") {
                     this.setDialog(station.witnessLineEn, station.witnessLineZh);
                     this.renderCourtActions(station);
+                }
+            }
+
+            prevStation() {
+                if (this.currentStationIndex > 0) {
+                    this.loadStation(this.currentStationIndex - 1);
                 }
             }
 
@@ -1008,7 +1035,7 @@
                 document.getElementById("evDetailEn").innerText = h.descEn;
                 document.getElementById("evDetailZh").innerText = h.descZh;
                 document.getElementById("evidenceDetailModal").classList.remove("hidden");
-                // Auto-TTS English explanation
+                // Auto-TTS English explanation ONLY
                 this.speakText(h.descEn);
             }
 
@@ -1028,7 +1055,7 @@
                 zhDiv.innerText = zhText;
                 this.currentEnText = enText;
                 this.sound.playTypewriter();
-                // Automatic English TTS on every station / dialog change
+                // Automatic English TTS on dialogue transition (strictly English only)
                 this.speakText(enText);
             }
 
@@ -1036,14 +1063,22 @@
                 this.speakText(this.currentEnText);
             }
 
+            // Strictly speaks English ONLY, completely skipping Chinese characters
             speakText(text) {
                 if (!text || !window.speechSynthesis || this.sound.muted) return;
                 try {
                     window.speechSynthesis.cancel();
-                    const cleanText = text.replace(/\[Question \d+\/\d+\]/g, '').replace(/【[^】]+】/g, '').trim();
-                    const utter = new SpeechSynthesisUtterance(cleanText || "Justice will prevail!");
+                    let cleaned = text.replace(/\[Question \d+\/\d+\]/gi, '').replace(/【[^】]+】/g, '');
+                    // Strip all CJK characters & CJK punctuation
+                    let enOnly = cleaned
+                        .replace(/[\u4e00-\u9fa5\u3000-\u303f\uff00-\uffef]/g, ' ')
+                        .replace(/[\(\)（）「」『』、《》【】]/g, ' ')
+                        .replace(/\s+/g, ' ')
+                        .trim();
+                    if (!enOnly || enOnly.length < 2) return;
+                    const utter = new SpeechSynthesisUtterance(enOnly);
                     utter.lang = "en-US";
-                    utter.rate = 0.93;
+                    utter.rate = 0.92;
                     window.speechSynthesis.speak(utter);
                 } catch (e) {
                     console.warn("TTS Error:", e);
@@ -1053,20 +1088,32 @@
             renderStoryActions(station) {
                 const actions = document.getElementById("actionContainer");
                 actions.innerHTML = `
-                    <button onclick="game.nextStation()" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold rounded-xl shadow-lg transition transform hover:scale-105 active:scale-95 flex items-center space-x-2 text-base">
-                        <span>進入下一關卡 (Continue to Level)</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </button>
+                    <div class="flex items-center justify-between w-full">
+                        <button onclick="game.prevStation()" ${this.currentStationIndex === 0 ? 'disabled class="opacity-30 cursor-not-allowed px-5 py-2.5 bg-slate-800 text-slate-500 rounded-xl font-bold text-base"' : 'class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/50 rounded-xl font-bold text-base transition flex items-center space-x-2"'} title="返回上一站收集證物">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                            <span>返回上一站 (Prev Station)</span>
+                        </button>
+                        <button onclick="game.nextStation()" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold rounded-xl shadow-lg transition transform hover:scale-105 active:scale-95 flex items-center space-x-2 text-base">
+                            <span>進入下一關卡 (Continue to Level)</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </button>
+                    </div>
                 `;
             }
 
             renderCourtActions(station) {
                 const actions = document.getElementById("actionContainer");
                 actions.innerHTML = `
-                    <button onclick="game.startCrossExamination()" class="px-6 py-2.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-extrabold rounded-xl shadow-lg transition transform hover:scale-105 active:scale-95 flex items-center space-x-2 text-base animate-pulse">
-                        <span class="text-xl">💥</span>
-                        <span>OBJECTION! 提出異議與答題 (Start Cross-Examination)</span>
-                    </button>
+                    <div class="flex items-center justify-between w-full">
+                        <button onclick="game.prevStation()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/50 rounded-xl font-bold text-base transition flex items-center space-x-2" title="返回上一站查看證物">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                            <span>返回上一站 (Prev Station)</span>
+                        </button>
+                        <button onclick="game.startCrossExamination()" class="px-6 py-2.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-extrabold rounded-xl shadow-lg transition transform hover:scale-105 active:scale-95 flex items-center space-x-2 text-base animate-pulse">
+                            <span class="text-xl">💥</span>
+                            <span>OBJECTION! 提出異議與答題 (Start Cross-Examination)</span>
+                        </button>
+                    </div>
                 `;
             }
 
@@ -1105,12 +1152,14 @@
                 if (q.type === "single") {
                     const grid = document.createElement("div");
                     grid.className = "w-full grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-2";
-                    q.options.forEach((opt, idx) => {
+                    // Shuffle options every time question renders so students must read content!
+                    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+                    shuffledOptions.forEach((opt) => {
                         const b = document.createElement("button");
                         b.className = "w-full text-left p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-amber-400 rounded-xl text-slate-100 font-semibold transition transform active:scale-98 shadow flex flex-col justify-center";
                         b.innerHTML = `
-                            <span class="text-emerald-300 font-bold text-[18px]">${opt.en}</span>
-                            <span class="text-slate-300 text-[16px] mt-0.5">${opt.zh}</span>
+                            <span class="text-white font-bold text-[18px]">${opt.en}</span>
+                            <span class="text-emerald-300 text-[16px] mt-0.5">${opt.zh}</span>
                         `;
                         b.onclick = () => this.evaluateAnswer(opt.correct, q);
                         grid.appendChild(b);
@@ -1121,42 +1170,32 @@
                     wrap.className = "flex space-x-4 w-full justify-end mt-2";
                     wrap.innerHTML = `
                         <button onclick="game.evaluateAnswer(false === ${q.correctVal}, GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="flex-1 py-4 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-[20px] transition shadow flex flex-col items-center">
-                            <span>○ 是 (TRUE)</span>
+                            <span class="text-white font-bold">○ 是 (TRUE)</span>
                             <span class="text-xs text-emerald-200 font-normal">同意即代表完全合法</span>
                         </button>
                         <button onclick="game.evaluateAnswer(true === ${!q.correctVal}, GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="flex-1 py-4 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-xl text-[20px] transition shadow flex flex-col items-center">
-                            <span>╳ 否 (FALSE)</span>
+                            <span class="text-white font-bold">╳ 否 (FALSE)</span>
                             <span class="text-xs text-rose-200 font-normal">未成年私密照即便同意仍屬違法重罪</span>
                         </button>
                     `;
                     actions.appendChild(wrap);
                 } else if (q.type === "matching") {
-                    // Interactive matching: click left action, click right term to link
                     this.initInteractiveMatching(q, actions);
-                } else if (q.type === "fillblank") {
-                    const wrap = document.createElement("div");
-                    wrap.className = "flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full mt-2";
-                    wrap.innerHTML = `
-                        <input type="text" id="blankInput" class="flex-1 bg-slate-800 border-2 border-slate-600 rounded-xl px-4 py-3 text-white text-[22px] font-bold text-center focus:outline-none focus:border-amber-400 placeholder-slate-500" placeholder="請輸入答案 (例: 電腦)">
-                        <button onclick="game.evaluateFillBlank('${q.correctText}', GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="px-8 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold rounded-xl transition text-[20px] shadow-lg">
-                            送出裁決 (Submit)
-                        </button>
-                    `;
-                    actions.appendChild(wrap);
                 } else if (q.type === "ordering") {
-                    // Interactive ordering with movable cards
                     this.initInteractiveOrdering(q, actions);
                 } else if (q.type === "multiselect") {
                     const wrap = document.createElement("div");
                     wrap.className = "w-full space-y-2 mt-2";
-                    q.options.forEach((opt, idx) => {
+                    // Shuffle multiselect options every time
+                    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+                    shuffledOptions.forEach((opt, idx) => {
                         const label = document.createElement("label");
                         label.className = "flex items-start space-x-3 p-3 bg-slate-800 hover:bg-slate-700/80 rounded-xl cursor-pointer border border-slate-700 transition";
                         label.innerHTML = `
-                            <input type="checkbox" name="multiOpt" value="${idx}" class="mt-1 w-6 h-6 text-amber-500 rounded focus:ring-0">
+                            <input type="checkbox" name="multiOpt" data-correct="${opt.correct}" class="mt-1 w-6 h-6 text-amber-500 rounded focus:ring-0">
                             <div class="flex-1">
-                                <span class="text-emerald-300 text-[18px] font-bold block">${opt.en}</span>
-                                <span class="text-slate-300 text-[16px]">${opt.zh}</span>
+                                <span class="text-white text-[18px] font-bold block">${opt.en}</span>
+                                <span class="text-emerald-300 text-[16px]">${opt.zh}</span>
                             </div>
                         `;
                         wrap.appendChild(label);
@@ -1165,8 +1204,14 @@
                     submitBtn.className = "w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold rounded-xl transition mt-2 text-[20px] shadow-lg";
                     submitBtn.innerText = "送出多選解答 (Submit Selections)";
                     submitBtn.onclick = () => {
-                        const checked = Array.from(document.querySelectorAll("input[name='multiOpt']:checked")).map(el => parseInt(el.value));
-                        const isCorrect = checked.length === 3 && checked.includes(0) && checked.includes(2) && checked.includes(3);
+                        const inputs = Array.from(document.querySelectorAll("input[name='multiOpt']"));
+                        let isCorrect = true;
+                        inputs.forEach(input => {
+                            const shouldBeChecked = input.getAttribute("data-correct") === "true";
+                            if (input.checked !== shouldBeChecked) {
+                                isCorrect = false;
+                            }
+                        });
                         this.evaluateAnswer(isCorrect, q);
                     };
                     wrap.appendChild(submitBtn);
@@ -1210,8 +1255,8 @@
                     const matchedTermId = this.matchedPairs[a.id];
                     btn.className = `w-full text-left p-3 rounded-xl border-2 transition ${isSelected ? 'border-amber-400 bg-amber-950/60 shadow-lg' : (matchedTermId ? 'border-emerald-500 bg-slate-800/90' : 'border-slate-700 bg-slate-800')}`;
                     btn.innerHTML = `
-                        <div class="text-slate-100 font-bold text-[17px]">${a.zh}</div>
-                        <div class="text-xs text-emerald-300 mt-1">${a.en}</div>
+                        <div class="text-emerald-300 font-bold text-[17px]">${a.zh}</div>
+                        <div class="text-xs text-white mt-1">${a.en}</div>
                         ${matchedTermId ? `<div class="mt-1 text-xs text-amber-300 font-mono font-bold">➔ 已配對法條</div>` : ''}
                     `;
                     btn.onclick = () => {
@@ -1226,8 +1271,8 @@
                     const isLinked = Object.values(this.matchedPairs).includes(t.id);
                     btn.className = `w-full text-left p-3 rounded-xl border-2 transition ${isLinked ? 'border-emerald-500 bg-slate-800/90' : 'border-slate-700 bg-slate-800 hover:border-amber-400'}`;
                     btn.innerHTML = `
-                        <div class="text-amber-300 font-bold text-[18px]">${t.en}</div>
-                        <div class="text-xs text-slate-300 mt-1">${t.zh}</div>
+                        <div class="text-white font-bold text-[18px]">${t.en}</div>
+                        <div class="text-xs text-emerald-300 mt-1">${t.zh}</div>
                     `;
                     btn.onclick = () => {
                         if (this.matchingSelectedAction) {
@@ -1270,10 +1315,8 @@
             }
 
             initInteractiveOrdering(q, container) {
-                // Initialize shuffled copy
-                if (!this.currentOrderingList || this.currentOrderingList.length === 0) {
-                    this.currentOrderingList = [...q.steps].sort(() => Math.random() - 0.5);
-                }
+                // Initialize shuffled copy every time
+                this.currentOrderingList = [...q.steps].sort(() => Math.random() - 0.5);
 
                 const wrap = document.createElement("div");
                 wrap.className = "w-full flex flex-col space-y-3 mt-1";
@@ -1300,8 +1343,8 @@
                                 ${idx + 1}
                             </span>
                             <div>
-                                <div class="text-[17px] font-bold text-slate-100">${item.zh}</div>
-                                <div class="text-xs text-emerald-300 mt-0.5">${item.en}</div>
+                                <div class="text-[17px] font-bold text-white">${item.en}</div>
+                                <div class="text-xs text-emerald-300 mt-0.5">${item.zh}</div>
                             </div>
                         </div>
                         <div class="flex space-x-1.5 ml-2">
@@ -1333,12 +1376,6 @@
                 const q = station.questions[this.currentQuestionIndex];
                 const currentIds = this.currentOrderingList.map(item => item.id);
                 const isCorrect = JSON.stringify(currentIds) === JSON.stringify(q.correctOrder);
-                this.evaluateAnswer(isCorrect, q);
-            }
-
-            evaluateFillBlank(correctText, q) {
-                const val = document.getElementById("blankInput").value.trim();
-                const isCorrect = val.includes(correctText) || val.toLowerCase().includes("computer");
                 this.evaluateAnswer(isCorrect, q);
             }
 
@@ -1391,13 +1428,18 @@
                 this.saveToStorage();
                 const actions = document.getElementById("actionContainer");
                 actions.innerHTML = `
-                    <div class="flex flex-wrap gap-3 w-full justify-end">
-                        <button onclick="game.generateCertificate()" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-extrabold rounded-xl shadow-lg transition hover:scale-105 active:scale-95 text-base">
-                            🎓 領取破關證書 (Get Certificate)
+                    <div class="flex flex-wrap gap-3 w-full justify-between items-center">
+                        <button onclick="game.prevStation()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/50 rounded-xl font-bold text-base transition flex items-center space-x-2">
+                            <span>◀ 返回上一站 (Prev Station)</span>
                         </button>
-                        <button onclick="game.toggleLevelSelect()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl border border-slate-700 transition text-base">
-                            📑 關卡任意選 (Level Select)
-                        </button>
+                        <div class="flex space-x-3">
+                            <button onclick="game.generateCertificate()" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-extrabold rounded-xl shadow-lg transition hover:scale-105 active:scale-95 text-base">
+                                🎓 領取破關證書 (Get Certificate)
+                            </button>
+                            <button onclick="game.toggleLevelSelect()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl border border-slate-700 transition text-base">
+                                📑 關卡任意選 (Level Select)
+                            </button>
+                        </div>
                     </div>
                 `;
             }
@@ -1468,8 +1510,8 @@
                             <div class="text-3xl p-2 bg-slate-900 rounded-lg border border-slate-700">${found.icon || '📑'}</div>
                             <div class="flex-1">
                                 <h4 class="font-bold text-amber-300 text-sm">${found.title}</h4>
-                                <p class="text-xs text-emerald-300 mt-1">${found.descEn}</p>
-                                <p class="text-xs text-slate-400 mt-0.5">${found.descZh}</p>
+                                <p class="text-xs text-white mt-1">${found.descEn}</p>
+                                <p class="text-xs text-emerald-300 mt-0.5">${found.descZh}</p>
                             </div>
                         `;
                         list.appendChild(card);
