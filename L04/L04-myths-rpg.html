@@ -64,11 +64,26 @@
         .speed-lines {
             background: repeating-radial-gradient(circle at center, transparent 0, transparent 40px, rgba(239, 68, 68, 0.15) 45px, transparent 50px);
         }
-        /* Print layout for certificate */
+        /* Print layout for certificate - strictly hide control tabs and buttons */
         @media print {
-            body * { visibility: hidden; }
-            #printableCertificate, #printableCertificate * { visibility: visible; }
-            #printableCertificate { position: absolute; left: 0; top: 0; width: 100%; }
+            body * { visibility: hidden !important; }
+            #printableCertificate, #printableCertificate *:not(.no-print):not(.no-print *) { visibility: visible !important; }
+            .no-print, .no-print * { display: none !important; visibility: hidden !important; }
+            #printableCertificate { 
+                position: fixed; 
+                left: 0; 
+                top: 0; 
+                width: 100vw; 
+                height: 100vh; 
+                background: #0f172a !important; 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                margin: 0;
+            }
         }
     </style>
 </head>
@@ -114,7 +129,7 @@
                 </div>
             </div>
 
-            <!-- Controls (Evidence Bag, Reset, Sound, Help) -->
+            <!-- Controls (Evidence Bag, Reset, Sound) -->
             <div class="flex items-center space-x-2">
                 <!-- Evidence Bag Button -->
                 <button onclick="game.toggleEvidenceBag()" class="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-600/30 hover:bg-amber-600/50 text-amber-300 border border-amber-500/60 rounded-lg text-sm font-semibold transition active:scale-95 shadow">
@@ -148,11 +163,6 @@
             <!-- Dynamic SVG Scene Graphic -->
             <div id="sceneSvg" class="absolute inset-0 w-full h-full"></div>
 
-            <!-- Animated Character Sprite Canvas/Layer -->
-            <div id="characterLayer" class="absolute inset-0 pointer-events-none flex items-end justify-center transition-all duration-300">
-                <!-- Character Avatar Rendered Here -->
-            </div>
-
             <!-- Investigation Hotspots Overlay Layer -->
             <div id="hotspotLayer" class="absolute inset-0 pointer-events-auto">
                 <!-- Interactive clickable glowing items populated here -->
@@ -181,14 +191,14 @@
                 <div class="flex items-center space-x-2">
                     <button id="ttsPlayBtn" onclick="game.speakCurrentDialog()" class="flex items-center space-x-1.5 px-3 py-1 bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 border border-blue-500/50 rounded-lg text-sm font-medium transition active:scale-95" title="朗讀英文例句與對話">
                         <svg class="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
-                        <span>🔊 聽英文語音 (TTS)</span>
+                        <span>🔊 重複聆聽 (Replay TTS)</span>
                     </button>
                 </div>
             </div>
 
             <!-- Dialogue Text Content (Min Font Size 20px) -->
             <div id="dialogArea" class="min-h-[100px] mb-3">
-                <div id="dialogEnglish" class="game-text font-semibold text-emerald-300 tracking-normal mb-1">
+                <div id="dialogEnglish" class="game-text font-bold text-emerald-300 tracking-normal mb-1">
                     Welcome to the Campus Legal Aid Room!
                 </div>
                 <div id="dialogChinese" class="game-text text-slate-200 font-medium">
@@ -198,7 +208,7 @@
 
             <!-- Action Buttons / Question Interface Container -->
             <div id="actionContainer" class="flex flex-wrap items-center justify-end gap-3 pt-2 border-t border-slate-800">
-                <!-- Injected dynamically: [出示證物], [異議！], [下一頁], [開始測驗] -->
+                <!-- Injected dynamically -->
             </div>
 
         </div>
@@ -209,13 +219,45 @@
     <!-- 4. MODALS & OVERLAYS                       -->
     <!-- ========================================== -->
 
+    <!-- Evidence Detail Modal (Replaces browser alert with 20px+ font and auto-TTS) -->
+    <div id="evidenceDetailModal" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-slate-900 border-2 border-amber-500 rounded-2xl max-w-xl w-full p-6 shadow-2xl text-left">
+            <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
+                <div class="flex items-center space-x-3">
+                    <span id="evDetailIcon" class="text-3xl p-2 bg-slate-800 rounded-xl border border-amber-500/50">📑</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">EVIDENCE DISCOVERED ｜ 發現關鍵證物</span>
+                        <h3 id="evDetailTitle" class="text-xl sm:text-2xl font-bold text-amber-300">證物名稱</h3>
+                    </div>
+                </div>
+                <button onclick="game.closeEvidenceDetail()" class="text-slate-400 hover:text-white text-3xl font-bold">&times;</button>
+            </div>
+            <div class="mb-4 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-wide">Key English Point:</span>
+                    <button onclick="game.speakText(document.getElementById('evDetailEn').innerText)" class="px-2.5 py-0.5 bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 border border-blue-500/40 rounded text-xs flex items-center gap-1 font-semibold">
+                        🔊 重聽英文
+                    </button>
+                </div>
+                <p id="evDetailEn" class="text-[20px] font-bold text-emerald-300 leading-relaxed"></p>
+            </div>
+            <div class="mb-6 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
+                <span class="text-xs font-bold text-amber-400 uppercase tracking-wide block mb-1">台灣法律實務重點：</span>
+                <p id="evDetailZh" class="text-[20px] font-medium text-slate-100 leading-relaxed"></p>
+            </div>
+            <button onclick="game.closeEvidenceDetail()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold rounded-xl shadow-lg transition text-[20px]">
+                📥 收入證物包 (Add to Evidence Bag)
+            </button>
+        </div>
+    </div>
+
     <!-- Evidence Bag Modal -->
     <div id="evidenceModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-slate-900 border-2 border-amber-500/70 rounded-2xl max-w-2xl w-full p-6 shadow-2xl max-h-[85vh] flex flex-col">
             <div class="flex justify-between items-center border-b border-slate-700 pb-3 mb-4">
                 <h2 class="text-2xl font-bold text-amber-400 flex items-center">
                     <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>
-                    證物包 (Court Evidence Court Bag)
+                    證物包 (Court Evidence Bag)
                 </h2>
                 <button onclick="game.toggleEvidenceBag()" class="text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
             </div>
@@ -240,9 +282,9 @@
                     <p class="text-xs text-slate-400">裁判長的質疑與法律鷹架指引</p>
                 </div>
             </div>
-            <div id="hintContentEn" class="text-emerald-300 font-semibold mb-2 game-text"></div>
-            <div id="hintContentZh" class="text-slate-200 game-text mb-6"></div>
-            <button onclick="game.closeHintModal()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg">我明白了，重新審視案件！(Understood)</button>
+            <div id="hintContentEn" class="text-emerald-300 font-bold mb-2 text-[20px]"></div>
+            <div id="hintContentZh" class="text-slate-200 text-[20px] mb-6 font-medium"></div>
+            <button onclick="game.closeHintModal()" class="w-full py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl transition shadow-lg text-[18px]">我明白了，重新審視案件！(Understood)</button>
         </div>
     </div>
 
@@ -335,7 +377,6 @@
                 if (this.muted) return;
                 this.init();
                 const now = this.ctx.currentTime;
-                // Heavy bass slam
                 const osc = this.ctx.createOscillator();
                 const gain = this.ctx.createGain();
                 osc.type = 'sine';
@@ -347,7 +388,7 @@
                 gain.connect(this.ctx.destination);
                 osc.start(now);
                 osc.stop(now + 0.35);
-                // Wood knock transient
+
                 const osc2 = this.ctx.createOscillator();
                 const gain2 = this.ctx.createGain();
                 osc2.type = 'triangle';
@@ -396,7 +437,7 @@
         }
 
         /**
-         * Stations & PIRLS Curriculum Data
+         * Stations & PIRLS Curriculum Data (All Bilingual CEFR A2-B1, No '(正解)' in text)
          */
         const GAME_DATA = {
             stations: [
@@ -439,7 +480,7 @@
                             label: "5 人 LINE 群組截圖 (LINE Chat Screenshot)",
                             evidenceId: "ev_line_chat",
                             title: "5 人 LINE 群組截圖 (5-Member LINE Screenshot)",
-                            descEn: "Taiwan Supreme Court ruled that a chat group with 3+ members already satisfies the 'public' requirement for Defamation.",
+                            descEn: "Taiwan Supreme Court ruled that a chat group with 3 or more members satisfies the 'public' requirement for Defamation.",
                             descZh: "實務判例指出，LINE 群組成員達 3 人以上即具散布力，符合公然侮辱罪「公然」要件。",
                             icon: "📱"
                         },
@@ -448,7 +489,7 @@
                             label: "匿名小帳 IP 追查公文 (IP Tracking Record)",
                             evidenceId: "ev_ip_doc",
                             title: "匿名小帳 IP 追查公文 (IP Tracking Record)",
-                            descEn: "Police can issue official subpoenas to track Instagram & Dcard burner account IPs and real registration names.",
+                            descEn: "Police can issue official subpoenas to track Instagram burner account IPs and real registration names.",
                             descZh: "警方與地檢署可向社群平台調閱匿名分身小帳之 IP 與註冊資料，網路絕非免責法外之地。",
                             icon: "📑"
                         }
@@ -461,10 +502,10 @@
                             promptEn: "According to Taiwan Law, how many members in a private messaging group make it 'public'?",
                             promptZh: "根據台灣刑法實務見解，通訊軟體私人群組達到多少人以上，在法律上即符合「公然」侮辱之公然要件？",
                             options: [
-                                { label: "A) 2 人 (Only 2 people)", correct: false },
-                                { label: "B) 3 人以上 (3 or more people)", correct: true },
-                                { label: "C) 10 人以上 (10 people)", correct: false },
-                                { label: "D) 50 人以上 (50 people)", correct: false }
+                                { en: "A) 2 people", zh: "僅 2 人", correct: false },
+                                { en: "B) 3 or more people", zh: "3 人以上", correct: true },
+                                { en: "C) 10 people", zh: "10 人以上", correct: false },
+                                { en: "D) 50 people", zh: "50 人以上", correct: false }
                             ],
                             hintEn: "Think about: does a 3-person conversation include another audience besides you and the target?",
                             hintZh: "提示：只要除了說話者與被害人之外，有第三人在場聽聞，即具「公然」散布性。"
@@ -473,13 +514,17 @@
                             qid: "q2",
                             pirls: "詮釋整合 (Interpret & Integrate)",
                             type: "matching",
-                            promptEn: "Match the online action with its correct English legal term:",
-                            promptZh: "請將下列網路行為與其對應的英文法律術語進行配對：",
-                            pairs: [
-                                { action: "① 在網路公開社團貼文辱罵同學豬頭 (Posting insults online)", term: "Defamation / Slander (公然侮辱/誹謗)" },
-                                { action: "② 未經同意將同學私人病歷或電話放上爆料公社 (Leaking private personal info)", term: "Privacy Violation (違反個人資料保護法)" }
+                            promptEn: "Connect each online action to its correct English legal term:",
+                            promptZh: "請點選左側行為，再點選右側對應的英文法律術語進行配對：",
+                            actions: [
+                                { id: "a1", en: "Posting insults attacking classmates online", zh: "在網路社群貼文或留言辱罵同學" },
+                                { id: "a2", en: "Sharing classmates' private phone numbers online without consent", zh: "未經同意將同學私人電話或個人資料放上網" }
                             ],
-                            hintEn: "Insults harm reputation (Defamation), while leaking secret info violates Privacy.",
+                            terms: [
+                                { id: "t2", en: "Privacy Violation", zh: "違反個人資料保護與隱私權", matchId: "a2" },
+                                { id: "t1", en: "Defamation / Slander", zh: "公然侮辱與誹謗罪", matchId: "a1" }
+                            ],
+                            hintEn: "Insults harm personal reputation (Defamation), while leaking secret info violates Privacy.",
                             hintZh: "提示：侮辱名譽屬於 Defamation，洩漏私密個人資料屬於 Privacy Violation。"
                         }
                     ],
@@ -494,7 +539,7 @@
                     speaker: "數位鑑識員 (Digital Forensics Officer)",
                     role: "警局數位鑑識組",
                     english: "Under the Child and Youth Sexual Exploitation Prevention Act, taking or keeping intimate photos of anyone under 18 is a serious felony—even if both sides agreed!",
-                    chinese: "根據《兒童及少年性剝削防制條例》，拍攝、製造或持有未滿 18 歲青少年的私密影像均屬公訴重罪——即便雙方正在交往且女方「同意」也依然違法！",
+                    chinese: "根據《兒童及少年性剝削防制條例》，拍攝、製造或持有未滿 18 歲青少年的私密影像均屬公訴重罪——即便雙方正在交往且對方「同意」也依然違法！",
                     hotspots: [
                         {
                             x: 52, y: 50,
@@ -524,7 +569,7 @@
                             label: "情侶對話日記 (Couples Diary & Agreement)",
                             evidenceId: "ev_diary",
                             title: "情侶對話日記 (Couples Chat Record)",
-                            descEn: "Taiwan law strictly protects minors. Mutual consent does NOT legalize taking under-18 explicit photos.",
+                            descEn: "Taiwan law strictly protects minors. Mutual consent does not legalize taking under-18 explicit photos.",
                             descZh: "法律強制保護未成年人身心健康，未滿 18 歲縱使合意拍私密照，仍觸犯兒少性剝削防制條例重罪。",
                             icon: "📖"
                         },
@@ -533,7 +578,7 @@
                             label: "知情同意告示 (Consent Spirit Board)",
                             evidenceId: "ev_consent_board",
                             title: "知情同意精神告示牌 (Consent Board)",
-                            descEn: "'No means No.' Consent must be clear, sober, and can be withdrawn at any time.",
+                            descEn: "No means No. Consent must be clear, sober, and can be withdrawn at any time.",
                             descZh: "「沒有同意就是性騷擾」。知情同意必須出於完全自主，且隨時可以撤回！",
                             icon: "🛑"
                         }
@@ -546,7 +591,7 @@
                             promptEn: "True or False: Because Mary agreed to let her boyfriend take private intimate photos, his action is 100% legal under Taiwan law.",
                             promptZh: "是非題：因為女友小美事前「同意」讓男友拍攝私密照片，因此男友的拍攝與保存行為在台灣法律下是完全合法的。",
                             correctVal: false,
-                            hintEn: "Remember Station 2: Consent does NOT protect people from the Child and Youth Sexual Exploitation Prevention Act.",
+                            hintEn: "Remember Station 2: Consent does not protect people from the Child and Youth Sexual Exploitation Prevention Act.",
                             hintZh: "提示：保護未成年人條例為強制規定，即便當事人事前同意，拍攝者依然觸法。"
                         },
                         {
@@ -554,12 +599,12 @@
                             pirls: "評鑑文本 (Examine & Evaluate)",
                             type: "multiselect",
                             promptEn: "Which of the following English expressions are appropriate for setting firm personal boundaries? (Select all that apply)",
-                            promptZh: "多選題：當同儕或他人跨越身體與人際界線時，下列哪些英文句型適合用於「堅定拒絕並劃定界線」？（多選）",
+                            promptZh: "多選題：當同儕跨越人際界線時，下列哪些英文句型適合用於「堅定拒絕並劃定界線」？（多選）",
                             options: [
-                                { label: "A) \"I don't give you consent to post my picture.\" (我沒有同意你發布我的照片)", correct: true },
-                                { label: "B) \"It's okay, it's just a funny prank.\" (沒關係，這只是好玩的惡作劇)", correct: false },
-                                { label: "C) \"You are crossing my personal space and privacy.\" (你侵犯了我的個人空間與隱私)", correct: true },
-                                { label: "D) \"I am not comfortable with this touch.\" (我對這種肢體碰觸感到很不舒服)", correct: true }
+                                { en: "A) \"I don't give you consent to post my picture.\"", zh: "我沒有同意你發布我的照片", correct: true },
+                                { en: "B) \"It's okay, it's just a funny prank.\"", zh: "沒關係，這只是好玩的惡作劇", correct: false },
+                                { en: "C) \"You are crossing my personal space and privacy.\"", zh: "你侵犯了我的個人空間與隱私", correct: true },
+                                { en: "D) \"I am not comfortable with this touch.\"", zh: "我對這種肢體碰觸感到很不舒服", correct: true }
                             ],
                             hintEn: "Select sentences that firmly state non-consent and defend personal boundaries.",
                             hintZh: "提示：請選擇明確表達拒絕、捍衛隱私與身體自主權的堅定語句。"
@@ -571,7 +616,7 @@
                             promptEn: "According to the penal code, cracking passwords or peeking into someone's smartphone violates the offense against ______ use (妨害______使用罪).",
                             promptZh: "填空題：根據刑法第 358 條，無故輸入密碼或破解指紋偷看他人手機隱私，觸犯「妨害______使用罪」。（請輸入兩個中文字）",
                             correctText: "電腦",
-                            hintEn: "In Taiwan penal law, smartphones are classified under 'Computer' (電腦).",
+                            hintEn: "In Taiwan penal law, smartphones are legally classified under 'Computer' (電腦).",
                             hintZh: "提示：智慧型手機在刑法規範中被視為廣義的「電腦」。"
                         }
                     ],
@@ -613,12 +658,12 @@
                             pirls: "直接推論 (Make Straightforward Inferences)",
                             type: "ordering",
                             promptEn: "Order the chain of events from 'prank' to 'legal consequence' correctly:",
-                            promptZh: "排序題：請將「抽椅子事件」從惡作劇演變成法律責任的因果順序正確排列：",
+                            promptZh: "排序題：請使用上下按鈕，將「抽椅子事件」從惡作劇演變成法律責任的順序正確排列：",
                             steps: [
-                                { id: "B", textEn: "Pull classmate's chair away for fun (趁同學不注意拉開椅子)" },
-                                { id: "A", textEn: "Classmate falls and fractures tailbone (同學跌坐倒地致尾椎骨折)" },
-                                { id: "D", textEn: "Claim it was just an online TikTok prank (辯解這只是網路惡作劇開玩笑)" },
-                                { id: "C", textEn: "Face criminal negligence & civil compensation (承擔過失傷害罪刑責與高額民事賠償)" }
+                                { id: "B", en: "Pull classmate's chair away for fun", zh: "趁同學不注意拉開椅子" },
+                                { id: "A", en: "Classmate falls and fractures tailbone", zh: "同學跌坐倒地致尾椎骨折" },
+                                { id: "D", en: "Claim it was just an online TikTok prank", zh: "辯解這只是網路惡作劇開玩笑" },
+                                { id: "C", en: "Face criminal negligence & civil compensation", zh: "承擔過失傷害罪刑責與高額民事賠償" }
                             ],
                             correctOrder: ["B", "A", "D", "C"],
                             hintEn: "Action -> Injury -> Excuse -> Legal consequence.",
@@ -631,10 +676,10 @@
                             promptEn: "Which statement best defines the true legal difference between a prank and a crime?",
                             promptZh: "單選題：關於「玩笑（Prank）」與「犯罪（Crime）」的界線，下列哪一個法學觀點最為正確？",
                             options: [
-                                { label: "A) 只要開玩笑的人覺得好笑，就不算犯法。", correct: false },
-                                { label: "B) A joke is only funny if everyone is laughing. If it hurts someone, it’s a crime. (正解)", correct: true },
-                                { label: "C) 只要發生在學校教室裡，警察就絕對管不到。", correct: false },
-                                { label: "D) 只要被害人當場沒哭出來，就代表他默認同意被整。", correct: false }
+                                { en: "A) It is not a crime as long as the prankster finds it funny.", zh: "只要開玩笑的人覺得好笑，就不算犯罪。", correct: false },
+                                { en: "B) A joke is only funny if everyone is laughing. If it hurts someone, it is a crime.", zh: "大家都笑得出來才算玩笑；若造成傷害，就是犯罪。", correct: true },
+                                { en: "C) Police have no legal power to investigate incidents inside school classrooms.", zh: "只要在學校教室內發生的事，警察就管不到。", correct: false },
+                                { en: "D) If the victim does not cry out immediately, it means they agreed to the prank.", zh: "只要被害人當下沒有哭鬧，就代表他默認同意被整。", correct: false }
                             ],
                             hintEn: "Key Golden Quote: Everyone must be laughing for it to be a real joke.",
                             hintZh: "提示：真正的玩笑是大家都感到愉快；一旦造成實質損害或痛苦，就是法律責任。"
@@ -694,10 +739,10 @@
                             promptEn: "Why can't students usually claim 'self-defense' (正當防衛) when they fight back against bullies in school?",
                             promptZh: "單選題：在學校遭遇霸凌時若直接動手還擊，為何在法律上通常無法成功主張「正當防衛」？",
                             options: [
-                                { label: "A) 因為高中生在法律上完全沒有自我保護權益。", correct: false },
-                                { label: "B) 正當防衛須針對「現在進行中」侵害；若對方已停手或演變成互相拉扯鬥毆，法律視為雙方互毆傷害 (正解)", correct: true },
-                                { label: "C) 因為只要是未成年人動手，警察就一律先關起來。", correct: false },
-                                { label: "D) 學校校規凌駕於中華民國刑法之上。", correct: false }
+                                { en: "A) High school students have no legal right to protect themselves on campus.", zh: "高中生在校園內完全沒有自我保護權益。", correct: false },
+                                { en: "B) Self-defense requires an ongoing attack; once it turns into a mutual fight, both face injury charges.", zh: "正當防衛須針對「現在進行中」侵害；若演變成互毆，雙方皆構成傷害罪。", correct: true },
+                                { en: "C) Police automatically arrest any teenager who physically touches someone.", zh: "只要未成年人有肢體碰觸，警察就一律先移送關押。", correct: false },
+                                { en: "D) School regulations are always higher than national criminal laws.", zh: "校規效力始終凌駕於中華民國刑法之上。", correct: false }
                             ],
                             hintEn: "Look at the legal definition: ongoing attack vs mutual intentional brawl.",
                             hintZh: "提示：正當防衛有嚴格時效限制，若是出於報復或演變成互相攻擊（互毆），將被雙方各告傷害罪。"
@@ -709,10 +754,10 @@
                             promptEn: "If a teenager acts as an ATM money mule (車手) for pocket money, what legal consequence will happen?",
                             promptZh: "單選題：若高中生因兼職打工幫忙跑腿領錢而成為詐騙集團「車手」，下列法律後果何者正確？",
                             options: [
-                                { label: "A) 只要推說不知情，法律完全不罰學生。", correct: false },
-                                { label: "B) 頂多記大過一支，不用賠償被害人損失。", correct: false },
-                                { label: "C) 依詐欺與洗錢共犯移送少年法庭，且父母依法需負擔數百萬連帶民事賠償 (正解)", correct: true },
-                                { label: "D) 未滿 18 歲依法永久免除所有民事賠償責任。", correct: false }
+                                { en: "A) Teenagers have zero legal liability if they claim they were tricked.", zh: "青少年只要推說被騙不知情，就完全不用負擔法律責任。", correct: false },
+                                { en: "B) The student only gets a school demerit without having to pay any money.", zh: "頂多被學校記大過處分，不需要向被害人賠償金錢。", correct: false },
+                                { en: "C) They face criminal fraud charges, and parents bear joint civil compensation.", zh: "會被依詐欺洗錢罪移送，且父母依法須負擔高額連帶民事賠償責任。", correct: true },
+                                { en: "D) Taiwan law permanently protects minors under 18 from paying civil damages.", zh: "法律規定未滿 18 歲者永久免除所有民事損害賠償責任。", correct: false }
                             ],
                             hintEn: "Recall Station 5: Joint parental liability under the Civil Code.",
                             hintZh: "提示：民法第 187 條規定法定代理人（父母）必須負擔連帶賠償責任。"
@@ -721,13 +766,13 @@
                             qid: "q10",
                             pirls: "評鑑文本 (Examine & Evaluate)",
                             type: "single",
-                            promptEn: "When a classmate plans to post private screenshots to start an online witch-hunt, what is the best English response?",
+                            promptEn: "When a classmate plans to post private screenshots to start an online witch-hunt, what is the best legal action?",
                             promptZh: "情境題：當你發現同儕正準備將同學的私密對話截圖公開上網進行「公審」時，最合適且合法的行動是？",
                             options: [
-                                { label: "A) 幫忙轉發到各社團，讓大家一起公審看熱鬧。", correct: false },
-                                { label: "B) 用英文堅定警告：\"Stop it. That's defamation and cyberbullying, and you could get sued!\" 並阻止發布 (正解)", correct: true },
-                                { label: "C) 幫他創假帳號發布，以為查不到就沒事。", correct: false },
-                                { label: "D) 完全不關我的事，默默按個愛心看戲就好。", correct: false }
+                                { en: "A) Share the screenshots to other online groups so everyone can discuss it.", zh: "幫忙轉發到各大社團與群組，讓大家一起公審看熱鬧。", correct: false },
+                                { en: "B) Warn them firmly: 'Stop it. That is defamation and cyberbullying, and you could get sued!'", zh: "用英文堅定警告：「住手！這是公然侮辱與網路霸凌，你可能會被告！」並阻止發布。", correct: true },
+                                { en: "C) Help create an anonymous burner account for them to post secretly.", zh: "幫忙註冊匿名分身小帳發文，以為這樣比較安全查不到。", correct: false },
+                                { en: "D) Pretend not to see it and simply press like as a silent bystander.", zh: "裝作完全沒看到，在旁邊默默按讚當個看戲路人。", correct: false }
                             ],
                             hintEn: "Use the Lesson 4 Target English warning against defamation and cyberbullying.",
                             hintZh: "提示：運用第四課核心英文片語，堅定指明違法後果並阻止憾事發生。"
@@ -762,6 +807,8 @@
                 this.badgeClickCount = 0;
                 this.lastBadgeClickTime = 0;
                 this.completedStations = new Set();
+                this.activeMatchingPair = { actionId: null, termId: null };
+                this.currentOrderingList = [];
                 this.initFromStorage();
             }
 
@@ -806,7 +853,6 @@
                 document.getElementById("hudHpText").innerText = `${this.integrity}%`;
                 document.getElementById("hudHpBar").style.width = `${Math.max(0, this.integrity)}%`;
                 
-                // Color shift HP bar
                 const bar = document.getElementById("hudHpBar");
                 if (this.integrity > 60) {
                     bar.className = "bg-gradient-to-r from-emerald-500 via-green-400 to-emerald-300 h-full rounded-full transition-all duration-500";
@@ -832,6 +878,7 @@
 
                 if (station.type === "victory") {
                     this.renderVictoryStation();
+                    this.setDialog(station.english, station.chinese);
                     return;
                 }
 
@@ -856,7 +903,6 @@
                                 <linearGradient id="woodGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#854d0e"/><stop offset="100%" stop-color="#451a03"/></linearGradient>
                             </defs>
                             <rect width="800" height="450" fill="url(#wallGrad)"/>
-                            <!-- Bookshelves -->
                             <rect x="50" y="40" width="220" height="260" fill="#334155" rx="4"/>
                             <line x1="50" y1="120" x2="270" y2="120" stroke="#64748b" stroke-width="4"/>
                             <line x1="50" y1="200" x2="270" y2="200" stroke="#64748b" stroke-width="4"/>
@@ -864,10 +910,8 @@
                             <rect x="100" y="55" width="30" height="60" fill="#3b82f6"/>
                             <rect x="135" y="65" width="22" height="50" fill="#10b981"/>
                             <rect x="165" y="50" width="28" height="65" fill="#ef4444"/>
-                            <!-- Desk -->
                             <polygon points="120,450 680,450 620,290 180,290" fill="url(#woodGrad)"/>
                             <rect x="360" y="300" width="80" height="15" fill="#d97706" rx="2"/>
-                            <!-- Scales of Justice Silhouette -->
                             <path d="M400 80 L400 180 M350 110 L450 110 M350 110 L330 145 M350 110 L370 145 M450 110 L430 145 M450 110 L470 145" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
                         </svg>
                     `;
@@ -875,16 +919,13 @@
                     svgContent = `
                         <svg class="w-full h-full" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                             <rect width="800" height="450" fill="#030712"/>
-                            <!-- Cyber Grid -->
                             <line x1="0" y1="360" x2="800" y2="360" stroke="#1e3a8a" stroke-width="2"/>
                             <line x1="0" y1="390" x2="800" y2="390" stroke="#1d4ed8" stroke-width="2"/>
                             <line x1="0" y1="420" x2="800" y2="420" stroke="#3b82f6" stroke-width="3"/>
-                            <!-- Floating chat bubbles -->
                             <rect x="100" y="80" width="240" height="60" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2" opacity="0.85"/>
                             <text x="120" y="115" fill="#7dd3fc" font-size="14" font-weight="bold">LINE Group (5 Members)</text>
                             <rect x="460" y="120" width="220" height="70" rx="10" fill="#1e293b" stroke="#f43f5e" stroke-width="2" opacity="0.85"/>
                             <text x="480" y="150" fill="#fda4af" font-size="14" font-weight="bold">Anonymous IG Account</text>
-                            <!-- Witness Bench -->
                             <polygon points="250,450 550,450 510,320 290,320" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/>
                         </svg>
                     `;
@@ -892,10 +933,8 @@
                     svgContent = `
                         <svg class="w-full h-full" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                             <rect width="800" height="450" fill="#0f172a"/>
-                            <!-- Blackboard -->
                             <rect x="160" y="40" width="480" height="180" fill="#064e3b" stroke="#78350f" stroke-width="10" rx="4"/>
                             <text x="240" y="130" fill="#6ee7b7" font-size="28" font-family="sans-serif">L4: Prank vs Crime?</text>
-                            <!-- Tilted fallen chair -->
                             <path d="M380 340 L430 310 L460 380 L410 410 Z" fill="#92400e"/>
                             <line x1="380" y1="340" x2="350" y2="420" stroke="#78350f" stroke-width="6"/>
                             <line x1="430" y1="310" x2="400" y2="390" stroke="#78350f" stroke-width="6"/>
@@ -905,24 +944,19 @@
                     svgContent = `
                         <svg class="w-full h-full" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                             <rect width="800" height="450" fill="#090d16"/>
-                            <!-- Grand Pillars -->
                             <rect x="80" y="0" width="70" height="450" fill="#1e293b"/>
                             <rect x="650" y="0" width="70" height="450" fill="#1e293b"/>
-                            <!-- Judge Bench -->
                             <polygon points="220,450 580,450 540,240 260,240" fill="#78350f" stroke="#d97706" stroke-width="3"/>
-                            <!-- Gavel & Block -->
                             <ellipse cx="400" cy="270" rx="30" ry="10" fill="#451a03"/>
                             <rect x="385" y="240" width="30" height="20" rx="3" fill="#b45309"/>
                             <line x1="370" y1="230" x2="430" y2="250" stroke="#f59e0b" stroke-width="5"/>
                         </svg>
                     `;
                 } else {
-                    // Default Tech Lab / Hallway
                     svgContent = `
                         <svg class="w-full h-full" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                             <rect width="800" height="450" fill="#0f172a"/>
                             <line x1="0" y1="320" x2="800" y2="320" stroke="#334155" stroke-width="4"/>
-                            <!-- Digital terminal -->
                             <rect x="320" y="160" width="160" height="120" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="4"/>
                             <circle cx="400" cy="220" r="28" fill="#0284c7" opacity="0.6"/>
                         </svg>
@@ -961,11 +995,25 @@
                 this.renderHUD();
                 this.renderHotspots(GAME_DATA.stations[this.currentStationIndex].hotspots || []);
 
-                // Open Inspection Popup
+                // Open custom modal with 20px+ font and auto-TTS
                 this.triggerFX("TAKE THAT! / 看招！", "red");
                 setTimeout(() => {
-                    alert(`【發現新證物！】\n\n📌 證物名稱：${h.title}\n\n📖 英文重點：${h.descEn}\n\n⚖️ 法律規範：${h.descZh}`);
+                    this.openEvidenceDetail(h);
                 }, 400);
+            }
+
+            openEvidenceDetail(h) {
+                document.getElementById("evDetailIcon").innerText = h.icon || "📑";
+                document.getElementById("evDetailTitle").innerText = h.title;
+                document.getElementById("evDetailEn").innerText = h.descEn;
+                document.getElementById("evDetailZh").innerText = h.descZh;
+                document.getElementById("evidenceDetailModal").classList.remove("hidden");
+                // Auto-TTS English explanation
+                this.speakText(h.descEn);
+            }
+
+            closeEvidenceDetail() {
+                document.getElementById("evidenceDetailModal").classList.add("hidden");
             }
 
             renderSpeaker(name, role) {
@@ -980,18 +1028,26 @@
                 zhDiv.innerText = zhText;
                 this.currentEnText = enText;
                 this.sound.playTypewriter();
+                // Automatic English TTS on every station / dialog change
+                this.speakText(enText);
             }
 
             speakCurrentDialog() {
-                if (!window.speechSynthesis) {
-                    alert("Your browser does not support Web Speech API.");
-                    return;
+                this.speakText(this.currentEnText);
+            }
+
+            speakText(text) {
+                if (!text || !window.speechSynthesis || this.sound.muted) return;
+                try {
+                    window.speechSynthesis.cancel();
+                    const cleanText = text.replace(/\[Question \d+\/\d+\]/g, '').replace(/【[^】]+】/g, '').trim();
+                    const utter = new SpeechSynthesisUtterance(cleanText || "Justice will prevail!");
+                    utter.lang = "en-US";
+                    utter.rate = 0.93;
+                    window.speechSynthesis.speak(utter);
+                } catch (e) {
+                    console.warn("TTS Error:", e);
                 }
-                window.speechSynthesis.cancel();
-                const utter = new SpeechSynthesisUtterance(this.currentEnText || "Justice will prevail!");
-                utter.lang = "en-US";
-                utter.rate = 0.95;
-                window.speechSynthesis.speak(utter);
             }
 
             renderStoryActions(station) {
@@ -1026,7 +1082,6 @@
             renderQuestion(qIdx) {
                 const station = GAME_DATA.stations[this.currentStationIndex];
                 if (!station.questions || qIdx >= station.questions.length) {
-                    // Level Passed!
                     this.completedStations.add(station.id);
                     this.saveToStorage();
                     this.triggerFX("VICTORY! / 辯護成功！", "green");
@@ -1049,11 +1104,14 @@
 
                 if (q.type === "single") {
                     const grid = document.createElement("div");
-                    grid.className = "w-full grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2";
+                    grid.className = "w-full grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-2";
                     q.options.forEach((opt, idx) => {
                         const b = document.createElement("button");
-                        b.className = "w-full text-left p-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-amber-400 rounded-xl text-slate-100 font-semibold text-base transition transform active:scale-98";
-                        b.innerText = opt.label;
+                        b.className = "w-full text-left p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-amber-400 rounded-xl text-slate-100 font-semibold transition transform active:scale-98 shadow flex flex-col justify-center";
+                        b.innerHTML = `
+                            <span class="text-emerald-300 font-bold text-[18px]">${opt.en}</span>
+                            <span class="text-slate-300 text-[16px] mt-0.5">${opt.zh}</span>
+                        `;
                         b.onclick = () => this.evaluateAnswer(opt.correct, q);
                         grid.appendChild(b);
                     });
@@ -1062,74 +1120,220 @@
                     const wrap = document.createElement("div");
                     wrap.className = "flex space-x-4 w-full justify-end mt-2";
                     wrap.innerHTML = `
-                        <button onclick="game.evaluateAnswer(false === ${q.correctVal}, GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="flex-1 py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-lg transition">○ 是 (TRUE)</button>
-                        <button onclick="game.evaluateAnswer(true === ${!q.correctVal}, GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="flex-1 py-3 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-xl text-lg transition">╳ 否 (FALSE)</button>
+                        <button onclick="game.evaluateAnswer(false === ${q.correctVal}, GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="flex-1 py-4 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-[20px] transition shadow flex flex-col items-center">
+                            <span>○ 是 (TRUE)</span>
+                            <span class="text-xs text-emerald-200 font-normal">同意即代表完全合法</span>
+                        </button>
+                        <button onclick="game.evaluateAnswer(true === ${!q.correctVal}, GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="flex-1 py-4 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-xl text-[20px] transition shadow flex flex-col items-center">
+                            <span>╳ 否 (FALSE)</span>
+                            <span class="text-xs text-rose-200 font-normal">未成年私密照即便同意仍屬違法重罪</span>
+                        </button>
                     `;
                     actions.appendChild(wrap);
                 } else if (q.type === "matching") {
-                    const wrap = document.createElement("div");
-                    wrap.className = "w-full space-y-2 mt-2";
-                    q.pairs.forEach((pair, idx) => {
-                        const row = document.createElement("div");
-                        row.className = "p-2.5 bg-slate-800 border border-slate-700 rounded-lg flex flex-col sm:flex-row justify-between items-center text-sm gap-2";
-                        row.innerHTML = `
-                            <span class="text-slate-200">${pair.action}</span>
-                            <span class="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/50 rounded-full font-bold">➔ ${pair.term}</span>
-                        `;
-                        wrap.appendChild(row);
-                    });
-                    const confirmBtn = document.createElement("button");
-                    confirmBtn.className = "w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition mt-2";
-                    confirmBtn.innerText = "確認此法律對應 (Confirm Legal Matches)";
-                    confirmBtn.onclick = () => this.evaluateAnswer(true, q);
-                    wrap.appendChild(confirmBtn);
-                    actions.appendChild(wrap);
+                    // Interactive matching: click left action, click right term to link
+                    this.initInteractiveMatching(q, actions);
                 } else if (q.type === "fillblank") {
                     const wrap = document.createElement("div");
-                    wrap.className = "flex space-x-2 w-full mt-2";
+                    wrap.className = "flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full mt-2";
                     wrap.innerHTML = `
-                        <input type="text" id="blankInput" class="flex-1 bg-slate-800 border border-slate-600 rounded-xl px-4 py-2.5 text-white text-lg font-bold text-center focus:outline-none focus:border-amber-400" placeholder="請輸入答案">
-                        <button onclick="game.evaluateFillBlank('${q.correctText}', GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl transition text-base">送出判斷</button>
+                        <input type="text" id="blankInput" class="flex-1 bg-slate-800 border-2 border-slate-600 rounded-xl px-4 py-3 text-white text-[22px] font-bold text-center focus:outline-none focus:border-amber-400 placeholder-slate-500" placeholder="請輸入答案 (例: 電腦)">
+                        <button onclick="game.evaluateFillBlank('${q.correctText}', GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="px-8 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold rounded-xl transition text-[20px] shadow-lg">
+                            送出裁決 (Submit)
+                        </button>
                     `;
                     actions.appendChild(wrap);
                 } else if (q.type === "ordering") {
-                    const wrap = document.createElement("div");
-                    wrap.className = "w-full space-y-2 mt-2";
-                    wrap.innerHTML = `
-                        <p class="text-xs text-slate-400">正確順序：[拉開椅子] ➔ [同學受傷骨折] ➔ [宣稱開玩笑] ➔ [承擔刑責與賠償]</p>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-sm font-bold">
-                            <div class="p-2 bg-slate-800 rounded border border-amber-500/60 text-amber-300">1. 拉開椅子 (B)</div>
-                            <div class="p-2 bg-slate-800 rounded border border-amber-500/60 text-amber-300">2. 同學受傷 (A)</div>
-                            <div class="p-2 bg-slate-800 rounded border border-amber-500/60 text-amber-300">3. 辯稱玩笑 (D)</div>
-                            <div class="p-2 bg-slate-800 rounded border border-amber-500/60 text-amber-300">4. 承擔刑責 (C)</div>
-                        </div>
-                        <button onclick="game.evaluateAnswer(true, GAME_DATA.stations[${this.currentStationIndex}].questions[${qIdx}])" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition mt-2">確認順序正確 (B ➔ A ➔ D ➔ C)</button>
-                    `;
-                    actions.appendChild(wrap);
+                    // Interactive ordering with movable cards
+                    this.initInteractiveOrdering(q, actions);
                 } else if (q.type === "multiselect") {
                     const wrap = document.createElement("div");
                     wrap.className = "w-full space-y-2 mt-2";
                     q.options.forEach((opt, idx) => {
                         const label = document.createElement("label");
-                        label.className = "flex items-center space-x-3 p-2.5 bg-slate-800 hover:bg-slate-700/80 rounded-lg cursor-pointer border border-slate-700";
+                        label.className = "flex items-start space-x-3 p-3 bg-slate-800 hover:bg-slate-700/80 rounded-xl cursor-pointer border border-slate-700 transition";
                         label.innerHTML = `
-                            <input type="checkbox" name="multiOpt" value="${idx}" class="w-5 h-5 text-amber-500 rounded focus:ring-0">
-                            <span class="text-slate-200 text-sm font-medium">${opt.label}</span>
+                            <input type="checkbox" name="multiOpt" value="${idx}" class="mt-1 w-6 h-6 text-amber-500 rounded focus:ring-0">
+                            <div class="flex-1">
+                                <span class="text-emerald-300 text-[18px] font-bold block">${opt.en}</span>
+                                <span class="text-slate-300 text-[16px]">${opt.zh}</span>
+                            </div>
                         `;
                         wrap.appendChild(label);
                     });
                     const submitBtn = document.createElement("button");
-                    submitBtn.className = "w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl transition mt-2";
+                    submitBtn.className = "w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold rounded-xl transition mt-2 text-[20px] shadow-lg";
                     submitBtn.innerText = "送出多選解答 (Submit Selections)";
                     submitBtn.onclick = () => {
                         const checked = Array.from(document.querySelectorAll("input[name='multiOpt']:checked")).map(el => parseInt(el.value));
-                        // Check if exact match with correct options (0, 2, 3)
                         const isCorrect = checked.length === 3 && checked.includes(0) && checked.includes(2) && checked.includes(3);
                         this.evaluateAnswer(isCorrect, q);
                     };
                     wrap.appendChild(submitBtn);
                     actions.appendChild(wrap);
                 }
+            }
+
+            initInteractiveMatching(q, container) {
+                this.matchingSelectedAction = null;
+                this.matchedPairs = {}; // actionId -> termId
+
+                const wrap = document.createElement("div");
+                wrap.className = "w-full flex flex-col space-y-3 mt-1";
+                wrap.innerHTML = `
+                    <div class="text-xs text-amber-300 flex items-center justify-between">
+                        <span>💡 操作方式：先點選左側行為，再點選右側法律術語完成連線！</span>
+                        <button onclick="game.resetMatching()" class="text-rose-400 hover:underline">重新配對</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="matchingGrid">
+                        <div class="space-y-2" id="matchingActionsCol"></div>
+                        <div class="space-y-2" id="matchingTermsCol"></div>
+                    </div>
+                    <button id="matchingSubmitBtn" onclick="game.submitMatching()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl transition text-[20px] shadow-lg">
+                        送出配對答案 (Submit Pairs)
+                    </button>
+                `;
+                container.appendChild(wrap);
+
+                this.renderMatchingCols(q);
+            }
+
+            renderMatchingCols(q) {
+                const actCol = document.getElementById("matchingActionsCol");
+                const termCol = document.getElementById("matchingTermsCol");
+                actCol.innerHTML = "<h4 class='text-xs font-bold text-slate-400 uppercase'>1. 點選校園行為 (Action)</h4>";
+                termCol.innerHTML = "<h4 class='text-xs font-bold text-slate-400 uppercase'>2. 點選對應法條 (Term)</h4>";
+
+                q.actions.forEach(a => {
+                    const btn = document.createElement("button");
+                    const isSelected = this.matchingSelectedAction === a.id;
+                    const matchedTermId = this.matchedPairs[a.id];
+                    btn.className = `w-full text-left p-3 rounded-xl border-2 transition ${isSelected ? 'border-amber-400 bg-amber-950/60 shadow-lg' : (matchedTermId ? 'border-emerald-500 bg-slate-800/90' : 'border-slate-700 bg-slate-800')}`;
+                    btn.innerHTML = `
+                        <div class="text-slate-100 font-bold text-[17px]">${a.zh}</div>
+                        <div class="text-xs text-emerald-300 mt-1">${a.en}</div>
+                        ${matchedTermId ? `<div class="mt-1 text-xs text-amber-300 font-mono font-bold">➔ 已配對法條</div>` : ''}
+                    `;
+                    btn.onclick = () => {
+                        this.matchingSelectedAction = a.id;
+                        this.renderMatchingCols(q);
+                    };
+                    actCol.appendChild(btn);
+                });
+
+                q.terms.forEach(t => {
+                    const btn = document.createElement("button");
+                    const isLinked = Object.values(this.matchedPairs).includes(t.id);
+                    btn.className = `w-full text-left p-3 rounded-xl border-2 transition ${isLinked ? 'border-emerald-500 bg-slate-800/90' : 'border-slate-700 bg-slate-800 hover:border-amber-400'}`;
+                    btn.innerHTML = `
+                        <div class="text-amber-300 font-bold text-[18px]">${t.en}</div>
+                        <div class="text-xs text-slate-300 mt-1">${t.zh}</div>
+                    `;
+                    btn.onclick = () => {
+                        if (this.matchingSelectedAction) {
+                            this.matchedPairs[this.matchingSelectedAction] = t.id;
+                            this.matchingSelectedAction = null;
+                            this.renderMatchingCols(q);
+                        } else {
+                            alert("請先點選左側的「行為」，再點選此法律術語！");
+                        }
+                    };
+                    termCol.appendChild(btn);
+                });
+            }
+
+            resetMatching() {
+                this.matchedPairs = {};
+                this.matchingSelectedAction = null;
+                const station = GAME_DATA.stations[this.currentStationIndex];
+                const q = station.questions[this.currentQuestionIndex];
+                this.renderMatchingCols(q);
+            }
+
+            submitMatching() {
+                const station = GAME_DATA.stations[this.currentStationIndex];
+                const q = station.questions[this.currentQuestionIndex];
+                const linkedCount = Object.keys(this.matchedPairs).length;
+                if (linkedCount < q.actions.length) {
+                    alert("請完成所有項目的配對連線後再送出！");
+                    return;
+                }
+                let allCorrect = true;
+                q.actions.forEach(a => {
+                    const termId = this.matchedPairs[a.id];
+                    const termObj = q.terms.find(t => t.id === termId);
+                    if (!termObj || termObj.matchId !== a.id) {
+                        allCorrect = false;
+                    }
+                });
+                this.evaluateAnswer(allCorrect, q);
+            }
+
+            initInteractiveOrdering(q, container) {
+                // Initialize shuffled copy
+                if (!this.currentOrderingList || this.currentOrderingList.length === 0) {
+                    this.currentOrderingList = [...q.steps].sort(() => Math.random() - 0.5);
+                }
+
+                const wrap = document.createElement("div");
+                wrap.className = "w-full flex flex-col space-y-3 mt-1";
+                wrap.innerHTML = `
+                    <div class="text-xs text-amber-300">💡 請點擊【▲ 往前】或【▼ 往後】調整步驟順序，排列出正確法律因果：</div>
+                    <div class="space-y-2" id="orderingCardsList"></div>
+                    <button onclick="game.submitOrdering()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl transition text-[20px] shadow-lg">
+                        確認送出排序 (Submit Order)
+                    </button>
+                `;
+                container.appendChild(wrap);
+                this.renderOrderingCards(q);
+            }
+
+            renderOrderingCards(q) {
+                const list = document.getElementById("orderingCardsList");
+                list.innerHTML = "";
+                this.currentOrderingList.forEach((item, idx) => {
+                    const card = document.createElement("div");
+                    card.className = "p-3 bg-slate-800 border-2 border-slate-700 rounded-xl flex items-center justify-between shadow";
+                    card.innerHTML = `
+                        <div class="flex items-center space-x-3 flex-1">
+                            <span class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center text-sm">
+                                ${idx + 1}
+                            </span>
+                            <div>
+                                <div class="text-[17px] font-bold text-slate-100">${item.zh}</div>
+                                <div class="text-xs text-emerald-300 mt-0.5">${item.en}</div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-1.5 ml-2">
+                            <button onclick="game.moveOrderingItem(${idx}, -1)" ${idx === 0 ? 'disabled class="opacity-30 p-2 bg-slate-700 rounded-lg"' : 'class="p-2 bg-slate-700 hover:bg-amber-500 hover:text-slate-950 text-white font-bold rounded-lg transition"'} title="往前移">
+                                ▲
+                            </button>
+                            <button onclick="game.moveOrderingItem(${idx}, 1)" ${idx === this.currentOrderingList.length - 1 ? 'disabled class="opacity-30 p-2 bg-slate-700 rounded-lg"' : 'class="p-2 bg-slate-700 hover:bg-amber-500 hover:text-slate-950 text-white font-bold rounded-lg transition"'} title="往後移">
+                                ▼
+                            </button>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+            }
+
+            moveOrderingItem(index, direction) {
+                const targetIdx = index + direction;
+                if (targetIdx < 0 || targetIdx >= this.currentOrderingList.length) return;
+                const temp = this.currentOrderingList[index];
+                this.currentOrderingList[index] = this.currentOrderingList[targetIdx];
+                this.currentOrderingList[targetIdx] = temp;
+                const station = GAME_DATA.stations[this.currentStationIndex];
+                const q = station.questions[this.currentQuestionIndex];
+                this.renderOrderingCards(q);
+            }
+
+            submitOrdering() {
+                const station = GAME_DATA.stations[this.currentStationIndex];
+                const q = station.questions[this.currentQuestionIndex];
+                const currentIds = this.currentOrderingList.map(item => item.id);
+                const isCorrect = JSON.stringify(currentIds) === JSON.stringify(q.correctOrder);
+                this.evaluateAnswer(isCorrect, q);
             }
 
             evaluateFillBlank(correctText, q) {
@@ -1168,6 +1372,7 @@
                 document.getElementById("hintContentEn").innerText = hintEn;
                 document.getElementById("hintContentZh").innerText = hintZh;
                 document.getElementById("hintModal").classList.remove("hidden");
+                this.speakText(hintEn);
             }
 
             closeHintModal() {
