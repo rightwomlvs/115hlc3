@@ -1402,7 +1402,7 @@
   <header class="top-nav">
     <div class="nav-container">
       <div class="brand-section">
-        <div class="logo-badge">🎧</div>
+        <div class="logo-badge" id="logoBadge" onclick="handleLogoClick()" title="點擊" style="cursor: pointer; user-select: none;">🎧</div>
         <div class="brand-text">
           <h1>翰林技高英語 Choice 3 聽力與會話互動測驗</h1>
           <p>B3L3 & B3L4 Listening & Conversation Interactive Practice</p>
@@ -1415,7 +1415,7 @@
           <button class="unit-tab" onclick="switchModule('l4-listening')">L4 聽力</button>
           <button class="unit-tab" onclick="switchModule('l4-conversation')">L4 會話</button>
         </div>
-        <button class="mode-btn" id="answerKeyToggleBtn" onclick="toggleAnswerKeyMode()">
+        <button class="mode-btn" id="answerKeyToggleBtn" style="display: none;" onclick="toggleAnswerKeyMode()">
           <span>🔑</span> 解答模式
         </button>
         <button class="settings-nav-btn" onclick="openSettingsModal()">
@@ -2935,6 +2935,38 @@
     const trackTitle = document.getElementById('playerTrackTitle');
 
     // Initialize application
+    /* Easter Egg: Click Earphone Logo 5 times to reveal / hide Answer Key button */
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+
+    function handleLogoClick() {
+      logoClickCount++;
+      if (logoClickTimer) clearTimeout(logoClickTimer);
+      logoClickTimer = setTimeout(() => {
+        logoClickCount = 0;
+      }, 3500);
+
+      const logo = document.getElementById('logoBadge');
+      if (logo) {
+        logo.style.transform = 'scale(0.88)';
+        setTimeout(() => { logo.style.transform = ''; }, 150);
+      }
+
+      if (logoClickCount >= 5) {
+        logoClickCount = 0;
+        const keyBtn = document.getElementById('answerKeyToggleBtn');
+        if (keyBtn) {
+          if (keyBtn.style.display === 'none') {
+            keyBtn.style.display = 'inline-flex';
+            alert('🔓 已解鎖「解答模式」！按鈕已顯現於上方導覽列。');
+          } else {
+            keyBtn.style.display = 'none';
+            alert('🔒 已隱藏「解答模式」。');
+          }
+        }
+      }
+    }
+
     function init() {
       loadTrack(currentModule, false);
       loadSavedStudentInfo();
