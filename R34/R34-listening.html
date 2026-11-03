@@ -1191,6 +1191,209 @@
       .img-wrapper { max-width: 100%; }
       .audio-player-card { top: 62px; }
     }
+  
+    /* Unit Status & Submission Banner */
+    .unit-submission-banner {
+      background: #ffffff;
+      border: 2px dashed #cbd5e1;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      transition: all 0.25s ease;
+    }
+
+    .unit-submission-banner.submitted {
+      border: 2px solid var(--success);
+      background: #f0fdf4;
+    }
+
+    .unit-banner-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .unit-banner-icon {
+      font-size: 1.8rem;
+    }
+
+    .unit-banner-text h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+
+    .unit-banner-text p {
+      font-size: 0.84rem;
+      color: #64748b;
+    }
+
+    .unit-submit-btn {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+      transition: all 0.2s;
+    }
+
+    .unit-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(79, 70, 229, 0.45);
+    }
+
+    .unit-submit-btn.done-btn {
+      background: #10b981;
+      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+      cursor: default;
+    }
+
+    .tab-status-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      padding: 1px 6px;
+      border-radius: 10px;
+      margin-left: 4px;
+      font-weight: 800;
+    }
+
+    .tab-status-badge.done {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    /* Unfinished Confirmation Modal */
+    .confirm-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.7);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .confirm-modal.show {
+      display: flex;
+    }
+
+    .confirm-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      max-width: 520px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .confirm-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .confirm-card-header h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .confirm-unit-list {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 14px 0;
+      list-style-type: none;
+    }
+
+    .confirm-unit-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px dashed #e2e8f0;
+      font-size: 0.86rem;
+    }
+
+    .confirm-unit-item:last-child {
+      border-bottom: none;
+    }
+
+    .confirm-unit-item .unit-name {
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .confirm-unit-item .unit-stat {
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .confirm-unit-item .unit-stat.done { color: #16a34a; }
+    .confirm-unit-item .unit-stat.warn { color: #d97706; }
+
+    .confirm-card-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
   </style>
 </head>
 <body>
@@ -1501,6 +1704,21 @@
       </div>
 
       <!-- L3 Listening Full Transcript (Visible after submission or answer key mode) -->
+      
+      <!-- Unit Submission & Answer Reveal Banner -->
+      <div class="unit-submission-banner" id="banner-l3-listening">
+        <div class="unit-banner-info">
+          <div class="unit-banner-icon" id="icon-l3-listening">📝</div>
+          <div class="unit-banner-text">
+            <h4 id="title-l3-listening">【L3 聽力】作答進度：<span id="stat-l3-listening">已作答 0 / 6 題</span></h4>
+            <p id="desc-l3-listening">請憑音檔完成作答後點擊交卷，將為您開啟本頁專屬中英對照文本與詳細題解。</p>
+          </div>
+        </div>
+        <button class="unit-submit-btn" id="btn-submit-l3-listening" onclick="submitUnit('l3-listening')">
+          <span>🚀</span> 交卷評分【L3 聽力】
+        </button>
+      </div>
+
       <div class="transcript-card" id="transcript-l3-listening">
         <div class="transcript-header">
           <h3>📖 聽力完整錄音稿與中文對照 (Full Transcript)</h3>
@@ -1808,6 +2026,21 @@
       </div>
 
       <!-- L3 Conversation Full Transcript -->
+      
+      <!-- Unit Submission & Answer Reveal Banner -->
+      <div class="unit-submission-banner" id="banner-l3-conversation">
+        <div class="unit-banner-info">
+          <div class="unit-banner-icon" id="icon-l3-conversation">📝</div>
+          <div class="unit-banner-text">
+            <h4 id="title-l3-conversation">【L3 會話】作答進度：<span id="stat-l3-conversation">已作答 0 / 6 題</span></h4>
+            <p id="desc-l3-conversation">請憑音檔完成作答後點擊交卷，將為您開啟本頁專屬中英對照文本與詳細題解。</p>
+          </div>
+        </div>
+        <button class="unit-submit-btn" id="btn-submit-l3-conversation" onclick="submitUnit('l3-conversation')">
+          <span>🚀</span> 交卷評分【L3 會話】
+        </button>
+      </div>
+
       <div class="transcript-card" id="transcript-l3-conversation">
         <div class="transcript-header">
           <h3>📖 會話逐句中英對照與口說小秘訣 (Dialogue & Speaking Tips)</h3>
@@ -2117,6 +2350,21 @@
       </div>
 
       <!-- L4 Listening Full Transcript -->
+      
+      <!-- Unit Submission & Answer Reveal Banner -->
+      <div class="unit-submission-banner" id="banner-l4-listening">
+        <div class="unit-banner-info">
+          <div class="unit-banner-icon" id="icon-l4-listening">📝</div>
+          <div class="unit-banner-text">
+            <h4 id="title-l4-listening">【L4 聽力】作答進度：<span id="stat-l4-listening">已作答 0 / 5 題</span></h4>
+            <p id="desc-l4-listening">請憑音檔完成作答後點擊交卷，將為您開啟本頁專屬中英對照文本與詳細題解。</p>
+          </div>
+        </div>
+        <button class="unit-submit-btn" id="btn-submit-l4-listening" onclick="submitUnit('l4-listening')">
+          <span>🚀</span> 交卷評分【L4 聽力】
+        </button>
+      </div>
+
       <div class="transcript-card" id="transcript-l4-listening">
         <div class="transcript-header">
           <h3>📖 聽力完整播客錄音稿與中文對照 (Podcast Transcript)</h3>
@@ -2423,6 +2671,21 @@
       </div>
 
       <!-- L4 Conversation Full Transcript -->
+      
+      <!-- Unit Submission & Answer Reveal Banner -->
+      <div class="unit-submission-banner" id="banner-l4-conversation">
+        <div class="unit-banner-info">
+          <div class="unit-banner-icon" id="icon-l4-conversation">📝</div>
+          <div class="unit-banner-text">
+            <h4 id="title-l4-conversation">【L4 會話】作答進度：<span id="stat-l4-conversation">已作答 0 / 6 題</span></h4>
+            <p id="desc-l4-conversation">請憑音檔完成作答後點擊交卷，將為您開啟本頁專屬中英對照文本與詳細題解。</p>
+          </div>
+        </div>
+        <button class="unit-submit-btn" id="btn-submit-l4-conversation" onclick="submitUnit('l4-conversation')">
+          <span>🚀</span> 交卷評分【L4 會話】
+        </button>
+      </div>
+
       <div class="transcript-card" id="transcript-l4-conversation">
         <div class="transcript-header">
           <h3>📖 會話逐句中英對照與口說小秘訣 (Dialogue & Speaking Tips)</h3>
@@ -2509,11 +2772,14 @@
     <div class="bottom-container">
       <div class="progress-status">
         <div class="status-dot"></div>
-        <span id="answeredCounter">作答進度：0 / 23 題</span>
+        <span id="answeredCounter">作答進度：全卷 0 / 23 題</span>
       </div>
       <div class="bottom-actions">
-        <button class="submit-btn" onclick="submitExam()">
-          <span>🚀</span> 交卷並評分 (Submit & Score)
+        <button class="submit-btn" id="footerSubmitBtn" onclick="submitCurrentModule()">
+          <span>🚀</span> 交卷評分【當前單元】
+        </button>
+        <button class="action-btn" onclick="requestExport('summary')" title="查看全卷總結算與成績報告">
+          <span>📊</span> 總結算與匯出報告
         </button>
       </div>
     </div>
@@ -2524,6 +2790,33 @@
     <div class="lightbox-content">
       <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
       <img id="lightboxImg" src="" alt="Enlarged textbook visual">
+    </div>
+  </div>
+
+  
+  <!-- Unfinished Units Confirmation Modal -->
+  <div class="confirm-modal" id="confirmModal">
+    <div class="confirm-card">
+      <div class="confirm-card-header">
+        <span style="font-size: 1.6rem;">⚠️</span>
+        <h3>尚有未完成單元提醒 (Unfinished Alert)</h3>
+      </div>
+      <p style="font-size: 0.86rem; color: #475569; line-height: 1.5;">
+        您目前尚有單元<strong>未完成作答或尚未交卷評分</strong>。若直接匯出報告或下載 CSV，未作答題數將以 0 分計算並同步上傳至 Google 試算表：
+      </p>
+
+      <ul class="confirm-unit-list" id="confirmUnitList">
+        <!-- populated by js -->
+      </ul>
+
+      <p style="font-size: 0.82rem; color: #b45309; font-weight: 700;">
+        💡 建議：點擊「返回繼續作答」完成各單元練習後再行匯出！
+      </p>
+
+      <div class="confirm-card-actions">
+        <button class="btn-secondary" onclick="closeConfirmModal()">🔙 返回繼續作答</button>
+        <button class="btn-danger" id="confirmExportAnywayBtn" onclick="confirmExportAnyway()">⚡ 確定以目前進度匯出</button>
+      </div>
     </div>
   </div>
 
@@ -2585,10 +2878,46 @@
       }
     };
 
+    /* Unit State Management (Each unit has independent submission & review state) */
+    const unitState = {
+      'l3-listening': {
+        name: 'L3 聽力',
+        total: 6,
+        qids: ['L3-L-Q1', 'L3-L-Q2', 'L3-L-Q3', 'L3-L-Q4', 'L3-L-Q5', 'L3-L-Q6'],
+        submitted: false,
+        score: 0,
+        correct: 0
+      },
+      'l3-conversation': {
+        name: 'L3 會話',
+        total: 6,
+        qids: ['L3-C-Q1', 'L3-C-Q2', 'L3-C-Q3', 'L3-C-Q4', 'L3-C-Q5', 'L3-C-Q6'],
+        submitted: false,
+        score: 0,
+        correct: 0
+      },
+      'l4-listening': {
+        name: 'L4 聽力',
+        total: 5,
+        qids: ['L4-L-Q1', 'L4-L-Q2', 'L4-L-Q3', 'L4-L-Q4', 'L4-L-Q5'],
+        submitted: false,
+        score: 0,
+        correct: 0
+      },
+      'l4-conversation': {
+        name: 'L4 會話',
+        total: 6,
+        qids: ['L4-C-Q1', 'L4-C-Q2', 'L4-C-Q3', 'L4-C-Q4', 'L4-C-Q5', 'L4-C-Q6'],
+        submitted: false,
+        score: 0,
+        correct: 0
+      }
+    };
+
     let currentModule = 'l3-listening';
-    let isAnswerKeyMode = false;
-    let isSubmitted = false;
+    let isTeacherKeyMode = false;
     let studentAnswers = {};
+    let pendingExportAction = null; // 'copy', 'csv', or 'summary'
 
     // Google Apps Script Web App URL
     let gasWebAppUrl = localStorage.getItem('hlc3_l3l4_gas_url') || localStorage.getItem('hlc3_gas_url') || '';
@@ -2609,7 +2938,7 @@
     function init() {
       loadTrack(currentModule, false);
       loadSavedStudentInfo();
-      updateAnsweredCounter();
+      updateAllUnitDisplays();
 
       audio.addEventListener('timeupdate', onTimeUpdate);
       audio.addEventListener('loadedmetadata', onLoadedMetadata);
@@ -2744,11 +3073,27 @@
       if (target) target.classList.add('active');
 
       loadTrack(moduleId, false);
+      updateFooterButton();
       window.scrollTo({ top: 180, behavior: 'smooth' });
     }
 
     /* Option Selection */
     function selectOption(qid, optLetter) {
+      // Find which unit this qid belongs to
+      let parentModule = null;
+      for (const [mid, u] of Object.entries(unitState)) {
+        if (u.qids.includes(qid)) {
+          parentModule = mid;
+          break;
+        }
+      }
+
+      // If unit already submitted, prevent modifying unless in teacher mode
+      if (parentModule && unitState[parentModule].submitted && !isTeacherKeyMode) {
+        alert('⚠️ 本單元已交卷評分！您可以對照下方解析訂正，若需重新作答請重新整理網頁。');
+        return;
+      }
+
       studentAnswers[qid] = optLetter;
 
       const card = document.querySelector(`.question-card[data-qid="${qid}"]`);
@@ -2765,46 +3110,146 @@
         chosenBtn.classList.add('selected');
       }
 
-      updateAnsweredCounter();
+      updateAllUnitDisplays();
     }
 
-    function updateAnsweredCounter() {
-      const answeredCount = Object.keys(studentAnswers).length;
-      document.getElementById('answeredCounter').textContent = `作答進度：${answeredCount} / 23 題`;
-    }
+    /* Update All Unit Displays & Counters */
+    function updateAllUnitDisplays() {
+      let totalAnswered = 0;
+      const totalAllQuestions = 23;
 
-    /* Toggle Answer Key Mode (Teacher / Review Mode) */
-    function toggleAnswerKeyMode() {
-      isAnswerKeyMode = !isAnswerKeyMode;
-      const keyBtn = document.getElementById('answerKeyToggleBtn');
+      for (const [mid, u] of Object.entries(unitState)) {
+        const answeredInUnit = u.qids.filter(qid => studentAnswers[qid]).length;
+        totalAnswered += answeredInUnit;
 
-      if (isAnswerKeyMode) {
-        keyBtn.classList.add('active-key');
-        keyBtn.innerHTML = '<span>🔒</span> 關閉解答模式';
-        revealAnswersAndTranscripts(true);
-      } else {
-        keyBtn.classList.remove('active-key');
-        keyBtn.innerHTML = '<span>🔑</span> 解答模式';
-        if (!isSubmitted) {
-          revealAnswersAndTranscripts(false);
+        const statSpan = document.getElementById(`stat-${mid}`);
+        if (statSpan && !u.submitted) {
+          statSpan.textContent = `已作答 ${answeredInUnit} / ${u.total} 題`;
         }
+
+        // Update tab badge
+        const tabBtn = Array.from(document.querySelectorAll('.unit-tab')).find(b => b.getAttribute('onclick').includes(mid));
+        if (tabBtn) {
+          if (u.submitted) {
+            tabBtn.innerHTML = `${u.name} <span class="tab-status-badge done">✓ ${u.score}%</span>`;
+          } else {
+            tabBtn.innerHTML = `${u.name}`;
+          }
+        }
+      }
+
+      document.getElementById('answeredCounter').textContent = `作答進度：全卷 ${totalAnswered} / ${totalAllQuestions} 題`;
+      updateFooterButton();
+    }
+
+    function updateFooterButton() {
+      const footerBtn = document.getElementById('footerSubmitBtn');
+      const u = unitState[currentModule];
+      if (!u || !footerBtn) return;
+
+      if (u.submitted) {
+        footerBtn.innerHTML = `<span>✅</span> 【${u.name}】已完成交卷 (${u.score}%)`;
+        footerBtn.style.background = '#10b981';
+      } else {
+        footerBtn.innerHTML = `<span>🚀</span> 交卷評分【${u.name}】`;
+        footerBtn.style.background = '';
       }
     }
 
-    /* Reveal / Hide Explanations & Transcripts */
-    function revealAnswersAndTranscripts(show) {
-      const questions = document.querySelectorAll('.question-card[data-qid]');
-      questions.forEach(q => {
-        const qid = q.getAttribute('data-qid');
-        const correct = q.getAttribute('data-correct');
-        const studentAns = studentAnswers[qid];
-        const explainBox = document.getElementById(`explain-${qid}`);
+    function submitCurrentModule() {
+      submitUnit(currentModule);
+    }
 
-        if (!explainBox) return;
+    /* Submit A Single Unit (Independent Review & Transcript Unlock) */
+    function submitUnit(mid) {
+      const u = unitState[mid];
+      if (!u) return;
+
+      // Validate student info first
+      const cls = document.getElementById('studentClass').value.trim();
+      const seat = document.getElementById('studentSeat').value.trim();
+      const name = document.getElementById('studentName').value.trim();
+
+      if (!cls || !seat || !name) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (!cls) document.getElementById('studentClass').classList.add('input-error');
+        if (!seat) document.getElementById('studentSeat').classList.add('input-error');
+        if (!name) document.getElementById('studentName').classList.add('input-error');
+        alert('⚠️ 請先於最上方填妥「班級、座號與姓名」，才能交卷評分喔！');
+        return;
+      }
+
+      saveStudentInfo();
+
+      // Check if all questions in this unit are answered
+      const answeredCount = u.qids.filter(qid => studentAnswers[qid]).length;
+      if (answeredCount < u.total) {
+        const confirmEarly = confirm(`⚠️ 【${u.name}】共有 ${u.total} 題，您目前已作答 ${answeredCount} 題，尚有 ${u.total - answeredCount} 題未填！\n\n是否確定現在交卷評分並查看本頁解析？（未答題目將視同錯誤）`);
+        if (!confirmEarly) return;
+      }
+
+      // Calculate score for this unit
+      let correct = 0;
+      u.qids.forEach(qid => {
+        const card = document.querySelector(`.question-card[data-qid="${qid}"]`);
+        if (!card) return;
+        const correctAns = card.getAttribute('data-correct');
+        const studentAns = studentAnswers[qid];
+        if (studentAns === correctAns) {
+          correct++;
+        }
+      });
+
+      const pct = Math.round((correct / u.total) * 100);
+      u.submitted = true;
+      u.correct = correct;
+      u.score = pct;
+
+      // Reveal ONLY this unit's explanations and transcript
+      revealUnitAnswersAndTranscript(mid, true);
+
+      // Update unit banner
+      const banner = document.getElementById(`banner-${mid}`);
+      const title = document.getElementById(`title-${mid}`);
+      const desc = document.getElementById(`desc-${mid}`);
+      const btn = document.getElementById(`btn-submit-${mid}`);
+      const icon = document.getElementById(`icon-${mid}`);
+
+      if (banner) banner.classList.add('submitted');
+      if (icon) icon.textContent = '🎉';
+      if (title) title.innerHTML = `【${u.name}】交卷完成！得分：<strong style="color: #15803d; font-size: 1.15rem;">${pct}%</strong>（答對 ${correct} / ${u.total} 題）`;
+      if (desc) desc.textContent = '✅ 已為您解鎖本頁專屬中英對照文本與各題詳細解析，請往下滑動逐題對答訂正！';
+      if (btn) {
+        btn.classList.add('done-btn');
+        btn.innerHTML = '<span>✓</span> 本單元已完成評分';
+        btn.onclick = null;
+      }
+
+      updateAllUnitDisplays();
+
+      if (pct >= 80) {
+        confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+      }
+
+      alert(`🎉 【${u.name}】交卷評分完成！\n得分：${pct}%（答對 ${correct}/${u.total} 題）\n\n已為您解鎖本單元中英對照逐字文本與題目詳細題解，請在下方對答訂正！`);
+    }
+
+    /* Reveal / Hide explanations & transcript for a SPECIFIC unit */
+    function revealUnitAnswersAndTranscript(mid, show) {
+      const u = unitState[mid];
+      if (!u) return;
+
+      u.qids.forEach(qid => {
+        const card = document.querySelector(`.question-card[data-qid="${qid}"]`);
+        const explainBox = document.getElementById(`explain-${qid}`);
+        if (!card || !explainBox) return;
+
+        const correctAns = card.getAttribute('data-correct');
+        const studentAns = studentAnswers[qid];
 
         if (show) {
           explainBox.classList.add('show');
-          if (studentAns === correct) {
+          if (studentAns === correctAns) {
             explainBox.className = 'post-submission-box show correct';
           } else {
             explainBox.className = 'post-submission-box show wrong';
@@ -2814,100 +3259,177 @@
         }
       });
 
-      // Show or hide transcripts
-      document.querySelectorAll('.transcript-card').forEach(t => {
+      // Transcript for this module
+      const transcript = document.getElementById(`transcript-${mid}`);
+      if (transcript) {
         if (show) {
-          t.classList.add('show');
+          transcript.classList.add('show');
         } else {
-          t.classList.remove('show');
+          transcript.classList.remove('show');
         }
-      });
+      }
     }
 
-    /* Submit Exam & Grade */
-    function submitExam() {
+    /* Teacher Answer Key Mode (Toggle all or current) */
+    function toggleAnswerKeyMode() {
+      isTeacherKeyMode = !isTeacherKeyMode;
+      const keyBtn = document.getElementById('answerKeyToggleBtn');
+
+      if (isTeacherKeyMode) {
+        keyBtn.classList.add('active-key');
+        keyBtn.innerHTML = '<span>🔒</span> 關閉解答模式';
+        for (const mid of Object.keys(unitState)) {
+          revealUnitAnswersAndTranscript(mid, true);
+        }
+      } else {
+        keyBtn.classList.remove('active-key');
+        keyBtn.innerHTML = '<span>🔑</span> 解答模式';
+        for (const [mid, u] of Object.entries(unitState)) {
+          if (!u.submitted) {
+            revealUnitAnswersAndTranscript(mid, false);
+          }
+        }
+      }
+    }
+
+    /* Check Unfinished Units and Show Confirmation Dialog */
+    function requestExport(actionType) {
+      // Validate student info
       const cls = document.getElementById('studentClass').value.trim();
       const seat = document.getElementById('studentSeat').value.trim();
       const name = document.getElementById('studentName').value.trim();
 
-      let hasError = false;
-      if (!cls) {
-        document.getElementById('studentClass').classList.add('input-error');
-        hasError = true;
-      }
-      if (!seat) {
-        document.getElementById('studentSeat').classList.add('input-error');
-        hasError = true;
-      }
-      if (!name) {
-        document.getElementById('studentName').classList.add('input-error');
-        hasError = true;
-      }
-
-      if (hasError) {
+      if (!cls || !seat || !name) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        alert('⚠️ 請先於上方填寫「班級、座號與姓名」，才能交卷並上傳作答紀錄喔！');
+        if (!cls) document.getElementById('studentClass').classList.add('input-error');
+        if (!seat) document.getElementById('studentSeat').classList.add('input-error');
+        if (!name) document.getElementById('studentName').classList.add('input-error');
+        alert('⚠️ 請先填寫班級、座號與姓名，才能進行總結算與匯出！');
         return;
       }
 
       saveStudentInfo();
-      isSubmitted = true;
+      pendingExportAction = actionType;
 
-      const questions = document.querySelectorAll('.question-card[data-qid]');
-      const totalQuestions = questions.length;
-      let correctCount = 0;
+      // Check all units
+      const unsubmittedList = [];
+      for (const [mid, u] of Object.entries(unitState)) {
+        const answered = u.qids.filter(qid => studentAnswers[qid]).length;
+        if (!u.submitted) {
+          unsubmittedList.push({
+            mid: mid,
+            name: u.name,
+            answered: answered,
+            total: u.total
+          });
+        }
+      }
+
+      if (unsubmittedList.length > 0) {
+        // Show modal with details
+        const listEl = document.getElementById('confirmUnitList');
+        listEl.innerHTML = '';
+
+        for (const [mid, u] of Object.entries(unitState)) {
+          const answered = u.qids.filter(qid => studentAnswers[qid]).length;
+          const li = document.createElement('li');
+          li.className = 'confirm-unit-item';
+
+          if (u.submitted) {
+            li.innerHTML = `<span class="unit-name">${u.name}</span> <span class="unit-stat done">✅ 已交卷 (${u.score}%, 答對 ${u.correct}/${u.total} 題)</span>`;
+          } else if (answered > 0) {
+            li.innerHTML = `<span class="unit-name">${u.name}</span> <span class="unit-stat warn">⚠️ 未交卷 (已作答 ${answered}/${u.total} 題)</span>`;
+          } else {
+            li.innerHTML = `<span class="unit-name">${u.name}</span> <span class="unit-stat warn">❌ 尚未作答 (0/${u.total} 題)</span>`;
+          }
+          listEl.appendChild(li);
+        }
+
+        document.getElementById('confirmModal').classList.add('show');
+      } else {
+        // All units completed! Execute export directly
+        finalizeAllAndExport();
+      }
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('confirmModal').classList.remove('show');
+      pendingExportAction = null;
+    }
+
+    function confirmExportAnyway() {
+      closeConfirmModal();
+      // Auto-submit all remaining units
+      for (const [mid, u] of Object.entries(unitState)) {
+        if (!u.submitted) {
+          let correct = 0;
+          u.qids.forEach(qid => {
+            const card = document.querySelector(`.question-card[data-qid="${qid}"]`);
+            const correctAns = card ? card.getAttribute('data-correct') : '';
+            if (studentAnswers[qid] === correctAns) correct++;
+          });
+          u.submitted = true;
+          u.correct = correct;
+          u.score = Math.round((correct / u.total) * 100);
+          revealUnitAnswersAndTranscript(mid, true);
+        }
+      }
+      updateAllUnitDisplays();
+      finalizeAllAndExport();
+    }
+
+    /* Finalize Total Scores & Google Sheets Submission */
+    function finalizeAllAndExport() {
+      const cls = document.getElementById('studentClass').value.trim();
+      const seat = document.getElementById('studentSeat').value.trim();
+      const name = document.getElementById('studentName').value.trim();
+
+      const totalQuestions = 23;
+      let totalCorrect = 0;
       let mistakes = [];
 
-      questions.forEach(q => {
-        const qid = q.getAttribute('data-qid');
-        const correct = q.getAttribute('data-correct');
-        const studentAns = studentAnswers[qid];
-        if (studentAns === correct) {
-          correctCount++;
-        } else {
-          mistakes.push(`${qid}(答:${studentAns || '未答'},正解:${correct})`);
-        }
-      });
+      for (const [mid, u] of Object.entries(unitState)) {
+        totalCorrect += u.correct;
+        u.qids.forEach(qid => {
+          const card = document.querySelector(`.question-card[data-qid="${qid}"]`);
+          const correctAns = card ? card.getAttribute('data-correct') : '';
+          const studentAns = studentAnswers[qid];
+          if (studentAns !== correctAns) {
+            mistakes.push(`${qid}(答:${studentAns || '未答'},正解:${correctAns})`);
+          }
+        });
+      }
 
-      const percentage = Math.round((correctCount / totalQuestions) * 100);
+      const overallPct = Math.round((totalCorrect / totalQuestions) * 100);
       const timeSpentStr = document.getElementById('examTimer').textContent;
 
-      // Reveal explanations & transcripts
-      revealAnswersAndTranscripts(true);
-
-      // Render Score Box
+      // Update Result Box
       const scoreBox = document.getElementById('scoreResultBox');
       const scoreVal = document.getElementById('scoreVal');
       const scoreComment = document.getElementById('scoreComment');
       const scoreDetail = document.getElementById('scoreDetail');
       const statusMsg = document.getElementById('submitStatusMsg');
 
-      scoreVal.textContent = `${percentage}%`;
-      scoreDetail.textContent = `考生：${cls}班 ${seat}號 ${name} ｜ 共 ${totalQuestions} 題，答對 ${correctCount} 題 ｜ 作答時間：${timeSpentStr}`;
+      scoreVal.textContent = `${overallPct}%`;
+      scoreDetail.textContent = `考生：${cls}班 ${seat}號 ${name} ｜ 全卷 23 題答對 ${totalCorrect} 題 ｜ 作答時間：${timeSpentStr}`;
 
-      if (percentage >= 90) {
-        scoreComment.textContent = '🌟 卓越超群！完美掌握大綱筆記、心智圖與日常會話關鍵線索！';
-        confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
-      } else if (percentage >= 70) {
-        scoreComment.textContent = '👏 成績優異！核心概念與重要對白掌握度高，表現非常亮眼！';
-        confetti({ particleCount: 60, spread: 60, origin: { y: 0.6 } });
-      } else {
-        scoreComment.textContent = '💪 繼續加油！已解鎖中英對照文本與詳細題解，請仔細比對音檔深入複習！';
-      }
+      let unitSummaries = Object.values(unitState).map(u => `${u.name}:${u.score}%(${u.correct}/${u.total})`).join(' ｜ ');
+      scoreComment.innerHTML = `各單元得分：${unitSummaries}`;
 
       scoreBox.classList.add('show');
+      scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-      // Prepare Google Sheets Payload
+      // Send to Google Sheets
       const payload = {
         className: cls,
         seatNumber: seat,
         studentName: name,
         unit: 'L3 & L4 聽力與會話互動測驗',
-        score: `${percentage}%`,
-        correctCount: correctCount,
+        score: `${overallPct}%`,
+        correctCount: totalCorrect,
         totalQuestions: totalQuestions,
         timeSpent: timeSpentStr,
-        orderResult: 'L3大綱與L4心智圖模式',
+        orderResult: unitSummaries,
         mistakes: mistakes.length > 0 ? mistakes.join('; ') : '全對',
         details: studentAnswers
       };
@@ -2923,7 +3445,7 @@
           body: JSON.stringify(payload)
         }).then(() => {
           statusMsg.style.color = '#15803d';
-          statusMsg.innerHTML = '✅ <strong>作答紀錄已成功同步上傳至 Google 試算表！</strong>';
+          statusMsg.innerHTML = '✅ <strong>全卷作答紀錄已成功同步上傳至 Google 試算表！</strong>';
         }).catch(err => {
           statusMsg.style.color = '#d97706';
           statusMsg.innerHTML = '⚠️ 上傳過程可能有網路延遲，已保留本地紀錄，您可點下方按鈕下載 CSV 備份。';
@@ -2933,10 +3455,16 @@
         statusMsg.innerHTML = '💡 老師尚未設定 Google Apps Script 網址，已完成本地評分！您可點下方按鈕「📥 下載 CSV」或「📋 複製作答報告」。';
       }
 
-      scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (pendingExportAction === 'copy') {
+        executeCopyResultText();
+      } else if (pendingExportAction === 'csv') {
+        executeExportCSV();
+      } else if (overallPct >= 80) {
+        confetti({ particleCount: 100, spread: 80, origin: { y: 0.5 } });
+      }
     }
 
-    /* Lightbox modal */
+    /* Lightbox Modal */
     function openLightbox(src) {
       const modal = document.getElementById('lightboxModal');
       const img = document.getElementById('lightboxImg');
@@ -2948,7 +3476,7 @@
       document.getElementById('lightboxModal').classList.remove('show');
     }
 
-    /* Settings modal */
+    /* Settings Modal */
     function openSettingsModal() {
       document.getElementById('settingsModal').classList.add('show');
     }
@@ -2976,7 +3504,7 @@ const SHEET_NAME = '作答紀錄';
 
 const HEADERS = [
   '時間戳記', '班級', '座號', '姓名', '單元', '得分百分比', 
-  '答對題數', '總題數', '作答耗時', '備註說明', '錯題列表', '各題作答詳情'
+  '答對題數', '總題數', '作答耗時', '各單元成績摘要', '錯題列表', '各題作答詳情'
 ];
 
 function doPost(e) {
@@ -3047,18 +3575,22 @@ function doGet(e) {
     }
 
     /* Export CSV */
-    /* Export CSV */
     function exportCSV() {
+      requestExport('csv');
+    }
+
+    function executeExportCSV() {
       const cls = document.getElementById('studentClass').value.trim() || '未填班級';
       const seat = document.getElementById('studentSeat').value.trim() || '00';
       const name = document.getElementById('studentName').value.trim() || '未填姓名';
       const timeSpent = document.getElementById('examTimer').textContent;
       const score = document.getElementById('scoreVal').textContent;
+      const summary = Object.values(unitState).map(u => `${u.name}:${u.score}%`).join(';');
 
-      const header = ['\uFEFF時間戳記', '班級', '座號', '姓名', '單元', '得分', '作答耗時', '各題作答詳情'].join(',');
+      const header = ['\uFEFF時間戳記', '班級', '座號', '姓名', '單元', '總分', '各單元得分', '作答耗時', '各題作答詳情'].join(',');
       const now = new Date().toLocaleString('zh-TW');
       const details = JSON.stringify(studentAnswers).replace(/"/g, '""');
-      const row = ['"' + now + '"', '"' + cls + '"', '"' + seat + '"', '"' + name + '"', '"L3 & L4 聽力與會話互動測驗"', '"' + score + '"', '"' + timeSpent + '"', '"' + details + '"'].join(',');
+      const row = ['"' + now + '"', '"' + cls + '"', '"' + seat + '"', '"' + name + '"', '"L3 & L4 聽力與會話互動測驗"', '"' + score + '"', '"' + summary + '"', '"' + timeSpent + '"', '"' + details + '"'].join(',');
       const csv = header + '\n' + row + '\n';
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -3071,22 +3603,29 @@ function doGet(e) {
       document.body.removeChild(link);
     }
 
+    /* Copy Result Text */
     function copyResultText() {
+      requestExport('copy');
+    }
+
+    function executeCopyResultText() {
       const cls = document.getElementById('studentClass').value.trim() || '未填班級';
       const seat = document.getElementById('studentSeat').value.trim() || '00';
       const name = document.getElementById('studentName').value.trim() || '未填姓名';
       const timeSpent = document.getElementById('examTimer').textContent;
       const score = document.getElementById('scoreVal').textContent;
+      const summary = Object.values(unitState).map(u => `【${u.name}】${u.score}% (${u.correct}/${u.total}題)`).join(' ｜ ');
 
       const text = `【翰林技高英語 Choice 3 聽力與會話測驗 (L3 & L4)】
 考生：${cls} 班 ${seat} 號 ${name}
-測驗得分：${score}
+總分百分比：${score}
+各單元得分：${summary}
 作答耗時：${timeSpent}
 繳交時間：${new Date().toLocaleString('zh-TW')}
 作答詳情：${JSON.stringify(studentAnswers)}`;
 
       navigator.clipboard.writeText(text).then(() => {
-        alert('📋 作答成績已成功複製到剪貼簿！可直接貼至 LINE、Google Classroom 或成績登記表。');
+        alert('📋 作答成績報告已成功複製到剪貼簿！可直接貼至 LINE、Google Classroom 或成績登記表。');
       }).catch(() => {
         prompt('請手動複製作答成績：', text);
       });
