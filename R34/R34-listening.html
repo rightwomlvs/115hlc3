@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <style>
     :root {
       --primary: #4f46e5;
@@ -1391,6 +1392,304 @@
       background: #dc2626;
     }
 
+  
+    /* Certificate Modal & Print Styling */
+    .cert-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.75);
+      z-index: 120;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+      backdrop-filter: blur(5px);
+    }
+
+    .cert-modal.show {
+      display: flex;
+    }
+
+    .cert-container {
+      max-width: 780px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .cert-toolbar {
+      background: #1e293b;
+      color: #ffffff;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cert-toolbar-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #f8fafc;
+    }
+
+    .cert-toolbar-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cert-tool-btn {
+      background: #334155;
+      color: #ffffff;
+      border: 1px solid #475569;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .cert-tool-btn:hover {
+      background: #475569;
+      transform: translateY(-1px);
+    }
+
+    .cert-tool-btn.primary {
+      background: #4f46e5;
+      border-color: #6366f1;
+    }
+
+    .cert-tool-btn.primary:hover {
+      background: #4338ca;
+    }
+
+    .cert-close-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.3rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      margin-left: 8px;
+    }
+
+    .cert-close-btn:hover {
+      color: #ffffff;
+    }
+
+    /* The Printable Certificate Paper */
+    .cert-paper {
+      background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #fefce8 100%);
+      border: 10px solid #1e293b;
+      outline: 3px solid #eab308;
+      outline-offset: -6px;
+      padding: 36px 40px;
+      margin: 16px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .cert-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      font-size: 5rem;
+      font-weight: 900;
+      color: rgba(234, 179, 8, 0.05);
+      pointer-events: none;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .cert-header {
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .cert-badge-icon {
+      font-size: 2.8rem;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    .cert-main-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+
+    .cert-sub-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #ca8a04;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .cert-hero-box {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cert-hero-item {
+      text-align: center;
+    }
+
+    .cert-hero-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+
+    .cert-hero-val {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .cert-hero-val.highlight {
+      color: #4f46e5;
+    }
+
+    /* 11 Mandatory Data Fields Table */
+    .cert-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin-bottom: 22px;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+    }
+
+    .cert-table th, .cert-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      text-align: left;
+    }
+
+    .cert-table tr:last-child th, .cert-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cert-table th {
+      width: 28%;
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 800;
+      font-size: 0.82rem;
+      border-right: 1px solid #f1f5f9;
+    }
+
+    .cert-table td {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    .cert-table td.mistake-cell {
+      font-size: 0.82rem;
+      color: #b91c1c;
+      word-break: break-all;
+    }
+
+    .cert-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-top: 1.5px dashed #cbd5e1;
+      padding-top: 16px;
+      margin-top: 10px;
+    }
+
+    .cert-verify-info {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      font-family: monospace;
+    }
+
+    .cert-stamp-box {
+      text-align: center;
+      border: 2px dashed #ca8a04;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ca8a04;
+      font-weight: 800;
+      font-size: 0.7rem;
+      line-height: 1.2;
+      transform: rotate(-10deg);
+      user-select: none;
+    }
+
+    /* Print media optimization */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .cert-modal, .cert-container, .cert-paper, .cert-paper * {
+        visibility: visible !important;
+      }
+      .cert-modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: transparent !important;
+        padding: 0 !important;
+        display: block !important;
+      }
+      .cert-toolbar {
+        display: none !important;
+      }
+      .cert-container {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+      }
+      .cert-paper {
+        margin: 0 !important;
+        border: 4px solid #1e293b !important;
+        outline: 2px solid #ca8a04 !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1415,9 +1714,7 @@
         <button class="mode-btn" id="answerKeyToggleBtn" style="display: none;" onclick="toggleAnswerKeyMode()">
           <span>🔑</span> 解答模式
         </button>
-        <button class="settings-nav-btn" onclick="openSettingsModal()">
-          <span>⚙️</span> 試算表設定
-        </button>
+<!-- 試算表已於系統內建自動回傳，不需學生自行設定 -->
       </div>
     </div>
   </header>
@@ -2756,9 +3053,12 @@
       <div class="score-detail-text" id="scoreDetail">答對 0 題 / 總計 23 題 ｜ 作答時間：00:00</div>
       <div class="status-msg" id="submitStatusMsg"></div>
       <div class="score-actions">
-        <button class="action-btn primary" onclick="copyResultText()">📋 複製作答成績報告</button>
-        <button class="action-btn" onclick="exportCSV()">📥 下載 CSV 成績檔</button>
-        <button class="action-btn" onclick="toggleAnswerKeyMode()">🔍 開啟中英解析對答</button>
+        <button class="action-btn primary" style="background: linear-gradient(135deg, #ca8a04 0%, #eab308 100%); border-color: #ca8a04; font-size: 0.95rem; padding: 10px 22px;" onclick="openCertificateModal()">
+          <span>🎓</span> 查看 / 下載個人練習證書報告 (Certificate & Report)
+        </button>
+        <button class="action-btn" onclick="executeCopyResultText()">
+          <span>📋</span> 複製證書文字摘要
+        </button>
       </div>
     </div>
 
@@ -2775,8 +3075,8 @@
         <button class="submit-btn" id="footerSubmitBtn" onclick="submitCurrentModule()">
           <span>🚀</span> 交卷評分【當前單元】
         </button>
-        <button class="action-btn" onclick="requestExport('summary')" title="查看全卷總結算與成績報告">
-          <span>📊</span> 總結算與匯出報告
+        <button class="action-btn" onclick="requestCertificateModal()" title="查看全卷總結算與個人證書報告">
+          <span>🎓</span> 總結算與證書報告
         </button>
       </div>
     </div>
@@ -2791,6 +3091,120 @@
   </div>
 
   
+  
+  <!-- Certificate & Official Report Modal -->
+  <div class="cert-modal" id="certModal" onclick="closeCertificateModal(event)">
+    <div class="cert-container" onclick="event.stopPropagation()">
+      <!-- Toolbar -->
+      <div class="cert-toolbar">
+        <div class="cert-toolbar-title">
+          <span>🎓</span> 學習成就證書報告 (Practice Certificate & Report)
+        </div>
+        <div class="cert-toolbar-actions">
+          <button class="cert-tool-btn primary" onclick="downloadCertificateImage()">
+            <span>📥</span> 下載證書圖片 (PNG)
+          </button>
+          <button class="cert-tool-btn" onclick="printCertificate()">
+            <span>🖨️</span> 列印 / 存為 PDF
+          </button>
+          <button class="cert-tool-btn" onclick="executeCopyResultText()">
+            <span>📋</span> 複製摘要
+          </button>
+          <button class="cert-close-btn" onclick="closeCertificateModal(event)" title="關閉">✕</button>
+        </div>
+      </div>
+
+      <!-- Printable Certificate Paper -->
+      <div class="cert-paper" id="certPaper">
+        <div class="cert-watermark">CERTIFICATE</div>
+
+        <div class="cert-header">
+          <div class="cert-badge-icon">🏅</div>
+          <h2 class="cert-main-title">技術型高中英語文學習成就證書</h2>
+          <div class="cert-sub-title">Certificate of Listening & Conversation Practice</div>
+        </div>
+
+        <!-- Student & Score Hero -->
+        <div class="cert-hero-box">
+          <div class="cert-hero-item">
+            <div class="cert-hero-label">受證學生 Student</div>
+            <div class="cert-hero-val" id="certStudentHero">--</div>
+          </div>
+          <div class="cert-hero-item">
+            <div class="cert-hero-label">得分百分比 Score</div>
+            <div class="cert-hero-val highlight" id="certScoreHero">0%</div>
+          </div>
+          <div class="cert-hero-item">
+            <div class="cert-hero-label">答對題數 Correct</div>
+            <div class="cert-hero-val" id="certCountHero">0 / 23</div>
+          </div>
+        </div>
+
+        <!-- 11 Specified Data Fields Table -->
+        <table class="cert-table">
+          <tbody>
+            <tr>
+              <th>① 時間戳記 (Timestamp)</th>
+              <td id="certFieldTimestamp">--</td>
+            </tr>
+            <tr>
+              <th>② 班級 (Class)</th>
+              <td id="certFieldClass">--</td>
+            </tr>
+            <tr>
+              <th>③ 座號 (Seat No.)</th>
+              <td id="certFieldSeat">--</td>
+            </tr>
+            <tr>
+              <th>④ 姓名 (Student Name)</th>
+              <td id="certFieldName">--</td>
+            </tr>
+            <tr>
+              <th>⑤ 單元 (Unit)</th>
+              <td id="certFieldUnit">翰林技高英語 Choice 3 (L3 & L4) 聽力與會話互動練習</td>
+            </tr>
+            <tr>
+              <th>⑥ 得分百分比 (Score)</th>
+              <td id="certFieldScore" style="font-weight: 800; color: #4f46e5;">--</td>
+            </tr>
+            <tr>
+              <th>⑦ 答對題數 (Correct Count)</th>
+              <td id="certFieldCorrect">--</td>
+            </tr>
+            <tr>
+              <th>⑧ 總題數 (Total Questions)</th>
+              <td id="certFieldTotal">23 題</td>
+            </tr>
+            <tr>
+              <th>⑨ 作答耗時 (Time Spent)</th>
+              <td id="certFieldTime">--</td>
+            </tr>
+            <tr>
+              <th>⑩ 作答結果 (Unit Results)</th>
+              <td id="certFieldResults">--</td>
+            </tr>
+            <tr>
+              <th>⑪ 錯題列表 (Mistakes Review)</th>
+              <td id="certFieldMistakes" class="mistake-cell">--</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Certificate Footer -->
+        <div class="cert-footer">
+          <div class="cert-verify-info">
+            <div>核發機構：翰林技英 Choice 3 互動學習平臺</div>
+            <div id="certVerifyCode">驗證編號：HLC3-CERT-20261103</div>
+          </div>
+          <div class="cert-stamp-box">
+            <span>教研認證</span>
+            <span style="font-size: 0.6rem;">VERIFIED</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Unfinished Units Confirmation Modal -->
   <div class="confirm-modal" id="confirmModal">
     <div class="confirm-card">
@@ -2917,7 +3331,10 @@
     let pendingExportAction = null; // 'copy', 'csv', or 'summary'
 
     // Google Apps Script Web App URL
-    let gasWebAppUrl = localStorage.getItem('hlc3_l3l4_gas_url') || localStorage.getItem('hlc3_gas_url') || '';
+    // Target Google Spreadsheet & Web App Endpoint (Directly embedded)
+    const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1h__9S-vHV2S4RAUxiA6VwULnN6nscLeYmuk_2zJrmt4/edit?gid=0#gid=0';
+    const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbynJEUtVeI4FyXuIax65mbIauk7m7xgzC9wUdR6DeXYp5YHjfxpMi0kDVkaxOdIZpN8Pg/exec';
+    let gasWebAppUrl = DEFAULT_GAS_URL;
 
     // Timer logic
     let timerSeconds = 0;
@@ -3322,6 +3739,112 @@
     }
 
     /* Check Unfinished Units and Show Confirmation Dialog */
+    /* Certificate Modal Management */
+    function requestCertificateModal() {
+      requestExport('certificate');
+    }
+
+    function openCertificateModal() {
+      const cls = document.getElementById('studentClass').value.trim() || '未填班級';
+      const seat = document.getElementById('studentSeat').value.trim() || '00';
+      const name = document.getElementById('studentName').value.trim() || '學生';
+
+      const totalQuestions = 23;
+      let totalCorrect = 0;
+      let mistakes = [];
+
+      for (const [mid, u] of Object.entries(unitState)) {
+        totalCorrect += u.correct;
+        u.qids.forEach(qid => {
+          const card = document.querySelector(`.question-card[data-qid="${qid}"]`);
+          const correctAns = card ? card.getAttribute('data-correct') : '';
+          const studentAns = studentAnswers[qid];
+          if (studentAns !== correctAns) {
+            mistakes.push(`${qid}(答:${studentAns || '未答'}, 正解:${correctAns})`);
+          }
+        });
+      }
+
+      const overallPct = Math.round((totalCorrect / totalQuestions) * 100);
+      const timeSpentStr = document.getElementById('examTimer').textContent;
+      const nowStr = new Date().toLocaleString('zh-TW');
+
+      let unitSummaries = Object.values(unitState).map(u => `${u.name}: ${u.score}% (${u.correct}/${u.total}題)`).join(' ｜ ');
+
+      // Fill in 11 specified certificate fields
+      document.getElementById('certStudentHero').textContent = `${cls}班 ${seat}號 ${name}`;
+      document.getElementById('certScoreHero').textContent = `${overallPct}%`;
+      document.getElementById('certCountHero').textContent = `${totalCorrect} / ${totalQuestions}`;
+
+      document.getElementById('certFieldTimestamp').textContent = nowStr;
+      document.getElementById('certFieldClass').textContent = `${cls} 班`;
+      document.getElementById('certFieldSeat').textContent = `${seat} 號`;
+      document.getElementById('certFieldName').textContent = name;
+      document.getElementById('certFieldUnit').textContent = '翰林技高英語 Choice 3 (L3 & L4) 聽力與會話互動練習';
+      document.getElementById('certFieldScore').textContent = `${overallPct}%`;
+      document.getElementById('certFieldCorrect').textContent = `${totalCorrect} 題`;
+      document.getElementById('certFieldTotal').textContent = `${totalQuestions} 題`;
+      document.getElementById('certFieldTime').textContent = timeSpentStr;
+      document.getElementById('certFieldResults').textContent = unitSummaries;
+
+      const mistakeEl = document.getElementById('certFieldMistakes');
+      if (mistakes.length === 0) {
+        mistakeEl.style.color = '#15803d';
+        mistakeEl.textContent = '🌟 全數答對！表現卓越，完美通關！';
+      } else {
+        mistakeEl.style.color = '#b91c1c';
+        mistakeEl.textContent = mistakes.join('； ');
+      }
+
+      // Generate verification code
+      const randHash = Math.random().toString(36).substring(2, 8).toUpperCase();
+      document.getElementById('certVerifyCode').textContent = `驗證編號：HLC3-CERT-${Date.now().toString().slice(-6)}-${randHash}`;
+
+      document.getElementById('certModal').classList.add('show');
+    }
+
+    function closeCertificateModal(e) {
+      document.getElementById('certModal').classList.remove('show');
+    }
+
+    /* Print / Save as PDF */
+    function printCertificate() {
+      window.print();
+    }
+
+    /* Download Certificate as PNG using html2canvas */
+    function downloadCertificateImage() {
+      const certPaper = document.getElementById('certPaper');
+      if (!certPaper) return;
+
+      const cls = document.getElementById('studentClass').value.trim() || '班級';
+      const seat = document.getElementById('studentSeat').value.trim() || '座號';
+      const name = document.getElementById('studentName').value.trim() || '學生';
+
+      if (typeof html2canvas === 'undefined') {
+        alert('💡 正在啟動列印對話框，您可直接選擇「另存為 PDF」存檔！');
+        window.print();
+        return;
+      }
+
+      const originalWatermark = certPaper.querySelector('.cert-watermark');
+      
+      html2canvas(certPaper, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff'
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `${cls}_${seat}_${name}_英語聽力會話學習證書.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }).catch(err => {
+        console.error('html2canvas error:', err);
+        alert('💡 下載圖片遇到相容性問題，已自動為您切換至「列印 / 存為 PDF」！');
+        window.print();
+      });
+    }
+
     function requestExport(actionType) {
       // Validate student info
       const cls = document.getElementById('studentClass').value.trim();
@@ -3463,28 +3986,26 @@
         details: studentAnswers
       };
 
-      if (gasWebAppUrl) {
-        statusMsg.style.color = '#4f46e5';
-        statusMsg.innerHTML = '⏳ 正在同步上傳作答紀錄至 Google 試算表...';
+      // Automatically sync to Google Sheets
+      statusMsg.style.color = '#4f46e5';
+      statusMsg.innerHTML = '⏳ 正在自動同步上傳作答紀錄至 Google 試算表...';
 
-        fetch(gasWebAppUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }).then(() => {
-          statusMsg.style.color = '#15803d';
-          statusMsg.innerHTML = '✅ <strong>全卷作答紀錄已成功同步上傳至 Google 試算表！</strong>';
-        }).catch(err => {
-          statusMsg.style.color = '#d97706';
-          statusMsg.innerHTML = '⚠️ 上傳過程可能有網路延遲，已保留本地紀錄，您可點下方按鈕下載 CSV 備份。';
-        });
-      } else {
+      fetch(DEFAULT_GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(() => {
+        statusMsg.style.color = '#15803d';
+        statusMsg.innerHTML = '✅ <strong>全卷作答紀錄已成功自動同步上傳至 Google 試算表！</strong>';
+      }).catch(err => {
         statusMsg.style.color = '#d97706';
-        statusMsg.innerHTML = '💡 老師尚未設定 Google Apps Script 網址，已完成本地評分！您可點下方按鈕「📥 下載 CSV」或「📋 複製作答報告」。';
-      }
+        statusMsg.innerHTML = '⚠️ 網路連線可能較慢，已為您保留作答紀錄，您亦可點擊查看證書報告備份！';
+      });
 
-      if (pendingExportAction === 'copy') {
+      if (pendingExportAction === 'certificate') {
+        openCertificateModal();
+      } else if (pendingExportAction === 'copy') {
         executeCopyResultText();
       } else if (pendingExportAction === 'csv') {
         executeExportCSV();
